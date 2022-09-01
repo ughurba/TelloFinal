@@ -1,4 +1,4 @@
-import { MyForm, MyField, Flex } from "../../../../Components/shared";
+import { MyForm, MyField } from "../../../../Components/shared";
 import { useValidator } from "../../../../Hooks/validator";
 import {
   Password,
@@ -6,35 +6,22 @@ import {
   StyledEye,
   StyledEyeSlash,
   Wrapper,
-  Text,
-  StyledFacebook,
-  StyledGoogle,
-  WrapperTitle,
-  Title,
-  SubText,
 } from "./style";
-import { useState } from "react";
+import { FC, useState } from "react";
+import { AnotherLogin } from "../anotherLogin";
 
-export const LoginForm = () => {
+interface Props {
+  onClick: (value: Record<string, string>) => void;
+}
+
+export const LoginForm: FC<Props> = ({ onClick }) => {
   const { LoginValidate } = useValidator();
   const [show, setShow] = useState<boolean>(false);
-  const handleGetDataFromLogin = (value: Record<string, string>) => {
-    console.log(value);
-  };
 
   return (
     <Wrapper>
-      <WrapperTitle>
-        <Title>Daxil ol</Title>
-        <Flex JsContent={"center"} AlItems={"center"}>
-          <StyledFacebook />
-          <Text>Facebook ilə</Text>
-          <StyledGoogle />
-          <Text>Google ilə</Text>
-        </Flex>
-        <SubText>və ya</SubText>
-      </WrapperTitle>
-      <MyForm onClick={handleGetDataFromLogin} validationScheme={LoginValidate}>
+      <AnotherLogin />
+      <MyForm onClick={onClick} validationScheme={LoginValidate}>
         <MyField
           name={"email"}
           label={"E-mail"}

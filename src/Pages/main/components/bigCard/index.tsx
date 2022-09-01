@@ -1,8 +1,8 @@
 import { Box, CardContent, CardMedia, Typography } from "@mui/material";
-import { mapPhone, phone } from "../../../../Assets";
+import { mapPhone, phone } from "Assets";
 import AppleIcon from "@mui/icons-material/Apple";
 import { FC } from "react";
-import { Flex, Container } from "../../../../Components/shared";
+import { Flex, Container } from "Components/shared";
 import {
   DiscountPrice,
   PriceTypography,

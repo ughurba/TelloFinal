@@ -1,7 +1,7 @@
-import { ErrorMessage, Field } from "formik";
+import { ErrorMessage } from "formik";
 
 import { FC } from "react";
-import { Label, StyledErrorMessage, StyledField } from "./style";
+import { Label, StyledErrorMessage, StyledField, Wrapper } from "./style";
 
 export const MyField: FC<Record<string, string>> = ({
   name,
@@ -9,12 +9,12 @@ export const MyField: FC<Record<string, string>> = ({
   ...rest
 }) => {
   return (
-    <div>
+    <Wrapper>
       <Label htmlFor={name}>{label}</Label>
       <StyledField id={name} name={name} {...rest} />
       <StyledErrorMessage>
         <ErrorMessage name={name} />
       </StyledErrorMessage>
-    </div>
+    </Wrapper>
   );
 };

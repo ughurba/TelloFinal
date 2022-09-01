@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { IGoods } from "../../../types";
-import { StyledGlobal } from "../../../Pages/main/components/productsMain/style";
+import { IGoods } from "types";
+import { StyledGlobal } from "Pages/main/components/productsMain/style";
 import { Grid } from "@mui/material";
 import { Card } from "../сard";
 import { CustomCheck, StyledGrid, StyledLink, Wrapper } from "./style";

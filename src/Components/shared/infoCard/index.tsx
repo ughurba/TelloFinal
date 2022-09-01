@@ -1,6 +1,6 @@
 import { Container, Flex } from "../";
 
-import { watching } from "../../../Assets";
+import { watching } from "Assets";
 import {
   GoodsCount,
   GoodsPath,

@@ -1,15 +1,13 @@
-// interface ISpecification {
-//   brand: string;
-//   type: string;
-//   Network: string;
-//   eSim: string;
-//   countSim;
-//   screenSize;
-//   displayPermission;
-//   operatingMemory;
-//   prosessorType;
-// }
-
+export interface IRegisterData {
+  name: string;
+  surname: string;
+  email: string;
+  password: string;
+}
+export interface ILogin {
+  email: string;
+  password: string;
+}
 export interface IUserPay {
   address: string;
   building: string;

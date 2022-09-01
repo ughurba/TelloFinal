@@ -1,7 +1,7 @@
 import { BasketItems } from "./components/basketItems";
-import { Flex, Container, TotalSide } from "../../Components/shared";
+import { Flex, Container, TotalSide } from "Components/shared";
 import { StyledTotalSide, Wrapper } from "./style";
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { minusItem, plusItem } from "../../Redux/slices/basketSlice";
 
 export const Basket = () => {

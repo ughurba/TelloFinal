@@ -1,10 +1,10 @@
 import { Footer } from "../../Components/layout/footer";
-import { GroupTello } from "../../Assets";
+import { GroupTello } from "Assets";
 import { Container, Flex, TotalSide } from "../../Components/shared";
 import { InputSide } from "./components/inputSide";
 import { useState } from "react";
 import { HeaderIcon, StyledTotalSide, Wrapper } from "./style";
-import { IUserPay } from "../../types";
+import { IUserPay } from "types";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 export interface Confirm {

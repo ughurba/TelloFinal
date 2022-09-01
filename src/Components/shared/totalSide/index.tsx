@@ -8,7 +8,7 @@ import {
   Wrapper,
   WrapperLink,
 } from "./style";
-import { GreyAzn } from "../../../Assets";
+import { GreyAzn } from "Assets";
 import { Flex } from "../";
 
 export const TotalSide = () => {

@@ -1,12 +1,9 @@
-import { MyForm } from "../../../../../../Components/shared/form";
 import { StyledButton, WrapperBoxInput, WrapperInput } from "../../style";
-import { Flex } from "../../../../../../Components/shared";
-import { MyField } from "../../../../../../Components/shared/field";
 import { Record } from "phosphor-react";
 import { FC } from "react";
-import { useValidator } from "../../../../../../Hooks/validator";
+import { useValidator } from "Hooks/validator";
 import styled from "styled-components";
-import { PhoneInputField } from "../../../../../../Components/shared/PhoneInput";
+import { PhoneInputField, MyField, MyForm, Flex } from "Components/shared";
 
 interface Props {
   handleClickPersonalValue: (value: Record<string, string>) => void;

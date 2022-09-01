@@ -1,5 +1,5 @@
 import { Flex } from "../";
-import { IProps } from "../../../Pages/detailProduct/components/fullInfoProductContent";
+import { IProps } from "Pages/detailProduct/components/fullInfoProductContent";
 import { FC, useState } from "react";
 import {
   Paragraph,

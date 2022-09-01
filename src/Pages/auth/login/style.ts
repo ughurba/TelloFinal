@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Wrapper = styled.div`
   padding: 50px 0;
@@ -24,12 +25,13 @@ export const StyledRegisterText = styled.p`
   text-align: center;
   color: ${({ theme }) => theme.colors.gray31};
 `;
-export const StyledToRegister = styled.span`
+export const StyledToRegister = styled(Link)`
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.medium};
   font-size: ${({ theme }) => theme.fontStyle.size.xSmall};
   line-height: 1.14;
   color: #2d9cdb;
   cursor: pointer;
+  text-decoration: none;
   &:hover {
     text-decoration: underline;
   }

@@ -1,12 +1,12 @@
 import {
   useFetchAllGoodsQuery,
   useFetchPagintaionQuery,
-} from "../../services/goodsServices";
+} from "services/goodsServices";
 import { ChangeEvent, useMemo, useState } from "react";
-import { IGoods } from "../../types";
+import { IGoods } from "types";
 import { SizeProducts, Wrapper, WrapperShop } from "./style";
 import * as React from "react";
-import { load } from "../../Assets";
+import { load } from "Assets";
 import {
   MyPagintaion,
   Flex,

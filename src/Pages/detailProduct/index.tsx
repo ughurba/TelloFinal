@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { IGoods } from "../../types";
-import { load } from "../../Assets";
-import { Specification, Container, Flex } from "../../Components/shared/";
+import { IGoods } from "types";
+import { load } from "Assets";
+import { Specification, Container, Flex } from "Components/shared/";
 import { FullInfoShowSlider, FullInfoProductContent } from "./components";
 import { Wrapper, StyledLoading } from "./style";
-import { useGetOnePhoneQuery } from "../../services/goodsServices";
+import { useGetOnePhoneQuery } from "services/goodsServices";
 
 export const DetailProduct = () => {
   const { id } = useParams();

@@ -11,7 +11,6 @@ import {
   Discount,
   ProductContent,
 } from "./style";
-import { minusItem, plusItem } from "../../../../Redux/slices/basketSlice";
 
 interface Props {
   imgUrl: string;

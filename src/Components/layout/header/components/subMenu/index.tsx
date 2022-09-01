@@ -1,6 +1,6 @@
 import { StyledMenuList, Wrapper } from "./style";
-import { Flex } from "../../../../shared/flex";
-import { Links } from "../../../../../Routes/links";
+import { Flex } from "../../../../shared";
+import { Links } from "Routes/links";
 
 export const SubMenu = () => {
   return (

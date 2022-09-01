@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { CheckGreen, CheckWhite } from "../../../../Assets";
-import { MyField } from "../../../../Components/shared/field";
+import { CheckGreen, CheckWhite } from "Assets";
+import { MyField } from "../../../../Components/shared";
 
 interface Check {
   personal?: boolean;
@@ -68,7 +68,7 @@ export const StyledButton = styled.button`
 `;
 export const WrapperInput = styled.div`
   div .react-tel-input {
-    margin-top: 14px;
+    margin-top: 3px;
   }
   div .react-tel-input .form-control {
     width: 279px;

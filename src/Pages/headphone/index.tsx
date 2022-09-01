@@ -1,7 +1,7 @@
 import { ChangeEvent, useMemo, useState } from "react";
-import { IGoods } from "../../types";
+import { IGoods } from "types";
 import { SizeProducts, WrapperShop, Wrapper } from "./style";
-import { load } from "../../Assets";
+import { load } from "Assets";
 import {
   Products,
   Filter,

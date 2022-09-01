@@ -1,9 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { fetchSlider } from "../../../Redux/slices/sliderSlice";
+import { fetchSlider } from "Redux/slices/sliderSlice";
 import { FC, useEffect } from "react";
 import { StyledBox, Wrapper } from "./style";
 import { Container } from "../";
-import { useAppDispatch, useAppSelector } from "../../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 
 import { Pagination, Mousewheel } from "swiper";
 // Import Swiper styles

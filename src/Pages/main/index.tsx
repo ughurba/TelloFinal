@@ -2,10 +2,10 @@ import { FC, useMemo, useState } from "react";
 import { StyledMain } from "./style";
 import { ProductsHome } from "./components/productsMain";
 import { BigCards } from "./components/bigCard";
-import { SmallSlider, InfoCard, Swiper } from "../../Components/shared";
-import { IGoods } from "../../types";
-import { useFetchAllGoodsQuery } from "../../services/goodsServices";
-import { load } from "../../Assets";
+import { SmallSlider, InfoCard, Swiper } from "Components/shared";
+import { IGoods } from "types";
+import { useFetchAllGoodsQuery } from "services/goodsServices";
+import { load } from "Assets";
 
 export const MainPage: FC = () => {
   const title = [

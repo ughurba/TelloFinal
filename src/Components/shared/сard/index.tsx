@@ -6,7 +6,7 @@ import {
   StyledPrice,
   StyledImgBox,
 } from "./style";
-import { azn } from "../../../Assets";
+import { azn } from "Assets";
 import { FC } from "react";
 import { Flex } from "../";
 

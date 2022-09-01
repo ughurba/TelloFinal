@@ -8,10 +8,8 @@ import {
   StyledWrapper,
 } from "./style";
 import { Grid } from "@mui/material";
-import { Card, Flex, Container } from "../../../../Components/shared";
-
-import { load } from "../../../../Assets";
-import { IGoods } from "../../../../types";
+import { Card, Flex, Container } from "Components/shared";
+import { IGoods } from "types";
 
 interface Props {
   title: string;

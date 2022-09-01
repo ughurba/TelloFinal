@@ -8,10 +8,11 @@ import {
 import { Flex, Container } from "../../shared/";
 
 import { SubMenu } from "./components/subMenu";
-import { teloicon, Heart, SearchIcon, User, Basket } from "../../../Assets";
+import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../../Redux/hooks";
+import { useAppSelector } from "Redux/hooks";
+import { Links } from "Routes/links";
 
 export const Header = () => {
   const { items } = useAppSelector((state) => state.basket);
@@ -24,10 +25,12 @@ export const Header = () => {
           <SearchIcon />
         </StyledParentInput>
         <StyledParentSvg>
-          <User />
+          <Link to={Links.app.login}>
+            <User />
+          </Link>
           <Heart />
           <StyledBasketHeader>
-            <Link to={"/Basket"}>
+            <Link to={Links.app.basket}>
               <Basket />
             </Link>
             <StyledSize>{items.length}</StyledSize>

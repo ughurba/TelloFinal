@@ -1,7 +1,7 @@
 import { IncDec, StyledMinus, StyledPlus, Value } from "./style";
 
 import { FC } from "react";
-import { Flex } from "../flex";
+import { Flex } from "../";
 
 interface Props {
   handleDecrement: () => void;

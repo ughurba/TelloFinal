@@ -7,10 +7,12 @@ import {
   DetailProduct,
   MainPage,
   Basket,
+  Login,
+  Register,
+  Pay,
 } from "../Pages";
-import { Pay } from "../Pages/pay";
+
 import { Links } from "./links";
-import { Login } from "../Pages/login";
 
 export const AppRoutes = () => {
   return (
@@ -24,6 +26,7 @@ export const AppRoutes = () => {
           <Route path={Links.app.basket} element={<Basket />} />
           <Route path={Links.app.question} element={<Question />} />
           <Route path={Links.app.login} element={<Login />} />
+          <Route path={Links.app.register} element={<Register />} />
         </Route>
         <Route path={Links.app.pay} element={<Pay />} />
       </Routes>

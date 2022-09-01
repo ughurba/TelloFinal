@@ -1,7 +1,7 @@
 import Pagination from "@mui/material/Pagination";
 import * as React from "react";
 import { styled as MuiStyled } from "@mui/material/styles";
-import { IGoods } from "../../../types";
+import { IGoods } from "types";
 import { ChangeEvent, FC } from "react";
 
 export const StyledPagination = MuiStyled(Pagination)`

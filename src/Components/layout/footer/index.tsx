@@ -16,7 +16,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { Flex, Container } from "../../shared";
 import { FC } from "react";
-import { Links } from "../../../Routes/links";
+import { Links } from "Routes/links";
 
 export const Footer: FC = () => {
   return (

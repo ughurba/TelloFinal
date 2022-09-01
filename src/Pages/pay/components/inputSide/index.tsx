@@ -9,7 +9,7 @@ import {
   StyledCheckWhite,
   SaveList,
 } from "./style";
-import { Flex } from "../../../../Components/shared";
+import { Flex } from "Components/shared";
 import { Confirm } from "../../index";
 import { Record } from "phosphor-react";
 import { PersonalForm } from "./components/personalForm";

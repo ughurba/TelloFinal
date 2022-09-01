@@ -1,6 +1,6 @@
-import { IGoods } from "../../../../types";
+import { IGoods } from "types";
 import { FC, useState } from "react";
-import { Flex } from "../../../../Components/shared";
+
 import {
   Azn,
   Color,
@@ -15,9 +15,9 @@ import {
   StyledButton,
   WrapperLink,
 } from "./style";
-import { IncDecCount } from "../../../../Components/shared/";
+import { IncDecCount, Flex } from "Components/shared/";
 import { IncDecWrapper } from "Pages/detailProduct/style";
-import { useAppDispatch, useAppSelector } from "../../../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import {
   addItem,
   minusItem,

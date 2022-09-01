@@ -1,15 +1,13 @@
-import { MyForm } from "../../../../../../Components/shared/form";
 import {
   StyledButton,
   StyledTextArea,
   WrapperBoxInput,
   WrapperInput,
 } from "../../style";
-import { Flex } from "../../../../../../Components/shared";
-import { MyField } from "../../../../../../Components/shared/field";
+import { Flex, MyField, MyForm } from "Components/shared";
 import { Record } from "phosphor-react";
 import { FC } from "react";
-import { useValidator } from "../../../../../../Hooks/validator";
+import { useValidator } from "Hooks/validator";
 
 interface Props {
   handleClickDeliveryValue: (value: Record<string, string>) => void;

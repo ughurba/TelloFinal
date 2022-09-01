@@ -12,8 +12,9 @@ import { IncDecCount } from "./incDecCount";
 import { TotalSide } from "./totalSide";
 import { MyField } from "./field";
 import { MyForm } from "./form";
-
+import { PhoneInputField } from "./PhoneInput";
 export {
+  PhoneInputField,
   MyField,
   MyForm,
   TotalSide,
