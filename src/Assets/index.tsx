@@ -15,6 +15,7 @@ import { ReactComponent as Facebook } from "./img/icon/facebook.svg";
 import { ReactComponent as Google } from "./img/icon/google.svg";
 import azn from "./img/icon/aznsymbol.svg";
 import load from "./img/5.gif";
+import buttonLoader from "./img/icon/buttonLoader.gif";
 import fon from "./img/fon.png";
 import watch from "./img/Gradientwatch.png";
 import xiaomi from "./img/image6xiaomi.png";
@@ -25,6 +26,7 @@ import watching from "./img/watching.png";
 import GroupTello from "./img/icon/GroupTello.png";
 
 export {
+  buttonLoader,
   registerImg,
   registerFon,
   Google,

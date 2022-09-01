@@ -17,6 +17,7 @@ import { StyledError } from "./style";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { LoadingButton } from "@mui/lab";
 
 export const Loading = styled.div`
   height: 500px;
@@ -55,21 +56,16 @@ export const Register = () => {
       }
     });
   }
-  if (isLoading) {
-    return (
-      <Loading>
-        <div>
-          <img src={load} />
-        </div>
-      </Loading>
-    );
-  }
+
   return (
     <Wrapper>
       <Container>
         <Flex JsContent={"space-around"}>
           <div>
-            <RegisterForm onClick={handleGetDataFromRegister} />
+            <RegisterForm
+              isLoading={isLoading}
+              onClick={handleGetDataFromRegister}
+            />
             {error && "data" in error ? (
               <StyledError>{error.data as ReactNode}</StyledError>
             ) : (
@@ -80,6 +76,7 @@ export const Register = () => {
           <RegisterSide>
             <RegisterImg src={registerImg} />
             <RegisterFon src={registerFon} />
+
             <StyledRegisterText>
               Artıq hesabınız var?
               <StyledToRegister to={Links.app.login}>

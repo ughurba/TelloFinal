@@ -10,6 +10,7 @@ import {
   Login,
   Register,
   Pay,
+  UserProfile,
 } from "../Pages";
 
 import { Links } from "./links";
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
           <Route path={Links.app.question} element={<Question />} />
           <Route path={Links.app.login} element={<Login />} />
           <Route path={Links.app.register} element={<Register />} />
+          <Route path={Links.app.userProfile} element={<UserProfile />} />
         </Route>
         <Route path={Links.app.pay} element={<Pay />} />
       </Routes>

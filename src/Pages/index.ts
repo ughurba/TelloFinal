@@ -7,7 +7,10 @@ import { Basket } from "./basket";
 import { Register } from "./auth/register";
 import { Login } from "./auth/login";
 import { Pay } from "./pay";
+import { UserProfile } from "./userProfile";
+
 export {
+  UserProfile,
   Pay,
   Login,
   Register,

@@ -4,6 +4,7 @@ export interface IRegisterData {
   email: string;
   password: string;
 }
+
 export interface ILogin {
   email: string;
   password: string;
@@ -20,6 +21,14 @@ export interface IUserPay {
   cash: boolean;
 }
 
+export interface IUser {
+  isOnline: boolean;
+  nameid: string;
+  Name: string;
+  Surname: string;
+  Role: [];
+  unique_name: string;
+}
 export interface IGoods {
   name: string;
   id: string;

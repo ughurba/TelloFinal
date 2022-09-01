@@ -13,9 +13,13 @@ import { Search } from "../../shared/search";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
+import { useSetUser } from "Hooks/useSetUser";
 
 export const Header = () => {
+  useSetUser();
+  const { user } = useAppSelector((state) => state.user);
   const { items } = useAppSelector((state) => state.basket);
+
   return (
     <Container>
       <Flex AlItems={"center"} JsContent={"space-between"}>
@@ -25,7 +29,7 @@ export const Header = () => {
           <SearchIcon />
         </StyledParentInput>
         <StyledParentSvg>
-          <Link to={Links.app.login}>
+          <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>
             <User />
           </Link>
           <Heart />

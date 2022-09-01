@@ -26,8 +26,7 @@ export const useValidator = () => {
   const LoginValidate = Yup.object({
     email: Yup.string().email("Invalid mail").required("Required"),
     password: Yup.string()
-      .min(3, "3-den az ola bilmez")
-      .max(20, "20-den yuxari olmaz")
+      .min(8, "Şifrə çox qısadır. Minimal şifrənin uzunluğu: 8 simvol")
       .required("Required"),
   });
   const RegisterValidate = Yup.object({
@@ -41,8 +40,7 @@ export const useValidator = () => {
       .required("Required"),
     email: Yup.string().email("Invalid mail").required("Required"),
     password: Yup.string()
-      .min(3, "3-den az ola bilmez")
-      .max(15, "15-den yuxari olmaz")
+      .min(8, "Şifrə çox qısadır. Minimal şifrənin uzunluğu: 8 simvol")
       .required("Required"),
   });
   return {

@@ -9,13 +9,15 @@ import {
 } from "../loginForm/style";
 import { AnotherLogin } from "../anotherLogin";
 import { MyField, MyForm } from "Components/shared";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/query/react";
+
+import { buttonLoader } from "Assets";
 
 interface Props {
   onClick: (value: Record<string, string>) => void;
+  isLoading: boolean;
 }
 
-export const RegisterForm: FC<Props> = ({ onClick }) => {
+export const RegisterForm: FC<Props> = ({ onClick, isLoading }) => {
   const { RegisterValidate } = useValidator();
   const [show, setShow] = useState<boolean>(false);
 
@@ -52,7 +54,13 @@ export const RegisterForm: FC<Props> = ({ onClick }) => {
             <StyledEyeSlash onClick={() => setShow(!show)} />
           )}
         </Password>
-        <StyledButton type={"submit"}>Qeydiyyat</StyledButton>
+
+        <StyledButton
+          startIcon={isLoading ? <img width={40} src={buttonLoader} /> : ""}
+          type={"submit"}
+        >
+          Qeydiyyat
+        </StyledButton>
       </MyForm>
     </Wrapper>
   );

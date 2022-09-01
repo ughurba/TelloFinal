@@ -9,12 +9,14 @@ import {
 } from "./style";
 import { FC, useState } from "react";
 import { AnotherLogin } from "../anotherLogin";
+import { buttonLoader } from "../../../../Assets";
 
 interface Props {
   onClick: (value: Record<string, string>) => void;
+  isLoading: boolean;
 }
 
-export const LoginForm: FC<Props> = ({ onClick }) => {
+export const LoginForm: FC<Props> = ({ onClick, isLoading }) => {
   const { LoginValidate } = useValidator();
   const [show, setShow] = useState<boolean>(false);
 
@@ -42,7 +44,12 @@ export const LoginForm: FC<Props> = ({ onClick }) => {
           )}
         </Password>
 
-        <StyledButton type={"submit"}>Daxil ol</StyledButton>
+        <StyledButton
+          startIcon={isLoading ? <img width={40} src={buttonLoader} /> : ""}
+          type={"submit"}
+        >
+          Daxil ol
+        </StyledButton>
       </MyForm>
     </Wrapper>
   );

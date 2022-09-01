@@ -9,5 +9,6 @@ export const Links = {
     basket: "/Basket",
     login: "/Login",
     register: "/Register",
+    userProfile: "/UserProfile",
   },
 };

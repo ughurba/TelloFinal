@@ -8,16 +8,16 @@ import {
   StyledToRegister,
   Wrapper,
 } from "./style";
-import { load, registerFon, registerImg } from "Assets";
+import { registerFon, registerImg } from "Assets";
 import { Links } from "Routes/links";
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { ILogin } from "types";
-import { useFetchLoginMutation } from "../../../services/authServices";
-import swal from "sweetalert";
-import { Loading } from "../register";
-import { useSetToken } from "../../../Hooks/setGetToken";
+import { useFetchLoginMutation } from "services/authServices";
+import { StyledError } from "../register/style";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate();
   const [loginData, setLoginData] = useState<ILogin>();
   const [loginPost, result] = useFetchLoginMutation();
   const { error, data, isLoading, isSuccess } = result;
@@ -37,21 +37,23 @@ export const Login = () => {
   }, [loginData]);
 
   if (isSuccess) {
+    localStorage.setItem("userToken", data?.token);
+    navigate("/UserProfile");
   }
-  if (isLoading) {
-    return (
-      <Loading>
-        <div>
-          <img src={load} />
-        </div>
-      </Loading>
-    );
-  }
+
   return (
     <Wrapper>
       <Container>
         <Flex JsContent={"space-around"}>
-          <LoginForm onClick={handleGetDataFromLogin} />
+          <div>
+            <LoginForm isLoading={isLoading} onClick={handleGetDataFromLogin} />
+            {error && "data" in error ? (
+              <StyledError>{error.data as ReactNode}</StyledError>
+            ) : (
+              ""
+            )}
+          </div>
+
           <RegisterSide>
             <RegisterImg src={registerImg} />
             <RegisterFon src={registerFon} />
