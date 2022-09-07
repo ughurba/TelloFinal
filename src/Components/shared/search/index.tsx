@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { CSSProperties, FC, FormEvent, useState } from "react";
 import { useGetSearchingGoodsQuery } from "../../../services/goodsServices";
+import { useTranslation } from "react-i18next";
 
 export const Wrapper = styled.div``;
 interface Props {
@@ -28,12 +29,13 @@ export const StyledInput = styled.input<Props>`
 `;
 
 export const Search: FC<Props> = ({ ...props }, { handleSearch }) => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <StyledInput
         type={"search"}
         onChange={() => handleSearch}
-        placeholder="Axtarış..."
+        placeholder={t("Search")}
         {...props}
       />
     </Wrapper>

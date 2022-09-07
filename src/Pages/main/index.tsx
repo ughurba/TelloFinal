@@ -6,12 +6,14 @@ import { SmallSlider, InfoCard, Swiper } from "Components/shared";
 import { IGoods } from "types";
 import { useFetchAllGoodsQuery } from "services/goodsServices";
 import { load } from "Assets";
+import { useTranslation } from "react-i18next";
 
 export const MainPage: FC = () => {
+  const { t } = useTranslation();
   const title = [
-    "Ən çox satılan məhsullar",
-    "Yeni gələn məhsullar",
-    "Yeni gələn aksessuarlar",
+    t("BestSellingProducts"),
+    t("NewArrivals"),
+    t("NewArrivalAccessories"),
   ];
   const [phones, setPhones] = useState<IGoods[]>([]);
   const [headphones, setHeadphones] = useState<IGoods[]>([]);

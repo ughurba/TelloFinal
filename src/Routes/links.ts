@@ -9,6 +9,12 @@ export const Links = {
     basket: "/Basket",
     login: "/Login",
     register: "/Register",
-    userProfile: "/UserProfile",
+    userProfile: "UserProfile",
+  },
+  userProfileApp: {
+    MyOrders: "MyOrders",
+    MyFavorites: "MyFavorites",
+    PersonalInformation: "PersonalInformation",
+    DeliveryAddress: "DeliveryAddress",
   },
 };

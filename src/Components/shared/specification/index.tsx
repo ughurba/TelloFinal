@@ -10,21 +10,23 @@ import {
   Link,
   InfoProduct,
 } from "./style";
+import { useTranslation } from "react-i18next";
 
 interface Props extends IProps {}
 
 export const Specification: FC<Props> = ({ product }) => {
   const [specification, setSpecification] = useState<boolean>(true);
+  const { t } = useTranslation();
   const specifications = [
-    "Brend",
-    "Məhsul tipi",
-    "Şəbəkə",
-    "eSIM",
-    "SIM-kart sayı",
-    "Ekranın ölçüsü",
-    "Ekran icazəsi",
-    "Operativ yaddaş",
-    "Prosessor tipi",
+    t("Brand"),
+    t("ProductType"),
+    t("Network"),
+    t("eSIM"),
+    t("SIMCartCount"),
+    t("ScreenSize"),
+    t("ScreenPermission"),
+    t("OperatingMemory"),
+    t("ProsessorType"),
   ];
   return (
     <Wrapper>
@@ -33,20 +35,20 @@ export const Specification: FC<Props> = ({ product }) => {
           specification={specification}
           onClick={() => setSpecification(true)}
         >
-          Texniki Xüsusiyyətləri
+          {t("TechnicalCharacteristics")}
         </Title>
         <Title
           onClick={() => setSpecification(!specification)}
           specification={specification}
         >
-          Rəylər
+          {t("Reviews")}
         </Title>
       </Flex>
       <Line />
       {specification && (
         <Flex JsContent={"space-between"}>
           <List>
-            Xüsusiyyətlər
+            {t("Features")}
             {specifications.map((value, index) => (
               <Link key={index}>{value}</Link>
             ))}
@@ -57,7 +59,7 @@ export const Specification: FC<Props> = ({ product }) => {
             ))}
           </List>
           <InfoProduct>
-            Məhsul haqqında
+            {t("AboutTheProduct")}
             <Paragraph>{product?.paragraph}</Paragraph>
           </InfoProduct>
         </Flex>

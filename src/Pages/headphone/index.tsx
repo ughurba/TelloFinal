@@ -8,13 +8,15 @@ import {
   Flex,
   Container,
   MyPagintaion,
-} from "../../Components/shared";
+} from "Components/shared";
 import {
   useFetchAllGoodsQuery,
   useFetchPagintaionQuery,
-} from "../../services/goodsServices";
+} from "services/goodsServices";
+import { useTranslation } from "react-i18next";
 
 export const Headphone = () => {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [headphonesPagination, setHeadphonesPagination] = useState<IGoods[]>(
     []
@@ -47,7 +49,9 @@ export const Headphone = () => {
               <Filter />
             </div>
             <WrapperShop>
-              <SizeProducts>{headphone?.length} məhsul tapıldı</SizeProducts>
+              <SizeProducts>
+                {headphone?.length} {t("ProductFound")}
+              </SizeProducts>
               <Products data={headphone} />
               <MyPagintaion
                 page={page}

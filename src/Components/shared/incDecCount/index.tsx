@@ -13,7 +13,6 @@ export const IncDecCount: FC<Props> = ({
   handleIncrement,
   count,
 }) => {
-  console.log(count);
   return (
     <IncDec>
       <Flex AlItems={"center"}>

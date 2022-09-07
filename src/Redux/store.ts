@@ -5,6 +5,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import basketSlice from "./slices/basketSlice";
 import { authApi } from "../services/authServices";
 import userSlice from "./slices/userSlice";
+import { adminApi } from "../services/adminServices";
 
 export const store = configureStore({
   reducer: {
@@ -13,9 +14,14 @@ export const store = configureStore({
     user: userSlice,
     [goodsApi.reducerPath]: goodsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
+    [adminApi.reducerPath]: adminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(goodsApi.middleware, authApi.middleware),
+    getDefaultMiddleware().concat(
+      goodsApi.middleware,
+      authApi.middleware,
+      adminApi.middleware
+    ),
 });
 
 setupListeners(store.dispatch);

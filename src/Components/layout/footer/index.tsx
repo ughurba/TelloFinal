@@ -17,8 +17,10 @@ import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import { Flex, Container } from "../../shared";
 import { FC } from "react";
 import { Links } from "Routes/links";
+import { useTranslation } from "react-i18next";
 
 export const Footer: FC = () => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <Container>
@@ -41,31 +43,31 @@ export const Footer: FC = () => {
             </Flex>
           </ul>
           <ul>
-            <Title>Menu</Title>
-            <List>Yeni</List>
-            <List>Endirimlər</List>
-            <List>Aksessuarlar</List>
-            <List>Bütün brendlər</List>
+            <Title>{t("Menu")}</Title>
+            <List>{t("New")}</List>
+            <List>{t("Discounts")}</List>
+            <List>{t("Headphones")}</List>
+            <List>{t("AllBrands")}</List>
           </ul>
           <ul>
-            <Title>Kömək</Title>
+            <Title>{t("Help")}</Title>
             <List>
               <StyledLink to={Links.app.question}>
-                Tez-tez soruşulan suallar
+                {t("FrequentlyAskedQuestions")}
               </StyledLink>
             </List>
-            <List>Çatdırılma xidməti</List>
-            <List>Geri qaytarılma şərtləri</List>
+            <List>{t("DeliveryService")}</List>
+            <List>{t("RefundPolicy")}</List>
           </ul>
           <ul>
-            <Title>Əlaqə</Title>
+            <Title>{t("Contact")}</Title>
             <List>
               <LocationOnIcon />
-              <Span>M. K. Ataturk avenue 89, Baku, Azerbaijan</Span>
+              <Span>{t("LocationFooter")}</Span>
             </List>
             <List>
               <EmailIcon />
-              <Span>example@gmail.com</Span>
+              <Span>{t("Gmail")}</Span>
             </List>
             <List>
               <LocalPhoneIcon />

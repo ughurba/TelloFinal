@@ -15,12 +15,14 @@ import { ILogin } from "types";
 import { useFetchLoginMutation } from "services/authServices";
 import { StyledError } from "../register/style";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const Login = () => {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState<ILogin>();
   const [loginPost, result] = useFetchLoginMutation();
   const { error, data, isLoading, isSuccess } = result;
+  const { t } = useTranslation();
 
   const handleGetDataFromLogin = (value: Record<string, string>) => {
     setLoginData({
@@ -36,10 +38,12 @@ export const Login = () => {
     }
   }, [loginData]);
 
-  if (isSuccess) {
-    localStorage.setItem("userToken", data?.token);
-    navigate("/UserProfile");
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("userToken", data?.token);
+      navigate("/UserProfile");
+    }
+  }, [isSuccess]);
 
   return (
     <Wrapper>
@@ -58,9 +62,9 @@ export const Login = () => {
             <RegisterImg src={registerImg} />
             <RegisterFon src={registerFon} />
             <StyledRegisterText>
-              Hesabınız yoxdur?
+              {t("YouDontHaveAnAccount")}
               <StyledToRegister to={Links.app.register}>
-                Qeydiyyatdan keçin
+                {t("SignUp")}
               </StyledToRegister>
             </StyledRegisterText>
           </RegisterSide>

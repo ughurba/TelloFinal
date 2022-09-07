@@ -10,10 +10,14 @@ import {
   Login,
   Register,
   Pay,
-  UserProfile,
+  DeliveryAddress,
+  MyOrders,
+  PersonalInformation,
+  MyFavorites,
 } from "../Pages";
 
 import { Links } from "./links";
+import { UserProfileLayout } from "Layouts/UserProfileLayout";
 
 export const AppRoutes = () => {
   return (
@@ -28,7 +32,24 @@ export const AppRoutes = () => {
           <Route path={Links.app.question} element={<Question />} />
           <Route path={Links.app.login} element={<Login />} />
           <Route path={Links.app.register} element={<Register />} />
-          <Route path={Links.app.userProfile} element={<UserProfile />} />
+          <Route path={Links.app.userProfile} element={<UserProfileLayout />}>
+            <Route
+              path={Links.userProfileApp.DeliveryAddress}
+              element={<DeliveryAddress />}
+            />
+            <Route
+              path={Links.userProfileApp.MyOrders}
+              element={<MyOrders />}
+            />
+            <Route
+              path={Links.userProfileApp.MyFavorites}
+              element={<MyFavorites />}
+            />
+            <Route
+              path={Links.userProfileApp.PersonalInformation}
+              element={<PersonalInformation />}
+            />
+          </Route>
         </Route>
         <Route path={Links.app.pay} element={<Pay />} />
       </Routes>

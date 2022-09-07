@@ -10,6 +10,7 @@ import {
 import { FC, useState } from "react";
 import { AnotherLogin } from "../anotherLogin";
 import { buttonLoader } from "../../../../Assets";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onClick: (value: Record<string, string>) => void;
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export const LoginForm: FC<Props> = ({ onClick, isLoading }) => {
+  const { t } = useTranslation();
   const { LoginValidate } = useValidator();
   const [show, setShow] = useState<boolean>(false);
 
@@ -26,16 +28,16 @@ export const LoginForm: FC<Props> = ({ onClick, isLoading }) => {
       <MyForm onClick={onClick} validationScheme={LoginValidate}>
         <MyField
           name={"email"}
-          label={"E-mail"}
-          placeholder={"nümunə@gmail.com"}
+          label={t("EMail")}
+          placeholder={t("Example")}
           type={"email"}
         />
         <Password>
           <MyField
             type={show ? "text" : "password"}
             name={"password"}
-            label={"Şifrə"}
-            placeholder={"Şifrənizi daxil edin"}
+            label={t("Password")}
+            placeholder={t("EnterYourPassword")}
           />
           {show ? (
             <StyledEye onClick={() => setShow(!show)} />
@@ -48,7 +50,7 @@ export const LoginForm: FC<Props> = ({ onClick, isLoading }) => {
           startIcon={isLoading ? <img width={40} src={buttonLoader} /> : ""}
           type={"submit"}
         >
-          Daxil ol
+          {t("Insert")}
         </StyledButton>
       </MyForm>
     </Wrapper>

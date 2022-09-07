@@ -30,6 +30,20 @@ export const authApi = createApi({
         };
       },
     }),
+
+    fetchUpdate: builder.mutation<DataToken, Record<string, string>>({
+      query: (body) => {
+        return {
+          url: "updateUser",
+          method: "PUT",
+          body,
+        };
+      },
+    }),
   }),
 });
-export const { useFetchRegistersMutation, useFetchLoginMutation } = authApi;
+export const {
+  useFetchRegistersMutation,
+  useFetchLoginMutation,
+  useFetchUpdateMutation,
+} = authApi;

@@ -22,11 +22,13 @@ export interface IUserPay {
 }
 
 export interface IUser {
+  Birthda?: string;
   isOnline: boolean;
   nameid: string;
   Name: string;
   Surname: string;
   Role: [];
+  Email?: string;
   unique_name: string;
 }
 export interface IGoods {

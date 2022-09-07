@@ -16,16 +16,11 @@ import { useFetchRegistersMutation } from "services/authServices";
 import { StyledError } from "./style";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { LoadingButton } from "@mui/lab";
 
-export const Loading = styled.div`
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+import { useTranslation } from "react-i18next";
+
 export const Register = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [registerData, setRegisterData] = useState<IRegisterData>();
   const [registerPost, result] = useFetchRegistersMutation();
@@ -78,10 +73,11 @@ export const Register = () => {
             <RegisterFon src={registerFon} />
 
             <StyledRegisterText>
-              Artıq hesabınız var?
+              {t("YouAlreadyHaveAnAccount")}
+
               <StyledToRegister to={Links.app.login}>
                 {" "}
-                Daxil olun
+                {t("Enter")}
               </StyledToRegister>
             </StyledRegisterText>
           </RegisterSide>

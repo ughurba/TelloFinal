@@ -18,11 +18,8 @@ import {
 import { IncDecCount, Flex } from "Components/shared/";
 import { IncDecWrapper } from "Pages/detailProduct/style";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
-import {
-  addItem,
-  minusItem,
-  plusItem,
-} from "../../../../Redux/slices/basketSlice";
+import { addItem, minusItem, plusItem } from "Redux/slices/basketSlice";
+import { useTranslation } from "react-i18next";
 
 export interface IProps {
   product?: IGoods;
@@ -31,7 +28,7 @@ export interface IProps {
 export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   const dispatch = useAppDispatch();
   const { items } = useAppSelector((state) => state.basket);
-
+  const { t } = useTranslation();
   const handleAddItems = () => {
     if (product) {
       dispatch(addItem(product));
@@ -59,7 +56,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       <Line />
       <WrapperColor>
         <Flex AlItems={"center"}>
-          <Name>Rəng:</Name>
+          <Name>{t("Rəng")}:</Name>
           {product?.color.map((color, index) => (
             <Color key={color} colors={color} />
           ))}
@@ -67,7 +64,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       </WrapperColor>
       <WrapperStorage>
         <Flex AlItems={"center"}>
-          <Name>Yaddaş:</Name>
+          <Name>{t("Storage")}:</Name>
           {product?.storage.map((storage, index) => (
             <Storage key={index}>{storage}</Storage>
           ))}
@@ -83,7 +80,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       </IncDecWrapper>
 
       <WrapperLink>
-        <StyledButton onClick={handleAddItems}>Səbətə at</StyledButton>
+        <StyledButton onClick={handleAddItems}>{t("AddToCart")}</StyledButton>
       </WrapperLink>
     </Wrapper>
   );

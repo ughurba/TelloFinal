@@ -14,6 +14,7 @@ export const StyledMenuList = styled(NavLink)`
   }
 `;
 export const Wrapper = styled.div`
+  padding-bottom: 12px;
   .active {
     color: ${({ theme }) => theme.colors.green};
   }

@@ -4,9 +4,7 @@ import {
   StyledBasketHeader,
   StyledSize,
 } from "./style";
-
 import { Flex, Container } from "../../shared/";
-
 import { SubMenu } from "./components/subMenu";
 import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";

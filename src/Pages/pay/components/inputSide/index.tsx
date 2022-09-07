@@ -16,6 +16,7 @@ import { PersonalForm } from "./components/personalForm";
 import { SaveLinks } from "./components/saveLinks";
 import { DeliveryForm } from "./components/deliveryForm";
 import { Payment } from "./components/payment";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   handleClickPersonalValue: (value: Record<string, string>) => void;
@@ -33,14 +34,15 @@ export const InputSide: FC<Props> = ({
   personalInfo,
   delivering,
 }) => {
+  const { t } = useTranslation();
   const { personal, delivery, payments } = confirmation;
   return (
     <Wrapper>
-      <Title>Ödəmə</Title>
+      <Title>{t("Payment")}</Title>
       <List>
         <WrapperLink>
           <Flex JsContent={"space-between"} AlItems={"center"}>
-            <Link>1. Şəxsi məlumatlar</Link>
+            <Link>1. {t("PersonalInformation")}</Link>
             {personal ? <StyledCheckGreen /> : <StyledCheckWhite />}
           </Flex>
 
@@ -48,17 +50,17 @@ export const InputSide: FC<Props> = ({
             <PersonalForm handleClickPersonalValue={handleClickPersonalValue} />
           ) : (
             <SaveList>
-              <SaveLinks title={"Ad"} info={personalInfo?.firstName} />
-              <SaveLinks title={"Soyad"} info={personalInfo?.lastName} />
-              <SaveLinks title={"E-mail"} info={personalInfo?.email} />
-              <SaveLinks title={"Nomre"} phone={personalInfo?.mobile} />
+              <SaveLinks title={t("Name")} info={personalInfo?.firstName} />
+              <SaveLinks title={t("Surname")} info={personalInfo?.lastName} />
+              <SaveLinks title={t("EMail")} info={personalInfo?.email} />
+              <SaveLinks title={t("Number")} phone={personalInfo?.mobile} />
             </SaveList>
           )}
         </WrapperLink>
 
         <WrapperLink personal={personal}>
           <Flex JsContent={"space-between"} AlItems={"center"}>
-            <Link>2. Çatdırılma</Link>
+            <Link>2. {t("Delivery")}</Link>
             {delivery ? <StyledCheckGreen /> : <StyledCheckWhite />}
           </Flex>
           {personal &&
@@ -68,14 +70,17 @@ export const InputSide: FC<Props> = ({
               />
             ) : (
               <SaveList>
-                <SaveLinks title={"Ünvan"} info={delivering?.address} />
-                <SaveLinks title={"Bina/Mənzil"} info={delivering?.building} />
+                <SaveLinks title={t("Address")} info={delivering?.address} />
+                <SaveLinks
+                  title={t("BuildingApartment")}
+                  info={delivering?.building}
+                />
               </SaveList>
             ))}
         </WrapperLink>
         <WrapperLink delivery={delivery}>
           <Flex JsContent={"space-between"} AlItems={"center"}>
-            <Link>3. Ödəmə üsulu</Link>
+            <Link>3. {t("PaymentMethod")}</Link>
             {payments ? <StyledCheckGreen /> : <StyledCheckWhite />}
           </Flex>
           {delivery && <Payment handleClickConfirm={handleClickConfirm} />}

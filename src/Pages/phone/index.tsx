@@ -13,8 +13,8 @@ import {
   Filter,
   Container,
   Products,
-} from "../../Components/shared";
-import { useDataSet } from "../../Hooks/pagination";
+} from "Components/shared";
+import { useTranslation } from "react-i18next";
 
 export const Phone = () => {
   const [phonesPagintaion, setPhonesPagintaion] = useState<IGoods[]>([]);
@@ -22,7 +22,7 @@ export const Phone = () => {
   const [page, setPage] = React.useState(1);
   const { data: goods } = useFetchAllGoodsQuery();
   const { isError, data, isLoading } = useFetchPagintaionQuery(page);
-
+  const { t } = useTranslation();
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -48,7 +48,9 @@ export const Phone = () => {
               <Filter />
             </div>
             <WrapperShop>
-              <SizeProducts>{phones?.length} məhsul tapıldı</SizeProducts>
+              <SizeProducts>
+                {phones?.length} {t("ProductFound")}
+              </SizeProducts>
               <Products data={phonesPagintaion} />
               <MyPagintaion page={page} onChange={handleChange} data={phones} />
             </WrapperShop>

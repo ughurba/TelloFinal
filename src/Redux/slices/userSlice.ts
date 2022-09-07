@@ -12,6 +12,8 @@ const initialState: initialStateTypes = {
     Surname: "",
     unique_name: "",
     Role: [],
+    Birthda: "",
+    Email: "",
   },
 };
 const userSlice = createSlice({
@@ -24,13 +26,17 @@ const userSlice = createSlice({
       state.user.Name = action.payload.Name;
       state.user.Surname = action.payload.Surname;
       state.user.Role = action.payload.Role;
+      state.user.Birthda = action.payload.Birthda;
+      state.user.Email = action.payload.Email;
       state.user.isOnline = true;
     },
     logoutUser: (state) => {
+      state.user.Email = "";
       state.user.nameid = "";
       state.user.unique_name = "";
       state.user.Name = "";
       state.user.Surname = "";
+      state.user.Birthda = "";
       state.user.Role = [];
       state.user.isOnline = false;
     },

@@ -11,6 +11,7 @@ import {
   Discount,
   ProductContent,
 } from "./style";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   imgUrl: string;
@@ -31,7 +32,7 @@ export const BasketItems: FC<Props> = ({
 }) => {
   const handleIncrement = () => {};
   const handleDecrement = () => {};
-
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <Flex JsContent={"space-between"} AlItems={"center"}>
@@ -40,7 +41,7 @@ export const BasketItems: FC<Props> = ({
           <Title>{title}</Title>
           <Flex AlItems={"flex-end"}>
             <Color>
-              Rəng: <NameColor>{color}</NameColor>
+              {t("Color")}: <NameColor>{color}</NameColor>
             </Color>
 
             <Discount>{discount} ₼</Discount>

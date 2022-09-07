@@ -11,6 +11,7 @@ import { AnotherLogin } from "../anotherLogin";
 import { MyField, MyForm } from "Components/shared";
 
 import { buttonLoader } from "Assets";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   onClick: (value: Record<string, string>) => void;
@@ -20,33 +21,33 @@ interface Props {
 export const RegisterForm: FC<Props> = ({ onClick, isLoading }) => {
   const { RegisterValidate } = useValidator();
   const [show, setShow] = useState<boolean>(false);
-
+  const { t } = useTranslation();
   return (
     <Wrapper>
       <AnotherLogin />
       <MyForm onClick={onClick} validationScheme={RegisterValidate}>
         <MyField
           name={"firstName"}
-          label={"Ad"}
-          placeholder={"Adınızı daxil edin"}
+          label={t("Name")}
+          placeholder={t("EnterYourName")}
         />
         <MyField
           name={"lastName"}
-          label={"Soyad"}
-          placeholder={"Soyadınızı daxil edin"}
+          label={t("Surname")}
+          placeholder={t("EnterYourSurname")}
         />
         <MyField
           name={"email"}
-          label={"E-mail"}
-          placeholder={"nümunə@gmail.com"}
+          label={t("EMail")}
+          placeholder={t("Example")}
           type={"email"}
         />
         <Password>
           <MyField
             type={show ? "text" : "password"}
             name={"password"}
-            label={"Şifrə"}
-            placeholder={"Şifrənizi daxil edin"}
+            label={"Password"}
+            placeholder={"EnterYourPassword"}
           />
           {show ? (
             <StyledEye onClick={() => setShow(!show)} />
@@ -59,7 +60,7 @@ export const RegisterForm: FC<Props> = ({ onClick, isLoading }) => {
           startIcon={isLoading ? <img width={40} src={buttonLoader} /> : ""}
           type={"submit"}
         >
-          Qeydiyyat
+          {t("Registration")}
         </StyledButton>
       </MyForm>
     </Wrapper>

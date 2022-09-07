@@ -4,6 +4,7 @@ import { FC } from "react";
 import { useValidator } from "Hooks/validator";
 import styled from "styled-components";
 import { PhoneInputField, MyField, MyForm, Flex } from "Components/shared";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   handleClickPersonalValue: (value: Record<string, string>) => void;
@@ -13,7 +14,7 @@ export const Phone = styled(PhoneInputField)``;
 
 export const PersonalForm: FC<Props> = ({ handleClickPersonalValue }) => {
   const { PersonalInfoValidate } = useValidator();
-
+  const { t } = useTranslation();
   return (
     <MyForm
       onClick={handleClickPersonalValue}
@@ -23,16 +24,16 @@ export const PersonalForm: FC<Props> = ({ handleClickPersonalValue }) => {
         <Flex JsContent={"space-between"}>
           <WrapperInput>
             <MyField
-              label={"Ad"}
+              label={t("Name")}
               name={"firstName"}
-              placeholder={"Adınızı daxil edin"}
+              placeholder={t("EnterYourName")}
             />
           </WrapperInput>
           <WrapperInput>
             <MyField
-              label={"Soyad"}
+              label={t("Surname")}
               name={"lastName"}
-              placeholder={"Soyadınızı daxil edin"}
+              placeholder={t("EnterYourSurname")}
             />
           </WrapperInput>
         </Flex>
@@ -41,7 +42,7 @@ export const PersonalForm: FC<Props> = ({ handleClickPersonalValue }) => {
         <Flex JsContent={"space-between"}>
           <WrapperInput>
             <MyField
-              label={"Mobil nömrə"}
+              label={t("MobileNumber")}
               name="mobile"
               component={Phone}
               country={"az"}
@@ -49,16 +50,16 @@ export const PersonalForm: FC<Props> = ({ handleClickPersonalValue }) => {
           </WrapperInput>
           <WrapperInput>
             <MyField
-              label={"E-mail"}
+              label={t("EMail")}
               name={"email"}
               type={"email"}
-              placeholder={"nümunə@gmail.com"}
+              placeholder={t("Example")}
             />
           </WrapperInput>
         </Flex>
       </WrapperBoxInput>
       <div>
-        <StyledButton type={"submit"}>Yadda saxla </StyledButton>
+        <StyledButton type={"submit"}>{t("Remember")} </StyledButton>
       </div>
     </MyForm>
   );

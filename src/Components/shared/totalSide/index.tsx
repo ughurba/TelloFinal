@@ -10,16 +10,18 @@ import {
 } from "./style";
 import { GreyAzn } from "Assets";
 import { Flex } from "../";
+import { useTranslation } from "react-i18next";
 
 export const TotalSide = () => {
+  const { t } = useTranslation();
   return (
     <Wrapper>
-      <Title>Ümumi</Title>
+      <Title>{t("General")}</Title>
 
       <List>
         <WrapperLink>
           <Flex JsContent={"space-between"}>
-            <Link>Məbləğ </Link>
+            <Link>{t("Amount")}</Link>
             <Flex AlItems={"center"}>
               <Price>66.50</Price>
               <GreyAzn />
@@ -28,7 +30,7 @@ export const TotalSide = () => {
         </WrapperLink>
         <WrapperLink>
           <Flex JsContent={"space-between"}>
-            <Link>Çatdırılma </Link>
+            <Link>{t("Delivery")}</Link>
             <Flex AlItems={"center"}>
               <Price>0.00</Price>
               <GreyAzn />
@@ -37,7 +39,7 @@ export const TotalSide = () => {
         </WrapperLink>
         <WrapperLink>
           <Flex JsContent={"space-between"}>
-            <Link>Hədiyyə paketi </Link>
+            <Link>{t("GiftPackage")}</Link>
             <Flex AlItems={"center"}>
               <Price>5.00</Price>
               <GreyAzn />
@@ -47,7 +49,7 @@ export const TotalSide = () => {
       </List>
       <Line />
       <Flex AlItems={"center"} JsContent={"space-between"}>
-        <Total>Cəmi</Total>
+        <Total>{t("Total")}</Total>
         <Flex AlItems={"center"}>
           <Price>61.50</Price>
           <GreyAzn />

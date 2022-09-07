@@ -13,7 +13,6 @@ const StyleEye = css`
   cursor: pointer;
   color: ${({ theme }) => theme.colors.oldSilver}};
 `;
-
 export const Wrapper = styled.div`
   width: 300px;
 `;

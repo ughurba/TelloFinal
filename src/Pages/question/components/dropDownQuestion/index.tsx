@@ -1,7 +1,9 @@
 import { FC, useState } from "react";
 import { Box, Minus, Paragraph, Plus, SubParagraph } from "./style";
+import { useTranslation } from "react-i18next";
 
 export const DropQuestion: FC = () => {
+  const { t } = useTranslation();
   const [showSub, setShowSub] = useState<boolean>(false);
   return (
     <Box>

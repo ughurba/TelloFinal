@@ -11,7 +11,6 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
  
 }
-
 `;
 
 const theme = {

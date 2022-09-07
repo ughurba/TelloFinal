@@ -7,18 +7,20 @@ import {
   Text,
   WrapperTitle,
 } from "./style";
+import { useTranslation } from "react-i18next";
 
 export const AnotherLogin = () => {
+  const { t } = useTranslation();
   return (
     <WrapperTitle>
-      <Title>Daxil ol</Title>
+      <Title>{t("Insert")}</Title>
       <Flex JsContent={"center"} AlItems={"center"}>
         <StyledFacebook />
-        <Text>Facebook ilə</Text>
+        <Text>{t("WithFacebook")}</Text>
         <StyledGoogle />
-        <Text>Google ilə</Text>
+        <Text>{t("WithGoogle")}</Text>
       </Flex>
-      <SubText>və ya</SubText>
+      <SubText>{t("Or")}</SubText>
     </WrapperTitle>
   );
 };
