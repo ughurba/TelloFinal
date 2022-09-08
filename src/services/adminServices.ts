@@ -8,7 +8,7 @@ export const adminApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    createProduct: builder.mutation<any, any>({
+    createProduct: builder.mutation<void, FormData>({
       query: (body) => {
         return {
           url: "createProduct",
@@ -27,4 +27,5 @@ export const adminApi = createApi({
     }),
   }),
 });
-export const { useGetBrandAndCategoryIdQuery } = adminApi;
+export const { useGetBrandAndCategoryIdQuery, useCreateProductMutation } =
+  adminApi;

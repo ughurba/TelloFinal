@@ -1,102 +1,137 @@
-import { Field, Form, Formik } from "formik";
-import { ChangeEvent, FC, useState } from "react";
+import { useFormik } from "formik";
+import { FC, useEffect, useState } from "react";
 
-import { IBrandAndCategory } from "../../../Pages/Product/types";
+import { IBrandAndCategory } from "Admin/Pages/Product/types";
 import { StyledLabel, Wrapper } from "./style";
+import { useCreateProductMutation } from "services/adminServices";
+import { toFormData } from "Helper";
 
-interface IAddProductData {
-  Title: string;
-  Description: string;
-  NewPrice: string;
-  OldPrice: string;
-  BrandId: number;
-  CategoryId: number;
-  StockCount: number;
-}
 interface Props {
-  data: IBrandAndCategory;
+  data?: IBrandAndCategory;
 }
 export const AddProduct: FC<Props> = ({ data }) => {
-  const [files, setFiles] = useState({});
+  const [setAddProduct, result] = useCreateProductMutation();
+  const [photos, setPhotos] = useState([]);
+  const formik = useFormik({
+    initialValues: {
+      Title: "",
+      Description: "",
+      NewPrice: 0,
+      OldPrice: 0,
+      BrandId: "",
+      CategoryId: "",
+      StockCount: 0,
+      Photos: [],
+      ChildPhoto: [],
+    },
+    onSubmit: (values) => {
+      setAddProduct(
+        toFormData({ ...values, Photos: Array.from(values.Photos) })
+      );
+      setPhotos(values.Photos);
+    },
+  });
 
-  const handleFileUpload = (ev: ChangeEvent<HTMLInputElement>) => {
-    if (ev.currentTarget.files) {
-      setFiles(ev.currentTarget.value);
-    }
-  };
-  console.log(files);
-  const value = {
-    Title: "",
-    Description: "",
-    NewPrice: "",
-    OldPrice: "",
-    BrandId: 0,
-    CategoryId: 0,
-    StockCount: 0,
-    file: files,
-  };
   return (
     <Wrapper>
-      <Formik
-        initialValues={value}
-        onSubmit={(values: IAddProductData) => {
-          console.log(values);
-        }}
-      >
-        <Form>
-          <div>
-            <StyledLabel>Title</StyledLabel>
-            <Field id={"Title"} name={"Title"} />
-          </div>
-          <div>
-            <StyledLabel>Description</StyledLabel>
-            <Field id={"Description"} name={"Description"} />
-          </div>
-          <div>
-            <StyledLabel>NewPrice</StyledLabel>
-            <Field id={"NewPrice"} type={"number"} name={"NewPrice"} />
-          </div>
-          <div>
-            <StyledLabel>OldPrice</StyledLabel>
-            <Field id={"OldPrice"} type={"number"} name={"OldPrice"} />
-          </div>
-          <div>
-            <StyledLabel>StockCount</StyledLabel>
-            <Field id={"StockCount"} type={"number"} name={"StockCount"} />
-          </div>
-          <div>
-            <StyledLabel>Brand</StyledLabel>
-            <Field as="select" name="BrandId">
-              {data.brand.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </Field>
-          </div>
-          <div>
-            <StyledLabel>CategoryId</StyledLabel>
-            <Field as="select" name="CategoryId">
-              {data.category.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.title}
-                </option>
-              ))}
-            </Field>
-          </div>
-          <div>
-            <input
-              id="file"
-              name="file"
-              type="file"
-              multiple={true}
-              accept="image/*"
-              onChange={handleFileUpload}
-            />
-          </div>
-          <button type={"submit"}>submit</button>
-        </Form>
-      </Formik>
+      <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
+        <div>
+          <StyledLabel>Title</StyledLabel>
+          <input
+            onChange={formik.handleChange}
+            value={formik.values.Title}
+            id={"Title"}
+            name={"Title"}
+          />
+        </div>
+        <div>
+          <StyledLabel>Description</StyledLabel>
+          <input
+            id={"Description"}
+            name={"Description"}
+            onChange={formik.handleChange}
+            value={formik.values.Description}
+          />
+        </div>
+        <div>
+          <StyledLabel>NewPrice</StyledLabel>
+          <input
+            id={"NewPrice"}
+            type={"number"}
+            name={"NewPrice"}
+            onChange={formik.handleChange}
+            value={formik.values.NewPrice}
+          />
+        </div>
+        <div>
+          <StyledLabel>OldPrice</StyledLabel>
+          <input
+            id="OldPrice"
+            type="number"
+            name="OldPrice"
+            onChange={formik.handleChange}
+            value={formik.values.OldPrice}
+          />
+        </div>
+        <div>
+          <StyledLabel>StockCount</StyledLabel>
+          <input
+            id="StockCount"
+            type="number"
+            name="StockCount"
+            onChange={formik.handleChange}
+            value={formik.values.StockCount}
+          />
+        </div>
+        <div>
+          <StyledLabel>Brand</StyledLabel>
+          <select name="BrandId" onChange={formik.handleChange}>
+            {data?.brand.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <StyledLabel>CategoryId</StyledLabel>
+          <select onChange={formik.handleChange} name="CategoryId">
+            {data?.category.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </div>
+        <label>IsMain</label>
+        <div>
+          <input
+            id="file"
+            name="Photos"
+            type="file"
+            multiple={true}
+            accept="image/*"
+            onChange={(e) =>
+              formik.setFieldValue("Photos", e.currentTarget.files)
+            }
+          />
+        </div>
+
+        <div>
+          <input
+            id="file"
+            name="Photos"
+            type="file"
+            multiple={true}
+            accept="image/*"
+            onChange={(e) =>
+              formik.setFieldValue("ChildPhoto", e.currentTarget.files)
+            }
+          />
+        </div>
+
+        <button type={"submit"}>submit</button>
+      </form>
     </Wrapper>
   );
 };

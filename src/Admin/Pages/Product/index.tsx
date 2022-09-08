@@ -4,5 +4,9 @@ import { useGetBrandAndCategoryIdQuery } from "services/adminServices";
 export const Product = () => {
   const { data, isLoading, isSuccess } = useGetBrandAndCategoryIdQuery();
 
-  return <div>{isSuccess && <AddProduct data={data} />}</div>;
+  return (
+    <div>
+      {!isLoading ? <AddProduct data={data} /> : <div>loading....</div>}
+    </div>
+  );
 };
