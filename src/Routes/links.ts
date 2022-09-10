@@ -3,6 +3,8 @@ export const Links = {
     main: "/",
     phone: "/Phones",
     headphone: "/Headphones",
+    allBrands: "AllBrands",
+    discounts: "Discounts",
     detail: "/FullInfoProduct/:id",
     pay: "/Pay",
     question: "/Question",

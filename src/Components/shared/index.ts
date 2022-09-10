@@ -3,7 +3,6 @@ import { Container } from "./container";
 import { Filter } from "./filter";
 import { Flex } from "./flex";
 import { InfoCard } from "./infoCard";
-import { MyPagintaion } from "./pagintaion";
 import { Products } from "./products";
 import { SmallSlider } from "./smallSlider";
 import { Specification } from "./specification";
@@ -24,7 +23,6 @@ export {
   Filter,
   Flex,
   InfoCard,
-  MyPagintaion,
   Products,
   SmallSlider,
   Specification,

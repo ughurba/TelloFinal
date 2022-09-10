@@ -9,26 +9,29 @@ import {
 import { azn } from "Assets";
 import { FC } from "react";
 import { Flex } from "../";
+import { Goods } from "types";
 
-interface Props {
-  MainImgUrl?: Array<string>;
-  title: string;
-  price: number;
-  imgUrl: string;
-}
-
-export const Card: FC<Props> = ({ MainImgUrl, imgUrl, title, price }) => {
+export const Card: FC<Goods> = ({
+  newPrice,
+  oldPrice,
+  photos,
+  inStock,
+  title,
+  description,
+}) => {
   return (
     <StyledWrapper>
       <StyledBox>
         <Flex FlexColumn={"column"} AlItems={"center"} JsContent={"center"}>
           <StyledImgBox>
-            <StyledImg src={MainImgUrl ? MainImgUrl[1] : imgUrl} />
+            {photos?.map((img) =>
+              img.isMain ? <StyledImg key={img.path} src={img.path} /> : ""
+            )}
           </StyledImgBox>
         </Flex>
         <StyledTitle>{title}</StyledTitle>
         <StyledPrice>
-          {price} <img src={azn} />
+          {newPrice} <img src={azn} />
         </StyledPrice>
       </StyledBox>
     </StyledWrapper>

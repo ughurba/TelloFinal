@@ -13,11 +13,11 @@ import {
   Title,
 } from "./style";
 import { FC } from "react";
-import { IGoods } from "types";
+import { Goods } from "types";
 import { useTranslation } from "react-i18next";
 interface Props {
-  phones: IGoods[];
-  headphones: IGoods[];
+  phones: Goods[];
+  headphones: Goods[];
 }
 export const InfoCard: FC<Props> = ({ phones, headphones }) => {
   const { t } = useTranslation();
@@ -28,7 +28,7 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
           <ImageBoxFon>
             <Title>{t("Phone")}</Title>
             <GoodsCount>
-              {t("ProductCount")}: {phones.length}
+              {t("ProductCount")}: {phones?.length}
             </GoodsCount>
             <GoodsPath>
               {t("SkipToProducts")} <StyledChevron />

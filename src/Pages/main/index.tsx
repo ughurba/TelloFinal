@@ -3,47 +3,70 @@ import { StyledMain } from "./style";
 import { ProductsHome } from "./components/productsMain";
 import { BigCards } from "./components/bigCard";
 import { SmallSlider, InfoCard, Swiper } from "Components/shared";
-import { IGoods } from "types";
-import { useFetchAllGoodsQuery } from "services/goodsServices";
+import { Goods } from "types";
+import {
+  useFetchAllGoodsQuery,
+  useGetBestSellingProductQuery,
+  useGetNewArrivalProductQuery,
+} from "services/goodsServices";
 import { load } from "Assets";
 import { useTranslation } from "react-i18next";
 
 export const MainPage: FC = () => {
   const { t } = useTranslation();
-  const title = [
-    t("BestSellingProducts"),
-    t("NewArrivals"),
-    t("NewArrivalAccessories"),
-  ];
-  const [phones, setPhones] = useState<IGoods[]>([]);
-  const [headphones, setHeadphones] = useState<IGoods[]>([]);
-  const [phonesRating, setPhonesRating] = useState<IGoods[]>([]);
-  const { data, isLoading } = useFetchAllGoodsQuery();
+
+  const { data, isLoading: isRatingGoodsLoad } =
+    useGetBestSellingProductQuery();
+
+  const { data: newArrivalProduct } = useGetNewArrivalProductQuery();
+  const { data: goods } = useFetchAllGoodsQuery();
+  const [bestSellingProducts, setBestSellingProducts] = useState<Goods[]>([]);
+  const [headphones, setHeadphone] = useState<Goods[]>([]);
+  const [newArrivalHeadphones, setNewArrivalHeadphones] = useState<Goods[]>();
+  const [phones, setPhones] = useState<Goods[]>([]);
+
+  useMemo(() => {
+    if (goods) {
+      setPhones(goods?.filter((g) => g.categoryTitle === "Telefonlar"));
+      setHeadphone(goods?.filter((g) => g.categoryTitle === "Aksessuarlar"));
+    }
+  }, [goods]);
+  useMemo(() => {
+    if (newArrivalProduct) {
+      setNewArrivalHeadphones(
+        newArrivalProduct?.filter((n) => n.categoryTitle === "Aksessuarlar")
+      );
+    }
+  }, [newArrivalProduct]);
   useMemo(() => {
     if (data) {
-      setPhones(data?.filter((p) => p.name === "phone"));
-      setHeadphones(data?.filter((p) => p.name === "qulaqliq"));
+      setBestSellingProducts(data);
+      setHeadphone(data.filter((h) => h.categoryTitle === "Aksessuarlar"));
     }
   }, [data]);
-  useMemo(() => {
-    setPhonesRating(phones?.filter((p) => p.rating > 1));
-  }, [phones]);
 
-  return isLoading ? (
+  return isRatingGoodsLoad ? (
     <img src={load} />
   ) : (
     <StyledMain>
       <Swiper />
-      {title.map((value, index) => (
-        <div key={index}>
-          <ProductsHome
-            title={value}
-            phonesRating={phonesRating.slice(0, 4)}
-            headphones={headphones}
-          />
-          {index === 0 && <BigCards />}
-        </div>
-      ))}
+
+      <div>
+        <ProductsHome
+          title={t("BestSellingProducts")}
+          ratingGoods={bestSellingProducts?.slice(0, 4)}
+        />
+        <ProductsHome
+          title={t("NewArrivals")}
+          ratingGoods={newArrivalProduct?.slice(0, 4)}
+        />
+        <BigCards />
+        <ProductsHome
+          title={t("NewArrivalAccessories")}
+          ratingGoods={newArrivalHeadphones?.slice(0, 4)}
+        />
+      </div>
+
       <InfoCard phones={phones} headphones={headphones} />
       <SmallSlider />
     </StyledMain>

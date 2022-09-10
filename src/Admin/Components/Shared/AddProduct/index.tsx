@@ -11,7 +11,7 @@ interface Props {
 }
 export const AddProduct: FC<Props> = ({ data }) => {
   const [setAddProduct, result] = useCreateProductMutation();
-  const [photos, setPhotos] = useState([]);
+
   const formik = useFormik({
     initialValues: {
       Title: "",
@@ -22,13 +22,18 @@ export const AddProduct: FC<Props> = ({ data }) => {
       CategoryId: "",
       StockCount: 0,
       Photos: [],
-      ChildPhoto: [],
+      ChildPhotos: [],
+      color: "",
+      storage: "",
     },
     onSubmit: (values) => {
       setAddProduct(
-        toFormData({ ...values, Photos: Array.from(values.Photos) })
+        toFormData({
+          ...values,
+          ChildPhotos: Array.from(values.ChildPhotos),
+          Photos: Array.from(values.Photos),
+        })
       );
-      setPhotos(values.Photos);
     },
   });
 
@@ -109,7 +114,6 @@ export const AddProduct: FC<Props> = ({ data }) => {
             id="file"
             name="Photos"
             type="file"
-            multiple={true}
             accept="image/*"
             onChange={(e) =>
               formik.setFieldValue("Photos", e.currentTarget.files)
@@ -120,13 +124,30 @@ export const AddProduct: FC<Props> = ({ data }) => {
         <div>
           <input
             id="file"
-            name="Photos"
+            name="ChildPhotos"
             type="file"
             multiple={true}
             accept="image/*"
             onChange={(e) =>
-              formik.setFieldValue("ChildPhoto", e.currentTarget.files)
+              formik.setFieldValue("ChildPhotos", e.currentTarget.files)
             }
+          />
+        </div>
+        <div>
+          <input
+            id="color"
+            name="color"
+            type="color"
+            onChange={formik.handleChange}
+          />
+        </div>
+        <div>
+          <div>Storage</div>
+          <input
+            id="storage"
+            name="storage"
+            type="number"
+            onChange={formik.handleChange}
           />
         </div>
 

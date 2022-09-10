@@ -16,7 +16,6 @@ import { useSetUser } from "Hooks/useSetUser";
 export const Header = () => {
   useSetUser();
   const { user } = useAppSelector((state) => state.user);
-  const { items } = useAppSelector((state) => state.basket);
 
   return (
     <Container>
@@ -35,7 +34,7 @@ export const Header = () => {
             <Link to={Links.app.basket}>
               <Basket />
             </Link>
-            <StyledSize>{items.length}</StyledSize>
+            <StyledSize>{0}</StyledSize>
           </StyledBasketHeader>
         </StyledParentSvg>
       </Flex>

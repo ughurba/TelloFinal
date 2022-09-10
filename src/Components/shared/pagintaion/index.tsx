@@ -1,7 +1,6 @@
 import Pagination from "@mui/material/Pagination";
 import * as React from "react";
 import { styled as MuiStyled } from "@mui/material/styles";
-import { IGoods } from "types";
 import { ChangeEvent, FC } from "react";
 
 export const StyledPagination = MuiStyled(Pagination)`
@@ -11,23 +10,23 @@ export const StyledPagination = MuiStyled(Pagination)`
  padding:15px 0px;
 
 `;
-interface Props {
-  data: IGoods[];
-  page: number;
-  onChange: (ev: ChangeEvent<unknown>, value: number) => void;
-}
-
-export const MyPagintaion: FC<Props> = ({ data, page, onChange }) => {
-  const calculatePaginationCount = () => {
-    const count = data.length / 6;
-    return Math.round(count);
-  };
-  return (
-    <StyledPagination
-      page={page}
-      onChange={onChange}
-      count={calculatePaginationCount()}
-      color="secondary"
-    />
-  );
-};
+// interface Props {
+//   data: IGoods[];
+//   page: number;
+//   onChange: (ev: ChangeEvent<unknown>, value: number) => void;
+// }
+//
+// export const MyPagintaion: FC<Props> = ({ data, page, onChange }) => {
+//   const calculatePaginationCount = () => {
+//     const count = data.length / 6;
+//     return Math.round(count);
+//   };
+//   return (
+//     <StyledPagination
+//       page={page}
+//       onChange={onChange}
+//       count={calculatePaginationCount()}
+//       color="secondary"
+//     />
+//   );
+// };

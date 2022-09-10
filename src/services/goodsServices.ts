@@ -1,30 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IGoods } from "../types";
+import { Goods } from "../types";
 
 export const goodsApi = createApi({
   reducerPath: "goodsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://62b19376196a9e9870386a98.mockapi.io/",
+    baseUrl: "http://localhost:33033/api/",
   }),
   endpoints: (builder) => ({
-    fetchAllGoods: builder.query<IGoods[], void>({
-      query: () => `tello`,
+    fetchAllGoods: builder.query<Goods[], void>({
+      query: () => `product`,
     }),
-    fetchPagintaion: builder.query<IGoods[], number>({
-      query: (page) => `tello?page=${page}&limit=6`,
+    getBestSellingProduct: builder.query<Goods[], void>({
+      query: () => `product/bestSelling`,
     }),
-    getOnePhone: builder.query<IGoods, string>({
-      query: (id) => `tello/${id}`,
-    }),
-    getSearchingGoods: builder.query<IGoods, string>({
-      query: (search) => `tello?search=${search}`,
+    getNewArrivalProduct: builder.query<Goods[], void>({
+      query: () => `product/newArrival`,
     }),
   }),
 });
 
 export const {
-  useFetchPagintaionQuery,
+  useGetNewArrivalProductQuery,
   useFetchAllGoodsQuery,
-  useGetOnePhoneQuery,
-  useGetSearchingGoodsQuery,
+  useGetBestSellingProductQuery,
 } = goodsApi;

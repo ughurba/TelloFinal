@@ -31,23 +31,6 @@ export interface IUser {
   Email?: string;
   unique_name: string;
 }
-export interface IGoods {
-  name: string;
-  id: string;
-  imgUrl: string;
-  rating: number;
-  MainImgUrl: string[];
-  ChildImgUrl: string[];
-  specifications: string[];
-  color: string[];
-  storage: string[];
-  title: string;
-  price: number;
-  paragraph: string;
-  count: number;
-  total: string;
-  discount: number;
-}
 
 export interface ISlider {
   id: string;
@@ -55,4 +38,27 @@ export interface ISlider {
   title: string;
   paragraph: string;
   type: string;
+}
+export interface Goods {
+  oldPrice: number;
+  newPrice: number;
+  title: string;
+  id: number;
+  inStock: boolean;
+  categoryTitle: string;
+  description: string;
+  photos: Image[];
+}
+
+interface ShopGoods {
+  result: Goods[];
+  totalCount: number;
+}
+export interface Image {
+  path: string;
+  isMain: boolean;
+}
+export interface Category {
+  id: number;
+  title: string;
 }

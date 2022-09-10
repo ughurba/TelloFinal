@@ -1,40 +1,24 @@
-import {
-  useFetchAllGoodsQuery,
-  useFetchPagintaionQuery,
-} from "services/goodsServices";
 import { ChangeEvent, useMemo, useState } from "react";
-import { IGoods } from "types";
+import { Goods, ShopGoods } from "types";
 import { SizeProducts, Wrapper, WrapperShop } from "./style";
 import * as React from "react";
 import { load } from "Assets";
-import {
-  MyPagintaion,
-  Flex,
-  Filter,
-  Container,
-  Products,
-} from "Components/shared";
+import { Flex, Filter, Container, Products } from "Components/shared";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "../../Redux/hooks";
 
 export const Phone = () => {
-  const [phonesPagintaion, setPhonesPagintaion] = useState<IGoods[]>([]);
-  const [phones, setPhones] = useState<IGoods[]>([]);
-  const [page, setPage] = React.useState(1);
-  const { data: goods } = useFetchAllGoodsQuery();
-  const { isError, data, isLoading } = useFetchPagintaionQuery(page);
   const { t } = useTranslation();
+  const [phones, setPhones] = useState<ShopGoods>();
+  const [page, setPage] = React.useState(1);
+  const { goods, isLoading } = useAppSelector((state) => state.goods);
+
+  useMemo(() => {
+    setPhones(goods);
+  }, [goods]);
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-
-  useMemo(() => {
-    if (data) {
-      setPhonesPagintaion(data.filter((p) => p.name === "phone"));
-    }
-    if (goods) {
-      setPhones(goods.filter((p) => p.name === "phone"));
-    }
-  }, [data, goods]);
 
   return (
     <Wrapper>
@@ -49,10 +33,10 @@ export const Phone = () => {
             </div>
             <WrapperShop>
               <SizeProducts>
-                {phones?.length} {t("ProductFound")}
+                {phones?.result.length} {t("ProductFound")}
               </SizeProducts>
-              <Products data={phonesPagintaion} />
-              <MyPagintaion page={page} onChange={handleChange} data={phones} />
+              <Products data={goods} />
+              {/*<MyPagintaion page={page} onChange={handleChange} data={phones} />*/}
             </WrapperShop>
           </Flex>
         )}

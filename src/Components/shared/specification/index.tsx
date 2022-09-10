@@ -49,19 +49,19 @@ export const Specification: FC<Props> = ({ product }) => {
         <Flex JsContent={"space-between"}>
           <List>
             {t("Features")}
-            {specifications.map((value, index) => (
+            {specifications?.map((value, index) => (
               <Link key={index}>{value}</Link>
             ))}
           </List>
-          <List>
-            {product?.specifications.map((spec, index) => (
-              <Link key={index}>{spec}</Link>
-            ))}
-          </List>
-          <InfoProduct>
-            {t("AboutTheProduct")}
-            <Paragraph>{product?.paragraph}</Paragraph>
-          </InfoProduct>
+          {/*<List>*/}
+          {/*  {product?.specifications?.map((spec: any, index: any) => (*/}
+          {/*    <Link key={index}>{spec}</Link>*/}
+          {/*  ))}*/}
+          {/*</List>*/}
+          {/*<InfoProduct>*/}
+          {/*  {t("AboutTheProduct")}*/}
+          {/*  <Paragraph>{product?.paragraph}</Paragraph>*/}
+          {/*</InfoProduct>*/}
         </Flex>
       )}
     </Wrapper>
