@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Category, Goods, ShopGoods } from "../types";
+import { Brand, Category, Goods, ShopGoods } from "../types";
 
 export interface IPagination {
   id: number;
@@ -19,7 +19,14 @@ export const categoriesApi = createApi({
       query: (Pagination) =>
         `/${Pagination.id}?page=${Pagination.page}&size=${Pagination.size}`,
     }),
+
+    getBrands: builder.query<Brand[], void>({
+      query: () => `brand`,
+    }),
   }),
 });
-export const { useGetAllCategoriesQuery, useGetCategoryProductQuery } =
-  categoriesApi;
+export const {
+  useGetAllCategoriesQuery,
+  useGetBrandsQuery,
+  useGetCategoryProductQuery,
+} = categoriesApi;

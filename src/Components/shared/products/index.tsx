@@ -11,7 +11,6 @@ interface Props {
   data: ShopGoods;
 }
 export const Products: FC<Props> = ({ data }) => {
-  console.log(data);
   return (
     <Wrapper>
       <StyledGlobal />

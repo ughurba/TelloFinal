@@ -39,6 +39,14 @@ export interface ISlider {
   paragraph: string;
   type: string;
 }
+export interface Brand {
+  id: number;
+  name: string;
+}
+export interface Color {
+  id: number;
+  code: string;
+}
 export interface Goods {
   oldPrice: number;
   newPrice: number;
@@ -46,8 +54,11 @@ export interface Goods {
   id: number;
   inStock: boolean;
   categoryTitle: string;
+  categoryId: number;
   description: string;
   photos: Image[];
+  brand: Brand;
+  colors: Color[];
 }
 
 interface ShopGoods {

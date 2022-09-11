@@ -1,42 +1,75 @@
-import { ChangeEvent, useMemo, useState } from "react";
-import { Goods, ShopGoods } from "types";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { Brand } from "types";
 import { SizeProducts, Wrapper, WrapperShop } from "./style";
 import * as React from "react";
-import { load } from "Assets";
-import { Flex, Filter, Container, Products } from "Components/shared";
+import { Flex, Container, Products } from "Components/shared";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import {
+  IPagination,
+  useGetBrandsQuery,
+  useGetCategoryProductQuery,
+} from "services/categoriesServices";
+import { BrandFilter } from "./components/brandFilter";
+import { RedesignedPagination, Loader } from "Components/shared";
+import { setPhonesLoading, setPhones } from "../../Redux/slices/goodsSlice";
 
 export const Phone = () => {
   const { t } = useTranslation();
-  const [phones, setPhones] = useState<ShopGoods>();
-  const [page, setPage] = React.useState(1);
-  const { goods, isLoading } = useAppSelector((state) => state.goods);
+  const [page, setPage] = useState(1);
+  const [brand, setBrand] = useState<Brand[]>([]);
+  const { phones, phonesLoading, categoryId } = useAppSelector(
+    (state) => state.goods
+  );
+  const dispatch = useAppDispatch();
+  const { data: brands } = useGetBrandsQuery();
+  const Pagination: IPagination = {
+    id: categoryId,
+    page: page,
+    size: 6,
+  };
+  const { data, isLoading: loading } = useGetCategoryProductQuery(Pagination);
+  useEffect(() => {
+    if (data) {
+      dispatch(setPhones(data));
+      dispatch(setPhonesLoading(loading));
+    }
+  }, [data]);
 
   useMemo(() => {
-    setPhones(goods);
-  }, [goods]);
+    if (brands) {
+      setBrand(brands.map((item) => item));
+    }
+  }, [brands]);
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
-
   return (
     <Wrapper>
       <Container>
-        {isLoading ? (
-          <img src={load} />
+        {phonesLoading && loading ? (
+          <Loader />
         ) : (
           <Flex>
             <div>
-              <Filter />
-              <Filter />
+              {
+                <>
+                  <BrandFilter title="Brand" brands={brand} />
+                </>
+              }
             </div>
             <WrapperShop>
               <SizeProducts>
                 {phones?.result.length} {t("ProductFound")}
               </SizeProducts>
-              <Products data={goods} />
-              {/*<MyPagintaion page={page} onChange={handleChange} data={phones} />*/}
+              <Products data={phones} />
+              {
+                <RedesignedPagination
+                  page={page}
+                  onChange={handleChange}
+                  productCount={phones.totalCount}
+                />
+              }
             </WrapperShop>
           </Flex>
         )}

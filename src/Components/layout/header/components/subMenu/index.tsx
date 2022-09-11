@@ -8,7 +8,13 @@ import {
   useGetCategoryProductQuery,
 } from "services/categoriesServices";
 import { useEffect, useMemo, useState } from "react";
-import { setGoods, setLoading } from "Redux/slices/goodsSlice";
+import {
+  setPhonesLoading,
+  setPhones,
+  setHeadphonesLoading,
+  setHeadphones,
+  setCategoryId,
+} from "Redux/slices/goodsSlice";
 import { useAppDispatch } from "Redux/hooks";
 
 export const SubMenu = () => {
@@ -37,18 +43,22 @@ export const SubMenu = () => {
     }),
     [data]
   );
-  const [id, setId] = useState<number>(1);
+  const [id, setId] = useState<number>(0);
 
   const Pagination: IPagination = {
     id: id,
     page: 1,
-    size: 5,
+    size: 6,
   };
   const { data: goods, isLoading } = useGetCategoryProductQuery(Pagination);
   useEffect(() => {
     if (goods) {
-      dispatch(setGoods(goods));
-      dispatch(setLoading(isLoading));
+      dispatch(setCategoryId(id));
+
+      dispatch(setPhones(goods));
+      dispatch(setPhonesLoading(isLoading));
+      dispatch(setHeadphones(goods));
+      dispatch(setHeadphonesLoading(isLoading));
     }
   }, [goods]);
 

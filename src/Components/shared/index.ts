@@ -1,6 +1,5 @@
 import Swiper from "./bigSlider";
 import { Container } from "./container";
-import { Filter } from "./filter";
 import { Flex } from "./flex";
 import { InfoCard } from "./infoCard";
 import { Products } from "./products";
@@ -12,7 +11,12 @@ import { TotalSide } from "./totalSide";
 import { MyField } from "./field";
 import { MyForm } from "./form";
 import { PhoneInputField } from "./PhoneInput";
+import { RedesignedPagination } from "./pagintaion";
+import { Loader } from "./loader";
+
 export {
+  Loader,
+  RedesignedPagination,
   PhoneInputField,
   MyField,
   MyForm,
@@ -20,7 +24,6 @@ export {
   IncDecCount,
   Swiper,
   Container,
-  Filter,
   Flex,
   InfoCard,
   Products,

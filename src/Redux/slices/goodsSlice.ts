@@ -1,31 +1,55 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import state from "sweetalert/typings/modules/state";
-import { Goods, ShopGoods } from "../../types";
+import { ShopGoods } from "../../types";
 
 interface initialState {
-  goods: ShopGoods;
-  isLoading: boolean;
+  headphones: ShopGoods;
+  phones: ShopGoods;
+  phonesLoading: boolean;
+  headphonesLoading: boolean;
+  categoryId: number;
 }
 const initialState: initialState = {
-  goods: {
+  phones: {
     result: [],
     totalCount: 0,
   },
-  isLoading: false,
+  headphones: {
+    result: [],
+    totalCount: 0,
+  },
+  categoryId: 0,
+  headphonesLoading: true,
+  phonesLoading: true,
 };
 
 export const goodsSlice = createSlice({
   name: "goods",
   initialState,
   reducers: {
-    setGoods: (state, action: PayloadAction<ShopGoods>) => {
-      state.goods.result = action.payload.result;
-      state.goods.totalCount = action.payload.totalCount;
+    setCategoryId: (state, action: PayloadAction<number>) => {
+      state.categoryId = action.payload;
     },
-    setLoading: (state, action: PayloadAction<boolean>) => {
-      state.isLoading = action.payload;
+    setPhones: (state, action: PayloadAction<ShopGoods>) => {
+      state.phones.result = action.payload.result;
+      state.phones.totalCount = action.payload.totalCount;
+    },
+    setPhonesLoading: (state, action: PayloadAction<boolean>) => {
+      state.phonesLoading = action.payload;
+    },
+    setHeadphones: (state, action: PayloadAction<ShopGoods>) => {
+      state.headphones.result = action.payload.result;
+      state.headphones.totalCount = action.payload.totalCount;
+    },
+    setHeadphonesLoading: (state, action: PayloadAction<boolean>) => {
+      state.headphonesLoading = action.payload;
     },
   },
 });
-export const { setGoods, setLoading } = goodsSlice.actions;
+export const {
+  setPhones,
+  setPhonesLoading,
+  setHeadphonesLoading,
+  setHeadphones,
+  setCategoryId,
+} = goodsSlice.actions;
 export default goodsSlice.reducer;

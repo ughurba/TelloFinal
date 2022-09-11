@@ -11,6 +11,7 @@ import {
 } from "services/goodsServices";
 import { load } from "Assets";
 import { useTranslation } from "react-i18next";
+import { Loader } from "../../Components/shared/loader";
 
 export const MainPage: FC = () => {
   const { t } = useTranslation();
@@ -46,7 +47,7 @@ export const MainPage: FC = () => {
   }, [data]);
 
   return isRatingGoodsLoad ? (
-    <img src={load} />
+    <Loader />
   ) : (
     <StyledMain>
       <Swiper />
