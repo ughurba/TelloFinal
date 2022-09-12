@@ -20,8 +20,10 @@ export const StyledImg = styled.img`
   height: 48px;
 `;
 export const MainImgWrapper = styled.div`
-  width: 480px;
-  height: 428px;
+  width: 275px !important;
+  height: 388px !important;
 `;
 export const Link = styled.a``;
-export const StyledMainImg = styled.img``;
+export const StyledMainImg = styled.img`
+  width: 100%;
+`;

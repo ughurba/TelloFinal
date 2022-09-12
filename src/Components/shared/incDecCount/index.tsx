@@ -4,8 +4,8 @@ import { FC } from "react";
 import { Flex } from "../";
 
 interface Props {
-  handleDecrement: () => void;
-  handleIncrement: () => void;
+  handleDecrement?: () => void;
+  handleIncrement?: () => void;
   count?: number;
 }
 export const IncDecCount: FC<Props> = ({

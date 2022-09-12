@@ -47,6 +47,24 @@ export interface Color {
   id: number;
   code: string;
 }
+export interface Storage {
+  id: number;
+  value: number;
+}
+export interface IRating {
+  avarge: number;
+  fiveStart: number;
+  fourStart: number;
+  oneStart: number;
+  threeStar: number;
+  twoStart: number;
+}
+export interface ProductStorages {
+  storage: Storage;
+}
+export interface ProductColors {
+  colors: Color;
+}
 export interface Goods {
   oldPrice: number;
   newPrice: number;
@@ -60,7 +78,28 @@ export interface Goods {
   brand: Brand;
   colors: Color[];
 }
-
+interface ProductDetails {
+  id: number;
+  name: string;
+  value: string;
+}
+interface DetailProduct {
+  id: number;
+  brandId: number;
+  categoryId: number;
+  comments: string[];
+  description: string;
+  favorits: [];
+  newPrice: number;
+  oldPrice: number;
+  photos: Image[];
+  stockCount: number;
+  title: string;
+  productColors: ProductColors[];
+  productStorages: ProductStorages[];
+  productDetails: ProductDetails[];
+  ratings: IRating[];
+}
 interface ShopGoods {
   result: Goods[];
   totalCount: number;

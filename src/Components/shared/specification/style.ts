@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { MyField } from "../field";
 
 interface TitleProps {
   specification: boolean;
@@ -32,11 +33,16 @@ const StyleSpecification = css`
   margin-top: 32px;
   color: #4f4f4f;
 `;
+const StyleColorDate = css`
+  font-weight: ${({ theme }) => theme.fontStyle.fontWeight.normal};
+  font-size: ${({ theme }) => theme.fontStyle.size.small};
+  color: ${({ theme }) => theme.colors.gray31};
+  display: inline-block;
+  margin-top: 8px;
+  line-height: 1.33;
+`;
 export const List = styled.ul`
   ${StyleSpecification}
-  &:nth-child(2) {
-    margin-top: 60px;
-  }
 `;
 export const InfoProduct = styled.h4`
   ${StyleSpecification}
@@ -48,7 +54,6 @@ const StyleParagrpah = css`
   line-height: 1.5;
   color: #828282;
   list-style: none;
-  margin-top: 16px;
 `;
 export const Paragraph = styled.p`
   width: 456px;
@@ -60,3 +65,47 @@ export const Link = styled.li`
     margin-top: 28px;
   }
 `;
+export const Description = styled.p`
+  font-weight: ${({ theme }) => theme.fontStyle.fontWeight.normal};
+  font-size: ${({ theme }) => theme.fontStyle.size.medium};
+  color: ${({ theme }) => theme.colors.gray31};
+  line-height: 1.5;
+  margin-top: 16px;
+  width: 1000px;
+`;
+export const WrapperComment = styled.div`
+  margin-top: 38px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #bdbdbd;
+`;
+export const StyledTextArea = styled(MyField).attrs({
+  component: "textarea",
+  id: "comment",
+  name: "comment",
+  placeholder: "Rətinizi buraya yazın",
+  label: "Rəyinizi yazın",
+})`
+  width: 100%;
+  height: 144px;
+  padding-left: 20px;
+  padding-top: 15px;
+  background: #f2f2f2;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  resize: none;
+  margin-top: 10px;
+`;
+export const FullName = styled.h3`
+  font-weight: ${({ theme }) => theme.fontStyle.fontWeight.medium};
+  font-size: ${({ theme }) => theme.fontStyle.size.medium};
+  line-height: 1.4;
+  color: ${({ theme }) => theme.colors.gray31};
+`;
+export const StorageColor = styled.span`
+  ${StyleColorDate}
+`;
+export const Date = styled.span`
+  ${StyleColorDate}
+`;
+export const WrapperReviews = styled.div``;

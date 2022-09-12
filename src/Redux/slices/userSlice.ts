@@ -31,14 +31,7 @@ const userSlice = createSlice({
       state.user.isOnline = true;
     },
     logoutUser: (state) => {
-      state.user.Email = "";
-      state.user.nameid = "";
-      state.user.unique_name = "";
-      state.user.Name = "";
-      state.user.Surname = "";
-      state.user.Birthda = "";
-      state.user.Role = [];
-      state.user.isOnline = false;
+      state.user = {} as IUser;
     },
   },
 });

@@ -25,7 +25,7 @@ export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
     customPaging: function (i: number) {
       return (
         <Link>
-          <StyledImg src={childImg[i]} />
+          <img src={childImg[i]} alt={childImg[i]} />
         </Link>
       );
     },

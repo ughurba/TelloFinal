@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 
 import {
   Azn,
@@ -14,71 +14,74 @@ import {
   StyledButton,
   WrapperLink,
 } from "./style";
-import { IncDecCount, Flex } from "Components/shared/";
-import { IncDecWrapper } from "Pages/detailProduct/style";
-import { useAppDispatch, useAppSelector } from "Redux/hooks";
+import { Flex, IncDecCount } from "Components/shared/";
 import { useTranslation } from "react-i18next";
-import { Goods } from "types";
+import { DetailProduct, IRating } from "types";
+
+import HoverRating from "../customRating";
+import styled from "styled-components";
+import { IncDecWrapper } from "Pages/detailProduct/style";
 
 export interface IProps {
-  product?: Goods;
+  product?: DetailProduct;
 }
 
-export const FullInfoProductContent: FC<IProps> = ({ product }) => {
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation();
-  // const handleAddItems = () => {
-  //   if (product) {
-  //     dispatch(addItem(product));
-  //   }
-  // };
+export const StyledRating = styled.div`
+  margin-top: 16px;
+`;
 
-  // const handleIncrement = () => {
-  //   if (product) {
-  //     dispatch(plusItem(product));
-  //   }
-  // };
-  // const handleDecrement = () => {
-  //   if (product) {
-  //     dispatch(minusItem(product));
-  //   }
-  // };
+export const FullInfoProductContent: FC<IProps> = ({ product }) => {
+  const { t } = useTranslation();
+  // const [rating, setRating] = useState<IRating>({
+  //   avarge: 0,
+  //   fiveStart: 0,
+  //   fourStart: 0,
+  //   oneStart: 0,
+  //   threeStar: 0,
+  //   twoStart: 0,
+  // });
+  //
+  // useEffect(() => {
+  //   product?.ratings.map((item) => {
+  //     setRating({ ...item });
+  //   });
+  // }, [product]);
 
   return (
     <Wrapper>
       <Title>{product?.title}</Title>
+      <StyledRating>
+        <HoverRating />
+      </StyledRating>
+
       <Price>
         {product?.newPrice}
         <Azn />
       </Price>
       <Line />
       <WrapperColor>
-        {/*<Flex AlItems={"center"}>*/}
-        {/*  <Name>{t("Rəng")}:</Name>*/}
-        {/*  {product?.color.map((color, index) => (*/}
-        {/*    <Color key={color} colors={color} />*/}
-        {/*  ))}*/}
-        {/*</Flex>*/}
+        <Flex AlItems={"center"}>
+          <Name>{t("Color")}:</Name>
+          {product?.productColors.map((c) => (
+            <Color key={c.colors.id} colors={c.colors.code} />
+          ))}
+        </Flex>
       </WrapperColor>
       <WrapperStorage>
-        {/*<Flex AlItems={"center"}>*/}
-        {/*  <Name>{t("Storage")}:</Name>*/}
-        {/*  {product?.storage.map((storage, index) => (*/}
-        {/*    <Storage key={index}>{storage}</Storage>*/}
-        {/*  ))}*/}
-        {/*</Flex>*/}
+        <Flex AlItems={"center"}>
+          <Name>{t("Storage")}:</Name>
+          {product?.productStorages?.map((s, i) => (
+            <Storage key={i}>{s.storage.value}</Storage>
+          ))}
+        </Flex>
       </WrapperStorage>
       <Line />
-      {/*<IncDecWrapper>*/}
-      {/*  <IncDecCount*/}
-      {/*    count={product?.count}*/}
-      {/*    handleIncrement={handleIncrement}*/}
-      {/*    handleDecrement={handleDecrement}*/}
-      {/*  />*/}
-      {/*</IncDecWrapper>*/}
+      <IncDecWrapper>
+        <IncDecCount count={product?.stockCount} />
+      </IncDecWrapper>
 
       <WrapperLink>
-        {/*<StyledButton onClick={handleAddItems}>{t("AddToCart")}</StyledButton>*/}
+        <StyledButton>{t("AddToCart")}</StyledButton>
       </WrapperLink>
     </Wrapper>
   );

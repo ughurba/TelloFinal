@@ -26,6 +26,7 @@ export const MyForm: FC<Props> = ({
       address: "",
       building: "",
       courier: "",
+      comment: "",
       Birthda: rest?.Birthda || "",
     });
   }, [rest]);

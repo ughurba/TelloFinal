@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Brand, Category, Goods, ShopGoods } from "../types";
+import { Brand, Category, ShopGoods } from "../types";
 
 export interface IPagination {
   id: number;
