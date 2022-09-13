@@ -1,5 +1,5 @@
-import { Flex, MyField, MyForm } from "../";
-import { FC, useState } from "react";
+import { Flex, MyForm } from "../";
+import { FC, useMemo, useState } from "react";
 import {
   Paragraph,
   Wrapper,
@@ -20,6 +20,11 @@ import { useTranslation } from "react-i18next";
 import { DetailProduct } from "types";
 import { useAppSelector } from "Redux/hooks";
 import { IComment } from "./types";
+import {
+  useCommentPostMutation,
+  useGetCommentsQuery,
+} from "services/commentService";
+import { useSetUser } from "Hooks/useSetUser";
 
 interface Props {
   product?: DetailProduct;
@@ -27,24 +32,35 @@ interface Props {
 
 export const Specification: FC<Props> = ({ product }) => {
   const [specification, setSpecification] = useState<boolean>(true);
-  const [commentInfo, setCommentInfo] = useState<IComment[]>([]);
   const { user } = useAppSelector((state) => state.user);
-
+  const [postComment] = useCommentPostMutation();
+  const { data } = useGetCommentsQuery(product?.id ? product?.id : 0);
+  const [commentInfo, setCommentInfo] = useState<IComment[]>([]);
   const { t } = useTranslation();
+  useSetUser();
   const handleClick = (value: Record<string, string>) => {
     if (product) {
-      setCommentInfo([
-        ...commentInfo,
-        {
-          productId: product.id,
-          userId: user.nameid,
-          name: user.Name,
-          surname: user.Surname,
-          content: value.comment,
-        },
-      ]);
+      postComment({
+        productId: product.id,
+        appUserId: user.nameid,
+        name: user.Name,
+        surname: user.Surname,
+        content: value.comment,
+      });
+      commentInfo.push({
+        productId: product.id,
+        appUserId: user.nameid,
+        appUser: { name: user.Name, surname: user.Surname },
+        content: value.comment,
+      });
     }
   };
+
+  useMemo(() => {
+    if (data) {
+      setCommentInfo([...commentInfo, ...data]);
+    }
+  }, [data]);
   // const specifications = [
   //   t("Brand"),
   //   t("ProductType"),
@@ -91,21 +107,25 @@ export const Specification: FC<Props> = ({ product }) => {
         </Flex>
       ) : (
         <WrapperReviews>
-          {commentInfo.map((comment) => (
-            <WrapperComment>
+          {commentInfo?.map((item) => (
+            <WrapperComment key={item.id}>
               <Flex JsContent="space-between" AlItems="center">
                 <div>
-                  <FullName>{`${comment.name} ${comment.surname}`}</FullName>
+                  <FullName>{`${item.appUser?.name} ${item.appUser?.surname}`}</FullName>
                   <StorageColor>Yaddaş - 64, Rəng - Qara</StorageColor>
                 </div>
                 <Date>5 gün əvvəl</Date>
               </Flex>
-              <Description>{comment.content}</Description>
+              <Description>{item.content}</Description>
             </WrapperComment>
           ))}
           <MyForm onClick={handleClick}>
-            {user.isOnline && <StyledTextArea />}
-            <button type={"submit"}>Submit</button>
+            {user.isOnline && (
+              <>
+                <StyledTextArea />
+                <button type={"submit"}>Submit</button>
+              </>
+            )}
           </MyForm>
         </WrapperReviews>
       )}

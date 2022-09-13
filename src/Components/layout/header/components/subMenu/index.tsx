@@ -53,15 +53,14 @@ export const SubMenu = () => {
   const { data: goods, isLoading } = useGetCategoryProductQuery(Pagination);
   useEffect(() => {
     if (goods) {
+      localStorage.setItem("categoryId", JSON.stringify(id));
       dispatch(setCategoryId(id));
-
       dispatch(setPhones(goods));
       dispatch(setPhonesLoading(isLoading));
       dispatch(setHeadphones(goods));
       dispatch(setHeadphonesLoading(isLoading));
     }
   }, [goods]);
-
   return (
     <Wrapper>
       <Flex>

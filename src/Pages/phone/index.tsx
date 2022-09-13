@@ -12,16 +12,24 @@ import {
 } from "services/categoriesServices";
 import { BrandFilter } from "./components/brandFilter";
 import { RedesignedPagination, Loader } from "Components/shared";
-import { setPhonesLoading, setPhones } from "../../Redux/slices/goodsSlice";
+import {
+  setPhonesLoading,
+  setPhones,
+  setCategoryId,
+} from "../../Redux/slices/goodsSlice";
 
 export const Phone = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [brand, setBrand] = useState<Brand[]>([]);
+
+  const id = Number(localStorage.getItem("categoryId"));
+  dispatch(setCategoryId(id));
   const { phones, phonesLoading, categoryId } = useAppSelector(
     (state) => state.goods
   );
-  const dispatch = useAppDispatch();
+
   const { data: brands } = useGetBrandsQuery();
   const Pagination: IPagination = {
     id: categoryId,
