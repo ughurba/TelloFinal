@@ -1,5 +1,5 @@
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/dist/query/react";
-import { Basket, IBasketItems } from "types";
+import { Basket, CalculationBasket } from "types";
 export interface AddProps {
   colorId?: number;
   storageId?: number;
@@ -30,7 +30,16 @@ export const basketApi = createApi({
         };
       },
     }),
-    incrementPut: builder.mutation<void, number>({
+    deleteItem: builder.mutation<{ total: number }, number>({
+      query: (id) => {
+        return {
+          url: `/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
+
+    incrementPut: builder.mutation<CalculationBasket, number>({
       query: (id) => {
         return {
           url: `/${id}`,
@@ -38,7 +47,7 @@ export const basketApi = createApi({
         };
       },
     }),
-    decrementPut: builder.mutation<void, number>({
+    decrementPut: builder.mutation<CalculationBasket, number>({
       query: (id) => {
         return {
           url: `/minus/${id}`,
@@ -50,6 +59,7 @@ export const basketApi = createApi({
 });
 
 export const {
+  useDeleteItemMutation,
   useGetAllQuery,
   useIncrementPutMutation,
   useDecrementPutMutation,

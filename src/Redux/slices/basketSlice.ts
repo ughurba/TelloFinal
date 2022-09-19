@@ -20,7 +20,12 @@ export const basketSlice = createSlice({
     updateTotal: (state, action: PayloadAction<number>) => {
       state.basket.total = action.payload;
     },
+    removeItem: (state, action: PayloadAction<number>) => {
+      state.basket.basketItems = state.basket.basketItems.filter(
+        (b) => b.productId !== action.payload
+      );
+    },
   },
 });
-export const { addItem, updateTotal } = basketSlice.actions;
+export const { addItem, updateTotal, removeItem } = basketSlice.actions;
 export default basketSlice.reducer;

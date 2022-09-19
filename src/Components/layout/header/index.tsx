@@ -22,7 +22,6 @@ export const Header = () => {
   const { user } = useAppSelector((state) => state.user);
 
   const { data } = useGetAllQuery();
-
   useEffect(() => {
     if (data) {
       dispatch(addItem(data.basketItems));

@@ -77,6 +77,7 @@ export interface Goods {
   photos: Image[];
   brand: Brand;
   colors: Color[];
+  stockCount: number;
 }
 interface ProductDetails {
   id: number;
@@ -126,5 +127,14 @@ export interface IBasketItems {
 }
 export interface Basket {
   basketItems: IBasketItems[];
+  total: number;
+}
+export interface IncDecType {
+  isExistCount: number;
+  isExistSum: number;
+  productCount?: number;
+}
+export interface CalculationBasket {
+  frontBaskets: IncDecType[];
   total: number;
 }

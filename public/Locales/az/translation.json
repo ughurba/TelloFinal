@@ -83,5 +83,8 @@
   "Birtdhy" : "Doğum tarixi",
   "SelectYourDateOfBirth": "Doğum tarixinizi seçin",
   "UpdateInformation":"Məlumatları yenilə",
-  "YouCurrentlyHaveNoOrdersInYourCart": "Səbətinizdə hazırda heç bir sifarişiniz yoxdur"
+  "YouCurrentlyHaveNoOrdersInYourCart": "Səbətinizdə hazırda heç bir sifarişiniz yoxdur",
+  "EmptyBasket": "Onlayn mağazanın kataloqundan sizə lazım olan məhsulu seçin və səbətə əlavə edin.",
+  "EmptyBasketTitle":"Səbətiniz boşdur.",
+  "InKatalog": "kataloqa"
 }
