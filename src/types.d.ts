@@ -99,6 +99,7 @@ interface DetailProduct {
   productStorages: ProductStorages[];
   productDetails: ProductDetails[];
   ratings: IRating[];
+  basketItems: IBasketItems;
 }
 interface ShopGoods {
   result: Goods[];
@@ -111,4 +112,19 @@ export interface Image {
 export interface Category {
   id: number;
   title: string;
+}
+export interface IBasketItems {
+  id: number;
+  productId: number;
+  product?: Goods;
+  sum: number;
+  price: number;
+  path: string;
+  count: number;
+  code?: string;
+  storage?: string;
+}
+export interface Basket {
+  basketItems: IBasketItems[];
+  total: number;
 }

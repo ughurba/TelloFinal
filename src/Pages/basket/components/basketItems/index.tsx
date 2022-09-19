@@ -1,57 +1,66 @@
-import { Flex, IncDecCount } from "../../../../Components/shared";
+import { Flex, IncDecCount } from "Components/shared";
 import { FC, useState } from "react";
 import {
   Wrapper,
   StyledTrash,
   StyledImg,
   Title,
-  NameColor,
-  Color,
   StockPrice,
   Discount,
   ProductContent,
+  Color,
+  NameColor,
 } from "./style";
 import { useTranslation } from "react-i18next";
+import { IBasketItems } from "types";
+import {
+  useDecrementPutMutation,
+  useIncrementPutMutation,
+} from "services/basketServices";
 
-interface Props {
-  imgUrl: string;
-  title: string;
-  color: string[];
-  price: number;
-  discount: number;
-  count: number;
-}
+interface Props extends IBasketItems {}
 
 export const BasketItems: FC<Props> = ({
-  imgUrl,
-  title,
-  color,
+  product,
+  productId,
   price,
-  discount,
+  path,
   count,
+  code,
 }) => {
-  const handleIncrement = () => {};
-  const handleDecrement = () => {};
+  const [decrement] = useDecrementPutMutation();
+  const [increment] = useIncrementPutMutation();
   const { t } = useTranslation();
+  const [value, setValue] = useState<number>(count);
+  const handleIncrement = (id: number) => {
+    setValue(value + 1);
+    increment(id);
+  };
+  const handleDecrement = (id: number) => {
+    setValue(value - 1);
+    decrement(id);
+  };
+
   return (
     <Wrapper>
       <Flex JsContent={"space-between"} AlItems={"center"}>
-        <StyledImg src={imgUrl} />
-        <ProductContent>
-          <Title>{title}</Title>
-          <Flex AlItems={"flex-end"}>
-            <Color>
-              {t("Color")}: <NameColor>{color}</NameColor>
-            </Color>
+        <Flex AlItems={"center"}>
+          <StyledImg src={path} />
+          <ProductContent>
+            <Title>{product?.title}</Title>
+            <Flex AlItems={"flex-end"}>
+              <Color>
+                {t("Color")}: <NameColor>{code}</NameColor>
+              </Color>
+              <StockPrice>{price} ₼</StockPrice>
+            </Flex>
+          </ProductContent>
+        </Flex>
 
-            <Discount>{discount} ₼</Discount>
-            <StockPrice>{price} ₼</StockPrice>
-          </Flex>
-        </ProductContent>
         <IncDecCount
-          count={count}
-          handleDecrement={handleDecrement}
-          handleIncrement={handleIncrement}
+          count={value}
+          handleDecrement={() => handleDecrement(productId)}
+          handleIncrement={() => handleIncrement(productId)}
         />
         <StyledTrash />
       </Flex>

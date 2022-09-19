@@ -1,5 +1,5 @@
 import { Flex, MyForm } from "../";
-import { FC, useMemo, useState } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 import {
   Paragraph,
   Wrapper,
@@ -8,13 +8,14 @@ import {
   List,
   Link,
   InfoProduct,
-  Date,
+  DateTime,
   StorageColor,
   FullName,
   WrapperReviews,
   WrapperComment,
   Description,
   StyledTextArea,
+  Close,
 } from "./style";
 import { useTranslation } from "react-i18next";
 import { DetailProduct } from "types";
@@ -23,9 +24,9 @@ import { IComment } from "./types";
 import {
   useCommentPostMutation,
   useGetCommentsQuery,
+  useRemoveCommentMutation,
 } from "services/commentService";
 import { useSetUser } from "Hooks/useSetUser";
-
 interface Props {
   product?: DetailProduct;
 }
@@ -35,12 +36,15 @@ export const Specification: FC<Props> = ({ product }) => {
   const { user } = useAppSelector((state) => state.user);
   const [postComment] = useCommentPostMutation();
   const { data } = useGetCommentsQuery(product?.id ? product?.id : 0);
+  const [removeComment] = useRemoveCommentMutation();
   const [commentInfo, setCommentInfo] = useState<IComment[]>([]);
   const { t } = useTranslation();
   useSetUser();
   const handleClick = (value: Record<string, string>) => {
     if (product) {
+      const date = new Date();
       postComment({
+        createTime: date,
         productId: product.id,
         appUserId: user.nameid,
         name: user.Name,
@@ -56,9 +60,14 @@ export const Specification: FC<Props> = ({ product }) => {
     }
   };
 
-  useMemo(() => {
+  const handleRemoveComment = (id: number) => {
+    removeComment(id);
+    setCommentInfo(commentInfo.filter((comment) => comment.id !== id));
+  };
+  useEffect(() => {
     if (data) {
       setCommentInfo([...commentInfo, ...data]);
+      console.log("data");
     }
   }, [data]);
   // const specifications = [
@@ -107,16 +116,19 @@ export const Specification: FC<Props> = ({ product }) => {
         </Flex>
       ) : (
         <WrapperReviews>
-          {commentInfo?.map((item) => (
-            <WrapperComment key={item.id}>
+          {commentInfo?.map((item, index) => (
+            <WrapperComment key={index}>
               <Flex JsContent="space-between" AlItems="center">
                 <div>
                   <FullName>{`${item.appUser?.name} ${item.appUser?.surname}`}</FullName>
                   <StorageColor>Yaddaş - 64, Rəng - Qara</StorageColor>
                 </div>
-                <Date>5 gün əvvəl</Date>
+                <DateTime>{item?.createTime as ReactNode} gün əvvəl</DateTime>
               </Flex>
               <Description>{item.content}</Description>
+              <Close
+                onClick={() => handleRemoveComment(item.id ? item.id : 0)}
+              />
             </WrapperComment>
           ))}
           <MyForm onClick={handleClick}>

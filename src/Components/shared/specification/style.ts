@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import { MyField } from "../field";
+import { X } from "phosphor-react";
 
 interface TitleProps {
   specification: boolean;
@@ -77,6 +78,7 @@ export const WrapperComment = styled.div`
   margin-top: 38px;
   padding-bottom: 30px;
   border-bottom: 1px solid #bdbdbd;
+  position: relative;
 `;
 export const StyledTextArea = styled(MyField).attrs({
   component: "textarea",
@@ -105,7 +107,19 @@ export const FullName = styled.h3`
 export const StorageColor = styled.span`
   ${StyleColorDate}
 `;
-export const Date = styled.span`
+export const DateTime = styled.span`
+  padding-top: 24px;
   ${StyleColorDate}
 `;
 export const WrapperReviews = styled.div``;
+
+export const Close = styled(X)`
+  right: 10px;
+  top: -20px;
+  position: absolute;
+  font-size: 20px;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+`;

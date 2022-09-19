@@ -4,7 +4,7 @@ import { SizeProducts, Wrapper, WrapperShop } from "./style";
 import * as React from "react";
 import { Flex, Container, Products } from "Components/shared";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import {
   IPagination,
   useGetBrandsQuery,
@@ -16,8 +16,7 @@ import {
   setPhonesLoading,
   setPhones,
   setCategoryId,
-} from "../../Redux/slices/goodsSlice";
-
+} from "Redux/slices/goodsSlice";
 export const Phone = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -25,20 +24,18 @@ export const Phone = () => {
   const [brand, setBrand] = useState<Brand[]>([]);
 
   const id = Number(localStorage.getItem("categoryId"));
-  dispatch(setCategoryId(id));
-  const { phones, phonesLoading, categoryId } = useAppSelector(
-    (state) => state.goods
-  );
+  const { phones, phonesLoading } = useAppSelector((state) => state.goods);
 
   const { data: brands } = useGetBrandsQuery();
   const Pagination: IPagination = {
-    id: categoryId,
+    id: id,
     page: page,
     size: 6,
   };
   const { data, isLoading: loading } = useGetCategoryProductQuery(Pagination);
   useEffect(() => {
     if (data) {
+      dispatch(setCategoryId(id));
       dispatch(setPhones(data));
       dispatch(setPhonesLoading(loading));
     }
@@ -49,9 +46,11 @@ export const Phone = () => {
       setBrand(brands.map((item) => item));
     }
   }, [brands]);
+
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
+
   return (
     <Wrapper>
       <Container>

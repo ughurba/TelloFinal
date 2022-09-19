@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, FormEvent, useState } from "react";
 import {
   CheckBoxWrapper,
   StyledCheckBox,
@@ -11,10 +11,14 @@ interface Props {
   id: number;
 }
 export const SubFilter: FC<Props> = ({ name, id }) => {
+  const [brands, setBrands] = useState<Record<string, boolean>>();
+  const handleChange = (ev: FormEvent<HTMLInputElement>) => {
+    setBrands({ ...brands, [ev.currentTarget.name]: ev.currentTarget.checked });
+  };
   return (
     <SubFilterWrapper>
       <CheckBoxWrapper>
-        <StyledCheckBox id={name} />
+        <StyledCheckBox onChange={handleChange} name={name} id={name} />
         <StyledLabel htmlFor={name}>{name}</StyledLabel>
       </CheckBoxWrapper>
     </SubFilterWrapper>

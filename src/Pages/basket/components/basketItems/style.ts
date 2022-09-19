@@ -7,12 +7,15 @@ export const Wrapper = styled.div`
   background: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   padding: 7px 13px;
+  margin-top: 14px;
 `;
 export const StyledImg = styled.img`
   width: 50px;
   height: 72px;
 `;
-export const ProductContent = styled.div``;
+export const ProductContent = styled.div`
+  margin-left: 25px;
+`;
 export const Title = styled.h3`
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.medium};
   font-size: ${({ theme }) => theme.fontStyle.size.xSmall};

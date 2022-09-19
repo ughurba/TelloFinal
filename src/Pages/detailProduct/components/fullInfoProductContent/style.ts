@@ -1,11 +1,13 @@
 import styled, { css } from "styled-components";
 import { RedAzn } from "../../../../Assets";
-import { NavLink } from "react-router-dom";
 import { Button, styled as MuiStyled } from "@mui/material";
 
 interface colorProps {
   colors: string;
 }
+export const StyledRating = styled.div`
+  margin-top: 16px;
+`;
 
 export const Line = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.gray4};
@@ -59,12 +61,11 @@ export const Azn = styled(RedAzn)`
   left: 5px;
 `;
 export const WrapperLink = styled.div`
-  margin-top: 73px;
+  margin-top: 28px;
 `;
 export const StyledButton = MuiStyled(Button)`
   background: #2dd06e;
   border-radius: 8px;
-  
   padding: 14px 48px;
   font-weight: 500;
   font-size: 14px;

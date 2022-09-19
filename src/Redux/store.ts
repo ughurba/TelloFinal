@@ -8,18 +8,21 @@ import { adminApi } from "../services/adminServices";
 import { categoriesApi } from "../services/categoriesServices";
 import goodsSlice from "./slices/goodsSlice";
 import { commentApi } from "../services/commentService";
+import { basketApi } from "../services/basketServices";
+import basketSlice from "./slices/basketSlice";
 
 export const store = configureStore({
   reducer: {
     slider: sliderSlice,
     user: userSlice,
     goods: goodsSlice,
-
+    basket: basketSlice,
     [goodsApi.reducerPath]: goodsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [commentApi.reducerPath]: commentApi.reducer,
+    [basketApi.reducerPath]: basketApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -27,7 +30,8 @@ export const store = configureStore({
       authApi.middleware,
       adminApi.middleware,
       categoriesApi.middleware,
-      commentApi.middleware
+      commentApi.middleware,
+      basketApi.middleware
     ),
 });
 

@@ -53,7 +53,6 @@ export const SubMenu = () => {
   const { data: goods, isLoading } = useGetCategoryProductQuery(Pagination);
   useEffect(() => {
     if (goods) {
-      localStorage.setItem("categoryId", JSON.stringify(id));
       dispatch(setCategoryId(id));
       dispatch(setPhones(goods));
       dispatch(setPhonesLoading(isLoading));
@@ -61,6 +60,10 @@ export const SubMenu = () => {
       dispatch(setHeadphonesLoading(isLoading));
     }
   }, [goods]);
+  const handleSetCategoryId = (id: number) => {
+    setId(id);
+    localStorage.setItem("categoryId", JSON.stringify(id));
+  };
   return (
     <Wrapper>
       <Flex>
@@ -68,7 +71,7 @@ export const SubMenu = () => {
         {data?.map((item) => (
           <StyledMenuList
             key={item.id}
-            onClick={() => setId(item.id)}
+            onClick={() => handleSetCategoryId(item.id)}
             to={Routes[item.id as keyof typeof Routes].link}
           >
             {Routes[item.id as keyof typeof Routes].title}

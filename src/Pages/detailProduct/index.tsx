@@ -6,11 +6,12 @@ import { Wrapper } from "./style";
 import { useGetOneQuery } from "../../services/goodsServices";
 
 export const DetailProduct = () => {
-  const { id } = useParams();
+  const { id = "" } = useParams<{ id: string }>();
+
   const [mainImg, setMainImg] = useState<string[]>([]);
   const [childImg, setChildImg] = useState<string[]>([]);
 
-  const { data, isLoading } = useGetOneQuery(id ? id : "");
+  const { data, isLoading } = useGetOneQuery(id);
   useEffect(() => {
     data?.photos.forEach((item) => {
       if (item.isMain) {
@@ -30,7 +31,7 @@ export const DetailProduct = () => {
           <div>
             <Flex>
               <FullInfoShowSlider mainImg={mainImg} childImg={childImg} />{" "}
-              <FullInfoProductContent product={data} />
+              {data && <FullInfoProductContent product={data} />}
             </Flex>
             <Specification product={data} />
           </div>

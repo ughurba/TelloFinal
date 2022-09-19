@@ -1,28 +1,28 @@
 import { BasketItems } from "./components/basketItems";
 import { Flex, Container, TotalSide } from "Components/shared";
 import { StyledTotalSide, Wrapper } from "./style";
-import { useAppDispatch, useAppSelector } from "Redux/hooks";
+import { useAppSelector } from "Redux/hooks";
 
 export const Basket = () => {
-  const dispatch = useAppDispatch();
+  const { basketItems, total } = useAppSelector((state) => state.basket.basket);
 
   return (
     <Wrapper>
       <Container>
-        {/*<Flex JsContent={"space-between"}>*/}
-        {/*  {items.length !== 0 ? (*/}
-        {/*    <div>*/}
-        {/*      {items.map((obj) => (*/}
-        {/*        <BasketItems {...obj} />*/}
-        {/*      ))}*/}
-        {/*      <StyledTotalSide>*/}
-        {/*        <TotalSide />*/}
-        {/*      </StyledTotalSide>*/}
-        {/*    </div>*/}
-        {/*  ) : (*/}
-        {/*    <div>boshdur</div>*/}
-        {/*  )}*/}
-        {/*</Flex>*/}
+        {basketItems?.length !== 0 ? (
+          <Flex JsContent={"space-between"}>
+            <div>
+              {basketItems?.map((obj) => (
+                <BasketItems key={obj.id} {...obj} />
+              ))}
+            </div>
+            <StyledTotalSide>
+              <TotalSide total={total} />
+            </StyledTotalSide>
+          </Flex>
+        ) : (
+          <div>boshdur</div>
+        )}
       </Container>
     </Wrapper>
   );

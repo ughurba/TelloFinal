@@ -10,7 +10,11 @@ import {
   useGetBrandsQuery,
   useGetCategoryProductQuery,
 } from "services/categoriesServices";
-import { setHeadphonesLoading, setHeadphones } from "Redux/slices/goodsSlice";
+import {
+  setHeadphonesLoading,
+  setHeadphones,
+  setCategoryId,
+} from "Redux/slices/goodsSlice";
 import { BrandFilter } from "../phone/components/brandFilter";
 import { Loader, RedesignedPagination } from "Components/shared";
 
@@ -18,20 +22,21 @@ export const Headphone = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [brand, setBrand] = useState<Brand[]>([]);
-  const { headphones, headphonesLoading, categoryId } = useAppSelector(
+  const id = Number(localStorage.getItem("categoryId"));
+  const dispatch = useAppDispatch();
+  const { headphones, headphonesLoading } = useAppSelector(
     (state) => state.goods
   );
-  const dispatch = useAppDispatch();
   const { data: brands } = useGetBrandsQuery();
   const Pagination: IPagination = {
-    id: categoryId,
+    id: id,
     page: page,
     size: 6,
   };
   const { data, isLoading: loading } = useGetCategoryProductQuery(Pagination);
-
   useEffect(() => {
     if (data) {
+      dispatch(setCategoryId(id));
       dispatch(setHeadphones(data));
       dispatch(setHeadphonesLoading(loading));
     }

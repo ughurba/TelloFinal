@@ -9,13 +9,28 @@ import { SubMenu } from "./components/subMenu";
 import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
 import { useSetUser } from "Hooks/useSetUser";
+import { useGetAllQuery } from "services/basketServices";
+import { addItem, updateTotal } from "Redux/slices/basketSlice";
+import { useEffect } from "react";
 
 export const Header = () => {
+  const dispatch = useAppDispatch();
   useSetUser();
   const { user } = useAppSelector((state) => state.user);
+
+  const { data } = useGetAllQuery();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(addItem(data.basketItems));
+      dispatch(updateTotal(data.total));
+    }
+  }, [data]);
+
+  const { basketItems } = useAppSelector((state) => state.basket.basket);
 
   return (
     <Container>
@@ -34,7 +49,7 @@ export const Header = () => {
             <Link to={Links.app.basket}>
               <Basket />
             </Link>
-            <StyledSize>{0}</StyledSize>
+            <StyledSize>{basketItems.length}</StyledSize>
           </StyledBasketHeader>
         </StyledParentSvg>
       </Flex>

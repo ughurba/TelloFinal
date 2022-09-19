@@ -21,6 +21,16 @@ export const commentApi = createApi({
     getComments: builder.query<IComment[], number>({
       query: (id: number) => `/${id}`,
     }),
+    removeComment: builder.mutation<void, number>({
+      query: (id: number) => ({
+        url: `/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
-export const { useCommentPostMutation, useGetCommentsQuery } = commentApi;
+export const {
+  useCommentPostMutation,
+  useGetCommentsQuery,
+  useRemoveCommentMutation,
+} = commentApi;
