@@ -61,6 +61,7 @@ export interface IRating {
 }
 export interface ProductStorages {
   storage: Storage;
+  storageId: number;
 }
 export interface ProductColors {
   colors: Color;

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { ILogin, IRegisterData } from "../types";
-import { IComment } from "../Components/shared/specification/types";
+import { IComment } from "../Pages/detailProduct/components/specification/types";
 
 export const commentApi = createApi({
   reducerPath: "commentApi",

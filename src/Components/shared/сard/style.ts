@@ -1,40 +1,44 @@
 import styled, { css } from "styled-components";
+import { styled as MuiStyled } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
 
-export const StyledBox = styled.div`
-  border: 1px solid white;
-  box-shadow: 0px 4px 24px rgba(130, 130, 130, 0.16);
-  border-radius: 8px;
-  padding: ${(props) => props.theme.space[5]};
-  height: 360px;
-  width: 286px;
-`;
-export const StyledImg = styled.img`
-  width: 100%;
-  height: 100%;
-`;
-export const StyledImgBox = styled.div`
-  width: 110px;
-  height: 210px;
-`;
 export const FontStyles = css`
-  color: ${(props) => props.theme.colors.gray};
   font-weight: ${(props) => props.theme.fontStyle.fontWeight.medium};
-  font-size: ${(props) => props.theme.fontStyle.size.medium};
+  font-size: 20px;
   line-height: 1.5;
 `;
-export const StyledTitle = styled.h4`
-  margin-top: ${(props) => props.theme.space[4]};
-  ${FontStyles}
+export const StyledTypographyPrices = MuiStyled(Typography)`
+margin-top:15px;
 `;
-export const StyledPrice = styled.span`
-  display: inline-block;
-  margin-top: ${(props) => props.theme.space[3]};
-  ${FontStyles}
+export const StyledCardContent = MuiStyled(CardContent)`
+padding:8px;
 `;
-export const StyledWrapper = styled.div`
-  margin-left: ${(props) => props.theme.space[5]};
+export const StockNoStock = css`
+  display: block;
+  position: relative;
+  top: 10px;
+  font-size: 18px;
+`;
+export const Stock = styled.span`
+  color: green;
+  ${StockNoStock}
+`;
+export const NoStock = styled.span`
+  color: red;
+  ${StockNoStock}
+`;
 
-  &:nth-child(1) {
-    margin-left: 0;
-  }
+export const NewPrice = styled.span`
+  color: ${(props) => props.theme.colors.cerise};
+  margin-left: 15px;
+  ${FontStyles}
+`;
+export const OldPrice = styled.del`
+  color: ${(props) => props.theme.colors.oldSilver};
+  ${FontStyles}
+`;
+export const StyledCardActions = MuiStyled(CardActions)`
+padding:0px;
 `;

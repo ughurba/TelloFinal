@@ -1,10 +1,9 @@
 import { FC } from "react";
 import { StyledGlobal } from "Pages/main/components/productsMain/style";
 import { Grid } from "@mui/material";
-import { Card } from "../сard";
-import { CustomCheck, StyledGrid, StyledLink, Wrapper } from "./style";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
+import { CustomCard } from "../сard";
+import { StyledGrid, Wrapper } from "./style";
+
 import { ShopGoods } from "types";
 
 interface Props {
@@ -14,13 +13,10 @@ export const Products: FC<Props> = ({ data }) => {
   return (
     <Wrapper>
       <StyledGlobal />
-      <Grid container spacing={3}>
+      <Grid container spacing={5}>
         {data?.result.map((obj) => (
           <StyledGrid key={obj.id} item xs={4}>
-            <StyledLink to={`/FullInfoProduct/${obj.id}`}>
-              <Card {...obj} />
-            </StyledLink>
-            <CustomCheck icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+            <CustomCard {...obj} />
           </StyledGrid>
         ))}
       </Grid>

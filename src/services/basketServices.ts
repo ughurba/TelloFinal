@@ -5,6 +5,7 @@ export interface AddProps {
   storageId?: number;
   productId?: number;
 }
+
 export const basketApi = createApi({
   reducerPath: "basketApi",
   baseQuery: fetchBaseQuery({
@@ -19,9 +20,9 @@ export const basketApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    getAll: builder.query<Basket, void>({
-      query: () => `/`,
-    }),
+    // getAll: builder.query<Basket, void>({
+    //   query: () => `/`,
+    // }),
     addItem: builder.mutation<Basket, AddProps>({
       query: (itemId) => {
         return {
@@ -57,10 +58,16 @@ export const basketApi = createApi({
     }),
   }),
 });
-
+export const extendedApi = basketApi.injectEndpoints({
+  endpoints: (build) => ({
+    getAll: build.query<Basket, void>({
+      query: () => `/`,
+    }),
+  }),
+});
+export const { useGetAllQuery } = extendedApi;
 export const {
   useDeleteItemMutation,
-  useGetAllQuery,
   useIncrementPutMutation,
   useDecrementPutMutation,
   useAddItemMutation,

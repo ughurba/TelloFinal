@@ -12,12 +12,13 @@ export const DetailProduct = () => {
   const [childImg, setChildImg] = useState<string[]>([]);
 
   const { data, isLoading } = useGetOneQuery(id);
+
   useEffect(() => {
     data?.photos.forEach((item) => {
       if (item.isMain) {
         setMainImg([item.path]);
       } else {
-        setChildImg([item.path]);
+        childImg.push(item.path);
       }
     });
   }, [data]);

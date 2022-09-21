@@ -1,21 +1,21 @@
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { StyledMain } from "./style";
 import { ProductsHome } from "./components/productsMain";
 import { BigCards } from "./components/bigCard";
-import { SmallSlider, InfoCard, Swiper } from "Components/shared";
+import { SmallSlider, InfoCard, Swiper, Loader } from "Components/shared";
 import { Goods } from "types";
 import {
   useFetchAllGoodsQuery,
   useGetBestSellingProductQuery,
   useGetNewArrivalProductQuery,
 } from "services/goodsServices";
-import { load } from "Assets";
 import { useTranslation } from "react-i18next";
-import { Loader } from "../../Components/shared/loader";
+import { useAppDispatch } from "../../Redux/hooks";
+import { useGetAllQuery } from "../../services/basketServices";
+import { addItem, updateTotal } from "../../Redux/slices/basketSlice";
 
 export const MainPage: FC = () => {
   const { t } = useTranslation();
-
   const { data, isLoading: isRatingGoodsLoad } =
     useGetBestSellingProductQuery();
 
@@ -25,7 +25,15 @@ export const MainPage: FC = () => {
   const [headphones, setHeadphone] = useState<Goods[]>([]);
   const [newArrivalHeadphones, setNewArrivalHeadphones] = useState<Goods[]>();
   const [phones, setPhones] = useState<Goods[]>([]);
-
+  const dispatch = useAppDispatch();
+  // const { data: basketData } = useGetAllQuery();
+  //
+  // useEffect(() => {
+  //   if (basketData) {
+  //     dispatch(addItem(basketData.basketItems));
+  //     dispatch(updateTotal(basketData.total));
+  //   }
+  // }, [basketData]);
   useMemo(() => {
     if (goods) {
       setPhones(goods?.filter((g) => g.categoryTitle === "Telefonlar"));

@@ -1,5 +1,5 @@
 import { Flex, IncDecCount } from "Components/shared";
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Wrapper,
   StyledTrash,
@@ -9,6 +9,8 @@ import {
   ProductContent,
   Color,
   NameColor,
+  Storage,
+  NameStorage,
 } from "./style";
 import { useTranslation } from "react-i18next";
 import { IBasketItems, IncDecType } from "types";
@@ -29,6 +31,7 @@ export const BasketItems: FC<Props> = ({
   count,
   code,
   sum,
+  storage,
 }) => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -102,8 +105,11 @@ export const BasketItems: FC<Props> = ({
             <Title>{product?.title}</Title>
             <Flex AlItems={"flex-end"}>
               <Color>
-                {t("Color")}: <NameColor>{code}</NameColor>
+                {t("Color")}: <NameColor color={code} />
               </Color>
+              <Storage>
+                {t("Storage")}: <NameStorage>{storage}GB</NameStorage>
+              </Storage>
               <StockPrice>{incDec.isExistSum} ₼</StockPrice>
             </Flex>
           </ProductContent>

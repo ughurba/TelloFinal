@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "Redux/hooks";
+import { useAppDispatch } from "Redux/hooks";
 import { useSetUser } from "Hooks/useSetUser";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "Redux/slices/userSlice";
@@ -12,18 +12,30 @@ import {
   User,
 } from "phosphor-react";
 import { List, StyledLink, Title, Wrapper, Text, Logout } from "./style";
+import { addItem, updateTotal } from "Redux/slices/basketSlice";
+import { extendedApi } from "services/basketServices";
+import { useBasketUpdate } from "Hooks/basket";
+import { useEffect } from "react";
 
 export const UserProfile = () => {
-  const { t } = useTranslation();
-
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
+  useEffect(() => {
+    dispatch(extendedApi.util.resetApiState());
+  }, []);
+
   useSetUser();
+  useBasketUpdate();
   const naviagte = useNavigate();
   const handleLogout = () => {
+    dispatch(extendedApi.util.resetApiState());
     localStorage.removeItem("userToken");
     dispatch(logoutUser());
     naviagte("/");
+    dispatch(addItem([]));
+    dispatch(updateTotal(0));
   };
+
   return (
     <Wrapper>
       <List>

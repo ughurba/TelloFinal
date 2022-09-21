@@ -22,23 +22,51 @@ export const Title = styled.h3`
   line-height: 1.4;
   color: ${({ theme }) => theme.colors.gray};
   width: 444px;
+  margin-bottom: 8px;
 `;
 export const Color = styled.span`
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.normal};
   font-size: ${({ theme }) => theme.fontStyle.size.small};
   line-height: 1.3;
   color: ${({ theme }) => theme.colors.oldSilver};
+  display: flex;
+  align-items: center;
 `;
-export const NameColor = styled.span`
+export const Storage = styled.span`
+  margin-left: 25px;
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.normal};
   font-size: ${({ theme }) => theme.fontStyle.size.small};
   line-height: 1.3;
-  color: ${({ theme }) => theme.colors.gray};
-`;
-
-export const Discount = styled.s`
   color: ${({ theme }) => theme.colors.oldSilver};
-  margin-left: 32px;
+  display: flex;
+  align-items: flex-end;
+`;
+export const NameStorage = styled.span`
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 5px;
+  justify-content: center;
+  width: 53px;
+  height: 27px;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #4f4f4f;
+  color: white;
+  margin-left: 16px;
+`;
+export const NameColor = styled.span<{ color?: string }>`
+  display: inline-block;
+  font-weight: ${({ theme }) => theme.fontStyle.fontWeight.normal};
+  font-size: ${({ theme }) => theme.fontStyle.size.small};
+  line-height: 1.3;
+  border: 1px solid ${(props) => props.color};
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  background: ${(props) => props.color};
+  color: ${({ theme }) => theme.colors.gray};
+  margin-left: 5px;
 `;
 
 export const StockPrice = styled.span`

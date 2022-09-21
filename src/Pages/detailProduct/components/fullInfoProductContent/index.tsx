@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, ReactNode, useEffect, useMemo, useState } from "react";
 import {
   Azn,
   Color,
@@ -16,7 +16,7 @@ import {
 } from "./style";
 import { Flex } from "Components/shared/";
 import { useTranslation } from "react-i18next";
-import { DetailProduct, IRating } from "types";
+import { DetailProduct, ProductStorages } from "types";
 import HoverRating from "../customRating";
 import { AddProps, useAddItemMutation } from "services/basketServices";
 import { useAppDispatch } from "Redux/hooks";
@@ -31,12 +31,27 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   const { data, isSuccess } = result;
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const [checkColor, setCheckColor] = useState<string>(
+    product.productColors[0].colors.code
+  );
+  const [checkStorage, setCheckStorage] = useState<number>(
+    product.productStorages[0].storage.id
+  );
+
   const [itemIds, setItemIds] = useState<AddProps>({
-    productId: product?.id,
+    productId: product.id,
     colorId: product.productColors[0].colors.id,
     storageId: product.productStorages[0].storage.id,
   });
-
+  const handleClickColor = (id: number, colorCode: string) => {
+    setItemIds({ ...itemIds, colorId: id });
+    setCheckColor(colorCode);
+  };
+  const handleClickStorage = (id: number) => {
+    setItemIds({ ...itemIds, storageId: id });
+    console.log(id);
+    setCheckStorage(id);
+  };
   const handleAddItem = (productId: number) => {
     setItemIds({ ...itemIds, productId: productId });
     addProduct(itemIds);
@@ -47,10 +62,9 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       dispatch(updateTotal(data.total));
     }
   }, [data]);
-
   return (
     <Wrapper>
-      <Title>{product?.title}</Title>
+      <Title>{product.title}</Title>
       <StyledRating>
         <HoverRating />
       </StyledRating>
@@ -65,9 +79,10 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
           <Name>{t("Color")}:</Name>
           {product?.productColors.map((c) => (
             <Color
-              onClick={() => setItemIds({ ...itemIds, colorId: c.colors.id })}
+              onClick={() => handleClickColor(c.colors.id, c.colors.code)}
               key={c.colors.id}
               colors={c.colors.code}
+              checkColor={checkColor}
             />
           ))}
         </Flex>
@@ -77,9 +92,9 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
           <Name>{t("Storage")}:</Name>
           {product?.productStorages?.map((s, i) => (
             <Storage
-              onClick={() =>
-                setItemIds({ ...itemIds, storageId: s.storage.id })
-              }
+              storageId={s.storageId}
+              checkStorage={checkStorage}
+              onClick={() => handleClickStorage(s.storageId)}
               key={i}
             >
               {s.storage.value}

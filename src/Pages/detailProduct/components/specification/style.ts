@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { MyField } from "../field";
+import { MyField } from "../../../../Components/shared/field";
 import { X } from "phosphor-react";
 
 interface TitleProps {

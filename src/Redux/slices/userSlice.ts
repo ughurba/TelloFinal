@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IUser } from "types";
+import { useBasketUpdate } from "../../Hooks/basket";
 
 interface initialStateTypes {
   user: IUser;

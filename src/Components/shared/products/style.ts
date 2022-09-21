@@ -15,5 +15,6 @@ position:relative;
 export const CustomCheck = MuiStyled(Checkbox)`
   position: absolute;
   top:30px;
-  right:50px;
+  right:40px;
+  color:red;
 `;

@@ -23,7 +23,6 @@ export const Login = () => {
   const [loginPost, result] = useFetchLoginMutation();
   const { error, data, isLoading, isSuccess } = result;
   const { t } = useTranslation();
-
   const handleGetDataFromLogin = (value: Record<string, string>) => {
     setLoginData({
       ...loginData,

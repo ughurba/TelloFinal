@@ -1,4 +1,4 @@
-import { Flex, MyForm } from "../";
+import { Flex, MyForm } from "Components/shared";
 import { FC, ReactNode, useEffect, useState } from "react";
 import {
   Paragraph,
@@ -67,7 +67,6 @@ export const Specification: FC<Props> = ({ product }) => {
   useEffect(() => {
     if (data) {
       setCommentInfo([...commentInfo, ...data]);
-      console.log("data");
     }
   }, [data]);
   // const specifications = [

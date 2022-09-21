@@ -8,7 +8,7 @@ import {
   StyledWrapper,
 } from "./style";
 import { Grid } from "@mui/material";
-import { Card, Flex, Container } from "Components/shared";
+import { CustomCard, Flex, Container } from "Components/shared";
 import { Goods } from "types";
 import { useTranslation } from "react-i18next";
 interface Props {
@@ -35,7 +35,7 @@ export const ProductsHome: FC<Props> = ({ title, ratingGoods, headphones }) => {
           {ratingGoods?.map((obj) => (
             <Grid key={obj.id} item xs={3}>
               <StyledLink to={`/FullInfoProduct/${obj.id}`}>
-                <Card {...obj} />
+                <CustomCard {...obj} />
               </StyledLink>
             </Grid>
           ))}

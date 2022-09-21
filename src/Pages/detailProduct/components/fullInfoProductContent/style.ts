@@ -1,9 +1,10 @@
 import styled, { css } from "styled-components";
-import { RedAzn } from "../../../../Assets";
+import { RedAzn } from "Assets";
 import { Button, styled as MuiStyled } from "@mui/material";
 
 interface colorProps {
   colors: string;
+  checkColor: string;
 }
 export const StyledRating = styled.div`
   margin-top: 16px;
@@ -43,11 +44,30 @@ export const Color = styled.p<colorProps>`
     ${({ colors }) => (colors === "#FFFFFF" ? "#E0E0E0" : colors)};
   background: ${(props) => props.colors};
   border-radius: 50px;
-  width: 32px;
-  height: 32px;
+  width: 27px;
+  height: 27px;
   margin-left: 22px;
   cursor: pointer;
-
+  position: relative;
+  ${(props) =>
+    props.checkColor === props.colors
+      ? `
+      width:35px;
+      height:35px;
+      &::before{
+    border-radius: 50px;
+    content: "";
+    display: block;
+    height: 40px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50.6%,-50.6%);
+    width: 40px;
+    border:2px solid #4c1e87;
+      }
+`
+      : ""}
   &:nth-child(1) {
     margin-left: 0;
   }
@@ -77,17 +97,20 @@ export const StyledButton = MuiStyled(Button)`
     background:#2dd06e;
   }
 `;
-export const Storage = styled.p`
+export const Storage = styled.p<{ storageId: number; checkStorage: number }>`
   padding: 8px 16px;
   border-radius: 10px;
   cursor: pointer;
-  &:nth-child(even) {
-    background: #4f4f4f;
-    color: white;
-  }
   background: #f2f2f2;
   color: black;
   margin-left: 16px;
+  ${(props) =>
+    props.checkStorage === props.storageId
+      ? `
+    background: #4f4f4f;
+    color: white;
+  `
+      : ""}
 `;
 export const WrapperStorage = styled.div`
   margin-top: 24px;

@@ -4,8 +4,8 @@ import { Flex } from "./flex";
 import { InfoCard } from "./infoCard";
 import { Products } from "./products";
 import { SmallSlider } from "./smallSlider";
-import { Specification } from "./specification";
-import { Card } from "./сard";
+import { Specification } from "../../Pages/detailProduct/components/specification";
+import { CustomCard } from "./сard";
 import { IncDecCount } from "./incDecCount";
 import { TotalSide } from "./totalSide";
 import { MyField } from "./field";
@@ -29,5 +29,5 @@ export {
   Products,
   SmallSlider,
   Specification,
-  Card,
+  CustomCard,
 };
