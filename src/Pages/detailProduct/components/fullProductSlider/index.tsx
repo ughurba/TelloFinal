@@ -41,8 +41,8 @@ export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper2"
         >
-          {childImg.map((item) => (
-            <SwiperSlide>
+          {childImg.map((item, i) => (
+            <SwiperSlide key={i}>
               <img src={item} />
             </SwiperSlide>
           ))}
@@ -53,14 +53,14 @@ export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
           onSwiper={setThumbsSwiper}
           loop={true}
           spaceBetween={10}
-          slidesPerView={3}
+          slidesPerView={4}
           freeMode={true}
           watchSlidesProgress={true}
           modules={[FreeMode, Navigation, Thumbs]}
           className="mySwiper"
         >
-          {childImg.map((item) => (
-            <SwiperSlide>
+          {childImg.map((item, i) => (
+            <SwiperSlide key={i}>
               <img src={item} />
             </SwiperSlide>
           ))}

@@ -16,6 +16,7 @@ import { useBasketUpdate } from "Hooks/basket";
 import { FormEvent, useEffect, useState } from "react";
 import { useSearchProductMutation } from "services/shopServices";
 import { useDebounce } from "Hooks/debounce";
+import { SearchMenu } from "./components/searchMenu";
 
 export const Header = () => {
   useSetUser();
@@ -28,12 +29,9 @@ export const Header = () => {
   };
   const debounceSearch = useDebounce(search, 500);
   const [postSearch, { data }] = useSearchProductMutation();
-  console.log(data);
 
   useEffect(() => {
-    if (debounceSearch !== "") {
-      postSearch(debounceSearch);
-    }
+    postSearch(debounceSearch);
   }, [debounceSearch]);
   return (
     <Container>
@@ -42,6 +40,7 @@ export const Header = () => {
         <StyledParentInput>
           <Search onChange={handleSearch} width={"591px"} height={"40px"} />
           <SearchIcon />
+          {data?.result.length ? <SearchMenu data={data.result} /> : ""}
         </StyledParentInput>
         <StyledParentSvg>
           <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>

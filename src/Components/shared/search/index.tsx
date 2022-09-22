@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 export const Wrapper = styled.div``;
 interface Props {
   onChange?(event: FormEvent<HTMLInputElement>): void;
+
   width?: string;
   height?: string;
   positionSearch?: string;

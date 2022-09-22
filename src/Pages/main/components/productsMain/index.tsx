@@ -34,9 +34,7 @@ export const ProductsHome: FC<Props> = ({ title, ratingGoods, headphones }) => {
         <Grid container spacing={3}>
           {ratingGoods?.map((obj) => (
             <Grid key={obj.id} item xs={3}>
-              <StyledLink to={`/FullInfoProduct/${obj.id}`}>
-                <CustomCard {...obj} />
-              </StyledLink>
+              <CustomCard {...obj} />
             </Grid>
           ))}
 
