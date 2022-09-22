@@ -4,10 +4,8 @@ import Slider from "@mui/material/Slider";
 import { Flex } from "Components/shared";
 import { useTranslation } from "react-i18next";
 import { From, MaxPrice, MinPrice, Title, To, Wrapper } from "./style";
-import { useGetFilteredMinMaxPriceQuery } from "services/shopServices";
-import { useAppDispatch, useAppSelector } from "Redux/hooks";
-import { FC, useEffect } from "react";
-import { setPhones } from "Redux/slices/goodsSlice";
+
+import { FC } from "react";
 
 function valuetext(value: number) {
   return `${value}$`;
@@ -20,17 +18,6 @@ interface Props {
 export const RangeSlider: FC<Props> = ({ value, handleChange }) => {
   const { t } = useTranslation();
 
-  // const { data } = useGetFilteredMinMaxPriceQuery({
-  //   minPrice: value[0],
-  //   maxPrice: value[1],
-  //   categoryId: categoryId,
-  // });
-  //
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(setPhones(data));
-  //   }
-  // }, [data]);
   return (
     <Wrapper>
       <Title>{t("Price")}</Title>

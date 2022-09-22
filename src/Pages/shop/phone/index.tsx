@@ -29,7 +29,6 @@ export const Phone = () => {
   const id = Number(localStorage.getItem("categoryId"));
   const { phones, phonesLoading } = useAppSelector((state) => state.goods);
   const debounced = useDebounce(value, 1000);
-  console.log(debounced);
   const { data: brands } = useGetBrandsQuery();
   const Pagination: IPagination = {
     id: id,

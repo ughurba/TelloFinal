@@ -13,19 +13,34 @@ import { useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
 import { useSetUser } from "Hooks/useSetUser";
 import { useBasketUpdate } from "Hooks/basket";
+import { FormEvent, useEffect, useState } from "react";
+import { useSearchProductMutation } from "services/shopServices";
+import { useDebounce } from "Hooks/debounce";
 
 export const Header = () => {
   useSetUser();
   useBasketUpdate();
   const { user } = useAppSelector((state) => state.user);
   const { basketItems } = useAppSelector((state) => state.basket.basket);
+  const [search, setSearch] = useState<string>("");
+  const handleSearch = (ev: FormEvent<HTMLInputElement>) => {
+    setSearch(ev.currentTarget.value);
+  };
+  const debounceSearch = useDebounce(search, 500);
+  const [postSearch, { data }] = useSearchProductMutation();
+  console.log(data);
 
+  useEffect(() => {
+    if (debounceSearch !== "") {
+      postSearch(debounceSearch);
+    }
+  }, [debounceSearch]);
   return (
     <Container>
       <Flex AlItems={"center"} JsContent={"space-between"}>
         <img src={teloicon} alt={"icon"} />
         <StyledParentInput>
-          <Search width={"591px"} height={"40px"} />
+          <Search onChange={handleSearch} width={"591px"} height={"40px"} />
           <SearchIcon />
         </StyledParentInput>
         <StyledParentSvg>

@@ -7,14 +7,10 @@ export const shopApi = createApi({
     baseUrl: "http://localhost:33033/api/shop",
   }),
   endpoints: (builder) => ({
-    getFilteredMinMaxPrice: builder.query<
-      ShopGoods,
-      { minPrice: number; maxPrice: number; categoryId: number }
-    >({
-      query: (arg) =>
-        `/filterPrice?minPrice=${arg.minPrice}&maxPrice=${arg.maxPrice}&categoryId=${arg.categoryId}`,
+    searchProduct: builder.mutation<ShopGoods, string>({
+      query: (search) => `/search?search=${search}`,
     }),
   }),
 });
 
-export const { useGetFilteredMinMaxPriceQuery } = shopApi;
+export const { useSearchProductMutation } = shopApi;
