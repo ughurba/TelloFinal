@@ -6,6 +6,7 @@ import {
   StyledTypographyPrices,
   StyledCardContent,
   StyledCardActions,
+  Title,
 } from "./style";
 import { FC } from "react";
 import { Goods } from "types";
@@ -67,9 +68,7 @@ export const CustomCard: FC<Goods> = ({
         )
       )}
       <StyledCardContent>
-        <Typography variant="h6" color="black">
-          {title}
-        </Typography>
+        <Title variant="h4">{title}</Title>
         <StyledTypographyPrices variant="subtitle2" color="text.secondary">
           {oldPrice ? <OldPrice>{oldPrice} ₼ </OldPrice> : ""}
           {""}

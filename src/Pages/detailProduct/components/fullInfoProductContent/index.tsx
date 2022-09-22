@@ -97,7 +97,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
               onClick={() => handleClickStorage(s.storageId)}
               key={i}
             >
-              {s.storage.value}
+              {s.storage.value}GB
             </Storage>
           ))}
         </Flex>

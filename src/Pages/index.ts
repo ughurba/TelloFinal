@@ -1,7 +1,7 @@
 import { DetailProduct } from "./detailProduct";
-import { Headphone } from "./headphone";
+import { Headphone } from "./shop/headphone";
 import { MainPage } from "./main";
-import { Phone } from "./phone";
+import { Phone } from "./shop/phone";
 import { Question } from "./question";
 import { Basket } from "./basket";
 import { Register } from "./auth/register";

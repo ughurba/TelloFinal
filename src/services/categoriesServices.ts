@@ -5,6 +5,8 @@ export interface IPagination {
   id: number;
   page: number;
   size: number;
+  minPrice?: number;
+  maxPrice?: number;
 }
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
@@ -17,7 +19,7 @@ export const categoriesApi = createApi({
     }),
     getCategoryProduct: builder.query<ShopGoods, IPagination>({
       query: (Pagination) =>
-        `/${Pagination.id}?page=${Pagination.page}&size=${Pagination.size}`,
+        `/${Pagination.id}?minPrice=${Pagination?.minPrice}&maxPrice=${Pagination?.maxPrice}&page=${Pagination.page}&size=${Pagination.size}`,
     }),
 
     getBrands: builder.query<Brand[], void>({

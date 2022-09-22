@@ -10,4 +10,6 @@ export const Wrapper = styled.div`
 `;
 export const WrapperShop = styled.div`
   margin-left: 50px;
+  width: 100%;
 `;
+export const WrapperSideBar = styled.div``;

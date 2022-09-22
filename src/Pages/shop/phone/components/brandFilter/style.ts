@@ -21,11 +21,12 @@ export const Box = styled.div`
 
 export const Line = styled.div`
   border-top: 1px solid ${(props) => props.theme.colors.gray4};
-  margin-top: 10px;
+  margin-top: 25px;
 `;
 export const Title = styled.h5`
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.medium};
-  font-size: ${({ theme }) => theme.fontStyle.size.xSmall};
+  font-size: ${({ theme }) => theme.fontStyle.size.medium};
   line-height: 1.4;
   color: ${({ theme }) => theme.colors.gray31};
+  margin: 0 0 16px;
 `;

@@ -86,5 +86,8 @@
   "YouCurrentlyHaveNoOrdersInYourCart": "Səbətinizdə hazırda heç bir sifarişiniz yoxdur",
   "EmptyBasket": "Onlayn mağazanın kataloqundan sizə lazım olan məhsulu seçin və səbətə əlavə edin.",
   "EmptyBasketTitle":"Səbətiniz boşdur.",
-  "InKatalog": "kataloqa"
+  "InKatalog": "kataloqa",
+  "Price": "Qiymət",
+  "To": "dək",
+  "From": "dən"
 }

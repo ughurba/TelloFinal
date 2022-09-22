@@ -10,6 +10,7 @@ import goodsSlice from "./slices/goodsSlice";
 import { commentApi } from "../services/commentService";
 import { basketApi } from "../services/basketServices";
 import basketSlice from "./slices/basketSlice";
+import { shopApi } from "../services/shopServices";
 
 export const store = configureStore({
   reducer: {
@@ -17,12 +18,14 @@ export const store = configureStore({
     user: userSlice,
     goods: goodsSlice,
     basket: basketSlice,
+
     [goodsApi.reducerPath]: goodsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
     [adminApi.reducerPath]: adminApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [commentApi.reducerPath]: commentApi.reducer,
     [basketApi.reducerPath]: basketApi.reducer,
+    [shopApi.reducerPath]: shopApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -31,7 +34,8 @@ export const store = configureStore({
       adminApi.middleware,
       categoriesApi.middleware,
       commentApi.middleware,
-      basketApi.middleware
+      basketApi.middleware,
+      shopApi.middleware
     ),
 });
 

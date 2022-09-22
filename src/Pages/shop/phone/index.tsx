@@ -1,44 +1,50 @@
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { Brand } from "types";
-import { SizeProducts, WrapperShop, Wrapper } from "./style";
-import { Products, Flex, Container } from "Components/shared";
-import { useTranslation } from "react-i18next";
+import { SizeProducts, Wrapper, WrapperShop, WrapperSideBar } from "./style";
 import * as React from "react";
+import { Flex, Container, Products } from "Components/shared";
+import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import {
   IPagination,
   useGetBrandsQuery,
   useGetCategoryProductQuery,
 } from "services/categoriesServices";
+import { BrandFilter } from "./components/brandFilter";
+import { RedesignedPagination, Loader } from "Components/shared";
 import {
-  setHeadphonesLoading,
-  setHeadphones,
+  setPhonesLoading,
+  setPhones,
   setCategoryId,
 } from "Redux/slices/goodsSlice";
-import { BrandFilter } from "../phone/components/brandFilter";
-import { Loader, RedesignedPagination } from "Components/shared";
-
-export const Headphone = () => {
+import { RangeSlider } from "../components/rangeSlide";
+import { useDebounce } from "../../../Hooks/debounce";
+export const Phone = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [brand, setBrand] = useState<Brand[]>([]);
+  const [value, setValue] = React.useState<number[]>([0, 4300]);
+
   const id = Number(localStorage.getItem("categoryId"));
-  const dispatch = useAppDispatch();
-  const { headphones, headphonesLoading } = useAppSelector(
-    (state) => state.goods
-  );
+  const { phones, phonesLoading } = useAppSelector((state) => state.goods);
+  const debounced = useDebounce(value, 1000);
+  console.log(debounced);
   const { data: brands } = useGetBrandsQuery();
   const Pagination: IPagination = {
     id: id,
     page: page,
     size: 6,
+    minPrice: debounced[0],
+    maxPrice: debounced[1],
   };
   const { data, isLoading: loading } = useGetCategoryProductQuery(Pagination);
+
   useEffect(() => {
     if (data) {
       dispatch(setCategoryId(id));
-      dispatch(setHeadphones(data));
-      dispatch(setHeadphonesLoading(loading));
+      dispatch(setPhones(data));
+      dispatch(setPhonesLoading(loading));
     }
   }, [data]);
 
@@ -47,33 +53,45 @@ export const Headphone = () => {
       setBrand(brands.map((item) => item));
     }
   }, [brands]);
+
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
+  };
+
+  const handleChangeFilteredPrice = (
+    event: Event,
+    newValue: number | number[]
+  ) => {
+    setValue(newValue as number[]);
   };
   return (
     <Wrapper>
       <Container>
-        {headphonesLoading && loading ? (
+        {phonesLoading && loading ? (
           <Loader />
         ) : (
           <Flex>
-            <div>
+            <WrapperSideBar>
               {
                 <>
-                  <BrandFilter title="Brand" brands={brand} />
+                  <BrandFilter title={t("Brand")} brands={brand} />
+                  <RangeSlider
+                    value={value}
+                    handleChange={handleChangeFilteredPrice}
+                  />
                 </>
               }
-            </div>
+            </WrapperSideBar>
             <WrapperShop>
               <SizeProducts>
-                {headphones?.result.length} {t("ProductFound")}
+                {phones?.result.length} {t("ProductFound")}
               </SizeProducts>
-              <Products data={headphones} />
+              <Products data={phones} />
               {
                 <RedesignedPagination
                   page={page}
                   onChange={handleChange}
-                  productCount={headphones.totalCount}
+                  productCount={phones.totalCount}
                 />
               }
             </WrapperShop>
