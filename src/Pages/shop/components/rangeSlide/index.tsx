@@ -1,9 +1,16 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
 import { Flex } from "Components/shared";
 import { useTranslation } from "react-i18next";
-import { From, MaxPrice, MinPrice, Title, To, Wrapper } from "./style";
+import {
+  From,
+  MaxPrice,
+  MinPrice,
+  PrettoSlider,
+  Title,
+  To,
+  Wrapper,
+} from "./style";
 
 import { FC } from "react";
 
@@ -23,7 +30,7 @@ export const RangeSlider: FC<Props> = ({ value, handleChange }) => {
       <Title>{t("Price")}</Title>
 
       <Box sx={{ width: 270 }}>
-        <Slider
+        <PrettoSlider
           getAriaLabel={() => "Temperature range"}
           value={value}
           onChange={handleChange}
@@ -31,6 +38,7 @@ export const RangeSlider: FC<Props> = ({ value, handleChange }) => {
           getAriaValueText={valuetext}
           min={0}
           max={4300}
+          defaultValue={20}
         />
       </Box>
       <Flex FlexWrap={"wrap"} AlItems={"flex-end"}>

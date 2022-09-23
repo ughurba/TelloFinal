@@ -10,14 +10,16 @@ import {
   useGetNewArrivalProductQuery,
 } from "services/goodsServices";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch } from "../../Redux/hooks";
-import { useGetAllQuery } from "../../services/basketServices";
-import { addItem, updateTotal } from "../../Redux/slices/basketSlice";
+
+import * as React from "react";
+import { useSetFavoriteMutation } from "../../services/shopServices";
 
 export const MainPage: FC = () => {
   const { t } = useTranslation();
   const { data, isLoading: isRatingGoodsLoad } =
     useGetBestSellingProductQuery();
+
+  const [postFavorite] = useSetFavoriteMutation();
 
   const { data: newArrivalProduct } = useGetNewArrivalProductQuery();
   const { data: goods } = useFetchAllGoodsQuery();
@@ -25,15 +27,7 @@ export const MainPage: FC = () => {
   const [headphones, setHeadphone] = useState<Goods[]>([]);
   const [newArrivalHeadphones, setNewArrivalHeadphones] = useState<Goods[]>();
   const [phones, setPhones] = useState<Goods[]>([]);
-  const dispatch = useAppDispatch();
-  // const { data: basketData } = useGetAllQuery();
-  //
-  // useEffect(() => {
-  //   if (basketData) {
-  //     dispatch(addItem(basketData.basketItems));
-  //     dispatch(updateTotal(basketData.total));
-  //   }
-  // }, [basketData]);
+
   useMemo(() => {
     if (goods) {
       setPhones(goods?.filter((g) => g.categoryTitle === "Telefonlar"));
@@ -53,7 +47,15 @@ export const MainPage: FC = () => {
       setHeadphone(data.filter((h) => h.categoryTitle === "Aksessuarlar"));
     }
   }, [data]);
-
+  const handleChangeFavorite = (
+    ev: React.FormEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    postFavorite({
+      productId: id,
+      isFavorite: ev.currentTarget.checked,
+    });
+  };
   return isRatingGoodsLoad ? (
     <Loader />
   ) : (
@@ -62,15 +64,18 @@ export const MainPage: FC = () => {
 
       <div>
         <ProductsHome
+          handleChange={handleChangeFavorite}
           title={t("BestSellingProducts")}
           ratingGoods={bestSellingProducts?.slice(0, 4)}
         />
         <ProductsHome
+          handleChange={handleChangeFavorite}
           title={t("NewArrivals")}
           ratingGoods={newArrivalProduct?.slice(0, 4)}
         />
         <BigCards />
         <ProductsHome
+          handleChange={handleChangeFavorite}
           title={t("NewArrivalAccessories")}
           ratingGoods={newArrivalHeadphones?.slice(0, 4)}
         />

@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
-import { Brand } from "types";
+import { Brand, Favorites } from "types";
 import { SizeProducts, WrapperShop, Wrapper } from "./style";
 import { Products, Flex, Container } from "Components/shared";
 import { useTranslation } from "react-i18next";
@@ -19,6 +19,7 @@ import { BrandFilter } from "../phone/components/brandFilter";
 import { Loader, RedesignedPagination } from "Components/shared";
 import { RangeSlider } from "../components/rangeSlide";
 import { useDebounce } from "../../../Hooks/debounce";
+import { useSetFavoriteMutation } from "../../../services/shopServices";
 
 export const Headphone = () => {
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ export const Headphone = () => {
   const { headphones, headphonesLoading } = useAppSelector(
     (state) => state.goods
   );
+
   const { data: brands } = useGetBrandsQuery();
   useMemo(() => {
     const Pagination: IPagination = {
@@ -50,6 +52,7 @@ export const Headphone = () => {
     };
     setPag(Pagination);
   }, [debounced, page, id]);
+  const [postFavorite] = useSetFavoriteMutation();
 
   const { data, isLoading: loading } = useGetCategoryProductQuery(pag);
   useEffect(() => {
@@ -74,6 +77,16 @@ export const Headphone = () => {
   ) => {
     setValue(newValue as number[]);
   };
+
+  const handleChangeFavorite = (
+    ev: React.FormEvent<HTMLInputElement>,
+    id: number
+  ) => {
+    postFavorite({
+      productId: id,
+      isFavorite: ev.currentTarget.checked,
+    });
+  };
   return (
     <Wrapper>
       <Container>
@@ -96,7 +109,7 @@ export const Headphone = () => {
               <SizeProducts>
                 {headphones?.result.length} {t("ProductFound")}
               </SizeProducts>
-              <Products data={headphones} />
+              <Products handleChange={handleChangeFavorite} data={headphones} />
               {
                 <RedesignedPagination
                   page={page}

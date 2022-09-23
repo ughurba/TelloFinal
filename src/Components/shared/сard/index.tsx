@@ -8,8 +8,8 @@ import {
   StyledCardActions,
   Title,
 } from "./style";
-import { FC } from "react";
-import { Goods } from "types";
+import { FC, useState } from "react";
+import { Favorites, Goods } from "types";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -22,6 +22,7 @@ import { StyledLink } from "../products/style";
 import { Checkbox } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { useAppSelector } from "../../../Redux/hooks";
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -36,7 +37,11 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     duration: theme.transitions.duration.shortest,
   }),
 }));
-export const CustomCard: FC<Goods> = ({
+
+interface Props extends Goods {
+  handleChange: (ev: React.FormEvent<HTMLInputElement>, id: number) => void;
+}
+export const CustomCard: FC<Props> = ({
   newPrice,
   oldPrice,
   photos,
@@ -44,9 +49,10 @@ export const CustomCard: FC<Goods> = ({
   title,
   description,
   id,
+  handleChange,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
-
+  const { user } = useAppSelector((state) => state.user);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -78,7 +84,16 @@ export const CustomCard: FC<Goods> = ({
       </StyledCardContent>
       <StyledCardActions disableSpacing>
         <IconButton aria-label="add to favorites">
-          <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+          <>
+            {user.isOnline && (
+              <Checkbox
+                name={id.toString()}
+                onChange={(ev) => handleChange(ev, id)}
+                icon={<FavoriteBorder />}
+                checkedIcon={<Favorite />}
+              />
+            )}
+          </>
         </IconButton>
         <ExpandMore
           expand={expanded}

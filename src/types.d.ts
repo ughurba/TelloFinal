@@ -139,3 +139,8 @@ export interface CalculationBasket {
   frontBaskets: IncDecType[];
   total: number;
 }
+
+export interface Favorites {
+  productId: number;
+  isFavorite: boolean;
+}

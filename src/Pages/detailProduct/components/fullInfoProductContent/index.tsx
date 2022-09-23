@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import { DetailProduct, ProductStorages } from "types";
 import HoverRating from "../customRating";
 import { AddProps, useAddItemMutation } from "services/basketServices";
-import { useAppDispatch } from "Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { addItem, updateTotal } from "Redux/slices/basketSlice";
 
 export interface IProps {
@@ -28,6 +28,7 @@ export interface IProps {
 
 export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   const [addProduct, result] = useAddItemMutation();
+  const { user } = useAppSelector((state) => state.user);
   const { data, isSuccess } = result;
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -53,8 +54,12 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
     setCheckStorage(id);
   };
   const handleAddItem = (productId: number) => {
-    setItemIds({ ...itemIds, productId: productId });
-    addProduct(itemIds);
+    if (user.isOnline) {
+      setItemIds({ ...itemIds, productId: productId });
+      addProduct(itemIds);
+    } else {
+      alert("xaiw edirik login olun");
+    }
   };
   useEffect(() => {
     if (isSuccess) {

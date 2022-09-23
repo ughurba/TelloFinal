@@ -9,16 +9,20 @@ import { SubMenu } from "./components/subMenu";
 import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
 import { useSetUser } from "Hooks/useSetUser";
 import { useBasketUpdate } from "Hooks/basket";
 import { FormEvent, useEffect, useState } from "react";
-import { useSearchProductMutation } from "services/shopServices";
+import {
+  shopExtendedApi,
+  useSearchProductMutation,
+} from "services/shopServices";
 import { useDebounce } from "Hooks/debounce";
 import { SearchMenu } from "./components/searchMenu";
 
 export const Header = () => {
+  const dispatch = useAppDispatch();
   useSetUser();
   useBasketUpdate();
   const { user } = useAppSelector((state) => state.user);
@@ -31,7 +35,11 @@ export const Header = () => {
   const [postSearch, { data }] = useSearchProductMutation();
 
   useEffect(() => {
-    postSearch(debounceSearch);
+    if (debounceSearch !== "") {
+      postSearch(debounceSearch);
+    } else {
+      dispatch(shopExtendedApi.util.resetApiState());
+    }
   }, [debounceSearch]);
   return (
     <Container>
@@ -40,7 +48,11 @@ export const Header = () => {
         <StyledParentInput>
           <Search onChange={handleSearch} width={"591px"} height={"40px"} />
           <SearchIcon />
-          {data?.result.length ? <SearchMenu data={data.result} /> : ""}
+          {data?.result.length !== 0 && data?.result ? (
+            <SearchMenu data={data.result} />
+          ) : (
+            ""
+          )}
         </StyledParentInput>
         <StyledParentSvg>
           <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>
