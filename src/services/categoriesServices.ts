@@ -3,11 +3,19 @@ import { Brand, Category, ShopGoods } from "../types";
 
 export interface IPagination {
   id: number;
+  brandIds?: number[];
   page: number;
   size: number;
   minPrice?: number;
   maxPrice?: number;
 }
+const categoryProduct = (Pagination: IPagination, url?: string) => {
+  return `/${url ? `${url}/` : ""}${Pagination.id}?minPrice=${
+    Pagination?.minPrice
+  }&maxPrice=${Pagination?.maxPrice}&page=${Pagination.page}&size=${
+    Pagination.size
+  }`;
+};
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
   baseQuery: fetchBaseQuery({
@@ -18,16 +26,18 @@ export const categoriesApi = createApi({
       query: () => `/`,
     }),
     getCategoryProduct: builder.query<ShopGoods, IPagination>({
-      query: (Pagination) =>
-        `/${Pagination.id}?minPrice=${Pagination?.minPrice}&maxPrice=${Pagination?.maxPrice}&page=${Pagination.page}&size=${Pagination.size}`,
+      query: (Pagination) => categoryProduct(Pagination),
     }),
-
+    getProductIsDiscount: builder.query<ShopGoods, IPagination>({
+      query: (Pagination) => categoryProduct(Pagination, `discount`),
+    }),
     getBrands: builder.query<Brand[], void>({
       query: () => `brand`,
     }),
   }),
 });
 export const {
+  useGetProductIsDiscountQuery,
   useGetAllCategoriesQuery,
   useGetBrandsQuery,
   useGetCategoryProductQuery,

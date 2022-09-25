@@ -43,25 +43,25 @@ export const SubMenu = () => {
     }),
     [data]
   );
-  const [id, setId] = useState<number>(0);
-
-  const Pagination: IPagination = {
-    id: id,
-    page: 1,
-    size: 6,
-  };
-  const { data: goods, isLoading } = useGetCategoryProductQuery(Pagination);
-  useEffect(() => {
-    if (goods) {
-      dispatch(setCategoryId(id));
-      dispatch(setPhones(goods));
-      dispatch(setPhonesLoading(isLoading));
-      dispatch(setHeadphones(goods));
-      dispatch(setHeadphonesLoading(isLoading));
-    }
-  }, [goods]);
+  //const [id, setId] = useState<number>(0);
+  //
+  // const Pagination: IPagination = {
+  //   id: id,
+  //   page: 1,
+  //   size: 6,
+  // };
+  // const { data: goods, isLoading } = useGetCategoryProductQuery(Pagination);
+  // useEffect(() => {
+  //   if (goods) {
+  //     dispatch(setCategoryId(id));
+  //     dispatch(setPhones(goods));
+  //     dispatch(setPhonesLoading(isLoading));
+  //     dispatch(setHeadphones(goods));
+  //     dispatch(setHeadphonesLoading(isLoading));
+  //   }
+  // }, [goods]);
   const handleSetCategoryId = (id: number) => {
-    setId(id);
+    //  setId(id);
     localStorage.setItem("categoryId", JSON.stringify(id));
   };
   return (

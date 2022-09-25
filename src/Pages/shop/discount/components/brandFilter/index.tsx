@@ -1,5 +1,5 @@
 import { Flex } from "Components/shared";
-import { FC, FormEvent } from "react";
+import { FC } from "react";
 
 import { Box, Line, Title, Wrapper } from "./style";
 import { Brand } from "types";
@@ -8,9 +8,8 @@ import { SubFilter } from "./subFilter";
 interface Props {
   brands: Brand[];
   title: string;
-  handleChange?: (ev: FormEvent<HTMLInputElement>) => void;
 }
-export const BrandFilter: FC<Props> = ({ brands, handleChange, title }) => {
+export const BrandFilter: FC<Props> = ({ brands, title }) => {
   return (
     <Wrapper>
       <Box>
@@ -18,12 +17,7 @@ export const BrandFilter: FC<Props> = ({ brands, handleChange, title }) => {
           <Title>
             {title}
             {brands?.map((item) => (
-              <SubFilter
-                handleChange={handleChange}
-                key={item.id}
-                id={item.id}
-                name={item.name}
-              />
+              <SubFilter key={item.id} id={item.id} name={item.name} />
             ))}
           </Title>
         </Flex>

@@ -50,6 +50,7 @@ export const CustomCard: FC<Props> = ({
   description,
   id,
   handleChange,
+  isFavorite,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
   const { user } = useAppSelector((state) => state.user);
@@ -87,6 +88,7 @@ export const CustomCard: FC<Props> = ({
           <>
             {user.isOnline && (
               <Checkbox
+                checked={isFavorite}
                 name={id.toString()}
                 onChange={(ev) => handleChange(ev, id)}
                 icon={<FavoriteBorder />}

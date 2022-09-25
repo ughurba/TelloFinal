@@ -79,6 +79,7 @@ export interface Goods {
   brand: Brand;
   colors: Color[];
   stockCount: number;
+  isFavorite?: boolean;
 }
 interface ProductDetails {
   id: number;

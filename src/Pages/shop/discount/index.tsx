@@ -1,11 +1,4 @@
-import {
-  ChangeEvent,
-  FormEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { Brand, Favorites } from "types";
 import { SizeProducts, Wrapper, WrapperShop, WrapperSideBar } from "./style";
 import * as React from "react";
@@ -15,19 +8,19 @@ import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import {
   IPagination,
   useGetBrandsQuery,
-  useGetCategoryProductQuery,
+  useGetProductIsDiscountQuery,
 } from "services/categoriesServices";
 import { BrandFilter } from "./components/brandFilter";
 import { RedesignedPagination, Loader } from "Components/shared";
 import {
-  setPhonesLoading,
-  setPhones,
   setCategoryId,
+  setDiscountProduct,
+  setDiscountProductLoading,
 } from "Redux/slices/goodsSlice";
 import { RangeSlider } from "../components/rangeSlide";
 import { useDebounce } from "Hooks/debounce";
 import { useSetFavoriteMutation } from "services/shopServices";
-export const Phone = () => {
+export const DiscountPage = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
@@ -35,40 +28,28 @@ export const Phone = () => {
   const [value, setValue] = React.useState<number[]>([0, 4300]);
 
   const id = Number(localStorage.getItem("categoryId"));
-  const { phones, phonesLoading } = useAppSelector((state) => state.goods);
+
+  const { discountProduct, discountProductLoading } = useAppSelector(
+    (state) => state.goods
+  );
 
   const debounced = useDebounce(value, 1000);
   const { data: brands } = useGetBrandsQuery();
-
-  const [brandValue, setBrandValue] = useState<number[]>([]);
-  const handleChangeBrand = useCallback(
-    (ev: FormEvent<HTMLInputElement>) => {
-      if (ev.currentTarget.checked) {
-        setBrandValue([...brandValue, +ev.currentTarget.name]);
-      } else {
-        setBrandValue(
-          brandValue.filter((item) => item !== +ev.currentTarget.name)
-        );
-      }
-    },
-    [brandValue]
-  );
-
   const Pagination: IPagination = {
     id: id,
-    brandIds: brandValue,
     page: page,
     size: 6,
     minPrice: debounced[0],
     maxPrice: debounced[1],
   };
-  const { data, isLoading: loading } = useGetCategoryProductQuery(Pagination);
+  const { data, isLoading: loading } = useGetProductIsDiscountQuery(Pagination);
+  console.log(data);
   const [postFavorite] = useSetFavoriteMutation();
   useEffect(() => {
     if (data) {
       dispatch(setCategoryId(id));
-      dispatch(setPhones(data));
-      dispatch(setPhonesLoading(loading));
+      dispatch(setDiscountProduct(data));
+      dispatch(setDiscountProductLoading(loading));
     }
   }, [data]);
 
@@ -98,22 +79,17 @@ export const Phone = () => {
       isFavorite: ev.currentTarget.checked,
     });
   };
-
   return (
     <Wrapper>
       <Container>
-        {phonesLoading && loading ? (
+        {discountProductLoading && loading ? (
           <Loader />
         ) : (
           <Flex>
             <WrapperSideBar>
               {
                 <>
-                  <BrandFilter
-                    handleChange={handleChangeBrand}
-                    title={t("Brand")}
-                    brands={brand}
-                  />
+                  <BrandFilter title={t("Brand")} brands={brand} />
                   <RangeSlider
                     value={value}
                     handleChange={handleChangeFilteredPrice}
@@ -121,19 +97,22 @@ export const Phone = () => {
                 </>
               }
             </WrapperSideBar>
-            {phones?.result.length === 0 ? (
+            {discountProduct?.result.length === 0 ? (
               <div>Heç bir nəticə tapılmadı</div>
             ) : (
               <WrapperShop>
                 <SizeProducts>
-                  {phones?.result.length} {t("ProductFound")}
+                  {discountProduct?.result.length} {t("ProductFound")}
                 </SizeProducts>
-                <Products handleChange={handleChangeFavorite} data={phones} />
+                <Products
+                  handleChange={handleChangeFavorite}
+                  data={discountProduct}
+                />
                 {
                   <RedesignedPagination
                     page={page}
                     onChange={handleChange}
-                    productCount={phones.totalCount}
+                    productCount={discountProduct.totalCount}
                   />
                 }
               </WrapperShop>

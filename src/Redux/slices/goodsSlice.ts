@@ -4,6 +4,8 @@ import { ShopGoods } from "../../types";
 interface initialState {
   headphones: ShopGoods;
   phones: ShopGoods;
+  discountProduct: ShopGoods;
+  discountProductLoading: boolean;
   phonesLoading: boolean;
   headphonesLoading: boolean;
   categoryId: number;
@@ -17,7 +19,12 @@ const initialState: initialState = {
     result: [],
     totalCount: 0,
   },
+  discountProduct: {
+    result: [],
+    totalCount: 0,
+  },
   categoryId: 0,
+  discountProductLoading: true,
   headphonesLoading: true,
   phonesLoading: true,
 };
@@ -43,9 +50,27 @@ export const goodsSlice = createSlice({
     setHeadphonesLoading: (state, action: PayloadAction<boolean>) => {
       state.headphonesLoading = action.payload;
     },
+    setDiscountProduct: (state, action: PayloadAction<ShopGoods>) => {
+      state.discountProduct.result = action.payload.result;
+      state.discountProduct.totalCount = action.payload.totalCount;
+    },
+    setDiscountProductLoading: (state, action: PayloadAction<boolean>) => {
+      state.headphonesLoading = action.payload;
+    },
+    // updateFavoritePhones: (state, action: PayloadAction<number>) => {
+    //   state.phones.result = state.phones.result.filter((x) => {
+    //     if (x.id === action.payload) {
+    //       x.isFavorite = true;
+    //     } else {
+    //       x.isFavorite = false;
+    //     }
+    //   });
+    // },
   },
 });
 export const {
+  setDiscountProductLoading,
+  setDiscountProduct,
   setPhones,
   setPhonesLoading,
   setHeadphonesLoading,

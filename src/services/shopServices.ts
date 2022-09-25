@@ -24,6 +24,9 @@ export const shopApi = createApi({
         };
       },
     }),
+    getAllFavorite: builder.query<ShopGoods, void>({
+      query: () => `/favoriteGet`,
+    }),
   }),
 });
 export const shopExtendedApi = shopApi.injectEndpoints({
@@ -39,4 +42,4 @@ export const shopExtendedApi = shopApi.injectEndpoints({
   }),
 });
 export const { useSearchProductMutation } = shopExtendedApi;
-export const { useSetFavoriteMutation } = shopApi;
+export const { useSetFavoriteMutation, useGetAllFavoriteQuery } = shopApi;

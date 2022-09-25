@@ -18,6 +18,7 @@ import {
 
 import { Links } from "./links";
 import { UserProfileLayout } from "Layouts/UserProfileLayout";
+import { DiscountPage } from "../Pages/shop/discount";
 
 export const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ export const AppRoutes = () => {
           <Route path={Links.app.main} element={<MainPage />} />
           <Route path={Links.app.phone} element={<Phone />} />
           <Route path={Links.app.headphone} element={<Headphone />} />
+          <Route path={Links.app.discounts} element={<DiscountPage />} />
           <Route path={Links.app.detail} element={<DetailProduct />} />
           <Route path={Links.app.basket} element={<Basket />} />
           <Route path={Links.app.question} element={<Question />} />
