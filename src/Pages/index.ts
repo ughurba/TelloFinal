@@ -1,7 +1,5 @@
 import { DetailProduct } from "./detailProduct";
-import { Headphone } from "./shop/headphone";
 import { MainPage } from "./main";
-import { Phone } from "./shop/phone";
 import { Question } from "./question";
 import { Basket } from "./basket";
 import { Register } from "./auth/register";
@@ -12,8 +10,9 @@ import { DeliveryAddress } from "./userProfilePages/deliveryAddress";
 import { MyFavorites } from "./userProfilePages/myFavorites";
 import { MyOrders } from "./userProfilePages/myOrders";
 import { PersonalInformation } from "./userProfilePages/personalInformation";
-
+import { Product } from "./shop/product";
 export {
+  Product,
   PersonalInformation,
   MyOrders,
   MyFavorites,
@@ -24,8 +23,6 @@ export {
   Register,
   Basket,
   DetailProduct,
-  Headphone,
   MainPage,
-  Phone,
   Question,
 };

@@ -1,9 +1,7 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
 import {
   Question,
-  Headphone,
-  Phone,
   DetailProduct,
   MainPage,
   Basket,
@@ -14,11 +12,11 @@ import {
   MyOrders,
   PersonalInformation,
   MyFavorites,
+  Product,
 } from "../Pages";
 
 import { Links } from "./links";
 import { UserProfileLayout } from "Layouts/UserProfileLayout";
-import { DiscountPage } from "../Pages/shop/discount";
 
 export const AppRoutes = () => {
   return (
@@ -26,9 +24,14 @@ export const AppRoutes = () => {
       <Routes>
         <Route path={Links.app.main} element={<AppLayout />}>
           <Route path={Links.app.main} element={<MainPage />} />
-          <Route path={Links.app.phone} element={<Phone />} />
-          <Route path={Links.app.headphone} element={<Headphone />} />
-          <Route path={Links.app.discounts} element={<DiscountPage />} />
+          <Route
+            path={Links.app.product}
+            element={<Navigate to={Links.app.main} />}
+          />
+          <Route
+            path={`${Links.app.product}/:category`}
+            element={<Product />}
+          />
           <Route path={Links.app.detail} element={<DetailProduct />} />
           <Route path={Links.app.basket} element={<Basket />} />
           <Route path={Links.app.question} element={<Question />} />

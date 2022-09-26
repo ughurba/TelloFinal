@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { FC, FormEvent } from "react";
 import {
   CheckBoxWrapper,
   StyledCheckBox,

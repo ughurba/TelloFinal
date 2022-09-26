@@ -13,29 +13,32 @@ import { Flex, Container, Products } from "Components/shared";
 import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import {
-  IPagination,
+  IProductType,
   useGetBrandsQuery,
   useGetCategoryProductQuery,
 } from "services/categoriesServices";
-import { BrandFilter } from "./components/brandFilter";
+import { BrandFilter } from "../components/brandFilter";
 import { RedesignedPagination, Loader } from "Components/shared";
 import {
-  setPhonesLoading,
-  setPhones,
   setCategoryId,
+  setProduct,
+  setProductLoading,
 } from "Redux/slices/goodsSlice";
 import { RangeSlider } from "../components/rangeSlide";
 import { useDebounce } from "Hooks/debounce";
 import { useSetFavoriteMutation } from "services/shopServices";
-export const Phone = () => {
+import { NativeSelectDemo } from "../components/select";
+import { useParams } from "react-router-dom";
+
+export const Product = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [brand, setBrand] = useState<Brand[]>([]);
   const [value, setValue] = React.useState<number[]>([0, 4300]);
-
+  const [orderByValue, setOrderByValue] = useState<number>(0);
   const id = Number(localStorage.getItem("categoryId"));
-  const { phones, phonesLoading } = useAppSelector((state) => state.goods);
+  const { product, productLoading } = useAppSelector((state) => state.goods);
 
   const debounced = useDebounce(value, 1000);
   const { data: brands } = useGetBrandsQuery();
@@ -53,22 +56,27 @@ export const Phone = () => {
     },
     [brandValue]
   );
-
-  const Pagination: IPagination = {
+  const handleValue = (ev: React.ChangeEvent<HTMLSelectElement>) => {
+    setOrderByValue(+ev.currentTarget.value);
+  };
+  const { category } = useParams();
+  const ProductType: IProductType = {
     id: id,
     brandIds: brandValue,
+    orderBy: orderByValue,
     page: page,
     size: 6,
     minPrice: debounced[0],
     maxPrice: debounced[1],
+    category: category,
   };
-  const { data, isLoading: loading } = useGetCategoryProductQuery(Pagination);
+  const { data, isLoading: loading } = useGetCategoryProductQuery(ProductType);
   const [postFavorite] = useSetFavoriteMutation();
   useEffect(() => {
     if (data) {
       dispatch(setCategoryId(id));
-      dispatch(setPhones(data));
-      dispatch(setPhonesLoading(loading));
+      dispatch(setProduct(data));
+      dispatch(setProductLoading(loading));
     }
   }, [data]);
 
@@ -102,7 +110,7 @@ export const Phone = () => {
   return (
     <Wrapper>
       <Container>
-        {phonesLoading && loading ? (
+        {productLoading && loading ? (
           <Loader />
         ) : (
           <Flex>
@@ -121,23 +129,24 @@ export const Phone = () => {
                 </>
               }
             </WrapperSideBar>
-            {phones?.result.length === 0 ? (
+            {product?.result.length === 0 ? (
               <div>Heç bir nəticə tapılmadı</div>
             ) : (
               <WrapperShop>
                 <SizeProducts>
-                  {phones?.result.length} {t("ProductFound")}
+                  {product?.result.length} {t("ProductFound")}
                 </SizeProducts>
-                <Products handleChange={handleChangeFavorite} data={phones} />
+                <Products handleChange={handleChangeFavorite} data={product} />
                 {
                   <RedesignedPagination
                     page={page}
                     onChange={handleChange}
-                    productCount={phones.totalCount}
+                    productCount={product.totalCount}
                   />
                 }
               </WrapperShop>
             )}
+            <NativeSelectDemo handleValue={handleValue} />
           </Flex>
         )}
       </Container>

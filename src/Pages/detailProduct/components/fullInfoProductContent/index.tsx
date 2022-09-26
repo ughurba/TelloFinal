@@ -1,4 +1,4 @@
-import { FC, ReactNode, useEffect, useMemo, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   Azn,
   Color,
@@ -21,6 +21,7 @@ import HoverRating from "../customRating";
 import { AddProps, useAddItemMutation } from "services/basketServices";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { addItem, updateTotal } from "Redux/slices/basketSlice";
+import { toast } from "react-toastify";
 
 export interface IProps {
   product: DetailProduct;
@@ -50,7 +51,6 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   };
   const handleClickStorage = (id: number) => {
     setItemIds({ ...itemIds, storageId: id });
-    console.log(id);
     setCheckStorage(id);
   };
   const handleAddItem = (productId: number) => {
@@ -58,7 +58,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       setItemIds({ ...itemIds, productId: productId });
       addProduct(itemIds);
     } else {
-      alert("xaiw edirik login olun");
+      toast.warning("login ol");
     }
   };
   useEffect(() => {
@@ -110,7 +110,10 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       <Line />
 
       <WrapperLink>
-        <StyledButton onClick={() => handleAddItem(product?.id)}>
+        <StyledButton
+          disabled={!product.inStock ? true : false}
+          onClick={() => handleAddItem(product?.id)}
+        >
           {t("AddToCart")}
         </StyledButton>
       </WrapperLink>

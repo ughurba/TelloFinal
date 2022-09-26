@@ -2,26 +2,16 @@ import { StyledMenuList, Wrapper } from "./style";
 import { Flex } from "../../../../shared";
 import { Links } from "Routes/links";
 import { useTranslation } from "react-i18next";
-import {
-  IPagination,
-  useGetAllCategoriesQuery,
-  useGetCategoryProductQuery,
-} from "services/categoriesServices";
-import { useEffect, useMemo, useState } from "react";
-import {
-  setPhonesLoading,
-  setPhones,
-  setHeadphonesLoading,
-  setHeadphones,
-  setCategoryId,
-} from "Redux/slices/goodsSlice";
+import { useGetAllCategoriesQuery } from "services/categoriesServices";
+import { useMemo } from "react";
+
 import { useAppDispatch } from "Redux/hooks";
+import { setCategoryId } from "Redux/slices/goodsSlice";
 
 export const SubMenu = () => {
   const dispatch = useAppDispatch();
   const { data } = useGetAllCategoriesQuery();
   const { t } = useTranslation();
-
   const Routes = useMemo(
     () => ({
       1: {
@@ -43,25 +33,9 @@ export const SubMenu = () => {
     }),
     [data]
   );
-  //const [id, setId] = useState<number>(0);
-  //
-  // const Pagination: IPagination = {
-  //   id: id,
-  //   page: 1,
-  //   size: 6,
-  // };
-  // const { data: goods, isLoading } = useGetCategoryProductQuery(Pagination);
-  // useEffect(() => {
-  //   if (goods) {
-  //     dispatch(setCategoryId(id));
-  //     dispatch(setPhones(goods));
-  //     dispatch(setPhonesLoading(isLoading));
-  //     dispatch(setHeadphones(goods));
-  //     dispatch(setHeadphonesLoading(isLoading));
-  //   }
-  // }, [goods]);
+
   const handleSetCategoryId = (id: number) => {
-    //  setId(id);
+    dispatch(setCategoryId(id));
     localStorage.setItem("categoryId", JSON.stringify(id));
   };
   return (

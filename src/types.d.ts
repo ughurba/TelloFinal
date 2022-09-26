@@ -97,6 +97,7 @@ interface DetailProduct {
   oldPrice: number;
   photos: Image[];
   stockCount: number;
+  inStock: boolean;
   title: string;
   productColors: ProductColors[];
   productStorages: ProductStorages[];

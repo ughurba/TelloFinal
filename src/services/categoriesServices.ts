@@ -1,20 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { Brand, Category, ShopGoods } from "../types";
+import { useParams } from "react-router-dom";
+import { Links } from "../Routes/links";
 
-export interface IPagination {
+export interface IProductType {
   id: number;
   brandIds?: number[];
   page: number;
   size: number;
   minPrice?: number;
   maxPrice?: number;
+  orderBy: number;
+  category?: string;
 }
-const categoryProduct = (Pagination: IPagination, url?: string) => {
-  return `/${url ? `${url}/` : ""}${Pagination.id}?minPrice=${
-    Pagination?.minPrice
-  }&maxPrice=${Pagination?.maxPrice}&page=${Pagination.page}&size=${
-    Pagination.size
+
+const categoryProduct = (Product: IProductType, url?: string) => {
+  const str = `${Product.brandIds?.map((item) => `brandIds=${item}&`)}`
+    .split(",")
+    .join("");
+  console.log(Product.category);
+  console.log(Links.app.discounts);
+
+  const discount = `${
+    Product.category === Links.app.discounts ? `&discount=${true}` : ""
   }`;
+  return `/${url ? `${url}/` : ""}${Product.id}?${str}
+  &orderBy=${Product.orderBy}&minPrice=${Product?.minPrice}
+  &maxPrice=${Product?.maxPrice}${discount}
+  &page=${Product.page}
+  &size=${Product.size}`;
 };
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
@@ -25,10 +39,10 @@ export const categoriesApi = createApi({
     getAllCategories: builder.query<Category[], void>({
       query: () => `/`,
     }),
-    getCategoryProduct: builder.query<ShopGoods, IPagination>({
+    getCategoryProduct: builder.query<ShopGoods, IProductType>({
       query: (Pagination) => categoryProduct(Pagination),
     }),
-    getProductIsDiscount: builder.query<ShopGoods, IPagination>({
+    getProductIsDiscount: builder.query<ShopGoods, IProductType>({
       query: (Pagination) => categoryProduct(Pagination, `discount`),
     }),
     getBrands: builder.query<Brand[], void>({

@@ -89,5 +89,8 @@
   "InKatalog": "kataloqa",
   "Price": "Qiymət",
   "To": "dək",
-  "From": "dən"
+  "From": "dən",
+  "FirstOfAllExpensive": "Əvvəlcə baha",
+  "FirstOfAllCheap": "Əvvəlcə ucuz",
+  "OrderBy": "Sıralamaq"
 }

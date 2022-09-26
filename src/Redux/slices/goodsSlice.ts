@@ -2,31 +2,27 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ShopGoods } from "../../types";
 
 interface initialState {
-  headphones: ShopGoods;
-  phones: ShopGoods;
-  discountProduct: ShopGoods;
-  discountProductLoading: boolean;
-  phonesLoading: boolean;
-  headphonesLoading: boolean;
+  product: ShopGoods;
+  productLoading: boolean;
   categoryId: number;
 }
 const initialState: initialState = {
-  phones: {
+  product: {
     result: [],
     totalCount: 0,
   },
-  headphones: {
-    result: [],
-    totalCount: 0,
-  },
-  discountProduct: {
-    result: [],
-    totalCount: 0,
-  },
+  // headphones: {
+  //   result: [],
+  //   totalCount: 0,
+  // },
+  // discountProduct: {
+  //   result: [],
+  //   totalCount: 0,
+  // },
   categoryId: 0,
-  discountProductLoading: true,
-  headphonesLoading: true,
-  phonesLoading: true,
+  // discountProductLoading: true,
+  // headphonesLoading: true,
+  productLoading: true,
 };
 
 export const goodsSlice = createSlice({
@@ -36,27 +32,27 @@ export const goodsSlice = createSlice({
     setCategoryId: (state, action: PayloadAction<number>) => {
       state.categoryId = action.payload;
     },
-    setPhones: (state, action: PayloadAction<ShopGoods>) => {
-      state.phones.result = action.payload.result;
-      state.phones.totalCount = action.payload.totalCount;
+    setProduct: (state, action: PayloadAction<ShopGoods>) => {
+      state.product.result = action.payload.result;
+      state.product.totalCount = action.payload.totalCount;
     },
-    setPhonesLoading: (state, action: PayloadAction<boolean>) => {
-      state.phonesLoading = action.payload;
+    setProductLoading: (state, action: PayloadAction<boolean>) => {
+      state.productLoading = action.payload;
     },
-    setHeadphones: (state, action: PayloadAction<ShopGoods>) => {
-      state.headphones.result = action.payload.result;
-      state.headphones.totalCount = action.payload.totalCount;
-    },
-    setHeadphonesLoading: (state, action: PayloadAction<boolean>) => {
-      state.headphonesLoading = action.payload;
-    },
-    setDiscountProduct: (state, action: PayloadAction<ShopGoods>) => {
-      state.discountProduct.result = action.payload.result;
-      state.discountProduct.totalCount = action.payload.totalCount;
-    },
-    setDiscountProductLoading: (state, action: PayloadAction<boolean>) => {
-      state.headphonesLoading = action.payload;
-    },
+    // setHeadphones: (state, action: PayloadAction<ShopGoods>) => {
+    //   state.headphones.result = action.payload.result;
+    //   state.headphones.totalCount = action.payload.totalCount;
+    // },
+    // setHeadphonesLoading: (state, action: PayloadAction<boolean>) => {
+    //   state.headphonesLoading = action.payload;
+    // },
+    // setDiscountProduct: (state, action: PayloadAction<ShopGoods>) => {
+    //   state.discountProduct.result = action.payload.result;
+    //   state.discountProduct.totalCount = action.payload.totalCount;
+    // },
+    // setDiscountProductLoading: (state, action: PayloadAction<boolean>) => {
+    //   state.headphonesLoading = action.payload;
+    // },
     // updateFavoritePhones: (state, action: PayloadAction<number>) => {
     //   state.phones.result = state.phones.result.filter((x) => {
     //     if (x.id === action.payload) {
@@ -68,13 +64,6 @@ export const goodsSlice = createSlice({
     // },
   },
 });
-export const {
-  setDiscountProductLoading,
-  setDiscountProduct,
-  setPhones,
-  setPhonesLoading,
-  setHeadphonesLoading,
-  setHeadphones,
-  setCategoryId,
-} = goodsSlice.actions;
+export const { setProduct, setProductLoading, setCategoryId } =
+  goodsSlice.actions;
 export default goodsSlice.reducer;
