@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Brand, Favorites } from "types";
+import { Brand } from "types";
 import { SizeProducts, Wrapper, WrapperShop, WrapperSideBar } from "./style";
 import * as React from "react";
 import { Flex, Container, Products } from "Components/shared";
@@ -72,6 +72,7 @@ export const Product = () => {
   };
   const { data, isLoading: loading } = useGetCategoryProductQuery(ProductType);
   const [postFavorite] = useSetFavoriteMutation();
+  
   useEffect(() => {
     if (data) {
       dispatch(setCategoryId(id));
@@ -106,7 +107,6 @@ export const Product = () => {
       isFavorite: ev.currentTarget.checked,
     });
   };
-
   return (
     <Wrapper>
       <Container>

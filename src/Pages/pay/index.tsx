@@ -7,6 +7,7 @@ import { HeaderIcon, StyledTotalSide, Wrapper } from "./style";
 import { IUserPay } from "types";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "../../Redux/hooks";
 export interface Confirm {
   personal?: boolean;
   delivery: boolean;
@@ -38,6 +39,7 @@ export const Pay = () => {
       mobile: value.mobile,
     });
   };
+  const { total } = useAppSelector((state) => state.basket.basket);
 
   const handleClickDeliveryValue = (value: Record<string, string>) => {
     setDelivering({ ...delivering, ...value });
@@ -92,7 +94,7 @@ export const Pay = () => {
             handleClickPersonalValue={handleClickPersonalValue}
           />
           <StyledTotalSide>
-            <TotalSide />
+            <TotalSide total={total} />
           </StyledTotalSide>
         </Flex>
       </Container>

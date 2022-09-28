@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { IBrandAndCategory } from "../Admin/Pages/Product/types";
+import { IBrandAndCategory } from "../../Admin/Pages/Product/types";
 
-export const adminApi = createApi({
-  reducerPath: "adminApi",
+export const productApi = createApi({
+  reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:33033/api/product/",
   }),
@@ -28,4 +28,4 @@ export const adminApi = createApi({
   }),
 });
 export const { useGetBrandAndCategoryIdQuery, useCreateProductMutation } =
-  adminApi;
+  productApi;

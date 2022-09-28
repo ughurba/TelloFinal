@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import { styled as MuiStyled } from "@mui/material/styles";
+import { Button } from "@mui/material";
 
 export const Wrapper = styled.div`
   max-width: 344px;
@@ -6,6 +8,7 @@ export const Wrapper = styled.div`
   box-shadow: 0 4px 32px rgba(130, 130, 130, 0.08);
   padding: 32px;
   border-radius: 16px;
+  border: 2px solid ${({ theme }) => theme.colors.green};
 `;
 const FontStyle = css`
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.normal};
@@ -41,3 +44,19 @@ export const Total = styled.p`
   font-size: ${({ theme }) => theme.fontStyle.size.medium}
   line-height: 1.5;
   color: ${({ theme }) => theme.colors.gray31};`;
+
+export const StyledButton = MuiStyled(Button)`
+  background: #2dd06e;
+  border-radius: 8px;
+  padding: 13px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.6;
+  color: white;
+  border: none;
+  cursor: pointer;
+  &:hover{
+    background:#2dd06e;
+  }
+  margin-top:30px;
+`;

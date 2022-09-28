@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 
 import { IBrandAndCategory } from "Admin/Pages/Product/types";
 import { StyledLabel, Wrapper } from "./style";
-import { useCreateProductMutation } from "services/adminServices";
+import { useCreateProductMutation } from "services/adminServices/productServices";
 import { toFormData } from "Helper";
 
 interface Props {

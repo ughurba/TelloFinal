@@ -6,6 +6,7 @@ import { EmptyBasket } from "../../Components/shared/emptyBasket";
 import { useTranslation } from "react-i18next";
 import { StyledButton } from "Pages/detailProduct/components/fullInfoProductContent/style";
 import { useNavigate } from "react-router-dom";
+import { Links } from "../../Routes/links";
 
 export const Basket = () => {
   const { basketItems, total } = useAppSelector((state) => state.basket.basket);
@@ -42,7 +43,7 @@ export const Basket = () => {
                   ))}
                 </div>
                 <StyledTotalSide>
-                  <TotalSide total={total} />
+                  <TotalSide isButton={true} total={total} />
                 </StyledTotalSide>
               </Flex>
             </Container>
@@ -57,7 +58,7 @@ export const Basket = () => {
               styleParagraph={true}
               text={t("EmptyBasket")}
             />
-            <StyledButton onClick={() => navigate("/Phones")}>
+            <StyledButton onClick={() => navigate(Links.app.product)}>
               {t("InKatalog")}
             </StyledButton>
           </Flex>

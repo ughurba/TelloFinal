@@ -9,7 +9,7 @@ import {
   Title,
 } from "./style";
 import { FC, useState } from "react";
-import { Favorites, Goods } from "types";
+import { Favorits, Goods } from "types";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -23,6 +23,7 @@ import { Checkbox } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useAppSelector } from "../../../Redux/hooks";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -40,6 +41,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 interface Props extends Goods {
   handleChange: (ev: React.FormEvent<HTMLInputElement>, id: number) => void;
+  favorites?: any[];
 }
 export const CustomCard: FC<Props> = ({
   newPrice,
@@ -51,6 +53,7 @@ export const CustomCard: FC<Props> = ({
   id,
   handleChange,
   isFavorite,
+  favorites,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
   const { user } = useAppSelector((state) => state.user);
@@ -80,7 +83,11 @@ export const CustomCard: FC<Props> = ({
           {oldPrice ? <OldPrice>{oldPrice} ₼ </OldPrice> : ""}
           {""}
           <NewPrice>{newPrice} ₼</NewPrice>
-          {inStock ? <Stock>InStock</Stock> : <NoStock>NoStock</NoStock>}
+          {inStock ? (
+            <Stock>Stokda var</Stock>
+          ) : (
+            <NoStock>Stokda yoxdur</NoStock>
+          )}
         </StyledTypographyPrices>
       </StyledCardContent>
       <StyledCardActions disableSpacing>
@@ -88,10 +95,11 @@ export const CustomCard: FC<Props> = ({
           <>
             {user.isOnline && (
               <Checkbox
-                checked={isFavorite}
                 name={id.toString()}
                 onChange={(ev) => handleChange(ev, id)}
-                icon={<FavoriteBorder />}
+                icon={
+                   <FavoriteBorder />
+                }
                 checkedIcon={<Favorite />}
               />
             )}

@@ -107,8 +107,8 @@ export const FullName = styled.h3`
 export const StorageColor = styled.span`
   ${StyleColorDate}
 `;
-export const DateTime = styled.span`
-  padding-top: 24px;
+export const StyledDateTime = styled.span`
+  padding-top: 0px;
   ${StyleColorDate}
 `;
 export const WrapperReviews = styled.div``;

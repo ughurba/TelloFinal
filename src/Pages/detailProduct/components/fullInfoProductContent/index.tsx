@@ -57,6 +57,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
     if (user.isOnline) {
       setItemIds({ ...itemIds, productId: productId });
       addProduct(itemIds);
+      toast.success(t("AddedToCart"), { position: "bottom-right" });
     } else {
       toast.warning("login ol");
     }
@@ -111,10 +112,10 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
 
       <WrapperLink>
         <StyledButton
-          disabled={!product.inStock ? true : false}
+          disabled={!product.inStock}
           onClick={() => handleAddItem(product?.id)}
         >
-          {t("AddToCart")}
+          {product.inStock ? t("AddToCart") : t("TheProductIsFinished")}
         </StyledButton>
       </WrapperLink>
     </Wrapper>

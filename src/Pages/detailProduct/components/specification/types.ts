@@ -3,7 +3,6 @@ export interface AppUser {
   surname: string;
 }
 
-const date = new Date();
 export interface IComment {
   id?: number;
   appUserId: string;
@@ -12,5 +11,5 @@ export interface IComment {
   content: string;
   productId: number;
   appUser?: AppUser;
-  createTime?: typeof date;
+  createTime?: string;
 }

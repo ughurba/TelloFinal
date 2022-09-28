@@ -22,7 +22,6 @@ interface Props {
 export const ProductsHome: FC<Props> = ({
   title,
   ratingGoods,
-  headphones,
   handleChange,
 }) => {
   const { t } = useTranslation();

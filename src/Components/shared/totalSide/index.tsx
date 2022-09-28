@@ -3,6 +3,7 @@ import {
   Link,
   List,
   Price,
+  StyledButton,
   Title,
   Total,
   Wrapper,
@@ -11,34 +12,17 @@ import {
 import { GreyAzn } from "Assets";
 import { Flex } from "../";
 import { useTranslation } from "react-i18next";
-import { IBasketItems } from "types";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
+import { useNavigate } from "react-router-dom";
+import { Links } from "Routes/links";
 
 interface Props {
   total?: number;
+  isButton?: boolean;
 }
-export const TotalSide: FC<Props> = ({ total }) => {
-  // const [obj, setObj] = useState<IBasketItems>({
-  //   sum: 0,
-  //   count: 0,
-  //   productId: 0,
-  //   path: "",
-  //   price: 0,
-  //   id: 0,
-  // });
-
-  // useEffect(() => {
-  //   data?.map((item) => {
-  //     setObj({ ...obj, ...item });
-  //   });
-  // }, [data]);
-  // const [sum, setSum] = useState<number>(obj?.sum);
-  //
-  // useEffect(() => {
-  //   setSum(obj.sum);
-  // }, [obj]);
-
+export const TotalSide: FC<Props> = ({ total, isButton = false }) => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <Title>{t("General")}</Title>
@@ -52,33 +36,40 @@ export const TotalSide: FC<Props> = ({ total }) => {
             </Flex>
           </Flex>
         </WrapperLink>
-        {/*<WrapperLink>*/}
-        {/*  <Flex JsContent={"space-between"}>*/}
-        {/*    <Link>{t("Delivery")}</Link>*/}
-        {/*    <Flex AlItems={"center"}>*/}
-        {/*      /!*<Price>{obj?.price}</Price>*!/*/}
-        {/*      <GreyAzn />*/}
-        {/*    </Flex>*/}
-        {/*  </Flex>*/}
-        {/*</WrapperLink>*/}
         <WrapperLink>
           <Flex JsContent={"space-between"}>
-            {/*<Link>{t("GiftPackage")}</Link>*/}
-            {/*<Flex AlItems={"center"}>*/}
-            {/*  <Price>5.00</Price>*/}
-            {/*  <GreyAzn />*/}
-            {/*</Flex>*/}
+            <Link>{t("Discount")}</Link>
+            <Flex AlItems={"center"}>
+              <Price>0</Price>
+              <GreyAzn />
+            </Flex>
           </Flex>
         </WrapperLink>
+        {/*<WrapperLink>*/}
+        {/*  <Flex JsContent={"space-between"}>*/}
+        {/*    /!*<Link>{t("GiftPackage")}</Link>*!/*/}
+        {/*    /!*<Flex AlItems={"center"}>*!/*/}
+        {/*    /!*  <Price>5.00</Price>*!/*/}
+        {/*    /!*  <GreyAzn />*!/*/}
+        {/*    /!*</Flex>*!/*/}
+        {/*  </Flex>*/}
+        {/*</WrapperLink>*/}
       </List>
       <Line />
       <Flex AlItems={"center"} JsContent={"space-between"}>
-        <Total>{t("Total")}</Total>
+        <Total>{t("Toplam qiymət:")}</Total>
         <Flex AlItems={"center"}>
           <Price>{total}</Price>
           <GreyAzn />
         </Flex>
       </Flex>
+      {isButton ? (
+        <StyledButton onClick={() => navigate(Links.app.pay)}>
+          {t("DrawTheOrder")}
+        </StyledButton>
+      ) : (
+        ""
+      )}
     </Wrapper>
   );
 };

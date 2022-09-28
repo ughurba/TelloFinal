@@ -47,9 +47,15 @@ export const PersonalInformation = () => {
 
   const { data, isLoading, isSuccess } = result;
 
-  if (isSuccess) {
-    localStorage.setItem("userToken", data?.token);
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("userToken", data?.token);
+      toast.success(t("Məlumatlarınız yeniləndi"), {
+        position: "bottom-right",
+      });
+    }
+  }, [isSuccess]);
+
   useSetUser();
   return (
     <Wrapper>

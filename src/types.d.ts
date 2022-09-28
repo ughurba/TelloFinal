@@ -86,13 +86,17 @@ interface ProductDetails {
   name: string;
   value: string;
 }
+export interface Favorits {
+  id: number;
+  prdocutId: number;
+  appUserId: string;
+}
 interface DetailProduct {
   id: number;
   brandId: number;
   categoryId: number;
   comments: string[];
   description: string;
-  favorits: [];
   newPrice: number;
   oldPrice: number;
   photos: Image[];
@@ -105,9 +109,11 @@ interface DetailProduct {
   ratings: IRating[];
   basketItems: IBasketItems;
 }
+
 interface ShopGoods {
   result: Goods[];
   totalCount: number;
+  favorits?: Favorits[];
 }
 export interface Image {
   path: string;

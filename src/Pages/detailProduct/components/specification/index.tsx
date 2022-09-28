@@ -1,5 +1,6 @@
 import { Flex, MyForm } from "Components/shared";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { DateTime } from "luxon";
 import {
   Paragraph,
   Wrapper,
@@ -8,8 +9,7 @@ import {
   List,
   Link,
   InfoProduct,
-  DateTime,
-  StorageColor,
+  StyledDateTime,
   FullName,
   WrapperReviews,
   WrapperComment,
@@ -27,6 +27,8 @@ import {
   useRemoveCommentMutation,
 } from "services/commentService";
 import { useSetUser } from "Hooks/useSetUser";
+import { buttonLoader } from "Assets";
+import { StyledButton } from "Pages/auth/components/loginForm/style";
 interface Props {
   product?: DetailProduct;
 }
@@ -34,52 +36,44 @@ interface Props {
 export const Specification: FC<Props> = ({ product }) => {
   const [specification, setSpecification] = useState<boolean>(true);
   const { user } = useAppSelector((state) => state.user);
-  const [postComment] = useCommentPostMutation();
+  const [postComment, result] = useCommentPostMutation();
   const { data } = useGetCommentsQuery(product?.id ? product?.id : 0);
   const [removeComment] = useRemoveCommentMutation();
-  const [commentInfo, setCommentInfo] = useState<IComment[]>([]);
+  const { data: commentData, isSuccess, isLoading } = result;
+  console.log(data);
+  const [commentInfo, setCommentInfo] = useState<IComment[]>(
+    commentData ? commentData : []
+  );
+  useEffect(() => {
+    if (isSuccess) {
+      setCommentInfo(commentData);
+    }
+  }, [isSuccess]);
+
   const { t } = useTranslation();
   useSetUser();
   const handleClick = (value: Record<string, string>) => {
     if (product) {
-      const date = new Date();
       postComment({
-        createTime: date,
+        createTime: DateTime.now().toISO(),
         productId: product.id,
         appUserId: user.nameid,
         name: user.Name,
         surname: user.Surname,
         content: value.comment,
       });
-      commentInfo.push({
-        productId: product.id,
-        appUserId: user.nameid,
-        appUser: { name: user.Name, surname: user.Surname },
-        content: value.comment,
-      });
     }
   };
-
   const handleRemoveComment = (id: number) => {
     removeComment(id);
     setCommentInfo(commentInfo.filter((comment) => comment.id !== id));
   };
   useEffect(() => {
     if (data) {
-      setCommentInfo([...commentInfo, ...data]);
+      setCommentInfo(data);
     }
   }, [data]);
-  // const specifications = [
-  //   t("Brand"),
-  //   t("ProductType"),
-  //   t("Network"),
-  //   t("eSIM"),
-  //   t("SIMCartCount"),
-  //   t("ScreenSize"),
-  //   t("ScreenPermission"),
-  //   t("OperatingMemory"),
-  //   t("ProsessorType"),
-  // ];
+
   return (
     <Wrapper>
       <Flex>
@@ -120,21 +114,35 @@ export const Specification: FC<Props> = ({ product }) => {
               <Flex JsContent="space-between" AlItems="center">
                 <div>
                   <FullName>{`${item.appUser?.name} ${item.appUser?.surname}`}</FullName>
-                  <StorageColor>Yaddaş - 64, Rəng - Qara</StorageColor>
+                  {/*<StorageColor>Yaddaş - 64, Rəng - Qara</StorageColor>*/}
+                  <StyledDateTime>
+                    {item.createTime &&
+                      DateTime.fromISO(item?.createTime).toFormat(
+                        "yyyy LLL dd"
+                      )}
+                  </StyledDateTime>
                 </div>
-                <DateTime>{item?.createTime as ReactNode} gün əvvəl</DateTime>
               </Flex>
               <Description>{item.content}</Description>
-              <Close
-                onClick={() => handleRemoveComment(item.id ? item.id : 0)}
-              />
+              {user.nameid === item.appUserId && (
+                <Close
+                  onClick={() => handleRemoveComment(item.id ? item.id : 0)}
+                />
+              )}
             </WrapperComment>
           ))}
           <MyForm onClick={handleClick}>
             {user.isOnline && (
               <>
                 <StyledTextArea />
-                <button type={"submit"}>Submit</button>
+                <StyledButton
+                  startIcon={
+                    isLoading ? <img width={40} src={buttonLoader} /> : ""
+                  }
+                  type={"submit"}
+                >
+                  {t("Insert")}
+                </StyledButton>
               </>
             )}
           </MyForm>

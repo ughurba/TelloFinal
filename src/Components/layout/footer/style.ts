@@ -24,6 +24,7 @@ color:white;
 export const Wrapper = styled.div`
   background: black;
   padding-top: ${(props) => props.theme.space[7]};
+  padding-bottom: ${(props) => props.theme.space[4]};
 `;
 export const ColorStyle = css`
   color: ${(props) => props.theme.colors.white};

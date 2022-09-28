@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { Brand, Category, ShopGoods } from "../types";
-import { useParams } from "react-router-dom";
 import { Links } from "../Routes/links";
 
 export interface IProductType {
@@ -18,12 +17,13 @@ const categoryProduct = (Product: IProductType, url?: string) => {
   const str = `${Product.brandIds?.map((item) => `brandIds=${item}&`)}`
     .split(",")
     .join("");
-  console.log(Product.category);
-  console.log(Links.app.discounts);
+
+  const discountStr = Links.app.discounts.split("/").at(-1);
 
   const discount = `${
-    Product.category === Links.app.discounts ? `&discount=${true}` : ""
+    Product.category === discountStr ? `&discount=${true}` : ""
   }`;
+
   return `/${url ? `${url}/` : ""}${Product.id}?${str}
   &orderBy=${Product.orderBy}&minPrice=${Product?.minPrice}
   &maxPrice=${Product?.maxPrice}${discount}

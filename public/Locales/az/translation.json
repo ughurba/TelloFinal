@@ -7,6 +7,7 @@
   "Menu": "Menu",
   "New": "Yeni",
   "Discounts": "Endirimlər",
+  "Discount": "Endirim",
   "AllBrands": "Bütün brendlər",
   "Help": "Kömək",
   "FrequentlyAskedQuestions": "Tez-tez soruşulan suallar",
@@ -92,5 +93,8 @@
   "From": "dən",
   "FirstOfAllExpensive": "Əvvəlcə baha",
   "FirstOfAllCheap": "Əvvəlcə ucuz",
-  "OrderBy": "Sıralamaq"
+  "OrderBy": "Sıralamaq",
+  "AddedToCart": "Səbətə əlave olundu",
+  "TheProductIsFinished": "Məhsul bitmişdir",
+  "DrawTheOrder": "Sifarişi rəsmləşdir"
 }

@@ -9,7 +9,7 @@ export const commentApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    commentPost: builder.mutation<void, IComment>({
+    commentPost: builder.mutation<IComment[], IComment>({
       query: (body) => {
         return {
           url: "/",
