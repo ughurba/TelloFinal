@@ -3,4 +3,5 @@ export const AdminLinks = {
   login: "/admin/login",
   product: "/admin/product",
   addProduct: "/admin/product/add",
+  updateProduct: "/admin/product/update",
 };

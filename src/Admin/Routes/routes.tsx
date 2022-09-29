@@ -1,5 +1,4 @@
 import { Product } from "Admin/Pages/Product";
-// import {lazy} from "react"
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
 import { AdminLinks } from "./AdminLinks";
@@ -13,7 +12,10 @@ export const AppRoutesAdmin = () => {
     <BrowserRouter>
       <Routes>
         <Route path={AdminLinks.base} element={<AppLayout />}>
-          <Route path={AdminLinks.addProduct} element={<AddProduct />} />
+          <Route
+            path={`${AdminLinks.addProduct}/:id`}
+            element={<AddProduct />}
+          />
           <Route path={AdminLinks.product} element={<Product />} />
         </Route>
         <Route path={AdminLinks.login} element={<SignIn />} />

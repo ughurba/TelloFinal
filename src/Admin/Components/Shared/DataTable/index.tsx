@@ -9,8 +9,11 @@ import { Goods } from "types";
 import styled from "styled-components";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useRemoveDataMutation } from "services/adminServices/productServices";
+import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import { Image } from "types";
+import { Link } from "react-router-dom";
+import { AdminLinks } from "Admin/Routes/AdminLinks";
 interface Props {
   product: Goods[];
 }
@@ -29,7 +32,7 @@ export const DataTable: React.FC<Props> = ({ product }) => {
   const [rows, setRows] = React.useState<Goods[]>(product);
   type Row = typeof product[number];
   const [postRemoveData, { isSuccess }] = useRemoveDataMutation();
-  const deleteUser = React.useCallback(
+  const deleteProduct = React.useCallback(
     (id: GridRowId) => () => {
       postRemoveData(id);
       setTimeout(() => {
@@ -38,7 +41,6 @@ export const DataTable: React.FC<Props> = ({ product }) => {
     },
     []
   );
-
   const columns = React.useMemo<GridColumns<Row>>(
     () => [
       { field: "id", headerName: "ID", width: 70 },
@@ -69,12 +71,15 @@ export const DataTable: React.FC<Props> = ({ product }) => {
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
-            onClick={deleteUser(params.id)}
+            onClick={deleteProduct(params.id)}
           />,
+          <Link to={`${AdminLinks.addProduct}/${params.id}`}>
+            <GridActionsCellItem icon={<EditIcon />} label="Delete" />
+          </Link>,
         ],
       },
     ],
-    [deleteUser]
+    [deleteProduct]
   );
   if (isSuccess) {
     toast.success("silindi");

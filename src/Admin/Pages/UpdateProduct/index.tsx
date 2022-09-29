@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import { FC } from "react";
-
 import { IBrandAndCategory } from "Admin/Pages/Product/types";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
@@ -14,61 +13,42 @@ import {
   WrapperUpload,
 } from "./style";
 import {
-  useUpdateProductMutation,
-  useCreateProductMutation,
   useGetBrandAndCategoryIdQuery,
-  useGetOneProductQuery,
+  useUpdateProductMutation,
 } from "services/adminServices/productServices";
 import { toFormData } from "Helper";
 import { toast } from "react-toastify";
 import { Loader } from "Components/shared";
-import { useParams } from "react-router-dom";
-import { number, string } from "yup";
 
 interface Props {
   data?: IBrandAndCategory;
 }
 export const AddProduct: FC<Props> = () => {
-  const { id = "" } = useParams<{ id: string }>();
-  const [setAddProduct, { isSuccess, isLoading }] = useCreateProductMutation();
-  const [updateProduct] = useUpdateProductMutation();
+  const [setAddProduct, { isSuccess, isLoading }] = useUpdateProductMutation();
   const { data } = useGetBrandAndCategoryIdQuery();
-  const { data: product } = useGetOneProductQuery(id, {
-    skip: id ? true : false,
-  });
-  console.log(product?.title);
+
   const formik = useFormik({
     initialValues: {
-      Title: product?.title || "",
-      Description: product?.description || "",
-      NewPrice: product?.newPrice || 0,
-      OldPrice: product?.oldPrice || 0,
-      BrandId: product?.brand || "",
-      CategoryId: product?.categoryTitle || "",
-      StockCount: product?.stockCount || 0,
+      Title: "",
+      Description: "",
+      NewPrice: 0,
+      OldPrice: 0,
+      BrandId: "",
+      CategoryId: "",
+      StockCount: 0,
       Photos: [],
       ChildPhotos: [],
       color: "",
       storage: "",
     },
     onSubmit: (values) => {
-      if (!id) {
-        setAddProduct(
-          toFormData({
-            ...values,
-            ChildPhotos: Array.from(values.ChildPhotos),
-            Photos: Array.from(values.Photos),
-          })
-        );
-      } else {
-        updateProduct(
-          toFormData({
-            ...values,
-            ChildPhotos: Array.from(values.ChildPhotos),
-            Photos: Array.from(values.Photos),
-          })
-        );
-      }
+      setAddProduct(
+        toFormData({
+          ...values,
+          ChildPhotos: Array.from(values.ChildPhotos),
+          Photos: Array.from(values.Photos),
+        })
+      );
     },
   });
   if (isSuccess) {
@@ -211,7 +191,7 @@ export const AddProduct: FC<Props> = () => {
           </div>
 
           <StyledButton variant="contained" type={"submit"}>
-            Mali elave etmek
+            Yenile
           </StyledButton>
         </form>
       )}

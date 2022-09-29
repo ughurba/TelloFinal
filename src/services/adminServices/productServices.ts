@@ -25,6 +25,18 @@ export const productApi = createApi({
         };
       },
     }),
+    updateProduct: builder.mutation<void, FormData>({
+      query: (body) => {
+        return {
+          url: "updateProduct",
+          method: "PUT",
+          body,
+        };
+      },
+    }),
+    getOneProduct: builder.query<Goods, string>({
+      query: (id) => `${id}`,
+    }),
     getAllProduct: builder.query<Goods[], void>({
       query: () => `getAll`,
     }),
@@ -47,6 +59,8 @@ export const productApi = createApi({
   }),
 });
 export const {
+  useGetOneProductQuery,
+  useUpdateProductMutation,
   useRemoveDataMutation,
   useGetAllProductQuery,
   useGetBrandAndCategoryIdQuery,
