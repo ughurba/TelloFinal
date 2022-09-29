@@ -11,7 +11,7 @@ export const Links = {
     question: "Question",
     basket: "Basket",
     login: "Login",
-    register: "Register",
+    register: "/Register",
     userProfile: "UserProfile",
   },
   userProfileApp: {

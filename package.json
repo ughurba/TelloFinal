@@ -10,6 +10,8 @@
     "@mui/joy": "^5.0.0-alpha.46",
     "@mui/lab": "^5.0.0-alpha.93",
     "@mui/material": "^5.9.3",
+    "@mui/x-data-grid": "^5.17.4",
+    "@mui/x-data-grid-generator": "^5.17.4",
     "@react-spring/types": "^9.5.5",
     "@react-spring/web": "^9.5.5",
     "@reduxjs/toolkit": "^1.8.3",

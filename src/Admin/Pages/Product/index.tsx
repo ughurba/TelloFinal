@@ -1,12 +1,27 @@
-import { AddProduct } from "Admin/Components/Shared/AddProduct";
-import { useGetBrandAndCategoryIdQuery } from "services/adminServices/productServices";
+import { DataTable } from "Admin/Components/Shared/DataTable";
+import { AdminLinks } from "Admin/Routes/AdminLinks";
+import { Link, NavLink } from "react-router-dom";
+import {
+  useGetAllProductQuery,
+  useGetBrandAndCategoryIdQuery,
+} from "services/adminServices/productServices";
+import styled from "styled-components";
 
+const Wrapper = styled.div``;
+export const StyledButton = styled.button`
+  padding: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+`;
 export const Product = () => {
-  const { data, isLoading, isSuccess } = useGetBrandAndCategoryIdQuery();
-
+  const { data: Goods } = useGetAllProductQuery();
   return (
-    <div>
-      {!isLoading ? <AddProduct data={data} /> : <div>loading....</div>}
-    </div>
+    <Wrapper>
+      <NavLink to={AdminLinks.addProduct}>
+        <StyledButton>Create Product</StyledButton>
+      </NavLink>
+
+      {Goods && <DataTable product={Goods} />}
+    </Wrapper>
   );
 };

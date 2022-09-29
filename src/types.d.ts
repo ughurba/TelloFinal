@@ -6,8 +6,8 @@ export interface IRegisterData {
 }
 
 export interface ILogin {
-  email: string;
-  password: string;
+  email: string | undefined;
+  password: string | undefined;
 }
 export interface IUserPay {
   address: string;

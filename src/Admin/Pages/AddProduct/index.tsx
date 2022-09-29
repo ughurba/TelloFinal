@@ -1,16 +1,20 @@
 import { useFormik } from "formik";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 
 import { IBrandAndCategory } from "Admin/Pages/Product/types";
-import { StyledLabel, Wrapper } from "./style";
-import { useCreateProductMutation } from "services/adminServices/productServices";
+import { StyledInput, StyledLabel, Wrapper } from "./style";
+import {
+  useCreateProductMutation,
+  useGetBrandAndCategoryIdQuery,
+} from "services/adminServices/productServices";
 import { toFormData } from "Helper";
 
 interface Props {
   data?: IBrandAndCategory;
 }
-export const AddProduct: FC<Props> = ({ data }) => {
-  const [setAddProduct, result] = useCreateProductMutation();
+export const AddProduct: FC<Props> = () => {
+  const [setAddProduct, { isSuccess }] = useCreateProductMutation();
+  const { data } = useGetBrandAndCategoryIdQuery();
 
   const formik = useFormik({
     initialValues: {
@@ -41,36 +45,36 @@ export const AddProduct: FC<Props> = ({ data }) => {
     <Wrapper>
       <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
         <div>
-          <StyledLabel>Title</StyledLabel>
-          <input
+          <StyledInput
             onChange={formik.handleChange}
             value={formik.values.Title}
-            id={"Title"}
-            name={"Title"}
+            id="title"
+            name="Title"
+            label="Title"
           />
         </div>
         <div>
-          <StyledLabel>Description</StyledLabel>
-          <input
-            id={"Description"}
-            name={"Description"}
+          <StyledInput
+            label="Description"
+            id="Description"
+            name="Description"
             onChange={formik.handleChange}
             value={formik.values.Description}
           />
         </div>
         <div>
-          <StyledLabel>NewPrice</StyledLabel>
-          <input
-            id={"NewPrice"}
-            type={"number"}
-            name={"NewPrice"}
+          <StyledInput
+            label="NewPrice"
+            id="NewPrice"
+            type="number"
+            name="NewPrice"
             onChange={formik.handleChange}
             value={formik.values.NewPrice}
           />
         </div>
         <div>
-          <StyledLabel>OldPrice</StyledLabel>
-          <input
+          <StyledInput
+            label="OldPrice"
             id="OldPrice"
             type="number"
             name="OldPrice"
@@ -79,8 +83,8 @@ export const AddProduct: FC<Props> = ({ data }) => {
           />
         </div>
         <div>
-          <StyledLabel>StockCount</StyledLabel>
-          <input
+          <StyledInput
+            label="StockCount"
             id="StockCount"
             type="number"
             name="StockCount"

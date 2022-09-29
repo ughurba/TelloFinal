@@ -47,7 +47,9 @@ export const LoginForm: FC<Props> = ({ onClick, isLoading }) => {
         </Password>
 
         <StyledButton
-          startIcon={isLoading ? <img width={40} src={buttonLoader} /> : ""}
+          startIcon={
+            isLoading ? <img width={40} src={buttonLoader} alt={""} /> : ""
+          }
           type={"submit"}
         >
           {t("Insert")}

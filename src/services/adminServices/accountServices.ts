@@ -1,16 +1,17 @@
+import { ILogin } from "./../../types.d";
 import { fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
 import { DataToken } from "services/authServices";
-import { ILogin } from "types";
 
 export const accountApi = createApi({
   reducerPath: "accountApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:33033/api/adminAccount/",
+    baseUrl: "http://localhost:33033/api/AdminAccount/",
   }),
   endpoints: (build) => ({
     fetchLogin: build.mutation<DataToken, ILogin>({
-      query: (body) => {
+      query: (body: ILogin) => {
+        console.log(body);
         return {
           url: "login",
           method: "POST",

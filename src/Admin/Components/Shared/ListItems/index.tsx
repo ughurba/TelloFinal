@@ -14,7 +14,7 @@ import { StyledLinks } from "./style";
 
 export const mainListItems = (
   <React.Fragment>
-    <StyledLinks to={AdminLinks.app.main}>
+    <StyledLinks to={AdminLinks.base}>
       <ListItemButton>
         <ListItemIcon>
           <DashboardIcon />
@@ -29,7 +29,7 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItemButton>
-    <StyledLinks to={AdminLinks.app.addProduct}>
+    <StyledLinks to={AdminLinks.product}>
       <ListItemButton>
         <ListItemIcon>
           <ProductionQuantityLimitsIcon />

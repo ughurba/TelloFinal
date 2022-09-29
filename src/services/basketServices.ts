@@ -20,9 +20,7 @@ export const basketApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    // getAll: builder.query<Basket, void>({
-    //   query: () => `/`,
-    // }),
+  
     addItem: builder.mutation<Basket, AddProps>({
       query: (itemId) => {
         return {
