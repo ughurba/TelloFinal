@@ -10,7 +10,7 @@ export const Links = {
     pay: "/Pay",
     question: "Question",
     basket: "Basket",
-    login: "Login",
+    login: "/Login",
     register: "/Register",
     userProfile: "UserProfile",
   },

@@ -152,3 +152,9 @@ export interface Favorites {
   productId: number;
   isFavorite: boolean;
 }
+export interface IOrder {
+  date: string;
+  orderStatus: number;
+  total: number;
+  photos: Image[];
+}

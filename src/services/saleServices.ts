@@ -1,4 +1,4 @@
-import { IUserPay } from "types";
+import { IUserPay, IOrder } from "types";
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/dist/query/react";
 
 export const saleApi = createApi({
@@ -23,6 +23,9 @@ export const saleApi = createApi({
         };
       },
     }),
+    getAllSaleProduct: builder.query<IOrder[], void>({
+      query: () => `/getAll`,
+    }),
   }),
 });
-export const { usePostOrderMutation } = saleApi;
+export const { usePostOrderMutation, useGetAllSaleProductQuery } = saleApi;

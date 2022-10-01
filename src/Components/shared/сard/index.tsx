@@ -8,7 +8,7 @@ import {
   StyledCardActions,
   Title,
 } from "./style";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Favorits, Goods } from "types";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
