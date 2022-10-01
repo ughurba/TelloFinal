@@ -11,7 +11,6 @@ export const accountApi = createApi({
   endpoints: (build) => ({
     fetchLogin: build.mutation<DataToken, ILogin>({
       query: (body: ILogin) => {
-        console.log(body);
         return {
           url: "login",
           method: "POST",

@@ -18,6 +18,7 @@ import { Flex, Container } from "../../shared";
 import { FC } from "react";
 import { Links } from "Routes/links";
 import { useTranslation } from "react-i18next";
+import { useBasketUpdate } from "Hooks/basket";
 
 export const Footer: FC = () => {
   const { t } = useTranslation();

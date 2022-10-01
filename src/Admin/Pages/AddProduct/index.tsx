@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 
 import { IBrandAndCategory } from "Admin/Pages/Product/types";
 import IconButton from "@mui/material/IconButton";
@@ -18,27 +18,32 @@ import {
   useCreateProductMutation,
   useGetBrandAndCategoryIdQuery,
   useGetOneProductQuery,
+  extendedGetAllProductAdminApi,
 } from "services/adminServices/productServices";
 import { toFormData } from "Helper";
 import { toast } from "react-toastify";
 import { Loader } from "Components/shared";
 import { useParams } from "react-router-dom";
-import { number, string } from "yup";
+import { useAppDispatch } from "Redux/hooks";
 
-interface Props {
-  data?: IBrandAndCategory;
-}
-export const AddProduct: FC<Props> = () => {
-  const { id = "" } = useParams<{ id: string }>();
+// interface Props {
+//   data?: IBrandAndCategory;
+// }
+export const AddProduct = () => {
+  const { id } = useParams<{ id: any }>();
   const [setAddProduct, { isSuccess, isLoading }] = useCreateProductMutation();
-  const [updateProduct] = useUpdateProductMutation();
+  const [updateProduct, { isSuccess: successUpdate }] =
+    useUpdateProductMutation();
   const { data } = useGetBrandAndCategoryIdQuery();
   const { data: product } = useGetOneProductQuery(id, {
-    skip: id ? true : false,
+    skip: id === "create",
   });
-  console.log(product?.title);
+
+  const dispatch = useAppDispatch();
   const formik = useFormik({
+    enableReinitialize: true,
     initialValues: {
+      id: id !== "create" ? id : 0,
       Title: product?.title || "",
       Description: product?.description || "",
       NewPrice: product?.newPrice || 0,
@@ -52,7 +57,7 @@ export const AddProduct: FC<Props> = () => {
       storage: "",
     },
     onSubmit: (values) => {
-      if (!id) {
+      if (id === "create") {
         setAddProduct(
           toFormData({
             ...values,
@@ -71,10 +76,18 @@ export const AddProduct: FC<Props> = () => {
       }
     },
   });
-  if (isSuccess) {
-    toast.success("mail elave olundu");
-    formik.resetForm();
-  }
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("mal elave olundu");
+      formik.resetForm();
+      dispatch(extendedGetAllProductAdminApi.util.resetApiState());
+    }
+    if (successUpdate) {
+      toast.success("mal update olundu");
+      dispatch(extendedGetAllProductAdminApi.util.resetApiState());
+    }
+  }, [isSuccess, successUpdate]);
+
   return (
     <Wrapper>
       {isLoading ? (

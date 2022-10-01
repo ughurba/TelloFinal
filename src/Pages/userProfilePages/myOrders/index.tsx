@@ -8,9 +8,9 @@ export const MyOrders = () => {
   return (
     <Wrapper>
       <Title>{t("MyOrders")}</Title>
-      <StyledEmptyBasket>
+      {/* <StyledEmptyBasket>
         <EmptyBasket text={t("YouCurrentlyHaveNoOrdersInYourCart")} />
-      </StyledEmptyBasket>
+      </StyledEmptyBasket> */}
     </Wrapper>
   );
 };

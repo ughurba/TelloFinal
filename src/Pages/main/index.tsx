@@ -13,8 +13,15 @@ import { useTranslation } from "react-i18next";
 
 import * as React from "react";
 import { useSetFavoriteMutation } from "../../services/shopServices";
+import { useAppDispatch } from "Redux/hooks";
+import { extendedApi } from "services/basketServices";
 
 export const MainPage: FC = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(extendedApi.util.resetApiState());
+  }, [dispatch]);
+
   const { t } = useTranslation();
   const { data, isLoading: isRatingGoodsLoad } =
     useGetBestSellingProductQuery();

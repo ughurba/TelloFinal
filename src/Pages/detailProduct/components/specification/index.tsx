@@ -40,7 +40,6 @@ export const Specification: FC<Props> = ({ product }) => {
   const { data } = useGetCommentsQuery(product?.id ? product?.id : 0);
   const [removeComment] = useRemoveCommentMutation();
   const { data: commentData, isSuccess, isLoading } = result;
-  console.log(data);
   const [commentInfo, setCommentInfo] = useState<IComment[]>(
     commentData ? commentData : []
   );

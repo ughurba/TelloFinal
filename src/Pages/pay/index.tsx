@@ -2,12 +2,16 @@ import { Footer } from "../../Components/layout/footer";
 import { GroupTello } from "Assets";
 import { Container, Flex, TotalSide } from "../../Components/shared";
 import { InputSide } from "./components/inputSide";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { HeaderIcon, StyledTotalSide, Wrapper } from "./style";
 import { IUserPay } from "types";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../../Redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
+import { extendedApi } from "services/basketServices";
+import { useBasketUpdate } from "Hooks/basket";
+import { useSetUser } from "Hooks/useSetUser";
+import { usePostOrderMutation } from "services/saleServices";
 export interface Confirm {
   personal?: boolean;
   delivery: boolean;
@@ -16,15 +20,24 @@ export interface Confirm {
 
 export const Pay = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(extendedApi.util.resetApiState());
+  }, [dispatch]);
+  useSetUser();
+  useBasketUpdate();
   const [confirmation, setConfirmation] = useState<Confirm>({
     personal: false,
     delivery: false,
     payments: false,
   });
+  const { total } = useAppSelector((state) => state.basket.basket);
   const [data, setData] = useState<Partial<IUserPay>>();
   const [personalInfo, setPersonalInfo] = useState<Record<string, string>>();
   const [delivering, setDelivering] = useState<Record<string, string>>();
+  const [postOrder, { isSuccess: orderSuccess }] = usePostOrderMutation();
+
   const handleClickPersonalValue = (value: Record<string, string>) => {
     setPersonalInfo({ ...personalInfo, ...value });
     setConfirmation({
@@ -39,7 +52,6 @@ export const Pay = () => {
       mobile: value.mobile,
     });
   };
-  const { total } = useAppSelector((state) => state.basket.basket);
 
   const handleClickDeliveryValue = (value: Record<string, string>) => {
     setDelivering({ ...delivering, ...value });
@@ -55,17 +67,28 @@ export const Pay = () => {
     });
   };
 
-  const handleClickConfirm = (value: Record<string, boolean>) => {
-    setConfirmation({
-      ...confirmation,
-      payments: !confirmation.payments,
-    });
-    setData({
-      ...data,
-      card: value.card,
-      cash: value.cash,
-    });
+  const handleClickConfirm = useCallback(
+    (value: Record<string, boolean>) => {
+      setConfirmation({
+        ...confirmation,
+        payments: !confirmation.payments,
+      });
+      setData({
+        ...data,
+        card: value.card,
+        cash: value.cash,
+      });
+    },
+    [data, confirmation]
+  );
 
+  useEffect(() => {
+    if (data?.cash) {
+      postOrder(data);
+    }
+  }, [handleClickConfirm]);
+
+  if (orderSuccess) {
     swal({
       title: "Tesdiqlendi",
       icon: "success",
@@ -74,8 +97,7 @@ export const Pay = () => {
         navigate("/");
       }
     });
-  };
-
+  }
   return (
     <Wrapper>
       <HeaderIcon>

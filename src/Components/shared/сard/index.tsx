@@ -97,9 +97,7 @@ export const CustomCard: FC<Props> = ({
               <Checkbox
                 name={id.toString()}
                 onChange={(ev) => handleChange(ev, id)}
-                icon={
-                   <FavoriteBorder />
-                }
+                icon={<FavoriteBorder />}
                 checkedIcon={<Favorite />}
               />
             )}

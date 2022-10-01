@@ -28,7 +28,7 @@ export interface IUser {
   Name: string;
   Surname: string;
   Role: [];
-  Email?: string;
+  Email: string;
   unique_name: string;
 }
 

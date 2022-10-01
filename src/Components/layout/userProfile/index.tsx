@@ -22,7 +22,7 @@ export const UserProfile = () => {
   const { t } = useTranslation();
   useEffect(() => {
     dispatch(extendedApi.util.resetApiState());
-  }, []);
+  }, [dispatch]);
 
   useSetUser();
   useBasketUpdate();
@@ -55,10 +55,10 @@ export const UserProfile = () => {
           <Text> {t("PersonalInformation")}</Text>
         </StyledLink>
 
-        <StyledLink to={Links.userProfileApp.DeliveryAddress}>
+        {/* <StyledLink to={Links.userProfileApp.DeliveryAddress}>
           <MapPin weight={"bold"} />
           <Text> {t("DeliveryAddress")}</Text>
-        </StyledLink>
+        </StyledLink> */}
 
         <Logout onClick={handleLogout}>
           <SignOut weight={"bold"} />

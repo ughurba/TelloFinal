@@ -37,9 +37,7 @@ export const productApi = createApi({
     getOneProduct: builder.query<Goods, string>({
       query: (id) => `${id}`,
     }),
-    getAllProduct: builder.query<Goods[], void>({
-      query: () => `getAll`,
-    }),
+
     getBrandAndCategoryId: builder.query<IBrandAndCategory, void>({
       query: () => {
         return {
@@ -58,11 +56,19 @@ export const productApi = createApi({
     }),
   }),
 });
+
+export const extendedGetAllProductAdminApi = productApi.injectEndpoints({
+  endpoints: (build) => ({
+    getAllProduct: build.query<Goods[], void>({
+      query: () => `getAll`,
+    }),
+  }),
+});
+export const {useGetAllProductQuery} = extendedGetAllProductAdminApi
 export const {
   useGetOneProductQuery,
   useUpdateProductMutation,
   useRemoveDataMutation,
-  useGetAllProductQuery,
   useGetBrandAndCategoryIdQuery,
   useCreateProductMutation,
 } = productApi;

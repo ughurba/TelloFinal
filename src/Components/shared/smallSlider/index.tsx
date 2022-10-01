@@ -30,8 +30,8 @@ export const SmallSlider: FC = () => {
           pagination={{ clickable: true }}
           spaceBetween={50}
           slidesPerView={5}
-          onSlideChange={() => console.log("slide change")}
-          onSwiper={(swiper) => console.log(swiper)}
+          // onSlideChange={() => console.log("slide change")}
+          // onSwiper={(swiper) => console.log(swiper)}
         >
           {sliderImg.map((value) => (
             <SwiperSlide key={value.id}>

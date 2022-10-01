@@ -1,17 +1,20 @@
 import { configureStore } from "@reduxjs/toolkit";
 import sliderSlice from "./slices/sliderSlice";
-import { goodsApi } from "../services/goodsServices";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import { authApi } from "../services/authServices";
 import userSlice from "./slices/userSlice";
-import { productApi } from "../services/adminServices/productServices";
-import { categoriesApi } from "../services/categoriesServices";
 import goodsSlice from "./slices/goodsSlice";
-import { commentApi } from "../services/commentService";
-import { basketApi } from "../services/basketServices";
 import basketSlice from "./slices/basketSlice";
-import { shopApi } from "../services/shopServices";
-import { accountApi } from "services/adminServices/accountServices";
+import {
+  accountApi,
+  authApi,
+  basketApi,
+  categoriesApi,
+  commentApi,
+  goodsApi,
+  productApi,
+  saleApi,
+  shopApi,
+} from "services";
 
 export const store = configureStore({
   reducer: {
@@ -28,6 +31,7 @@ export const store = configureStore({
     [basketApi.reducerPath]: basketApi.reducer,
     [shopApi.reducerPath]: shopApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
+    [saleApi.reducerPath]: saleApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -38,7 +42,8 @@ export const store = configureStore({
       commentApi.middleware,
       basketApi.middleware,
       shopApi.middleware,
-      accountApi.middleware
+      accountApi.middleware,
+      saleApi.middleware
     ),
 });
 
