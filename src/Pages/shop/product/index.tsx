@@ -16,7 +16,7 @@ import {
   IProductType,
   useGetBrandsQuery,
   useGetCategoryProductQuery,
-} from "services/categoriesServices";
+} from "services/baseServices/categoriesServices";
 import { BrandFilter } from "../components/brandFilter";
 import { RedesignedPagination, Loader } from "Components/shared";
 import {
@@ -26,7 +26,7 @@ import {
 } from "Redux/slices/goodsSlice";
 import { RangeSlider } from "../components/rangeSlide";
 import { useDebounce } from "Hooks/debounce";
-import { useSetFavoriteMutation } from "services/shopServices";
+import { useSetFavoriteMutation } from "services/baseServices/shopServices";
 import { NativeSelectDemo } from "../components/select";
 import { useParams } from "react-router-dom";
 
@@ -72,7 +72,7 @@ export const Product = () => {
   };
   const { data, isLoading: loading } = useGetCategoryProductQuery(ProductType);
   const [postFavorite] = useSetFavoriteMutation();
-  
+
   useEffect(() => {
     if (data) {
       dispatch(setCategoryId(id));
@@ -130,7 +130,7 @@ export const Product = () => {
               }
             </WrapperSideBar>
             {product?.result.length === 0 ? (
-              <div>Heç bir nəticə tapılmadı</div>
+              <div>{t("NoResultsFound")}</div>
             ) : (
               <WrapperShop>
                 <SizeProducts>

@@ -8,10 +8,10 @@ import { IUserPay } from "types";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Redux/hooks";
-import { extendedApi } from "services/basketServices";
+import { extendedApi } from "services/baseServices/basketServices";
 import { useBasketUpdate } from "Hooks/basket";
 import { useSetUser } from "Hooks/useSetUser";
-import { usePostOrderMutation } from "services/saleServices";
+import { usePostOrderMutation } from "services/baseServices/saleServices";
 export interface Confirm {
   personal?: boolean;
   delivery: boolean;

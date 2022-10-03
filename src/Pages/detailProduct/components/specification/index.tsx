@@ -25,7 +25,7 @@ import {
   useCommentPostMutation,
   useGetCommentsQuery,
   useRemoveCommentMutation,
-} from "services/commentService";
+} from "services/baseServices/commentService";
 import { useSetUser } from "Hooks/useSetUser";
 import { buttonLoader } from "Assets";
 import { StyledButton } from "Pages/auth/components/loginForm/style";

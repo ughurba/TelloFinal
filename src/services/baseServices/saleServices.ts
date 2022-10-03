@@ -1,4 +1,4 @@
-import { IUserPay, IOrder } from "types";
+import { IOrderItem, IUserPay, IOrder } from "types";
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/dist/query/react";
 
 export const saleApi = createApi({
@@ -23,9 +23,17 @@ export const saleApi = createApi({
         };
       },
     }),
-    getAllSaleProduct: builder.query<IOrder[], void>({
-      query: () => `/getAll`,
+    getOrderItem: builder.query<IOrderItem[], string>({
+      query: (id) => `/getOrderItemAll?orderId=${id}`,
     }),
   }),
 });
-export const { usePostOrderMutation, useGetAllSaleProductQuery } = saleApi;
+export const extendSaleApi = saleApi.injectEndpoints({
+  endpoints: (build) => ({
+    getAllSaleProduct: build.query<IOrder[], void>({
+      query: () => `/getOrderAll`,
+    }),
+  }),
+});
+export const { useGetAllSaleProductQuery } = extendSaleApi;
+export const { usePostOrderMutation, useGetOrderItemQuery } = saleApi;

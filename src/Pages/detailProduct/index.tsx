@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Specification, Container, Flex, Loader } from "Components/shared/";
 import { FullInfoProductContent, FullInfoShowSlider } from "./components";
 import { Wrapper } from "./style";
-import { useGetOneQuery } from "../../services/goodsServices";
+import { useGetOneQuery } from "services/baseServices/goodsServices";
 
 export const DetailProduct = () => {
   const { id = "" } = useParams<{ id: string }>();

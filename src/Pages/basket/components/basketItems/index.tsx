@@ -18,7 +18,7 @@ import {
   useDecrementPutMutation,
   useIncrementPutMutation,
   useDeleteItemMutation,
-} from "services/basketServices";
+} from "services/baseServices/basketServices";
 import { useAppDispatch } from "Redux/hooks";
 import { removeItem, updateTotal } from "Redux/slices/basketSlice";
 

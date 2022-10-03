@@ -13,7 +13,7 @@ import {
 } from "phosphor-react";
 import { List, StyledLink, Title, Wrapper, Text, Logout } from "./style";
 import { addItem, updateTotal } from "Redux/slices/basketSlice";
-import { extendedApi } from "services/basketServices";
+import { extendedApi } from "services/baseServices/basketServices";
 import { useBasketUpdate } from "Hooks/basket";
 import { useEffect } from "react";
 

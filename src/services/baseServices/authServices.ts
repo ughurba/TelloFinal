@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ILogin, IRegisterData } from "../types";
+import { ILogin, IRegisterData } from "../../types";
 
 export interface DataToken {
   token: string;

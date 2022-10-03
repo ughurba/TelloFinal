@@ -2,7 +2,7 @@ import { StyledMenuList, Wrapper } from "./style";
 import { Flex } from "../../../../shared";
 import { Links } from "Routes/links";
 import { useTranslation } from "react-i18next";
-import { useGetAllCategoriesQuery } from "services/categoriesServices";
+import { useGetAllCategoriesQuery } from "services/baseServices/categoriesServices";
 import { useMemo } from "react";
 
 import { useAppDispatch } from "Redux/hooks";

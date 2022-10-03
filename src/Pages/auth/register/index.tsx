@@ -12,7 +12,7 @@ import { Links } from "Routes/links";
 import { RegisterForm } from "../components/registerForm";
 import { ReactNode, useEffect, useState } from "react";
 import { IRegisterData } from "types";
-import { useFetchRegistersMutation } from "services/authServices";
+import { useFetchRegistersMutation } from "services/baseServices/authServices";
 import { StyledError } from "./style";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";

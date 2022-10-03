@@ -1,13 +1,15 @@
-import { shopApi } from "./shopServices";
+import { shopApi } from "./baseServices/shopServices";
 import { accountApi } from "services/adminServices/accountServices";
-import { commentApi } from "./commentService";
-import { basketApi } from "./basketServices";
+import { commentApi } from "./baseServices/commentService";
+import { basketApi } from "./baseServices/basketServices";
 import { productApi } from "./adminServices/productServices";
-import { categoriesApi } from "./categoriesServices";
-import { authApi } from "./authServices";
-import { goodsApi } from "./goodsServices";
-import { saleApi } from "./saleServices";
+import { categoriesApi } from "./baseServices/categoriesServices";
+import { authApi } from "./baseServices/authServices";
+import { goodsApi } from "./baseServices/goodsServices";
+import { saleApi } from "./baseServices/saleServices";
+import { saleAdminApi } from "./adminServices/saleAdminServices";
 export {
+  saleAdminApi,
   accountApi,
   authApi,
   basketApi,

@@ -14,6 +14,7 @@ import {
   productApi,
   saleApi,
   shopApi,
+  saleAdminApi,
 } from "services";
 
 export const store = configureStore({
@@ -32,6 +33,7 @@ export const store = configureStore({
     [shopApi.reducerPath]: shopApi.reducer,
     [accountApi.reducerPath]: accountApi.reducer,
     [saleApi.reducerPath]: saleApi.reducer,
+    [saleAdminApi.reducerPath]: saleAdminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -43,7 +45,8 @@ export const store = configureStore({
       basketApi.middleware,
       shopApi.middleware,
       accountApi.middleware,
-      saleApi.middleware
+      saleApi.middleware,
+      saleAdminApi.middleware
     ),
 });
 

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Chart from "../../Components/Shared/Chart";
 import Deposits from "../../Components/Shared/Deposits";
-import Orders from "../../Components/Shared/Orders";
+import { Orders } from "../Orders";
 
 export const ChartCustom = () => {
   return (

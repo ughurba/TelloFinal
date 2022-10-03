@@ -18,7 +18,7 @@ import {
   shopExtendedApi,
   useGetAllFavoriteQuery,
   useSearchProductMutation,
-} from "services/shopServices";
+} from "services/baseServices/shopServices";
 import { useDebounce } from "Hooks/debounce";
 import { SearchMenu } from "./components/searchMenu";
 

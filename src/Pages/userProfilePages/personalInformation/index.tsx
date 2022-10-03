@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Flex, MyField, MyForm } from "Components/shared";
 import { Wrapper, WrapperForm, Title, StyledDate, StyledPencil } from "./style";
 import { useEffect, useMemo, useState } from "react";
-import { useFetchUpdateMutation } from "services/authServices";
+import { useFetchUpdateMutation } from "services/baseServices/authServices";
 import { StyledButton } from "../../auth/components/loginForm/style";
 import { buttonLoader } from "Assets";
 import { useSetUser } from "Hooks/useSetUser";

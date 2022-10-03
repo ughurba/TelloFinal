@@ -13,6 +13,7 @@ import {
   PersonalInformation,
   MyFavorites,
   Product,
+  OrderItems,
 } from "../Pages";
 
 import { Links } from "./links";
@@ -53,6 +54,10 @@ export const AppRoutes = () => {
             <Route
               path={Links.userProfileApp.PersonalInformation}
               element={<PersonalInformation />}
+            />
+            <Route
+              path={`${Links.userProfileApp.OrderItems}/:orderId`}
+              element={<OrderItems />}
             />
           </Route>
         </Route>

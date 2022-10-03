@@ -1,5 +1,5 @@
-import { extendedApi } from "./../services/basketServices";
-import { useGetAllQuery } from "../services/basketServices";
+import { extendedApi } from "./../services/baseServices/basketServices";
+import { useGetAllQuery } from "../services/baseServices/basketServices";
 import { useEffect } from "react";
 import { addItem, updateTotal } from "../Redux/slices/basketSlice";
 import { useAppDispatch } from "../Redux/hooks";

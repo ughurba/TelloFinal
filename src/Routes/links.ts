@@ -19,5 +19,6 @@ export const Links = {
     MyFavorites: "MyFavorites",
     PersonalInformation: "PersonalInformation",
     DeliveryAddress: "DeliveryAddress",
+    OrderItems: "OrderItems",
   },
 };

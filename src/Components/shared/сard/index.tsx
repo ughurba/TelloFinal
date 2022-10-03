@@ -24,6 +24,7 @@ import CardContent from "@mui/material/CardContent";
 import { Favorite, FavoriteBorder } from "@mui/icons-material";
 import { useAppSelector } from "../../../Redux/hooks";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useTranslation } from "react-i18next";
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
@@ -56,6 +57,7 @@ export const CustomCard: FC<Props> = ({
   favorites,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
+  const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -84,9 +86,9 @@ export const CustomCard: FC<Props> = ({
           {""}
           <NewPrice>{newPrice} ₼</NewPrice>
           {inStock ? (
-            <Stock>Stokda var</Stock>
+            <Stock>{t("inStock")}</Stock>
           ) : (
-            <NoStock>Stokda yoxdur</NoStock>
+            <NoStock>{t("noStock")}</NoStock>
           )}
         </StyledTypographyPrices>
       </StyledCardContent>

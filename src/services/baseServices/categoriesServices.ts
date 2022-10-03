@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Brand, Category, ShopGoods } from "../types";
-import { Links } from "../Routes/links";
+import { Brand, Category, ShopGoods } from "types";
+import { Links } from "Routes/links";
 
 export interface IProductType {
   id: number;

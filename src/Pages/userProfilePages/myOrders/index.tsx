@@ -1,37 +1,47 @@
 import { EmptyBasket } from "Components/shared/emptyBasket";
 import { Title } from "../personalInformation/style";
 import { useTranslation } from "react-i18next";
-import { Wrapper, StyledEmptyBasket } from "./style";
+import { Wrapper, StyledEmptyBasket, StyledLink } from "./style";
 import { OrderCard } from "./Components/Card";
-import styled from "styled-components";
-import { useGetAllSaleProductQuery } from "services/saleServices";
+import {
+  extendSaleApi,
+  useGetAllSaleProductQuery,
+} from "services/baseServices/saleServices";
 import { Flex, Loader } from "Components/shared";
-export const WrapperCard = styled.div`
-  background-color: white;
-  border-radius: 10px;
-  margin-left: 20px;
-  margin-top: 10px;
-`;
+import { useAppDispatch } from "Redux/hooks";
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { Links } from "Routes/links";
+
 export const MyOrders = () => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(extendSaleApi.util.resetApiState());
+  }, [dispatch]);
   const { data, isLoading, isSuccess } = useGetAllSaleProductQuery();
   const { t } = useTranslation();
-  console.log(data);
+
   return (
     <Wrapper>
       <Title>{t("MyOrders")}</Title>
-      {/* <StyledEmptyBasket>
-        <EmptyBasket text={t("YouCurrentlyHaveNoOrdersInYourCart")} />
-      </StyledEmptyBasket> */}
+      {data?.length === 0 && (
+        <StyledEmptyBasket>
+          <EmptyBasket text={t("YouCurrentlyHaveNoOrdersInYourCart")} />
+        </StyledEmptyBasket>
+      )}
+
       <Flex FlexWrap="wrap">
         {isLoading ? (
           <Loader />
         ) : (
           isSuccess &&
           data.map((obj) => (
-            <WrapperCard>
-              {" "}
+            <StyledLink
+              key={obj.id}
+              to={`${Links.userProfileApp.OrderItems}/${obj.id}`}
+            >
               <OrderCard {...obj} />
-            </WrapperCard>
+            </StyledLink>
           ))
         )}
       </Flex>

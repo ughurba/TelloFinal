@@ -12,7 +12,7 @@ import { registerFon, registerImg } from "Assets";
 import { Links } from "Routes/links";
 import { ReactNode, useEffect, useState } from "react";
 import { ILogin } from "types";
-import { useFetchLoginMutation } from "services/authServices";
+import { useFetchLoginMutation } from "services/baseServices/authServices";
 import { StyledError } from "../register/style";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -61,7 +61,7 @@ export const Login = () => {
             <RegisterImg src={registerImg} />
             <RegisterFon src={registerFon} />
             <StyledRegisterText>
-              {t("YouDontHaveAnAccount")}
+              {t("YouDontHaveAnAccount")}{" "}
               <StyledToRegister to={Links.app.register}>
                 {t("SignUp")}
               </StyledToRegister>

@@ -18,7 +18,10 @@ import { Flex } from "Components/shared/";
 import { useTranslation } from "react-i18next";
 import { DetailProduct, ProductStorages } from "types";
 import HoverRating from "../customRating";
-import { AddProps, useAddItemMutation } from "services/basketServices";
+import {
+  AddProps,
+  useAddItemMutation,
+} from "services/baseServices/basketServices";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { addItem, updateTotal } from "Redux/slices/basketSlice";
 import { toast } from "react-toastify";

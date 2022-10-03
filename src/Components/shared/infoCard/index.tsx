@@ -16,6 +16,7 @@ import { FC } from "react";
 import { Goods } from "types";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Links } from "Routes/links";
 interface Props {
   phones: Goods[];
   headphones: Goods[];
@@ -32,7 +33,7 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
             <GoodsCount>
               {t("ProductCount")}: {phones?.length}
             </GoodsCount>
-            <GoodsPath onClick={() => navigate("/phones")}>
+            <GoodsPath onClick={() => navigate(Links.app.phone)}>
               {t("SkipToProducts")} <StyledChevron />
             </GoodsPath>
           </ImageBoxFon>
@@ -53,7 +54,7 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
               <GoodsCount>
                 {t("ProductCount")}: {headphones.length}
               </GoodsCount>
-              <GoodsPath onClick={() => navigate("/Headphones")}>
+              <GoodsPath onClick={() => navigate(Links.app.headphone)}>
                 {t("SkipToProducts")} <StyledChevron />
               </GoodsPath>
             </ImageBoxMask>

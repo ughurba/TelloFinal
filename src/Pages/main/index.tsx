@@ -8,13 +8,13 @@ import {
   useFetchAllGoodsQuery,
   useGetBestSellingProductQuery,
   useGetNewArrivalProductQuery,
-} from "services/goodsServices";
+} from "services/baseServices/goodsServices";
 import { useTranslation } from "react-i18next";
 
 import * as React from "react";
-import { useSetFavoriteMutation } from "../../services/shopServices";
+import { useSetFavoriteMutation } from "services/baseServices/shopServices";
 import { useAppDispatch } from "Redux/hooks";
-import { extendedApi } from "services/basketServices";
+import { extendedApi } from "services/baseServices/basketServices";
 
 export const MainPage: FC = () => {
   const dispatch = useAppDispatch();

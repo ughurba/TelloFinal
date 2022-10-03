@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Basket, DetailProduct, Favorites, Goods, ShopGoods } from "../types";
+import { Basket, DetailProduct, Favorites, Goods, ShopGoods } from "types";
 import { basketApi } from "./basketServices";
 
 export const shopApi = createApi({

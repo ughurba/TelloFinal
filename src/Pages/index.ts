@@ -11,7 +11,9 @@ import { MyFavorites } from "./userProfilePages/myFavorites";
 import { MyOrders } from "./userProfilePages/myOrders";
 import { PersonalInformation } from "./userProfilePages/personalInformation";
 import { Product } from "./shop/product";
+import { OrderItems } from "./orderItems";
 export {
+  OrderItems,
   Product,
   PersonalInformation,
   MyOrders,

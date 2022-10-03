@@ -23,12 +23,15 @@ export const mainListItems = (
       </ListItemButton>
     </StyledLinks>
 
-    <ListItemButton>
-      <ListItemIcon>
-        <ShoppingCartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Orders" />
-    </ListItemButton>
+    <StyledLinks to={AdminLinks.order}>
+      <ListItemButton>
+        <ListItemIcon>
+          <ShoppingCartIcon />
+        </ListItemIcon>
+        <ListItemText primary="Orders" />
+      </ListItemButton>
+    </StyledLinks>
+
     <StyledLinks to={AdminLinks.product}>
       <ListItemButton>
         <ListItemIcon>

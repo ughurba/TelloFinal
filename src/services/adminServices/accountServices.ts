@@ -1,7 +1,7 @@
 import { ILogin } from "./../../types.d";
 import { fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { createApi } from "@reduxjs/toolkit/dist/query/react";
-import { DataToken } from "services/authServices";
+import { DataToken } from "services/baseServices/authServices";
 
 export const accountApi = createApi({
   reducerPath: "accountApi",

@@ -96,5 +96,14 @@
   "OrderBy": "Sıralamaq",
   "AddedToCart": "Səbətə əlave olundu",
   "TheProductIsFinished": "Məhsul bitmişdir",
-  "DrawTheOrder": "Sifarişi rəsmləşdir"
+  "DrawTheOrder": "Sifarişi rəsmləşdir",
+  "DateOfOrder":"Sifariş tarixi:",
+  "Refused":"İmtina edilib",
+  "Status":"Status:",
+  "Confirmed":"Tesdiqlenib",
+  "NoResultsFound":"Heç bir nəticə tapılmadı",
+  "inStock":"Stokda var",
+  "noStock":"Stokda yoxdur",
+  "TotalPrice":"Ümumi qiymət"
+
 }
