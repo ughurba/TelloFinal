@@ -5,4 +5,5 @@ export const AdminLinks = {
   addProduct: "/admin/product/add",
   updateProduct: "/admin/product/update",
   order: "/admin/order",
+  orderItems: "/admin/orderItems",
 };

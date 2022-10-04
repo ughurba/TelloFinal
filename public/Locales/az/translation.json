@@ -104,6 +104,13 @@
   "NoResultsFound":"Heç bir nəticə tapılmadı",
   "inStock":"Stokda var",
   "noStock":"Stokda yoxdur",
-  "TotalPrice":"Ümumi qiymət"
+  "TotalPrice":"Ümumi qiymət",
+  "OrderHistory":"Sifariş Tarixi",
+  "Photo":"Şəkil",
+  "CourierNote":"Kuryer qeydi",
+  "UserName":"Istifadəçi adı",
+  "OrderStatus":"Sifariş Vəziyyəti",
+  "Adress":"Ünvan",
+  "Count":"Say"
 
 }

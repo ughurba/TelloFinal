@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IAdminOrder } from "Admin/Pages/Orders/types";
+import { IOrderItem } from "types";
 
 export const saleAdminApi = createApi({
   reducerPath: "saleAdminApi",
@@ -17,6 +18,24 @@ export const saleAdminApi = createApi({
     getAllOrder: builder.query<IAdminOrder[], void>({
       query: () => `allOrder`,
     }),
+    getAllOrderItem: builder.query<IOrderItem[], string>({
+      query: (id) => `/OrderItem?orderId=${id}`,
+    }),
+    updateOrderStatus: builder.mutation<
+      void,
+      { orderId: number; orderStatus: number }
+    >({
+      query: (arg) => {
+        return {
+          url: `?orderId=${arg.orderId}&orderStatus=${arg.orderStatus}`,
+          method: "PUT",
+        };
+      },
+    }),
   }),
 });
-export const { useGetAllOrderQuery } = saleAdminApi;
+export const {
+  useGetAllOrderQuery,
+  useGetAllOrderItemQuery,
+  useUpdateOrderStatusMutation,
+} = saleAdminApi;

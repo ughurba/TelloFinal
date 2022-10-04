@@ -30,6 +30,8 @@ const categoryProduct = (Product: IProductType, url?: string) => {
   &page=${Product.page}
   &size=${Product.size}`;
 };
+
+
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
   baseQuery: fetchBaseQuery({

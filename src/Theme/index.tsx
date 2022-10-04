@@ -25,6 +25,7 @@ const theme = {
     green: "#2DD06E",
     titleBlack: "#1D2123",
     oldSilver: "#828282",
+    yellow: "#ffcc00",
     inputSearch: {
       gray95: "#f2f2f2",
     },
