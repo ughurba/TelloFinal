@@ -15,6 +15,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect } from "react";
 import { StyledImg } from "Admin/Components/Shared/DataTable/style";
 import { Goods } from "types";
+import { Button } from "Admin/Components/Shared/Button";
 
 export const Product = () => {
   const { data: Goods, isSuccess: GoodsSuccess } = useGetAllProductQuery();
@@ -62,7 +63,7 @@ export const Product = () => {
       {
         field: "actions",
         type: "actions",
-        width: 80,
+        width: 100,
         getActions: (params) => [
           <GridActionsCellItem
             icon={<DeleteIcon />}
@@ -71,6 +72,16 @@ export const Product = () => {
           />,
           <Link to={`${AdminLinks.addProduct}/${params.id}`}>
             <GridActionsCellItem icon={<EditIcon />} label="Delete" />
+          </Link>,
+        ],
+      },
+      {
+        field: "createSpecifications",
+        type: "actions",
+        width: 200,
+        getActions: (params) => [
+          <Link to={`${AdminLinks.createSpecifications}/${params.id}`}>
+            <button>Create specifications</button>
           </Link>,
         ],
       },
@@ -84,7 +95,7 @@ export const Product = () => {
   return (
     <Wrapper>
       <NavLink to={`${AdminLinks.addProduct}/create`}>
-        <StyledButton>Create Product</StyledButton>
+        <Button btnName="Product yaratmaq" />
       </NavLink>
       {<DataTable rows={rows} columns={columns} />}
     </Wrapper>

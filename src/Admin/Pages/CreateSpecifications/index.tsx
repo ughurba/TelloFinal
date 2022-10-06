@@ -1,26 +1,67 @@
-import { Form, Formik } from "formik";
-import { Field } from "../../Components/Shared/Field";
-import { useMemo, useState } from "react";
+import * as yup from "yup";
+import { useFormik } from "formik";
+import { Button } from "Admin/Components/Shared/Button";
+import { StyledField } from "./style";
+import { useCreateSpecificationsMutation } from "services/adminServices/productServices";
+import { toast } from "react-toastify";
+import { useEffect, useState } from "react";
+import { ISpecifications } from "./types";
+import { useParams } from "react-router-dom";
 
 export const CreateSpecifications = () => {
-  const [value, setValue] = useState<Record<string, string>>({});
-  useMemo(() => {
-    setValue({});
-  }, []);
+  const [postSpecifications, { isSuccess, isLoading }] =
+    useCreateSpecificationsMutation();
+
+  const { productId } = useParams();
+
+  if (isSuccess) {
+    toast.success("elave olundu");
+  }
+
+  const validationSchema = yup.object({
+    value: yup.string().required("Key is required"),
+    key: yup.string().required("Key is required"),
+  });
+  const formik = useFormik({
+    initialValues: {
+      value: "",
+      key: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: (values) => {
+      postSpecifications({
+        key: values.key,
+        value: values.value,
+        productId: productId,
+      });
+    },
+  });
 
   return (
     <div>
-      <Formik
-        enableReinitialize
-        initialValues={value}
-        onSubmit={(values: Record<string, string>) => {}}
-      >
-        <Form>
-          <Field name="key" label="Key" />
-          <Field name="value" label="Value" />
-          <Field name="key" />
-        </Form>
-      </Formik>
+      <form onSubmit={formik.handleSubmit}>
+        <StyledField
+          id="key"
+          name="key"
+          label="Key"
+          value={formik.values.key}
+          onChange={formik.handleChange}
+          variant="outlined"
+          error={formik.touched.key && Boolean(formik.errors.key)}
+          helperText={formik.touched.key && formik.errors.key}
+        />
+        <StyledField
+          id="value"
+          name="value"
+          label="Value"
+          value={formik.values.value}
+          onChange={formik.handleChange}
+          variant="outlined"
+          error={formik.touched.value && Boolean(formik.errors.value)}
+          helperText={formik.touched.value && formik.errors.value}
+        />
+        <Button isLoading={isLoading} btnName="Elave et" />
+      </form>
     </div>
   );
 };

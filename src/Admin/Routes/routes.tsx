@@ -22,7 +22,7 @@ export const AppRoutesAdmin = () => {
             element={<AddProduct />}
           />
           <Route
-            path={AdminLinks.createSpecifications}
+            path={`${AdminLinks.createSpecifications}/:productId`}
             element={<CreateSpecifications />}
           />
           <Route path={AdminLinks.product} element={<Product />} />

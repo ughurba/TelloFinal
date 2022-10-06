@@ -1,3 +1,4 @@
+import { ISpecifications } from "./../../Admin/Pages/CreateSpecifications/types";
 import { Goods } from "./../../types.d";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IBrandAndCategory } from "../../Admin/Pages/Product/types";
@@ -54,6 +55,15 @@ export const productApi = createApi({
         };
       },
     }),
+    createSpecifications: builder.mutation<void, ISpecifications>({
+      query: (body) => {
+        return {
+          url: "createSpec",
+          method: "POST",
+          body,
+        };
+      },
+    }),
   }),
 });
 
@@ -64,8 +74,9 @@ export const extendedGetAllProductAdminApi = productApi.injectEndpoints({
     }),
   }),
 });
-export const {useGetAllProductQuery} = extendedGetAllProductAdminApi
+export const { useGetAllProductQuery } = extendedGetAllProductAdminApi;
 export const {
+  useCreateSpecificationsMutation,
   useGetOneProductQuery,
   useUpdateProductMutation,
   useRemoveDataMutation,

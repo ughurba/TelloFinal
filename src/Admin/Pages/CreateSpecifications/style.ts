@@ -1,0 +1,11 @@
+import { TextField } from "@material-ui/core";
+import styled from "styled-components";
+
+import { styled as MuiStyled } from "@mui/material";
+
+export const StyledField = MuiStyled(TextField)`
+width: 90%;
+height: 48px;
+outline: none;
+margin-top:30px;
+`;
