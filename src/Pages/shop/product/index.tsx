@@ -39,7 +39,6 @@ export const Product = () => {
   const [orderByValue, setOrderByValue] = useState<number>(0);
   const id = Number(localStorage.getItem("categoryId"));
   const { product, productLoading } = useAppSelector((state) => state.goods);
-
   const debounced = useDebounce(value, 1000);
   const { data: brands } = useGetBrandsQuery();
 
@@ -80,13 +79,11 @@ export const Product = () => {
       dispatch(setProductLoading(loading));
     }
   }, [data]);
-
   useMemo(() => {
     if (brands) {
       setBrand(brands.map((item) => item));
     }
   }, [brands]);
-
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -136,7 +133,10 @@ export const Product = () => {
                 <SizeProducts>
                   {product?.result.length} {t("ProductFound")}
                 </SizeProducts>
-                <Products handleChange={handleChangeFavorite} data={product} />
+                <Products
+                  handleChangeFavorite={handleChangeFavorite}
+                  data={product}
+                />
                 {
                   <RedesignedPagination
                     page={page}

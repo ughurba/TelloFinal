@@ -1,6 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { Basket, DetailProduct, Favorites, Goods, ShopGoods } from "types";
-import { basketApi } from "./basketServices";
+import { Favorites, Goods, ShopGoods } from "types";
 
 export const shopApi = createApi({
   reducerPath: "shopApi",
@@ -24,7 +23,7 @@ export const shopApi = createApi({
         };
       },
     }),
-    getAllFavorite: builder.query<ShopGoods, void>({
+    getAllFavorite: builder.query<Goods[], void>({
       query: () => `/favoriteGet`,
     }),
   }),

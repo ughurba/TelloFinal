@@ -6,16 +6,24 @@ import { useTranslation } from "react-i18next";
 import { Links } from "Routes/links";
 import {
   HeartStraight,
-  MapPin,
   ShoppingCartSimple,
   SignOut,
   User,
 } from "phosphor-react";
-import { List, StyledLink, Title, Wrapper, Text, Logout } from "./style";
+import {
+  List,
+  StyledLink,
+  Title,
+  Wrapper,
+  Text,
+  Logout,
+  StyledUser,
+} from "./style";
 import { addItem, updateTotal } from "Redux/slices/basketSlice";
 import { extendedApi } from "services/baseServices/basketServices";
 import { useBasketUpdate } from "Hooks/basket";
 import { useEffect } from "react";
+import { Flex } from "Components/shared";
 
 export const UserProfile = () => {
   const dispatch = useAppDispatch();
@@ -39,7 +47,13 @@ export const UserProfile = () => {
   return (
     <Wrapper>
       <List>
-        <Title>{t("ProfileTitle")}</Title>
+        <Flex AlItems="center">
+          <StyledUser>
+            <User size={30} color="#40b56d" weight="duotone" />
+          </StyledUser>
+          <Title>{t("ProfileTitle")}</Title>
+        </Flex>
+
         <StyledLink to={Links.userProfileApp.MyOrders}>
           <ShoppingCartSimple weight={"bold"} />
           <Text> {t("MyOrders")}</Text>

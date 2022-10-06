@@ -1,4 +1,10 @@
-import { AddProduct, Orders, SignIn, OrderItems } from "Admin/Pages";
+import {
+  CreateSpecifications,
+  AddProduct,
+  Orders,
+  SignIn,
+  OrderItems,
+} from "Admin/Pages";
 import { Product } from "Admin/Pages/Product";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
@@ -14,6 +20,10 @@ export const AppRoutesAdmin = () => {
           <Route
             path={`${AdminLinks.addProduct}/:id`}
             element={<AddProduct />}
+          />
+          <Route
+            path={AdminLinks.createSpecifications}
+            element={<CreateSpecifications />}
           />
           <Route path={AdminLinks.product} element={<Product />} />
           <Route

@@ -16,13 +16,16 @@ interface Props {
   title: string;
   ratingGoods?: Goods[];
   headphones?: Goods[];
-  handleChange: (ev: React.FormEvent<HTMLInputElement>, id: number) => void;
+  handleChangeFavorite: (
+    ev: React.FormEvent<HTMLInputElement>,
+    id: number
+  ) => void;
 }
 
 export const ProductsHome: FC<Props> = ({
   title,
   ratingGoods,
-  handleChange,
+  handleChangeFavorite,
 }) => {
   const { t } = useTranslation();
   return (
@@ -40,7 +43,10 @@ export const ProductsHome: FC<Props> = ({
         <Grid container spacing={3}>
           {ratingGoods?.map((obj) => (
             <Grid key={obj.id} item xs={3}>
-              <CustomCard handleChange={handleChange} {...obj} />
+              <CustomCard
+                handleChangeFavorite={handleChangeFavorite}
+                {...obj}
+              />
             </Grid>
           ))}
 

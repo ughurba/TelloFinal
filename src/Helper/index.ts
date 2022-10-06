@@ -1,3 +1,8 @@
+export enum OrderStatus {
+  Pending,
+  Accept,
+  Reject,
+}
 export const toFormData = (response: any) => {
   let formData = new FormData();
 

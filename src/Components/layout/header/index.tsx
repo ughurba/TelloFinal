@@ -16,7 +16,6 @@ import { useBasketUpdate } from "Hooks/basket";
 import { FormEvent, useEffect, useState } from "react";
 import {
   shopExtendedApi,
-  useGetAllFavoriteQuery,
   useSearchProductMutation,
 } from "services/baseServices/shopServices";
 import { useDebounce } from "Hooks/debounce";
@@ -32,13 +31,9 @@ export const Header = () => {
   const handleSearch = (ev: FormEvent<HTMLInputElement>) => {
     setSearch(ev.currentTarget.value);
   };
-  // const { data: favoriteData } = useGetAllFavoriteQuery();
   const debounceSearch = useDebounce(search, 500);
   const [postSearch, { data }] = useSearchProductMutation();
 
-  // useEffect(() => {
-  //   favoriteData?.result.map((item) => dispatch(updateFavoritePhones(item.id)));
-  // }, [favoriteData]);
   useEffect(() => {
     if (debounceSearch !== "") {
       postSearch(debounceSearch);

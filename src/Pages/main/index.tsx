@@ -71,18 +71,18 @@ export const MainPage: FC = () => {
 
       <div>
         <ProductsHome
-          handleChange={handleChangeFavorite}
+          handleChangeFavorite={handleChangeFavorite}
           title={t("BestSellingProducts")}
           ratingGoods={bestSellingProducts?.slice(0, 4)}
         />
         <ProductsHome
-          handleChange={handleChangeFavorite}
+          handleChangeFavorite={handleChangeFavorite}
           title={t("NewArrivals")}
           ratingGoods={newArrivalProduct?.slice(0, 4)}
         />
         <BigCards />
         <ProductsHome
-          handleChange={handleChangeFavorite}
+          handleChangeFavorite={handleChangeFavorite}
           title={t("NewArrivalAccessories")}
           ratingGoods={newArrivalHeadphones?.slice(0, 4)}
         />

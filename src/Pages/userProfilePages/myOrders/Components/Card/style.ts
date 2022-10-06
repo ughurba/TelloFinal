@@ -1,19 +1,32 @@
-import { styled as MuiStyled } from "@mui/material";
+import { styled as MuiStyled, css } from "@mui/material";
 import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
-export const SuccsessStatus = MuiStyled(Typography)`
 
-font-size:13px;
-font-weight:500;
-color:green;
-margin-top:5px;
+const OrderStatusStyled = css`
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: 5px;
+  border-radius: 2px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 25px;
+  color: white;
 `;
-export const BadStatus = MuiStyled(Typography)`
-color:red;
-font-size:13px;
-font-weight:500;
-width:100px;
-margin-top:5px;
+export const StyledSuccsess = MuiStyled(Typography)`
+background-color: green;
+padding:0px 20px;
+${OrderStatusStyled}
+`;
+export const StyledReject = MuiStyled(Typography)`
+background-color: red;
+${OrderStatusStyled}
+`;
+export const StyledPending = MuiStyled(Typography)`
+background-color: #ffcc00;
+${OrderStatusStyled}
 `;
 export const Price = MuiStyled(Typography)`
   color:#DB2C66;

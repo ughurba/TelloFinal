@@ -4,8 +4,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div``;
 export const StyledLink = styled(NavLink)`
   text-decoration: none;
-  /* color: ${({ theme }) => theme.colors.gray};
-  font-weight: 500; */
 `;
 export const StyledEmptyBasket = styled.div`
   width: 904px;

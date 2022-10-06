@@ -41,9 +41,16 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 }));
 
 interface Props extends Goods {
-  handleChange: (ev: React.FormEvent<HTMLInputElement>, id: number) => void;
-  favorites?: any[];
+  handleChangeFavorite?: (
+    ev: React.FormEvent<HTMLInputElement>,
+    id: number
+  ) => void;
+  favorites?: boolean;
+  isFavorite?: boolean;
 }
+const StyledFavorite = styled(Favorite)`
+  color: #1976d2;
+`;
 export const CustomCard: FC<Props> = ({
   newPrice,
   oldPrice,
@@ -52,9 +59,9 @@ export const CustomCard: FC<Props> = ({
   title,
   description,
   id,
-  handleChange,
-  isFavorite,
+  handleChangeFavorite,
   favorites,
+  isFavorite = true,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
   const { t } = useTranslation();
@@ -93,18 +100,26 @@ export const CustomCard: FC<Props> = ({
         </StyledTypographyPrices>
       </StyledCardContent>
       <StyledCardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <>
-            {user.isOnline && (
-              <Checkbox
-                name={id.toString()}
-                onChange={(ev) => handleChange(ev, id)}
-                icon={<FavoriteBorder />}
-                checkedIcon={<Favorite />}
-              />
-            )}
-          </>
-        </IconButton>
+        {isFavorite && (
+          <IconButton aria-label="add to favorites">
+            <>
+              {user.isOnline && (
+                <Checkbox
+                  name={id.toString()}
+                  onChange={
+                    handleChangeFavorite
+                      ? (ev) => handleChangeFavorite(ev, id)
+                      : undefined
+                  }
+                  icon={favorites ? <StyledFavorite /> : <FavoriteBorder />}
+                  defaultChecked={favorites}
+                  checkedIcon={<StyledFavorite />}
+                />
+              )}
+            </>
+          </IconButton>
+        )}
+
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

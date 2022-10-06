@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
-
+import {
+  HeartStraight,
+  ShoppingCartSimple,
+  SignOut,
+  User,
+} from "phosphor-react";
 export const Wrapper = styled.div`
   .active {
     color: ${({ theme }) => theme.colors.green};
@@ -40,4 +45,10 @@ export const Logout = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
+`;
+export const StyledUser = styled.div`
+  //  border: 2px solid #2dd06e;
+  padding: 5px;
+  /* margin-right: 5px;
+  border-radius: 50%; */
 `;

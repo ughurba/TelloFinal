@@ -15,6 +15,7 @@ export const DataTable: React.FC<Props> = ({ columns, rows }) => {
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
+      
       />
     </Wrapper>
   );

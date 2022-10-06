@@ -11,7 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import { mainListItems, secondaryListItems } from "../../Shared/ListItems";
+import { MainListItems, SecondaryListItems } from "../../Shared/ListItems";
 
 const drawerWidth: number = 240;
 
@@ -123,9 +123,9 @@ export function DashboardContent() {
         </Toolbar>
         <Divider />
         <List component="nav">
-          {mainListItems}
+          <MainListItems />
           <Divider sx={{ my: 1 }} />
-          {secondaryListItems}
+          <SecondaryListItems />
         </List>
       </Drawer>
     </ThemeProvider>

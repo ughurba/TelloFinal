@@ -10,12 +10,15 @@ import { useAppSelector } from "../../../Redux/hooks";
 
 interface Props {
   data: ShopGoods;
-  handleChange: (ev: React.FormEvent<HTMLInputElement>, id: number) => void;
+  handleChangeFavorite: (
+    ev: React.FormEvent<HTMLInputElement>,
+    id: number
+  ) => void;
+  checked?: boolean;
 }
-export const Products: FC<Props> = ({ data, handleChange }) => {
-  const [fav, setFav] = useState<number[]>();
+export const Products: FC<Props> = ({ data, handleChangeFavorite }) => {
   const { user } = useAppSelector((state) => state.user);
-  
+
   return (
     <Wrapper>
       <StyledGlobal />
@@ -23,15 +26,8 @@ export const Products: FC<Props> = ({ data, handleChange }) => {
         {data?.result.map((obj) => (
           <StyledGrid key={obj.id} item xs={4}>
             <CustomCard
-              favorites={data?.favorits?.filter((item) => {
-                if (
-                  item.appUserId === user.nameid &&
-                  item.prdocutId === obj.id
-                ) {
-                  return item.prdocutId;
-                }
-              })}
-              handleChange={handleChange}
+              favorites={data.productIdFavorite?.includes(obj.id)}
+              handleChangeFavorite={handleChangeFavorite}
               {...obj}
             />
           </StyledGrid>

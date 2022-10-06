@@ -113,7 +113,7 @@ interface DetailProduct {
 interface ShopGoods {
   result: Goods[];
   totalCount: number;
-  favorits?: Favorits[];
+  productIdFavorite?: number[];
 }
 export interface Image {
   path: string;
@@ -168,4 +168,3 @@ export interface IOrderItem {
   title: string;
   photos: Image[];
 }
-

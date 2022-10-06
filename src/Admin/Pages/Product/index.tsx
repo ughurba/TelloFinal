@@ -55,7 +55,7 @@ export const Product = () => {
           );
         },
       },
-      { field: "title", headerName: "title", width: 400 },
+      { field: "title", headerName: "title", width: 320 },
       { field: "newPrice", headerName: "newPrice", width: 100 },
       { field: "oldPrice", headerName: "oldPrice", width: 100 },
       { field: "stockCount", headerName: "stockCount", width: 100 },
@@ -70,7 +70,7 @@ export const Product = () => {
             onClick={deleteProduct(params.id)}
           />,
           <Link to={`${AdminLinks.addProduct}/${params.id}`}>
-            <GridActionsCellItem icon={<EditIcon />} label="Delete" />,
+            <GridActionsCellItem icon={<EditIcon />} label="Delete" />
           </Link>,
         ],
       },

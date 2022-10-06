@@ -10,7 +10,6 @@ import {
 import { Flex, Loader } from "Components/shared";
 import { useAppDispatch } from "Redux/hooks";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 import { Links } from "Routes/links";
 
 export const MyOrders = () => {

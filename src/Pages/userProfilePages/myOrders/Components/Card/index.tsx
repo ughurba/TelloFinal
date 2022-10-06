@@ -1,21 +1,32 @@
 import * as React from "react";
 import AspectRatio from "@mui/joy/AspectRatio";
 import Box from "@mui/joy/Box";
-import Typography from "@mui/joy/Typography";
 import { IOrder } from "types";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Flex } from "Components/shared";
 import {
-  BadStatus,
+  StyledPending,
+  StyledReject,
+  StyledSuccsess,
   Price,
   StyledCard,
-  SuccsessStatus,
   StyledTypography,
 } from "./style";
+import { OrderStatus } from "Helper";
 
 export const OrderCard: FC<IOrder> = ({ date, orderStatus, photos, total }) => {
   const { t } = useTranslation();
+
+  const orderHtml = () => {
+    if (orderStatus === OrderStatus.Pending) {
+      return <StyledPending>Pending</StyledPending>;
+    } else if (orderStatus === OrderStatus.Accept) {
+      return <StyledSuccsess>Succsess</StyledSuccsess>;
+    } else {
+      return <StyledReject>Reject</StyledReject>;
+    }
+  };
   return (
     <StyledCard variant="outlined" sx={{ minWidth: "250px" }}>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 0.5 }}>
@@ -47,13 +58,7 @@ export const OrderCard: FC<IOrder> = ({ date, orderStatus, photos, total }) => {
         </div>
         <Flex FlexColumn="column" AlItems="flex-end">
           <StyledTypography level="body3">{t("Status")}</StyledTypography>
-          {orderStatus === 0 ? (
-            <SuccsessStatus>{t("Confirmed")}</SuccsessStatus>
-          ) : (
-            <BadStatus fontSize="lg" fontWeight="lg">
-              {t("Refused")}
-            </BadStatus>
-          )}
+          {orderHtml()}
         </Flex>
       </Box>
     </StyledCard>

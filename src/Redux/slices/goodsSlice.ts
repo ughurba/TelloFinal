@@ -9,7 +9,7 @@ interface initialState {
 const initialState: initialState = {
   product: {
     result: [],
-    favorits: [],
+    productIdFavorite: [],
     totalCount: 0,
   },
   categoryId: 0,
@@ -25,7 +25,7 @@ export const goodsSlice = createSlice({
     },
     setProduct: (state, action: PayloadAction<ShopGoods>) => {
       state.product.result = action.payload.result;
-      state.product.favorits = action.payload.favorits;
+      state.product.productIdFavorite = action.payload.productIdFavorite;
       state.product.totalCount = action.payload.totalCount;
     },
     setProductLoading: (state, action: PayloadAction<boolean>) => {

@@ -13,7 +13,6 @@ export const OrderItems = () => {
   const [rows, setRows] = useState<IOrderItem[]>([]);
   const { data } = useGetAllOrderItemQuery(orderId);
   const { t } = useTranslation();
-  console.log(data);
   useEffect(() => {
     if (data) {
       setRows(data);

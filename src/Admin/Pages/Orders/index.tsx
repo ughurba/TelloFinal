@@ -1,8 +1,11 @@
+import { PanoramaSharp } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { GridActionsCellItem, GridColumns } from "@mui/x-data-grid";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import { IAdminOrder } from "Admin/Pages/Orders/types";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
 import { Flex } from "Components/shared";
+import { OrderStatus } from "Helper";
 import * as React from "react";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,7 +14,6 @@ import {
   useGetAllOrderQuery,
   useUpdateOrderStatusMutation,
 } from "services/adminServices/saleAdminServices";
-// import { OrderStatus } from "types";
 import {
   Wrapper,
   StyledImg,
@@ -22,19 +24,15 @@ import {
   StyledCheck,
   StyledRejectIcon,
 } from "./style";
-enum OrderStatus {
-  Pending,
-  Accept,
-  Reject,
-}
+
 interface ArgTypeOrder {
   orderId: number;
   orderStatus: number;
 }
 export const Orders = () => {
   const { t } = useTranslation();
-  const { data: Orders } = useGetAllOrderQuery();
-  const [putOrderStatus] = useUpdateOrderStatusMutation();
+  const { data: Orders, refetch: getAllOrder } = useGetAllOrderQuery();
+  const [putOrderStatus, { isSuccess }] = useUpdateOrderStatusMutation();
   const [rows, setRows] = React.useState<IAdminOrder[]>(Orders ? Orders : []);
   useEffect(() => {
     if (Orders) {
@@ -50,6 +48,11 @@ export const Orders = () => {
     putOrderStatus(arg);
   };
 
+  useEffect(() => {
+    if (isSuccess) {
+      getAllOrder();
+    }
+  }, [isSuccess]);
   type Row = IAdminOrder;
   const columns = React.useMemo<GridColumns<Row>>(
     () => [
@@ -101,22 +104,26 @@ export const Orders = () => {
       {
         field: "asas",
         type: "actions",
-        width: 80,
+        width: 100,
         renderCell: ({ row }) => {
           return (
             <Flex AlItems="center" JsContent="space-between">
-              <StyledCheck
-                weight="bold"
+              <Button
+                disabled={row.orderStatus === OrderStatus.Accept}
                 onClick={() =>
                   handleCheckOrderStatus({ orderId: row.id, orderStatus: 1 })
                 }
-              />
-              <StyledRejectIcon
-                weight="bold"
+              >
+                <StyledCheck weight="bold" />
+              </Button>
+              <Button
                 onClick={() =>
                   handleRejectOrderStatus({ orderId: row.id, orderStatus: 2 })
                 }
-              />
+                disabled={row.orderStatus === OrderStatus.Reject}
+              >
+                <StyledRejectIcon weight="bold" />
+              </Button>
             </Flex>
           );
         },
@@ -137,7 +144,7 @@ export const Orders = () => {
 
   return (
     <Wrapper>
-      <DataTable columns={columns} rows={rows} />
+      <DataTable  columns={columns} rows={rows} />
     </Wrapper>
   );
 };
