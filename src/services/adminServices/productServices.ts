@@ -1,4 +1,4 @@
-import { ISpecifications } from "./../../Admin/Pages/CreateSpecifications/types";
+import { ISpecifications } from "../../Admin/Pages/Specifications/CreateSpecifications/types";
 import { Goods } from "./../../types.d";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IBrandAndCategory } from "../../Admin/Pages/Product/types";
@@ -64,6 +64,25 @@ export const productApi = createApi({
         };
       },
     }),
+    getAllSpecifications: builder.query<ISpecifications[], string>({
+      query: (productId) => `/getSpecifications/${productId}`,
+    }),
+    getOneSpecifications: builder.query<
+      { name: string; value: string },
+      { productId: string; specId: string }
+    >({
+      query: ({ productId, specId }) => `/${productId}/${specId}`,
+    }),
+
+    updateSpecification: builder.mutation<void, Partial<ISpecifications>>({
+      query: (body) => {
+        return {
+          url: "/updateSpec",
+          method: "PUT",
+          body,
+        };
+      },
+    }),
   }),
 });
 
@@ -82,4 +101,7 @@ export const {
   useRemoveDataMutation,
   useGetBrandAndCategoryIdQuery,
   useCreateProductMutation,
+  useGetAllSpecificationsQuery,
+  useGetOneSpecificationsQuery,
+  useUpdateSpecificationMutation,
 } = productApi;

@@ -111,6 +111,20 @@
   "UserName":"Istifadəçi adı",
   "OrderStatus":"Sifariş Vəziyyəti",
   "Adress":"Ünvan",
-  "Count":"Say"
+  "Count":"Say",
+  "WasAdded":"əlavə edildi",
+  "AddTo":"Əlavə etmək",
+  "CreateSpecifications":"Xüsusiyyətlər yaradın",
+  "CreateProduct":"Məhsul yaradın",
+  "NewPrice":"Yeni Qiymet",
+  "OldPrice":"Köhnə Qiymət",
+  "Title":"Məhsulun adı",
+  "Photos":"Fotolar",
+  "StockCount":"Məhsul sayı",
+  "EditTheProduct":"Məhsulu redaktə edin",
+  "InformationHasBeenUpdated":"Məlumatlar yeniləndi",
+  "AddProduct":"Məhsul əlavə edin",
+  "ProductAdded":"Məhsul əlavə edildi",
+  "RemoveProduct":"Məhsul silindi"
 
 }

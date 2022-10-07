@@ -1,5 +1,5 @@
 import { styled as MuiStyled, Button as MuiButton } from "@mui/material";
-import { buttonLoader } from "Assets";
+import { adminBtnLoad } from "Assets";
 import { FC } from "react";
 
 export const StyledButton = MuiStyled(MuiButton)`
@@ -10,7 +10,7 @@ export const StyledButton = MuiStyled(MuiButton)`
   border-color: #2196f3;
   border-radius: 7px;
   color: white;
-  margin-top:40px;
+  margin-top:10px;
   &:hover{
     background: #2196f3;
   }
@@ -21,10 +21,13 @@ interface Props {
   isLoading?: boolean;
 }
 export const Button: FC<Props> = ({ btnName, isLoading }) => {
+  console.log(isLoading);
   return (
     <>
       <StyledButton
-        startIcon={isLoading ? <img width={40} src={buttonLoader} /> : ""}
+        startIcon={
+          isLoading ? <img width={40} src={adminBtnLoad} alt="d" /> : ""
+        }
         type="submit"
       >
         {btnName}

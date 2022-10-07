@@ -4,6 +4,8 @@ import {
   Orders,
   SignIn,
   OrderItems,
+  EditSpecifications,
+  UpdateSpecifications,
 } from "Admin/Pages";
 import { Product } from "Admin/Pages/Product";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -20,6 +22,14 @@ export const AppRoutesAdmin = () => {
           <Route
             path={`${AdminLinks.addProduct}/:id`}
             element={<AddProduct />}
+          />
+          <Route
+            path={`${AdminLinks.editSpecifications}/:productId`}
+            element={<EditSpecifications />}
+          />
+          <Route
+            path={`${AdminLinks.updateSpecifications}/:productId/:specId`}
+            element={<UpdateSpecifications />}
           />
           <Route
             path={`${AdminLinks.createSpecifications}/:productId`}

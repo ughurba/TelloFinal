@@ -25,15 +25,20 @@ import { toast } from "react-toastify";
 import { Loader } from "Components/shared";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "Redux/hooks";
+import { useTranslation } from "react-i18next";
+import { Button } from "Admin/Components/Shared/Button";
 
 // interface Props {
 //   data?: IBrandAndCategory;
 // }
 export const AddProduct = () => {
   const { id } = useParams<{ id: any }>();
+  const { t } = useTranslation();
   const [setAddProduct, { isSuccess, isLoading }] = useCreateProductMutation();
-  const [updateProduct, { isSuccess: successUpdate }] =
-    useUpdateProductMutation();
+  const [
+    updateProduct,
+    { isSuccess: successUpdate, isLoading: updateLoading },
+  ] = useUpdateProductMutation();
   const { data } = useGetBrandAndCategoryIdQuery();
   const { data: product } = useGetOneProductQuery(id, {
     skip: id === "create",
@@ -78,19 +83,19 @@ export const AddProduct = () => {
   });
   useEffect(() => {
     if (isSuccess) {
-      toast.success("mal elave olundu");
+      toast.success(t("ProductAdded"));
       formik.resetForm();
       dispatch(extendedGetAllProductAdminApi.util.resetApiState());
     }
     if (successUpdate) {
-      toast.success("mal update olundu");
+      toast.success(t("InformationHasBeenUpdated"));
       dispatch(extendedGetAllProductAdminApi.util.resetApiState());
     }
   }, [isSuccess, successUpdate]);
 
   return (
     <Wrapper>
-      {isLoading ? (
+      {isLoading || updateLoading ? (
         <Loader />
       ) : (
         <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
@@ -222,10 +227,10 @@ export const AddProduct = () => {
               onChange={formik.handleChange}
             />
           </div>
-
-          <StyledButton variant="contained" type={"submit"}>
-            Mali elave etmek
-          </StyledButton>
+          <Button
+            isLoading={isLoading || updateLoading}
+            btnName={id !== "create" ? t("UpdateInformation") : t("AddProduct")}
+          />
         </form>
       )}
     </Wrapper>

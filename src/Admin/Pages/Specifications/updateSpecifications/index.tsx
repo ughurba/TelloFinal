@@ -2,41 +2,48 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Button } from "Admin/Components/Shared/Button";
 import { StyledField } from "./style";
-import { useCreateSpecificationsMutation } from "services/adminServices/productServices";
-import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
-import { ISpecifications } from "./types";
+import {
+  useGetOneSpecificationsQuery,
+  useUpdateSpecificationMutation,
+} from "services/adminServices/productServices";
+
 import { useParams } from "react-router-dom";
 
-export const CreateSpecifications = () => {
-  const [postSpecifications, { isSuccess, isLoading }] =
-    useCreateSpecificationsMutation();
+import { useTranslation } from "react-i18next";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
-  const { productId } = useParams();
-
-  if (isSuccess) {
-    toast.success("elave olundu");
-  }
-
-  const validationSchema = yup.object({
-    value: yup.string().required("Key is required"),
-    key: yup.string().required("Key is required"),
+export const UpdateSpecifications = () => {
+  const { t } = useTranslation();
+  const { productId = "", specId = "" } = useParams();
+  const [putSpecification, { isSuccess, isLoading }] =
+    useUpdateSpecificationMutation();
+  const { data } = useGetOneSpecificationsQuery({
+    productId: productId,
+    specId: specId,
   });
+
   const formik = useFormik({
     initialValues: {
-      value: "",
-      key: "",
+      key: data?.name,
+      value: data?.value,
     },
-    validationSchema: validationSchema,
+
     onSubmit: (values) => {
-      postSpecifications({
+      putSpecification({
+        id: specId,
         key: values.key,
         value: values.value,
         productId: productId,
       });
     },
+    enableReinitialize: true,
   });
-
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("nice");
+    }
+  }, [isSuccess]);
   return (
     <div>
       <form onSubmit={formik.handleSubmit}>
@@ -44,6 +51,7 @@ export const CreateSpecifications = () => {
           id="key"
           name="key"
           label="Key"
+          InputLabelProps={{ shrink: true }}
           value={formik.values.key}
           onChange={formik.handleChange}
           variant="outlined"
@@ -54,13 +62,15 @@ export const CreateSpecifications = () => {
           id="value"
           name="value"
           label="Value"
+          InputLabelProps={{ shrink: true }}
           value={formik.values.value}
           onChange={formik.handleChange}
           variant="outlined"
           error={formik.touched.value && Boolean(formik.errors.value)}
           helperText={formik.touched.value && formik.errors.value}
         />
-        <Button isLoading={isLoading} btnName="Elave et" />
+
+        <Button isLoading={isLoading} btnName={t("UpdateInformation")} />
       </form>
     </div>
   );

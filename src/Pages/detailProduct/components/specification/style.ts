@@ -58,10 +58,12 @@ const StyleParagrpah = css`
 `;
 export const Paragraph = styled.p`
   width: 456px;
+
   ${StyleParagrpah}
 `;
 export const Link = styled.li`
   ${StyleParagrpah}
+  margin-top: 15px;
   &:nth-child(1) {
     margin-top: 28px;
   }

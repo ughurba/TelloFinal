@@ -5,7 +5,7 @@ import {
   useGetAllProductQuery,
   useRemoveDataMutation,
 } from "services/adminServices/productServices";
-import { StyledButton, Wrapper } from "./style";
+import { StyledButton, StyledLink, Wrapper } from "./style";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import { Image } from "types";
@@ -16,11 +16,12 @@ import React, { useEffect } from "react";
 import { StyledImg } from "Admin/Components/Shared/DataTable/style";
 import { Goods } from "types";
 import { Button } from "Admin/Components/Shared/Button";
+import { useTranslation } from "react-i18next";
 
 export const Product = () => {
   const { data: Goods, isSuccess: GoodsSuccess } = useGetAllProductQuery();
   const [rows, setRows] = React.useState<Goods[]>(Goods ? Goods : []);
-
+  const { t } = useTranslation();
   type Row = Goods;
   useEffect(() => {
     if (Goods) {
@@ -43,7 +44,7 @@ export const Product = () => {
       { field: "id", headerName: "ID", width: 70 },
       {
         field: "photos",
-        headerName: "photos",
+        headerName: t("Photos"),
         width: 130,
         sortable: false,
         renderCell: (params) => {
@@ -56,12 +57,13 @@ export const Product = () => {
           );
         },
       },
-      { field: "title", headerName: "title", width: 320 },
-      { field: "newPrice", headerName: "newPrice", width: 100 },
-      { field: "oldPrice", headerName: "oldPrice", width: 100 },
-      { field: "stockCount", headerName: "stockCount", width: 100 },
+      { field: "title", headerName: t("Title"), width: 320 },
+      { field: "newPrice", headerName: t("NewPrice"), width: 100 },
+      { field: "oldPrice", headerName: t("OldPrice"), width: 100 },
+      { field: "stockCount", headerName: t("StockCount"), width: 120 },
       {
         field: "actions",
+        headerName: t("EditTheProduct"),
         type: "actions",
         width: 100,
         getActions: (params) => [
@@ -78,10 +80,14 @@ export const Product = () => {
       {
         field: "createSpecifications",
         type: "actions",
-        width: 200,
+        width: 300,
         getActions: (params) => [
           <Link to={`${AdminLinks.createSpecifications}/${params.id}`}>
-            <button>Create specifications</button>
+            <StyledButton>{t("CreateSpecifications")}</StyledButton>
+          </Link>,
+
+          <Link to={`${AdminLinks.editSpecifications}/${params.id}`}>
+            <GridActionsCellItem icon={<EditIcon />} label="Delete" />
           </Link>,
         ],
       },
@@ -89,15 +95,15 @@ export const Product = () => {
     [deleteProduct]
   );
   if (isSuccess) {
-    toast.success("silindi");
+    toast.success(t("RemoveProduct"));
   }
 
   return (
-    <Wrapper>
-      <NavLink to={`${AdminLinks.addProduct}/create`}>
-        <Button btnName="Product yaratmaq" />
-      </NavLink>
-      {<DataTable rows={rows} columns={columns} />}
-    </Wrapper>
+    <>
+      <StyledLink to={`${AdminLinks.addProduct}/create`}>
+        <Button btnName={t("CreateProduct")} />
+      </StyledLink>
+      <Wrapper>{<DataTable rows={rows} columns={columns} />}</Wrapper>
+    </>
   );
 };

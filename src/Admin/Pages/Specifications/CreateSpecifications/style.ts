@@ -5,7 +5,6 @@ import { styled as MuiStyled } from "@mui/material";
 
 export const StyledField = MuiStyled(TextField)`
 width: 90%;
-height: 48px;
 outline: none;
-margin-top:30px;
+margin-top:20px !important;
 `;
