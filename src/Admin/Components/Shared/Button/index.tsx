@@ -21,7 +21,6 @@ interface Props {
   isLoading?: boolean;
 }
 export const Button: FC<Props> = ({ btnName, isLoading }) => {
-  console.log(isLoading);
   return (
     <>
       <StyledButton

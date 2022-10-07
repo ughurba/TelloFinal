@@ -83,6 +83,17 @@ export const productApi = createApi({
         };
       },
     }),
+    removeSpecifications: builder.mutation<
+      void,
+      { productId: string; specId: GridRowId }
+    >({
+      query: ({ productId, specId }) => {
+        return {
+          url: `removeSpec/${productId}/${specId}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
@@ -104,4 +115,5 @@ export const {
   useGetAllSpecificationsQuery,
   useGetOneSpecificationsQuery,
   useUpdateSpecificationMutation,
+  useRemoveSpecificationsMutation,
 } = productApi;

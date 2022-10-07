@@ -6,6 +6,7 @@ import {
   useRemoveDataMutation,
 } from "services/adminServices/productServices";
 import { StyledButton, StyledLink, Wrapper } from "./style";
+import BorderColorIcon from "@mui/icons-material/BorderColor";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import { Image } from "types";
@@ -72,23 +73,24 @@ export const Product = () => {
             label="Delete"
             onClick={deleteProduct(params.id)}
           />,
-          <Link to={`${AdminLinks.addProduct}/${params.id}`}>
-            <GridActionsCellItem icon={<EditIcon />} label="Delete" />
-          </Link>,
+          <StyledLink to={`${AdminLinks.addProduct}/${params.id}`}>
+            <EditIcon color="action" />
+          </StyledLink>,
         ],
       },
       {
         field: "createSpecifications",
+        headerName: t("TechnicalSpecificationsEdit"),
         type: "actions",
-        width: 300,
+        width: 260,
         getActions: (params) => [
           <Link to={`${AdminLinks.createSpecifications}/${params.id}`}>
             <StyledButton>{t("CreateSpecifications")}</StyledButton>
           </Link>,
 
-          <Link to={`${AdminLinks.editSpecifications}/${params.id}`}>
-            <GridActionsCellItem icon={<EditIcon />} label="Delete" />
-          </Link>,
+          <StyledLink to={`${AdminLinks.editSpecifications}/${params.id}`}>
+            <BorderColorIcon color="action" />
+          </StyledLink>,
         ],
       },
     ],

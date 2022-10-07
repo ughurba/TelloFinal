@@ -55,7 +55,6 @@ export const OrderItems = () => {
         headerName: t("Color"),
         width: 80,
         renderCell: (params) => {
-          console.log(params.value);
           return (
             <>
               <StyledColor color={params.value} />

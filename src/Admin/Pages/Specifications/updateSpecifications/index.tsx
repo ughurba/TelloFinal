@@ -41,7 +41,7 @@ export const UpdateSpecifications = () => {
   });
   useEffect(() => {
     if (isSuccess) {
-      toast.success("nice");
+      toast.success(t("InformationHasBeenUpdated"));
     }
   }, [isSuccess]);
   return (

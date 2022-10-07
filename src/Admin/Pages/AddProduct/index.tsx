@@ -28,9 +28,6 @@ import { useAppDispatch } from "Redux/hooks";
 import { useTranslation } from "react-i18next";
 import { Button } from "Admin/Components/Shared/Button";
 
-// interface Props {
-//   data?: IBrandAndCategory;
-// }
 export const AddProduct = () => {
   const { id } = useParams<{ id: any }>();
   const { t } = useTranslation();
@@ -131,8 +128,8 @@ export const AddProduct = () => {
             <StyledInput
               label="OldPrice"
               id="OldPrice"
-              type="number"
               name="OldPrice"
+              type="number"
               onChange={formik.handleChange}
               value={formik.values.OldPrice}
             />

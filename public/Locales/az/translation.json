@@ -125,6 +125,7 @@
   "InformationHasBeenUpdated":"Məlumatlar yeniləndi",
   "AddProduct":"Məhsul əlavə edin",
   "ProductAdded":"Məhsul əlavə edildi",
-  "RemoveProduct":"Məhsul silindi"
-
+  "RemoveProduct":"Məhsul silindi",
+  "TechnicalSpecificationsEdit":"Texniki Xüsusiyyətləri redaktə etmək",
+  "SuccsessDelete":"Uğurla silindi"
 }

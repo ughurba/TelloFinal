@@ -7,24 +7,40 @@ import EditIcon from "@mui/icons-material/Edit";
 
 import styled from "styled-components";
 import { Link, useParams } from "react-router-dom";
-import { useGetAllSpecificationsQuery } from "services/adminServices/productServices";
+import {
+  useGetAllSpecificationsQuery,
+  useRemoveSpecificationsMutation,
+} from "services/adminServices/productServices";
 import { ISpecifications } from "../CreateSpecifications/types";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
+import { toast } from "react-toastify";
 export const Wrapper = styled.div``;
 export const EditSpecifications = () => {
   const { t } = useTranslation();
   const { productId = "" } = useParams();
-  const { data } = useGetAllSpecificationsQuery(productId);
-
+  const { data, refetch: getAllSpec } = useGetAllSpecificationsQuery(productId);
+  const [removeSpecifications, { isSuccess }] =
+    useRemoveSpecificationsMutation();
   const [rows, setRows] = React.useState<ISpecifications[]>(data ? data : []);
+
+  useEffect(() => {
+    getAllSpec();
+  }, []);
+
   useEffect(() => {
     if (data) {
       setRows(data);
     }
   }, [data]);
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(t("SuccsessDelete"));
+    }
+  }, [isSuccess]);
   type Row = ISpecifications;
   const deleteProduct = React.useCallback(
     (id: GridRowId) => () => {
+      removeSpecifications({ productId: productId, specId: id });
       setTimeout(() => {
         setRows((prevRows) => prevRows.filter((row) => row.id !== id));
       });
@@ -40,7 +56,7 @@ export const EditSpecifications = () => {
         field: "actions",
         headerName: t("EditTheProduct"),
         type: "actions",
-        width: 200,
+        width: 450,
         getActions: (params) => [
           <GridActionsCellItem
             icon={<DeleteIcon />}
@@ -51,7 +67,7 @@ export const EditSpecifications = () => {
           <Link
             to={`${AdminLinks.updateSpecifications}/${productId}/${params.id}`}
           >
-            <GridActionsCellItem icon={<EditIcon />} label="edit" />
+            <EditIcon color="action" />
           </Link>,
         ],
       },

@@ -19,6 +19,7 @@ export const CreateSpecifications = () => {
   useEffect(() => {
     if (isSuccess) {
       toast.success(t("WasAdded"));
+      formik.resetForm();
     }
   }, [isSuccess]);
 
