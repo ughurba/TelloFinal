@@ -9,9 +9,8 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
 import { AdminLinks } from "../../../Routes/AdminLinks";
 import { StyledLinks } from "./style";
-import HomeIcon from "@mui/icons-material/Home";
-import { Links } from "Routes/links";
-import { Navigate, useNavigate } from "react-router-dom";
+
+import GroupIcon from "@mui/icons-material/Group";
 
 export const MainListItems = () => {
   return (
@@ -42,13 +41,15 @@ export const MainListItems = () => {
           <ListItemText primary="Product" />
         </ListItemButton>
       </StyledLinks>
+      <StyledLinks to={AdminLinks.user}>
+        <ListItemButton>
+          <ListItemIcon>
+            <GroupIcon />
+          </ListItemIcon>
+          <ListItemText primary="Users" />
+        </ListItemButton>
+      </StyledLinks>
 
-      <ListItemButton>
-        <ListItemIcon>
-          <BarChartIcon />
-        </ListItemIcon>
-        <ListItemText primary="Reports" />
-      </ListItemButton>
       <ListItemButton>
         <ListItemIcon>
           <LayersIcon />

@@ -127,5 +127,7 @@
   "ProductAdded":"Məhsul əlavə edildi",
   "RemoveProduct":"Məhsul silindi",
   "TechnicalSpecificationsEdit":"Texniki Xüsusiyyətləri redaktə etmək",
-  "SuccsessDelete":"Uğurla silindi"
+  "SuccsessDelete":"Uğurla silindi",
+  "AddRole":"Rol əlavə etmək",
+  "EnterTheRoll":"Rolu daxil edin"
 }

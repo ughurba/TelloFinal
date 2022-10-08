@@ -10,7 +10,7 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import { Image } from "types";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect } from "react";

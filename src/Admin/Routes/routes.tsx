@@ -6,8 +6,9 @@ import {
   OrderItems,
   EditSpecifications,
   UpdateSpecifications,
+  Users,
+  Product,
 } from "Admin/Pages";
-import { Product } from "Admin/Pages/Product";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
 import { AdminLinks } from "./AdminLinks";
@@ -41,6 +42,7 @@ export const AppRoutesAdmin = () => {
             element={<OrderItems />}
           />
           <Route path={AdminLinks.order} element={<Orders />} />
+          <Route path={AdminLinks.user} element={<Users />} />
         </Route>
         <Route path={AdminLinks.login} element={<SignIn />} />
       </Routes>

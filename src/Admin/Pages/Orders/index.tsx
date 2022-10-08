@@ -1,4 +1,3 @@
-import { PanoramaSharp } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import { GridActionsCellItem, GridColumns } from "@mui/x-data-grid";
 import { DataTable } from "Admin/Components/Shared/DataTable";
@@ -144,7 +143,7 @@ export const Orders = () => {
 
   return (
     <Wrapper>
-      <DataTable  columns={columns} rows={rows} />
+      <DataTable columns={columns} rows={rows} />
     </Wrapper>
   );
 };

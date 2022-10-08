@@ -1,12 +1,17 @@
 import * as React from "react";
-import { DataGrid, GridColumns } from "@mui/x-data-grid";
+import { DataGrid, GridColumns, GridEventListener } from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 interface Props {
   columns: GridColumns;
   rows: any[];
+  handleRowEditCommit?: GridEventListener<"cellEditCommit"> | undefined;
 }
 
-export const DataTable: React.FC<Props> = ({ columns, rows }) => {
+export const DataTable: React.FC<Props> = ({
+  columns,
+  rows,
+  handleRowEditCommit,
+}) => {
   return (
     <Box
       sx={{
@@ -25,6 +30,7 @@ export const DataTable: React.FC<Props> = ({ columns, rows }) => {
       }}
     >
       <DataGrid
+        onCellEditCommit={handleRowEditCommit}
         rows={rows}
         columns={columns}
         pageSize={5}

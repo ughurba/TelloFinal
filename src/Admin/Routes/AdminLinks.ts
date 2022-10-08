@@ -9,4 +9,5 @@ export const AdminLinks = {
   editSpecifications: "/admin/product/editSpec",
   order: "/admin/order",
   orderItems: "/admin/orderItems",
+  user: "/admin/user",
 };

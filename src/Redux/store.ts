@@ -1,3 +1,4 @@
+import { userApi } from "./../services/adminServices/userServices";
 import { configureStore } from "@reduxjs/toolkit";
 import sliderSlice from "./slices/sliderSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
@@ -34,6 +35,7 @@ export const store = configureStore({
     [accountApi.reducerPath]: accountApi.reducer,
     [saleApi.reducerPath]: saleApi.reducer,
     [saleAdminApi.reducerPath]: saleAdminApi.reducer,
+    [userApi.reducerPath]: userApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -46,7 +48,8 @@ export const store = configureStore({
       shopApi.middleware,
       accountApi.middleware,
       saleApi.middleware,
-      saleAdminApi.middleware
+      saleAdminApi.middleware,
+      userApi.middleware
     ),
 });
 
