@@ -10,3 +10,7 @@ export const StyledButton = styled.button`
   border-radius: 7px;
   color: white;
 `;
+export const StyledCreateRole = styled.span``;
+export const StyledRemoveRole = styled.span`
+  margin-left: 20px;
+`;

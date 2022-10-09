@@ -9,6 +9,7 @@ import {
   Users,
   Product,
 } from "Admin/Pages";
+import { RemoveRoleModal } from "Admin/Pages/User/components/removeModalRole";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
 import { AdminLinks } from "./AdminLinks";
@@ -20,6 +21,7 @@ export const AppRoutesAdmin = () => {
     <BrowserRouter>
       <Routes>
         <Route path={AdminLinks.base} element={<AppLayout />}>
+          <Route path="/admin/modal" element={<RemoveRoleModal />} />
           <Route
             path={`${AdminLinks.addProduct}/:id`}
             element={<AddProduct />}

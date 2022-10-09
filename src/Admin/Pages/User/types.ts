@@ -6,7 +6,7 @@ export interface IUser {
   email: string;
   userRoles: string[];
 }
-interface Role {
+export interface IRole {
   id: string;
   name: string;
 }

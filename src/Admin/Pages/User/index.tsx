@@ -20,6 +20,8 @@ import { IUser } from "./types";
 import { Loader } from "Components/shared";
 import { toast } from "react-toastify";
 import { BasicModalDialog } from "./components/modal";
+import { RemoveRoleModal } from "./components/removeModalRole";
+import { StyledCreateRole, StyledRemoveRole } from "./style";
 
 export const Wrapper = styled.div``;
 export const Users = () => {
@@ -39,12 +41,14 @@ export const Users = () => {
   }, [data]);
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Update olundu dostum");
+      toast.success(t("InformationHasBeenUpdated"));
     }
+  }, [isSuccess]);
+  useEffect(() => {
     if (removeSuccess) {
-      toast.success("silindi dostum");
+      toast.success(t("UserDelete"));
     }
-  }, [isSuccess, removeSuccess]);
+  }, [removeSuccess]);
 
   const handleRowEditCommit = React.useCallback(
     (params: GridCellEditCommitParams, event: MuiEvent<MuiBaseEvent>) => {
@@ -70,24 +74,24 @@ export const Users = () => {
       { field: "email", headerName: t("EMail"), width: 170 },
       {
         field: "userRoles",
-        headerName: t("Role"),
         type: "singleSelect",
+        headerName: t("Role"),
         valueOptions: data?.role,
         editable: true,
-        width: 150,
+        width: 400,
       },
       {
         field: "actions",
         headerName: "actions",
         type: "actions",
-        width: 350,
+        width: 100,
+
         getActions: (params) => [
           <GridActionsCellItem
             icon={<DeleteIcon />}
             label="Delete"
             onClick={deleteProduct(params.id)}
           />,
-          <BasicModalDialog />,
         ],
       },
     ],
@@ -98,11 +102,20 @@ export const Users = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <DataTable
-          handleRowEditCommit={handleRowEditCommit}
-          rows={rows}
-          columns={columns}
-        />
+        <>
+          <StyledCreateRole>
+            <BasicModalDialog />
+          </StyledCreateRole>
+          <StyledRemoveRole>
+            <RemoveRoleModal />
+          </StyledRemoveRole>
+
+          <DataTable
+            handleRowEditCommit={handleRowEditCommit}
+            rows={rows}
+            columns={columns}
+          />
+        </>
       )}
     </Wrapper>
   );

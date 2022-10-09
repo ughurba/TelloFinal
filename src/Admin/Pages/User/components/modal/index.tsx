@@ -8,25 +8,32 @@ import Add from "@mui/icons-material/Add";
 import Typography from "@mui/joy/Typography";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { useCreateRoleMutation } from "services/adminServices/userServices";
+import {
+  extendedUserApi,
+  useCreateRoleMutation,
+} from "services/adminServices/userServices";
 import { toast } from "react-toastify";
+import { useAppDispatch } from "Redux/hooks";
 
 export function BasicModalDialog() {
   const [open, setOpen] = useState(false);
   const [term, setTerm] = useState("");
   const [postRole, { isSuccess }] = useCreateRoleMutation();
-
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   useEffect(() => {
     if (isSuccess) {
       toast.success(`"${term}"-adli role elave olundu`);
+      dispatch(extendedUserApi.util.resetApiState());
     }
-  }, [isSuccess]);
+  }, [isSuccess, dispatch]);
+
   return (
     <React.Fragment>
       <Button
-        variant="outlined"
+        variant="contained"
         startIcon={<Add />}
+        size="small"
         onClick={() => setOpen(true)}
       >
         {t("AddRole")}
