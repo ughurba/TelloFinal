@@ -43,7 +43,24 @@ export const useValidator = () => {
       .min(8, "Şifrə çox qısadır. Minimal şifrənin uzunluğu: 8 simvol")
       .required("Required"),
   });
+  const addProductValidate = Yup.object({
+    Title: Yup.string()
+      .max(25, "25-den yuxari ola bilmez")
+      .min(5, "5-den az ola bilmez")
+      .required("Required"),
+    Description: Yup.string().required("Required"),
+    NewPrice: Yup.number().required(),
+    OldPrice: Yup.number().required(),
+    BrandId: Yup.string().required("Required"),
+    CategoryId: Yup.string().required("Required"),
+    StockCount: Yup.number().required("Required"),
+    Photos: Yup.array().required("Required"),
+    ChildPhotos: Yup.array().required("Required"),
+    colors: Yup.array().required("Required"),
+    storage: Yup.array().required("Required"),
+  });
   return {
+    addProductValidate,
     deliveryValidator,
     PersonalInfoValidate,
     LoginValidate,

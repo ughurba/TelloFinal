@@ -36,3 +36,6 @@ margin-top:20px;
 export const WrapperUpload = styled.div`
   margin-top: 20px;
 `;
+export const ColorInput = styled.input`
+  margin-left: 20px;
+`;

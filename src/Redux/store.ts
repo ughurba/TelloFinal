@@ -1,3 +1,4 @@
+import colorSlice from "./adminSlice/colorSlice";
 import { userApi } from "./../services/adminServices/userServices";
 import { configureStore } from "@reduxjs/toolkit";
 import sliderSlice from "./slices/sliderSlice";
@@ -20,6 +21,7 @@ import {
 
 export const store = configureStore({
   reducer: {
+    color: colorSlice,
     slider: sliderSlice,
     user: userSlice,
     goods: goodsSlice,
