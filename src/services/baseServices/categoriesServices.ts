@@ -19,6 +19,11 @@ const categoryProduct = (Product: IProductType, url?: string) => {
     .join("");
 
   const discountStr = Links.app.discounts.split("/").at(-1);
+  const allBrandsStr = Links.app.allBrands.split("/").at(-1);
+
+  const allBrands = `${
+    Product.category === allBrandsStr ? `&allBrands=${true}` : ""
+  }`;
 
   const discount = `${
     Product.category === discountStr ? `&discount=${true}` : ""
@@ -30,7 +35,6 @@ const categoryProduct = (Product: IProductType, url?: string) => {
   &page=${Product.page}
   &size=${Product.size}`;
 };
-
 
 export const categoriesApi = createApi({
   reducerPath: "categoriesApi",
@@ -46,6 +50,9 @@ export const categoriesApi = createApi({
     }),
     getProductIsDiscount: builder.query<ShopGoods, IProductType>({
       query: (Pagination) => categoryProduct(Pagination, `discount`),
+    }),
+    getProductAllBrands: builder.query<ShopGoods, IProductType>({
+      query: (Pagination) => categoryProduct(Pagination, `allBrands`),
     }),
     getBrands: builder.query<Brand[], void>({
       query: () => `brand`,

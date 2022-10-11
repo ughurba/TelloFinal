@@ -71,11 +71,12 @@ export const CustomCard: FC<Props> = ({
   };
 
   return (
-    <Card sx={{ maxWidth: 300, padding: "15px" }}>
+    <Card sx={{ maxWidth: 300, padding: "15px", height: 420 }}>
       {photos.map((img) =>
         img.isMain ? (
           <StyledLink key={id} to={`/FullInfoProduct/${id}`}>
             <CardMedia
+              sx={{ objectFit: "contain" }}
               component="img"
               height="194"
               image={img.path}

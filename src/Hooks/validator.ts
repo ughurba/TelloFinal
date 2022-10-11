@@ -44,20 +44,17 @@ export const useValidator = () => {
       .required("Required"),
   });
   const addProductValidate = Yup.object({
-    Title: Yup.string()
-      .max(25, "25-den yuxari ola bilmez")
-      .min(5, "5-den az ola bilmez")
-      .required("Required"),
+    Title: Yup.string().min(5, "5-den az ola bilmez").required("Required"),
     Description: Yup.string().required("Required"),
-    NewPrice: Yup.number().required(),
-    OldPrice: Yup.number().required(),
+    NewPrice: Yup.string().required(),
+    OldPrice: Yup.string().required(),
     BrandId: Yup.string().required("Required"),
     CategoryId: Yup.string().required("Required"),
     StockCount: Yup.number().required("Required"),
-    Photos: Yup.array().required("Required"),
-    ChildPhotos: Yup.array().required("Required"),
-    colors: Yup.array().required("Required"),
-    storage: Yup.array().required("Required"),
+    Photos: Yup.array().nullable().min(1, "min 1 items"),
+    ChildPhotos: Yup.array().nullable().min(1, "min 1 items"),
+    colors: Yup.array().nullable().min(1, "min 1 items"),
+    storage: Yup.array().nullable().min(1, "min 1 items"),
   });
   return {
     addProductValidate,

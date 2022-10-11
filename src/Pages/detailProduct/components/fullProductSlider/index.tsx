@@ -16,12 +16,19 @@ import {
   StyledSwiper,
   StyledChildSwiper,
 } from "./style";
+import styled from "styled-components";
 
 interface Props {
   mainImg: string[];
   childImg: string[];
 }
-
+export const StyledChildImg = styled.img`
+  height: 80px !important;
+  object-fit: contain !important;
+`;
+export const StyledMainImg = styled.img`
+  object-fit: contain !important;
+`;
 export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   return (
@@ -43,7 +50,7 @@ export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
         >
           {childImg.map((item, i) => (
             <SwiperSlide key={i}>
-              <img src={item} />
+              <StyledMainImg src={item} />
             </SwiperSlide>
           ))}
         </StyledSwiper>
@@ -61,7 +68,7 @@ export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
         >
           {childImg.map((item, i) => (
             <SwiperSlide key={i}>
-              <img src={item} />
+              <StyledChildImg src={item} />
             </SwiperSlide>
           ))}
         </StyledChildSwiper>

@@ -14,7 +14,11 @@ import {
   StyledTypography,
 } from "./style";
 import { OrderStatus } from "Helper";
+import styled from "styled-components";
 
+export const StyledImg = styled.img`
+  object-fit: contain !important;
+`;
 export const OrderCard: FC<IOrder> = ({ date, orderStatus, photos, total }) => {
   const { t } = useTranslation();
 
@@ -41,7 +45,7 @@ export const OrderCard: FC<IOrder> = ({ date, orderStatus, photos, total }) => {
       </Box>
 
       <AspectRatio minHeight="120px" maxHeight="200px" sx={{ my: 2 }}>
-        <img src={photos.at(0)?.path} alt="" />
+        <StyledImg src={photos.at(0)?.path} alt="" />
       </AspectRatio>
 
       <Box

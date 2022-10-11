@@ -13,6 +13,7 @@ import {
   Wrapper,
   WrapperSelect,
   WrapperUpload,
+  StyledErrorMessage,
 } from "./style";
 import {
   useUpdateProductMutation,
@@ -48,14 +49,15 @@ export const AddProduct = () => {
   });
   const { addProductValidate } = useValidator();
   const dispatch = useAppDispatch();
+  console.log(product);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
       id: id !== "create" ? id : 0,
       Title: product?.title || "",
       Description: product?.description || "",
-      NewPrice: product?.newPrice || 0,
-      OldPrice: product?.oldPrice || 0,
+      NewPrice: product?.newPrice || "",
+      OldPrice: product?.oldPrice || "",
       BrandId: product?.brand || "",
       CategoryId: product?.categoryTitle || "",
       StockCount: product?.stockCount || 0,
@@ -64,7 +66,7 @@ export const AddProduct = () => {
       colors: [],
       storage: [],
     },
-    validationSchema: addProductValidate,
+    validationSchema: id === "create" ? addProductValidate : "",
 
     onSubmit: (values) => {
       console.log(values);
@@ -141,7 +143,7 @@ export const AddProduct = () => {
               label="Title"
             />
             {formik.touched.Title && formik.errors.Title ? (
-              <p className="error">{formik.errors.Title}</p>
+              <StyledErrorMessage>{formik.errors.Title}</StyledErrorMessage>
             ) : null}
           </div>
           <div>
@@ -153,20 +155,22 @@ export const AddProduct = () => {
               value={formik.values.Description}
             />
             {formik.touched.Description && formik.errors.Description ? (
-              <p className="error">{formik.errors.Description}</p>
+              <StyledErrorMessage>
+                {formik.errors.Description}
+              </StyledErrorMessage>
             ) : null}
           </div>
           <div>
             <StyledInput
               label="NewPrice"
               id="NewPrice"
-              type="number"
+              type="text"
               name="NewPrice"
               onChange={formik.handleChange}
               value={formik.values.NewPrice}
             />
             {formik.touched.NewPrice && formik.errors.NewPrice ? (
-              <p>{formik.errors.NewPrice}</p>
+              <StyledErrorMessage>{formik.errors.NewPrice}</StyledErrorMessage>
             ) : null}
           </div>
           <div>
@@ -174,12 +178,12 @@ export const AddProduct = () => {
               label="OldPrice"
               id="OldPrice"
               name="OldPrice"
-              type="number"
+              type="text"
               onChange={formik.handleChange}
               value={formik.values.OldPrice}
             />
             {formik.touched.OldPrice && formik.errors.OldPrice ? (
-              <p>{formik.errors.OldPrice}</p>
+              <StyledErrorMessage>{formik.errors.OldPrice}</StyledErrorMessage>
             ) : null}
           </div>
           <div>
@@ -192,7 +196,9 @@ export const AddProduct = () => {
               value={formik.values.StockCount}
             />
             {formik.touched.StockCount && formik.errors.StockCount ? (
-              <p>{formik.errors.StockCount}</p>
+              <StyledErrorMessage>
+                {formik.errors.StockCount}
+              </StyledErrorMessage>
             ) : null}
           </div>
           <WrapperSelect>
@@ -205,7 +211,7 @@ export const AddProduct = () => {
               ))}
             </StyledSelect>
             {formik.touched.BrandId && formik.errors.BrandId ? (
-              <p>{formik.errors.BrandId}</p>
+              <StyledErrorMessage>{formik.errors.BrandId}</StyledErrorMessage>
             ) : null}
           </WrapperSelect>
           <WrapperSelect>
@@ -218,7 +224,9 @@ export const AddProduct = () => {
               ))}
             </StyledSelect>
             {formik.touched.CategoryId && formik.errors.CategoryId ? (
-              <p>{formik.errors.CategoryId}</p>
+              <StyledErrorMessage>
+                {formik.errors.CategoryId}
+              </StyledErrorMessage>
             ) : null}
           </WrapperSelect>
 
@@ -239,7 +247,7 @@ export const AddProduct = () => {
             </Button>
 
             {formik.touched.Photos && formik.errors.Photos ? (
-              <p>{formik.errors.Photos}</p>
+              <StyledErrorMessage>{formik.errors.Photos}</StyledErrorMessage>
             ) : null}
           </WrapperUpload>
 
@@ -261,7 +269,9 @@ export const AddProduct = () => {
             </Button>
 
             {formik.touched.ChildPhotos && formik.errors.ChildPhotos ? (
-              <p>{formik.errors.ChildPhotos}</p>
+              <StyledErrorMessage>
+                {formik.errors.ChildPhotos}
+              </StyledErrorMessage>
             ) : null}
           </WrapperUpload>
           <div>
@@ -274,14 +284,13 @@ export const AddProduct = () => {
               onChange={handleChangeColor}
             />
             {formik.touched.colors && formik.errors.colors ? (
-              <p>{formik.errors.colors}</p>
+              <StyledErrorMessage>{formik.errors.colors}</StyledErrorMessage>
             ) : null}
           </div>
           <Autocomplete
             multiple
             id="storage"
             options={["8", "16", "32", "64", "128", "256"]}
-            defaultValue={["8"]}
             getOptionLabel={(option) => option}
             onChange={(e, value) => formik.setFieldValue("storage", value)}
             renderInput={(params) => (
@@ -295,7 +304,7 @@ export const AddProduct = () => {
             )}
           />
           {formik.touched.storage && formik.errors.storage ? (
-            <p>{formik.errors.storage}</p>
+            <StyledErrorMessage>{formik.errors.storage}</StyledErrorMessage>
           ) : null}
           <StyledButton
             isLoading={isLoading || updateLoading}

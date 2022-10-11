@@ -39,3 +39,7 @@ export const WrapperUpload = styled.div`
 export const ColorInput = styled.input`
   margin-left: 20px;
 `;
+export const StyledErrorMessage = styled.div`
+  font-size: ${({ theme }) => theme.fontStyle.size.xSmall};
+  color: red;
+`;

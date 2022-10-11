@@ -18,12 +18,21 @@ import { StyledImg } from "Admin/Components/Shared/DataTable/style";
 import { Goods } from "types";
 import { Button } from "Admin/Components/Shared/Button";
 import { useTranslation } from "react-i18next";
+import { Loader } from "Components/shared";
 
 export const Product = () => {
-  const { data: Goods, isSuccess: GoodsSuccess } = useGetAllProductQuery();
+  const {
+    data: Goods,
+    refetch: getAllProduct,
+    isSuccess: GoodsSuccess,
+    isLoading,
+  } = useGetAllProductQuery();
   const [rows, setRows] = React.useState<Goods[]>(Goods ? Goods : []);
   const { t } = useTranslation();
   type Row = Goods;
+  useEffect(() => {
+    getAllProduct();
+  }, []);
   useEffect(() => {
     if (Goods) {
       setRows(Goods);
@@ -102,10 +111,16 @@ export const Product = () => {
 
   return (
     <>
-      <StyledLink to={`${AdminLinks.addProduct}/create`}>
-        <Button btnName={t("CreateProduct")} />
-      </StyledLink>
-      <Wrapper>{<DataTable rows={rows} columns={columns} />}</Wrapper>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <>
+          <StyledLink to={`${AdminLinks.addProduct}/create`}>
+            <Button btnName={t("CreateProduct")} />
+          </StyledLink>
+          <Wrapper>{<DataTable rows={rows} columns={columns} />}</Wrapper>
+        </>
+      )}
     </>
   );
 };

@@ -6,11 +6,13 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import BarChartIcon from "@mui/icons-material/BarChart";
+import LogoutIcon from "@mui/icons-material/Logout";
 import LayersIcon from "@mui/icons-material/Layers";
 import { AdminLinks } from "../../../Routes/AdminLinks";
 import { StyledLinks } from "./style";
 
 import GroupIcon from "@mui/icons-material/Group";
+import { useTranslation } from "react-i18next";
 
 export const MainListItems = () => {
   return (
@@ -61,5 +63,15 @@ export const MainListItems = () => {
 };
 
 export const SecondaryListItems = () => {
-  return <></>;
+  const { t } = useTranslation();
+  return (
+    <>
+      <ListItemButton>
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
+        <ListItemText primary={t("Logout")} />
+      </ListItemButton>
+    </>
+  );
 };

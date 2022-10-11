@@ -7,7 +7,7 @@ export const saleAdminApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:33033/api/adminsale",
     prepareHeaders: (headers, { getState }) => {
-      const token = localStorage.getItem("userToken");
+      const token = localStorage.getItem("userAdminToken");
       if (token) {
         headers.set("authorization", `Bearer ${token}`);
       }
