@@ -1,11 +1,4 @@
-export interface IBrand {
-  id: number;
-  name: string;
-}
-export interface ICategory {
-  id: number;
-  title: string;
-}
+import { IBrand, ICategory } from "types";
 
 export interface IBrandAndCategory {
   brand: IBrand[];

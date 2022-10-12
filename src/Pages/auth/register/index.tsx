@@ -7,7 +7,7 @@ import {
   Wrapper,
 } from "../login/style";
 import { Container, Flex } from "Components/shared";
-import { load, registerFon, registerImg } from "Assets";
+import { registerFon, registerImg } from "Assets";
 import { Links } from "Routes/links";
 import { RegisterForm } from "../components/registerForm";
 import { ReactNode, useEffect, useState } from "react";

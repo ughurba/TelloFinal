@@ -11,28 +11,29 @@ import { setCategoryId } from "Redux/slices/goodsSlice";
 export const SubMenu = () => {
   const dispatch = useAppDispatch();
   const { data } = useGetAllCategoriesQuery();
+  console.log(data);
   const { t } = useTranslation();
-  const Routes = useMemo(
-    () => ({
-      1: {
-        link: Links.app.phone,
-        title: t("Phones"),
-      },
-      2: {
-        link: Links.app.headphone,
-        title: t("Headphones"),
-      },
-      3: {
-        link: Links.app.allBrands,
-        title: t("AllBrands"),
-      },
-      4: {
-        link: Links.app.discounts,
-        title: t("Discounts"),
-      },
-    }),
-    [data]
-  );
+  // const Routes = useMemo(
+  //   () => ({
+  //     1: {
+  //       link: Links.app.phone,
+  //       title: t("Phones"),
+  //     },
+  //     2: {
+  //       link: Links.app.headphone,
+  //       title: t("Headphones"),
+  //     },
+  //     3: {
+  //       link: Links.app.allBrands,
+  //       title: t("AllBrands"),
+  //     },
+  //     4: {
+  //       link: Links.app.discounts,
+  //       title: t("Discounts"),
+  //     },
+  //   }),
+  //   [data]
+  // );
 
   const handleSetCategoryId = (id: number) => {
     dispatch(setCategoryId(id));
@@ -46,9 +47,9 @@ export const SubMenu = () => {
           <StyledMenuList
             key={item.id}
             onClick={() => handleSetCategoryId(item.id)}
-            to={Routes[item.id as keyof typeof Routes].link}
+            to={`${Links.app.product}/${item.title}`}
           >
-            {Routes[item.id as keyof typeof Routes].title}
+            {item.title}
           </StyledMenuList>
         ))}
       </Flex>

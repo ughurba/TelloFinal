@@ -1,44 +1,47 @@
 import * as React from "react";
-import Button from "@mui/material/Button";
 import TextField from "@mui/joy/TextField";
 import Modal from "@mui/joy/Modal";
 import ModalDialog from "@mui/joy/ModalDialog";
 import Stack from "@mui/joy/Stack";
 import Add from "@mui/icons-material/Add";
 import Typography from "@mui/joy/Typography";
-import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import {
-  extendedUserApi,
-  useCreateRoleMutation,
-} from "services/adminServices/userServices";
-import { toast } from "react-toastify";
-import { useAppDispatch } from "Redux/hooks";
+import { FC, useEffect, useState } from "react";
+import { Button, Checkbox } from "@mui/material";
+import { Flex } from "Components/shared";
 
-export function BasicModalDialog() {
-  const [open, setOpen] = useState(false);
-  const [term, setTerm] = useState("");
-
-  const [postRole, { isSuccess }] = useCreateRoleMutation();
-  const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+interface Props {
+  label: string;
+  isCheck: boolean;
+  title: string;
+  btnName: string;
+  postFn: (value: any) => void;
+}
+export const BasicModalDialog: FC<Props> = ({
+  label,
+  postFn,
+  title,
+  btnName,
+  isCheck = false,
+}) => {
+  const [open, setOpen] = React.useState(false);
+  const [value, setValue] = useState<any>();
+  const [check, setCheck] = useState<boolean>(false);
+  const [obj, setObj] = useState<any>();
 
   useEffect(() => {
-    if (isSuccess) {
-      toast.success(`"${term}"-adli role elave olundu`);
-      dispatch(extendedUserApi.util.resetApiState());
-    }
-  }, [isSuccess, dispatch]);
-
+    setObj({
+      Title: value,
+      isActive: check,
+    });
+  }, [check, value]);
   return (
     <React.Fragment>
       <Button
         variant="contained"
         startIcon={<Add />}
-        size="small"
         onClick={() => setOpen(true)}
       >
-        {t("AddRole")}
+        {btnName}
       </Button>
       <Modal open={open} onClose={() => setOpen(false)}>
         <ModalDialog
@@ -58,28 +61,43 @@ export function BasicModalDialog() {
             fontSize="1.25em"
             mb="0.25em"
           >
-            {t("EnterTheRoll")}
+            {title}
           </Typography>
-
           <form
             onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
               event.preventDefault();
               setOpen(false);
-              postRole({ role: term });
+              if (isCheck) {
+                postFn(obj);
+              } else {
+                postFn(value);
+              }
             }}
           >
             <Stack spacing={2}>
               <TextField
-                onChange={(e) => setTerm(e.target.value)}
-                label="Role Name"
+                label={label}
+                onChange={(e) => setValue(e.target.value)}
                 autoFocus
                 required
               />
-              <Button type="submit">Submit</Button>
+              {isCheck && (
+                <Flex AlItems="center">
+                  <p>isActive</p>
+                  <Checkbox
+                    onChange={(ev: React.ChangeEvent<HTMLInputElement>) =>
+                      setCheck(ev.target.checked)
+                    }
+                  />
+                </Flex>
+              )}
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
             </Stack>
           </form>
         </ModalDialog>
       </Modal>
     </React.Fragment>
   );
-}
+};

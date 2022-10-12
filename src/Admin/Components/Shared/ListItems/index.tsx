@@ -5,7 +5,7 @@ import ListItemText from "@mui/material/ListItemText";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
-import BarChartIcon from "@mui/icons-material/BarChart";
+import CategoryIcon from "@mui/icons-material/Category";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LayersIcon from "@mui/icons-material/Layers";
 import { AdminLinks } from "../../../Routes/AdminLinks";
@@ -52,12 +52,14 @@ export const MainListItems = () => {
         </ListItemButton>
       </StyledLinks>
 
-      <ListItemButton>
-        <ListItemIcon>
-          <LayersIcon />
-        </ListItemIcon>
-        <ListItemText primary="Integrations" />
-      </ListItemButton>
+      <StyledLinks to={AdminLinks.categoryAndBrand}>
+        <ListItemButton>
+          <ListItemIcon>
+            <CategoryIcon />
+          </ListItemIcon>
+          <ListItemText primary="Category" />
+        </ListItemButton>
+      </StyledLinks>
     </React.Fragment>
   );
 };

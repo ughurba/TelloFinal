@@ -217,11 +217,15 @@ export const AddProduct = () => {
           <WrapperSelect>
             <StyledLabel>CategoryId</StyledLabel>
             <StyledSelect onChange={formik.handleChange} name="CategoryId">
-              {data?.category.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.title}
-                </option>
-              ))}
+              {data?.category.map((item) =>
+                item.isActive ? (
+                  <option key={item.id} value={item.id}>
+                    {item.title}
+                  </option>
+                ) : (
+                  ""
+                )
+              )}
             </StyledSelect>
             {formik.touched.CategoryId && formik.errors.CategoryId ? (
               <StyledErrorMessage>

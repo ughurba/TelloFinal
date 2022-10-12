@@ -9,6 +9,7 @@ import {
   Users,
   Product,
 } from "Admin/Pages";
+import { CategoryAndBrand } from "Admin/Pages/CategoryAndProduct";
 import { RemoveRoleModal } from "Admin/Pages/User/components/removeModalRole";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
@@ -45,6 +46,10 @@ export const AppRoutesAdmin = () => {
           />
           <Route path={AdminLinks.order} element={<Orders />} />
           <Route path={AdminLinks.user} element={<Users />} />
+          <Route
+            path={AdminLinks.categoryAndBrand}
+            element={<CategoryAndBrand />}
+          />
         </Route>
         <Route path={AdminLinks.login} element={<SignIn />} />
       </Routes>

@@ -1,4 +1,3 @@
-import colorSlice from "./adminSlice/colorSlice";
 import { userApi } from "./../services/adminServices/userServices";
 import { configureStore } from "@reduxjs/toolkit";
 import sliderSlice from "./slices/sliderSlice";
@@ -17,11 +16,11 @@ import {
   saleApi,
   shopApi,
   saleAdminApi,
+  categoryAndBrandApi,
 } from "services";
 
 export const store = configureStore({
   reducer: {
-    color: colorSlice,
     slider: sliderSlice,
     user: userSlice,
     goods: goodsSlice,
@@ -38,6 +37,7 @@ export const store = configureStore({
     [saleApi.reducerPath]: saleApi.reducer,
     [saleAdminApi.reducerPath]: saleAdminApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
+    [categoryAndBrandApi.reducerPath]: categoryAndBrandApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -51,7 +51,8 @@ export const store = configureStore({
       accountApi.middleware,
       saleApi.middleware,
       saleAdminApi.middleware,
-      userApi.middleware
+      userApi.middleware,
+      categoryAndBrandApi.middleware
     ),
 });
 

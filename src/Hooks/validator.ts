@@ -54,7 +54,7 @@ export const useValidator = () => {
     Photos: Yup.array().nullable().min(1, "min 1 items"),
     ChildPhotos: Yup.array().nullable().min(1, "min 1 items"),
     colors: Yup.array().nullable().min(1, "min 1 items"),
-    storage: Yup.array().nullable().min(1, "min 1 items"),
+    // storage: Yup.array().nullable().min(1, "min 1 items"),
   });
   return {
     addProductValidate,

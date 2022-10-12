@@ -40,13 +40,13 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
     product.productColors[0].colors.code
   );
   const [checkStorage, setCheckStorage] = useState<number>(
-    product.productStorages[0].storage.id
+    product?.productStorages[0]?.storage.id
   );
 
   const [itemIds, setItemIds] = useState<AddProps>({
     productId: product.id,
     colorId: product.productColors[0].colors.id,
-    storageId: product.productStorages[0].storage.id,
+    storageId: product?.productStorages[0]?.storage.id,
   });
   const handleClickColor = (id: number, colorCode: string) => {
     setItemIds({ ...itemIds, colorId: id });
@@ -98,7 +98,12 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       </WrapperColor>
       <WrapperStorage>
         <Flex AlItems={"center"}>
-          <Name>{t("Storage")}:</Name>
+          {product.productStorages.length !== 0 ? (
+            <Name>{t("Storage")}:</Name>
+          ) : (
+            ""
+          )}
+
           {product?.productStorages?.map((s, i) => (
             <Storage
               storageId={s.storageId}

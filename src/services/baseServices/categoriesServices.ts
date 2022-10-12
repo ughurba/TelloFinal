@@ -18,20 +18,17 @@ const categoryProduct = (Product: IProductType, url?: string) => {
     .split(",")
     .join("");
 
-  const discountStr = Links.app.discounts.split("/").at(-1);
-  const allBrandsStr = Links.app.allBrands.split("/").at(-1);
-
   const allBrands = `${
-    Product.category === allBrandsStr ? `&allBrands=${true}` : ""
+    Product.category === "Bütün brendlər" ? `&allBrand=${true}` : ""
   }`;
 
   const discount = `${
-    Product.category === discountStr ? `&discount=${true}` : ""
+    Product.category === "Endirimlər" ? `&discount=${true}` : ""
   }`;
 
   return `/${url ? `${url}/` : ""}${Product.id}?${str}
   &orderBy=${Product.orderBy}&minPrice=${Product?.minPrice}
-  &maxPrice=${Product?.maxPrice}${discount}
+  &maxPrice=${Product?.maxPrice}${discount}${allBrands}
   &page=${Product.page}
   &size=${Product.size}`;
 };
@@ -48,19 +45,18 @@ export const categoriesApi = createApi({
     getCategoryProduct: builder.query<ShopGoods, IProductType>({
       query: (Pagination) => categoryProduct(Pagination),
     }),
-    getProductIsDiscount: builder.query<ShopGoods, IProductType>({
-      query: (Pagination) => categoryProduct(Pagination, `discount`),
-    }),
-    getProductAllBrands: builder.query<ShopGoods, IProductType>({
-      query: (Pagination) => categoryProduct(Pagination, `allBrands`),
-    }),
+    // getProductIsDiscount: builder.query<ShopGoods, IProductType>({
+    //   query: (Pagination) => categoryProduct(Pagination, `discount`),
+    // }),
+    // getProductAllBrands: builder.query<ShopGoods, IProductType>({
+    //   query: (Pagination) => categoryProduct(Pagination, `allBrands`),
+    // }),
     getBrands: builder.query<Brand[], void>({
       query: () => `brand`,
     }),
   }),
 });
 export const {
-  useGetProductIsDiscountQuery,
   useGetAllCategoriesQuery,
   useGetBrandsQuery,
   useGetCategoryProductQuery,

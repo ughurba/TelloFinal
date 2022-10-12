@@ -10,4 +10,5 @@ export const AdminLinks = {
   order: "/admin/order",
   orderItems: "/admin/orderItems",
   user: "/admin/user",
+  categoryAndBrand: "/admin/categoryAndBrand",
 };

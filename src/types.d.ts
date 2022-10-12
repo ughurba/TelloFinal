@@ -168,3 +168,12 @@ export interface IOrderItem {
   title: string;
   photos: Image[];
 }
+export interface IBrand {
+  id: number;
+  name: string;
+}
+export interface ICategory {
+  id: number;
+  title: string;
+  isActive: boolean;
+}
