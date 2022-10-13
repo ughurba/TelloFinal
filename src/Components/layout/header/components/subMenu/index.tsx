@@ -52,6 +52,12 @@ export const SubMenu = () => {
             {item.title}
           </StyledMenuList>
         ))}
+        <StyledMenuList to={`${Links.app.product}/Bütün brendlər`}>
+          Bütün brendlər
+        </StyledMenuList>
+        <StyledMenuList to={`${Links.app.product}/Endirimlər`}>
+          Endirimlər
+        </StyledMenuList>
       </Flex>
     </Wrapper>
   );

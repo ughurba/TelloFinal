@@ -1,13 +1,6 @@
-import { ICategory } from "types";
 import { GridRowId } from "@mui/x-data-grid";
-import { ICategoryAndBrand } from "./../../Admin/Pages/CategoryAndProduct/types";
-import {
-  fetchBaseQuery,
-  createApi,
-  FetchBaseQueryError,
-} from "@reduxjs/toolkit/dist/query/react";
-import { url } from "inspector";
-import { SerializedError } from "@reduxjs/toolkit";
+import { ICategoryAndBrand } from "../../Admin/Pages/CategoryAndProduct/types";
+import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/dist/query/react";
 
 export const categoryAndBrandApi = createApi({
   reducerPath: "categoryAndBrandApi",
@@ -21,12 +14,12 @@ export const categoryAndBrandApi = createApi({
       return headers;
     },
   }),
-  tagTypes: ["PostCategory"],
+  tagTypes: ["PostCategory", "PostBrand"],
 
   endpoints: (build) => ({
     getCategoryAndBrandAll: build.query<ICategoryAndBrand, void>({
       query: () => ``,
-      providesTags: ["PostCategory"],
+      providesTags: ["PostCategory", "PostBrand"],
     }),
     removeCategory: build.mutation<void, { id: GridRowId }>({
       query: (arg) => {
@@ -58,6 +51,33 @@ export const categoryAndBrandApi = createApi({
         };
       },
     }),
+    createBrand: build.mutation<any, { name: string }>({
+      query: (body) => {
+        return {
+          url: `createBrand`,
+          method: "POST",
+          body,
+        };
+      },
+      invalidatesTags: ["PostBrand"],
+    }),
+    removeBrand: build.mutation<void, { id: GridRowId }>({
+      query: (arg) => {
+        return {
+          url: `removeBrand/${arg.id}`,
+          method: "DELETE",
+        };
+      },
+    }),
+    updateBrand: build.mutation<void, { id: GridRowId; name: string }>({
+      query: (body) => {
+        return {
+          url: `brandUpdate`,
+          method: "PUT",
+          body,
+        };
+      },
+    }),
   }),
 });
 export const {
@@ -65,4 +85,7 @@ export const {
   useCreateCategoryMutation,
   useRemoveCategoryMutation,
   useUpdateCategoryMutation,
+  useCreateBrandMutation,
+  useRemoveBrandMutation,
+  useUpdateBrandMutation,
 } = categoryAndBrandApi;

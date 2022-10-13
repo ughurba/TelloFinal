@@ -7,19 +7,20 @@ import {
   MuiEvent,
 } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-import swal from "sweetalert";
 
-import { Button } from "Admin/Components/Shared/Button";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import { Flex } from "Components/shared";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  useCreateBrandMutation,
   useCreateCategoryMutation,
   useGetCategoryAndBrandAllQuery,
+  useRemoveBrandMutation,
   useRemoveCategoryMutation,
   useUpdateCategoryMutation,
-} from "services/adminServices/categoryServices";
+  useUpdateBrandMutation,
+} from "services/adminServices/categoryAndBrandServices";
 import styled from "styled-components";
 import { IBrand, ICategory } from "types";
 import { toast } from "react-toastify";
@@ -27,17 +28,34 @@ import { BasicModalDialog } from "Admin/Components/Shared/Modal";
 
 export const Wrapper = styled.div``;
 export const WrapperCategoryTable = styled.div`
-  width: 55%;
+  width: 50%;
 `;
 export const WrapperBrandTable = styled.div`
-  width: 45%;
+  width: 50%;
 `;
 export const CategoryAndBrand = () => {
   const { data } = useGetCategoryAndBrandAllQuery();
   const [removeCategory, { isSuccess: removeIsSuccsesCate }] =
     useRemoveCategoryMutation();
-  const [postCategory, { error, isSuccess }] = useCreateCategoryMutation();
-  const [updateCategory] = useUpdateCategoryMutation();
+  const [postCategory, { error, isSuccess: createSuccessCate }] =
+    useCreateCategoryMutation();
+  const [
+    updateCategory,
+    { isSuccess: updateSuccsessCate, error: updateErrorCate },
+  ] = useUpdateCategoryMutation();
+
+  ///brand requests
+  const [
+    postBrand,
+    { isSuccess: createSuccsessBrand, error: brandCreateError },
+  ] = useCreateBrandMutation();
+  const [removeBrand, { isSuccess: removeSuccessBrand }] =
+    useRemoveBrandMutation();
+  const [
+    updateBrand,
+    { isSuccess: updateSuccsessBrand, error: brandUpdateError },
+  ] = useUpdateBrandMutation();
+
   const [categoryRows, setRowsCategory] = useState<ICategory[]>(
     data?.categories ? data?.categories : []
   );
@@ -48,6 +66,12 @@ export const CategoryAndBrand = () => {
   const handlePostCreateCategory = (value: any) => {
     postCategory(value);
   };
+  const handlePostCreateBrand = (value: any) => {
+    postBrand({
+      name: value,
+    });
+  };
+
   const { t } = useTranslation();
   type CategoryRow = ICategory;
   type BrandRow = IBrand;
@@ -60,7 +84,6 @@ export const CategoryAndBrand = () => {
         });
       } else {
         const cate = categoryRows.find((x) => x.id === params.id);
-        console.log(cate);
 
         if (cate) {
           updateCategory({
@@ -73,6 +96,13 @@ export const CategoryAndBrand = () => {
     },
     [categoryRows]
   );
+  const handleRowEditBrand = useCallback(
+    (params: GridCellEditCommitParams) => {
+      updateBrand({ id: params.id, name: params.value });
+    },
+    [brandRows]
+  );
+
   useEffect(() => {
     if (data?.categories) {
       setRowsCategory(data?.categories);
@@ -93,6 +123,7 @@ export const CategoryAndBrand = () => {
   );
   const deleteBrand = useCallback(
     (id: GridRowId) => () => {
+      removeBrand({ id: id });
       setTimeout(() => {
         setBrandRows((prevRows) => prevRows.filter((row) => row.id !== id));
       });
@@ -102,7 +133,7 @@ export const CategoryAndBrand = () => {
   const CategoryColumns = useMemo<GridColumns<CategoryRow>>(
     () => [
       { field: "id", headerName: t("id"), width: 80 },
-      { field: "title", headerName: t("Title"), editable: true, width: 330 },
+      { field: "title", headerName: t("Title"), editable: true, width: 280 },
       {
         field: "isActive",
         headerName: t("isActive"),
@@ -129,9 +160,21 @@ export const CategoryAndBrand = () => {
   const BrandColumns = useMemo<GridColumns<BrandRow>>(
     () => [
       { field: "id", headerName: t("id"), width: 80 },
-      { field: "name", headerName: t("Name"), width: 450 },
+      { field: "name", headerName: t("Name"), editable: true, width: 380 },
+      {
+        field: "actions",
+        type: "actions",
+        width: 100,
+        getActions: (params) => [
+          <GridActionsCellItem
+            icon={<DeleteIcon />}
+            label="Delete"
+            onClick={deleteBrand(params.id)}
+          />,
+        ],
+      },
     ],
-    [deleteBrand, data?.brands]
+    [deleteBrand, brandRows]
   );
   useEffect(() => {
     if (removeIsSuccsesCate) {
@@ -146,11 +189,62 @@ export const CategoryAndBrand = () => {
       }
     }
   }, [error]);
+
   useEffect(() => {
-    if (isSuccess) {
+    if (updateErrorCate) {
+      if ("data" in updateErrorCate) {
+        //@ts-ignore
+        toast.error(updateErrorCate.data);
+      }
+    }
+  }, [updateErrorCate]);
+  useEffect(() => {
+    if (createSuccessCate) {
       toast.success("category elave edildi");
     }
-  }, [isSuccess]);
+  }, [createSuccessCate]);
+
+  useEffect(() => {
+    if (updateSuccsessCate) {
+      toast.success("category update olundu");
+    }
+  }, [updateSuccsessCate]);
+
+  ///brands
+  useEffect(() => {
+    if (createSuccsessBrand) {
+      toast.success("brand yaradildi");
+    }
+  }, [createSuccsessBrand]);
+
+  useEffect(() => {
+    if (removeSuccessBrand) {
+      toast.success("brand silindi");
+    }
+  }, [removeSuccessBrand]);
+
+  useEffect(() => {
+    if (updateSuccsessBrand) {
+      toast.success("brand update olundu");
+    }
+  }, [updateSuccsessBrand]);
+
+  useEffect(() => {
+    if (brandCreateError) {
+      if ("data" in brandCreateError) {
+        //@ts-ignore
+        toast.error(brandCreateError.data);
+      }
+    }
+  }, [brandCreateError]);
+  useEffect(() => {
+    if (brandUpdateError) {
+      if ("data" in brandUpdateError) {
+        //@ts-ignore
+        toast.error(brandUpdateError.data);
+      }
+    }
+  }, [brandUpdateError]);
   return (
     <Wrapper>
       <Flex>
@@ -169,8 +263,17 @@ export const CategoryAndBrand = () => {
           />
         </WrapperCategoryTable>
         <WrapperBrandTable>
-          <Button btnName="Create Brand" />
-          <DataTable rows={brandRows} columns={BrandColumns} />
+          <BasicModalDialog
+            btnName="Create Brand"
+            title="Cretae Brand"
+            label="Brand Title"
+            postFn={handlePostCreateBrand}
+          />
+          <DataTable
+            rows={brandRows}
+            handleRowEditCommit={handleRowEditBrand}
+            columns={BrandColumns}
+          />
         </WrapperBrandTable>
       </Flex>
     </Wrapper>

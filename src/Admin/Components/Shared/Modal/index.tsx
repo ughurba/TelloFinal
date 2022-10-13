@@ -11,7 +11,7 @@ import { Flex } from "Components/shared";
 
 interface Props {
   label: string;
-  isCheck: boolean;
+  isCheck?: boolean;
   title: string;
   btnName: string;
   postFn: (value: any) => void;

@@ -8,7 +8,7 @@ import { authApi } from "./baseServices/authServices";
 import { goodsApi } from "./baseServices/goodsServices";
 import { saleApi } from "./baseServices/saleServices";
 import { saleAdminApi } from "./adminServices/saleAdminServices";
-import { categoryAndBrandApi } from "./adminServices/categoryServices";
+import { categoryAndBrandApi } from "./adminServices/categoryAndBrandServices";
 export {
   saleAdminApi,
   accountApi,
