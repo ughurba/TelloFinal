@@ -2,13 +2,12 @@ import { useFormik } from "formik";
 import { FormEvent, useEffect, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import Button from "@mui/material/Button";
 
 import {
   StyledInput,
-  StyledLabel,
-  StyledSelect,
   Wrapper,
   WrapperSelect,
   WrapperUpload,
@@ -32,6 +31,7 @@ import { Button as StyledButton } from "Admin/Components/Shared/Button";
 import { GitHubLabel } from "./components/colors";
 import { useValidator } from "Hooks/validator";
 import { PhotoUpload } from "./components/photoUpload";
+import { TextField } from "@mui/material";
 
 export const AddProduct = () => {
   const [pendingValue, setPendingValue] = useState<string[]>([]);
@@ -70,9 +70,9 @@ export const AddProduct = () => {
       Description: product?.description || "",
       NewPrice: product?.newPrice || "",
       OldPrice: product?.oldPrice || "",
-      BrandId: product?.brand || "",
-      CategoryId: product?.categoryTitle || "",
-      StockCount: product?.stockCount || 0,
+      BrandId: product?.brandId || "",
+      CategoryId: product?.categoryId || "",
+      StockCount: product?.stockCount || "",
       Photos: [],
       ChildPhotos: [],
       colors: [],
@@ -81,7 +81,6 @@ export const AddProduct = () => {
     validationSchema: id === "create" ? addProductValidate : "",
 
     onSubmit: (values) => {
-      console.log(values);
       if (id === "create") {
         setAddProduct(
           toFormData({
@@ -130,6 +129,8 @@ export const AddProduct = () => {
       toast.success(t("ProductAdded"));
       formik.resetForm();
       dispatch(extendedGetAllProductAdminApi.util.resetApiState());
+      setMultiFileName([]);
+      setFileName("");
       setValue([]);
     }
     if (successUpdate) {
@@ -162,7 +163,6 @@ export const AddProduct = () => {
   useEffect(() => {
     formik.setFieldValue("colors", value);
   }, [value]);
-  console.log(storage);
   return (
     <Wrapper>
       {isLoading || updateLoading ? (
@@ -171,32 +171,34 @@ export const AddProduct = () => {
         <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
           <div>
             <StyledInput
+              error={formik.touched.Title && Boolean(formik.errors.Title)}
+              helperText={formik.touched.Title && formik.errors.Title}
               onChange={formik.handleChange}
               value={formik.values.Title}
               id="title"
               name="Title"
               label="Title"
             />
-            {formik.touched.Title && formik.errors.Title ? (
-              <StyledErrorMessage>{formik.errors.Title}</StyledErrorMessage>
-            ) : null}
           </div>
           <div>
             <StyledInput
+              error={
+                formik.touched.Description && Boolean(formik.errors.Description)
+              }
+              helperText={
+                formik.touched.Description && formik.errors.Description
+              }
               label="Description"
               id="Description"
               name="Description"
               onChange={formik.handleChange}
               value={formik.values.Description}
             />
-            {formik.touched.Description && formik.errors.Description ? (
-              <StyledErrorMessage>
-                {formik.errors.Description}
-              </StyledErrorMessage>
-            ) : null}
           </div>
           <div>
             <StyledInput
+              error={formik.touched.NewPrice && Boolean(formik.errors.NewPrice)}
+              helperText={formik.touched.NewPrice && formik.errors.NewPrice}
               label="NewPrice"
               id="NewPrice"
               type="text"
@@ -204,12 +206,11 @@ export const AddProduct = () => {
               onChange={formik.handleChange}
               value={formik.values.NewPrice}
             />
-            {formik.touched.NewPrice && formik.errors.NewPrice ? (
-              <StyledErrorMessage>{formik.errors.NewPrice}</StyledErrorMessage>
-            ) : null}
           </div>
           <div>
             <StyledInput
+              error={formik.touched.OldPrice && Boolean(formik.errors.OldPrice)}
+              helperText={formik.touched.OldPrice && formik.errors.OldPrice}
               label="OldPrice"
               id="OldPrice"
               name="OldPrice"
@@ -217,12 +218,13 @@ export const AddProduct = () => {
               onChange={formik.handleChange}
               value={formik.values.OldPrice}
             />
-            {formik.touched.OldPrice && formik.errors.OldPrice ? (
-              <StyledErrorMessage>{formik.errors.OldPrice}</StyledErrorMessage>
-            ) : null}
           </div>
           <div>
             <StyledInput
+              error={
+                formik.touched.StockCount && Boolean(formik.errors.StockCount)
+              }
+              helperText={formik.touched.StockCount && formik.errors.StockCount}
               label="StockCount"
               id="StockCount"
               type="number"
@@ -230,39 +232,53 @@ export const AddProduct = () => {
               onChange={formik.handleChange}
               value={formik.values.StockCount}
             />
-            {formik.touched.StockCount && formik.errors.StockCount ? (
-              <StyledErrorMessage>
-                {formik.errors.StockCount}
-              </StyledErrorMessage>
-            ) : null}
           </div>
           <WrapperSelect>
-            <StyledLabel>Brand</StyledLabel>
-            <StyledSelect name="BrandId" onChange={formik.handleChange}>
+            <TextField
+              select
+              style={{ width: "200px" }}
+              id="demo-simple-select"
+              error={formik.touched.BrandId && Boolean(formik.errors.BrandId)}
+              helperText={formik.touched.BrandId && formik.errors.BrandId}
+              variant="outlined"
+              name="BrandId"
+              label="Brand"
+              value={formik.values.BrandId}
+              onChange={formik.handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               {data?.brand.map((item) => (
-                <option key={item.id} value={item.id}>
+                <MenuItem key={item.id} value={item.id}>
                   {item.name}
-                </option>
+                </MenuItem>
               ))}
-            </StyledSelect>
-            {formik.touched.BrandId && formik.errors.BrandId ? (
-              <StyledErrorMessage>{formik.errors.BrandId}</StyledErrorMessage>
-            ) : null}
+            </TextField>
           </WrapperSelect>
           <WrapperSelect>
-            <StyledLabel>CategoryId</StyledLabel>
-            <StyledSelect onChange={formik.handleChange} name="CategoryId">
+            <TextField
+              select
+              error={
+                formik.touched.CategoryId && Boolean(formik.errors.CategoryId)
+              }
+              helperText={formik.touched.CategoryId && formik.errors.CategoryId}
+              style={{ width: "200px" }}
+              variant="outlined"
+              name="CategoryId"
+              label="Category"
+              value={formik.values.CategoryId}
+              onChange={formik.handleChange}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               {data?.category.map((item) => (
-                <option key={item.id} value={item.id}>
+                <MenuItem key={item.id} value={item.id}>
                   {item.title}
-                </option>
+                </MenuItem>
               ))}
-            </StyledSelect>
-            {formik.touched.CategoryId && formik.errors.CategoryId ? (
-              <StyledErrorMessage>
-                {formik.errors.CategoryId}
-              </StyledErrorMessage>
-            ) : null}
+            </TextField>
           </WrapperSelect>
 
           <WrapperUpload>

@@ -4,11 +4,11 @@ export interface IGoodsAdmin {
   oldPrice: number;
   newPrice: number;
   title: string;
-  categoryTitle: string;
+  categoryId: string;
   description: string;
   childPhotos: Image[];
   mainPhoto: Image;
-  brand: Brand;
+  brandId: number;
   colors: Color[];
   storages: Storage[];
   stockCount: number;
