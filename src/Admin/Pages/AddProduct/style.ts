@@ -43,3 +43,20 @@ export const StyledErrorMessage = styled.div`
   font-size: ${({ theme }) => theme.fontStyle.size.xSmall};
   color: red;
 `;
+export const StyledSpan = styled.span``;
+export const WrapperMultiFile = styled.div`
+  display: flex;
+  width: 260px;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  gap: 12px;
+  padding-left: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 4px;
+  margin-top: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(206, 212, 218);
+  overflow-y: scroll;
+  max-height: 200px;
+`;

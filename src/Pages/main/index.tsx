@@ -54,14 +54,12 @@ export const MainPage: FC = () => {
       setHeadphone(data.filter((h) => h.categoryTitle === "Aksessuarlar"));
     }
   }, [data]);
-  const handleChangeFavorite = (
-    ev: React.FormEvent<HTMLInputElement>,
-    id: number
-  ) => {
-    postFavorite({
-      productId: id,
-      isFavorite: ev.currentTarget.checked,
-    });
+
+  const handleNoCheckFavorite = (id: number) => {
+    // postFavorite({
+    //   productId: id,
+    //   isFavorite :
+    // });
   };
   return isRatingGoodsLoad ? (
     <Loader />
@@ -71,18 +69,18 @@ export const MainPage: FC = () => {
 
       <div>
         <ProductsHome
-          handleChangeFavorite={handleChangeFavorite}
+          handleNoCheckFavorite={handleNoCheckFavorite}
           title={t("BestSellingProducts")}
           ratingGoods={bestSellingProducts?.slice(0, 4)}
         />
         <ProductsHome
-          handleChangeFavorite={handleChangeFavorite}
+          handleNoCheckFavorite={handleNoCheckFavorite}
           title={t("NewArrivals")}
           ratingGoods={newArrivalProduct?.slice(0, 4)}
         />
         <BigCards />
         <ProductsHome
-          handleChangeFavorite={handleChangeFavorite}
+          handleNoCheckFavorite={handleNoCheckFavorite}
           title={t("NewArrivalAccessories")}
           ratingGoods={newArrivalHeadphones?.slice(0, 4)}
         />

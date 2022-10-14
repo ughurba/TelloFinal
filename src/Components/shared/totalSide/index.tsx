@@ -31,19 +31,19 @@ export const TotalSide: FC<Props> = ({ total, isButton = false }) => {
           <Flex JsContent={"space-between"}>
             <Link>{t("Amount")}</Link>
             <Flex AlItems={"center"}>
-              <Price>{total}</Price>
+              <Price>{total?.toFixed(2)}</Price>
               <GreyAzn />
             </Flex>
           </Flex>
         </WrapperLink>
         <WrapperLink>
-          <Flex JsContent={"space-between"}>
+          {/* <Flex JsContent={"space-between"}>
             <Link>{t("Discount")}</Link>
             <Flex AlItems={"center"}>
               <Price>0</Price>
               <GreyAzn />
             </Flex>
-          </Flex>
+          </Flex> */}
         </WrapperLink>
         {/*<WrapperLink>*/}
         {/*  <Flex JsContent={"space-between"}>*/}
@@ -59,7 +59,7 @@ export const TotalSide: FC<Props> = ({ total, isButton = false }) => {
       <Flex AlItems={"center"} JsContent={"space-between"}>
         <Total>{t("Toplam qiymət:")}</Total>
         <Flex AlItems={"center"}>
-          <Price>{total}</Price>
+          <Price>{total?.toFixed(2)}</Price>
           <GreyAzn />
         </Flex>
       </Flex>

@@ -57,7 +57,7 @@ export const OrderCard: FC<IOrder> = ({ date, orderStatus, photos, total }) => {
         <div>
           <StyledTypography level="body3">{t("TotalPrice")}:</StyledTypography>
           <Price fontSize="lg" fontWeight="lg">
-            {total} ₼
+            {total.toFixed(2)} ₼
           </Price>
         </div>
         <Flex FlexColumn="column" AlItems="flex-end">

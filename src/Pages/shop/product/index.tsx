@@ -35,7 +35,7 @@ export const Product = () => {
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [brand, setBrand] = useState<Brand[]>([]);
-  const [value, setValue] = React.useState<number[]>([0, 4300]);
+  const [value, setValue] = React.useState<number[]>([0, 9500]);
   const [orderByValue, setOrderByValue] = useState<number>(0);
   const id = Number(localStorage.getItem("categoryId"));
   const { product, productLoading } = useAppSelector((state) => state.goods);
@@ -69,7 +69,11 @@ export const Product = () => {
     maxPrice: debounced[1],
     category: category,
   };
-  const { data, isLoading: loading } = useGetCategoryProductQuery(ProductType);
+  const {
+    data,
+    refetch: getAllProduct,
+    isLoading: loading,
+  } = useGetCategoryProductQuery(ProductType);
   const [postFavorite] = useSetFavoriteMutation();
 
   useEffect(() => {
@@ -95,15 +99,14 @@ export const Product = () => {
     setValue(newValue as number[]);
   };
 
-  const handleChangeFavorite = (
-    ev: React.FormEvent<HTMLInputElement>,
-    id: number
-  ) => {
+  const handleNoCheckFavorite = (id: number) => {
     postFavorite({
       productId: id,
-      isFavorite: ev.currentTarget.checked,
+      isFavorite: !false,
     });
+    getAllProduct();
   };
+
   return (
     <Wrapper>
       <Container>
@@ -134,7 +137,7 @@ export const Product = () => {
                   {product?.result.length} {t("ProductFound")}
                 </SizeProducts>
                 <Products
-                  handleChangeFavorite={handleChangeFavorite}
+                  handleNoCheckFavorite={handleNoCheckFavorite}
                   data={product}
                 />
                 {

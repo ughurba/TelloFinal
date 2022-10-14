@@ -39,10 +39,13 @@ export const OrderItems = () => {
                     <Color>
                       {t("Color")}: <NameColor color={item.code} />
                     </Color>
-                    <Storage>
-                      {t("Storage")}:{" "}
-                      <NameStorage>{item.storage}GB</NameStorage>
-                    </Storage>
+                    {item.storage && (
+                      <Storage>
+                        {t("Storage")}
+                        <NameStorage>{item.storage}GB</NameStorage>
+                      </Storage>
+                    )}
+
                     <NameCount>
                       {t("Say")}: <Count>{item.count}</Count>eded
                     </NameCount>

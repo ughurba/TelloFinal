@@ -58,7 +58,10 @@ export const Header = () => {
           <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>
             <User />
           </Link>
-          <Heart />
+          <Link to={Links.userProfileApp.MyFavorites}>
+            <Heart />
+          </Link>
+
           <StyledBasketHeader>
             <Link to={Links.app.basket}>
               <Basket />

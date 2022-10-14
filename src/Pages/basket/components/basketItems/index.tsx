@@ -107,10 +107,13 @@ export const BasketItems: FC<Props> = ({
               <Color>
                 {t("Color")}: <NameColor color={code} />
               </Color>
-              <Storage>
-                {t("Storage")}: <NameStorage>{storage}GB</NameStorage>
-              </Storage>
-              <StockPrice>{incDec.isExistSum} ₼</StockPrice>
+              {storage && (
+                <Storage>
+                  {t("Storage")}: <NameStorage>{storage}GB</NameStorage>
+                </Storage>
+              )}
+
+              <StockPrice>{incDec.isExistSum.toFixed(2)} ₼</StockPrice>
             </Flex>
           </ProductContent>
         </Flex>

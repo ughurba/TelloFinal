@@ -3,7 +3,6 @@ import { Flex } from "../../../../shared";
 import { Links } from "Routes/links";
 import { useTranslation } from "react-i18next";
 import { useGetAllCategoriesQuery } from "services/baseServices/categoriesServices";
-import { useMemo } from "react";
 
 import { useAppDispatch } from "Redux/hooks";
 import { setCategoryId } from "Redux/slices/goodsSlice";
@@ -11,7 +10,6 @@ import { setCategoryId } from "Redux/slices/goodsSlice";
 export const SubMenu = () => {
   const dispatch = useAppDispatch();
   const { data } = useGetAllCategoriesQuery();
-  console.log(data);
   const { t } = useTranslation();
   // const Routes = useMemo(
   //   () => ({
@@ -47,7 +45,7 @@ export const SubMenu = () => {
           <StyledMenuList
             key={item.id}
             onClick={() => handleSetCategoryId(item.id)}
-            to={`${Links.app.product}/${item.title}`}
+            to={`${Links.app.product}/${item.title.split(" ").join("_")}`}
           >
             {item.title}
           </StyledMenuList>

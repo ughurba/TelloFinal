@@ -28,6 +28,7 @@ export const Product = () => {
     isLoading,
   } = useGetAllProductQuery();
   const [rows, setRows] = React.useState<Goods[]>(Goods ? Goods : []);
+  console.log(Goods);
   const { t } = useTranslation();
   type Row = Goods;
   useEffect(() => {

@@ -150,7 +150,7 @@ export interface CalculationBasket {
 
 export interface Favorites {
   productId: number;
-  isFavorite: boolean;
+  isFavorite?: boolean;
 }
 export interface IOrder {
   id: number;

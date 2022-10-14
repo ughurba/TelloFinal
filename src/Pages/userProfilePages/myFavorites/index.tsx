@@ -24,8 +24,8 @@ export const MyFavorites = () => {
       <Title>{t("MyFavorites")}</Title>
       <Flex FlexWrap="wrap">
         {data?.map((item) => (
-          <WrapperCard>
-            <CustomCard key={item.id} isFavorite={false} {...item} />
+          <WrapperCard key={item.id}>
+            <CustomCard isfavorite={false} {...item} />
           </WrapperCard>
         ))}
       </Flex>

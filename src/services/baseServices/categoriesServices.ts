@@ -45,12 +45,7 @@ export const categoriesApi = createApi({
     getCategoryProduct: builder.query<ShopGoods, IProductType>({
       query: (Pagination) => categoryProduct(Pagination),
     }),
-    // getProductIsDiscount: builder.query<ShopGoods, IProductType>({
-    //   query: (Pagination) => categoryProduct(Pagination, `discount`),
-    // }),
-    // getProductAllBrands: builder.query<ShopGoods, IProductType>({
-    //   query: (Pagination) => categoryProduct(Pagination, `allBrands`),
-    // }),
+
     getBrands: builder.query<Brand[], void>({
       query: () => `brand`,
     }),

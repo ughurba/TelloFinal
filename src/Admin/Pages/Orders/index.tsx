@@ -33,6 +33,7 @@ export const Orders = () => {
   const { data: Orders, refetch: getAllOrder } = useGetAllOrderQuery();
   const [putOrderStatus, { isSuccess }] = useUpdateOrderStatusMutation();
   const [rows, setRows] = React.useState<IAdminOrder[]>(Orders ? Orders : []);
+  console.log(Orders);
   useEffect(() => {
     if (Orders) {
       setRows(Orders);
@@ -46,7 +47,9 @@ export const Orders = () => {
   const handleRejectOrderStatus = (arg: ArgTypeOrder) => {
     putOrderStatus(arg);
   };
-
+  useEffect(() => {
+    getAllOrder();
+  }, []);
   useEffect(() => {
     if (isSuccess) {
       getAllOrder();
@@ -62,15 +65,22 @@ export const Orders = () => {
         width: 110,
         sortable: false,
         renderCell: (params) => {
+          return <>{<StyledImg src={params.value.at(0).path} />}</>;
+        },
+      },
+      { field: "date", headerName: t("OrderHistory"), width: 160 },
+      {
+        field: "total",
+        headerName: t("TotalPrice"),
+        width: 120,
+        renderCell: (params) => {
           return (
             <>
-              <StyledImg src={params.value.at(0).path} />
+              <span>{params.value.toFixed(2)}</span>
             </>
           );
         },
       },
-      { field: "date", headerName: t("OrderHistory"), width: 160 },
-      { field: "total", headerName: t("TotalPrice"), width: 120 },
       { field: "adress", headerName: t("Adress"), width: 80 },
       {
         field: "mobile",
@@ -98,6 +108,18 @@ export const Orders = () => {
           } else {
             return <StyledReject>Reject</StyledReject>;
           }
+        },
+      },
+      {
+        field: "cash",
+        headerName: t("Payment"),
+        width: 70,
+        renderCell: (params) => {
+          return (
+            <>
+              <span>{params.value ? "Nəğd " : ""}</span>
+            </>
+          );
         },
       },
       {

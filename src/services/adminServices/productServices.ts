@@ -3,6 +3,7 @@ import { Goods } from "./../../types.d";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IBrandAndCategory } from "../../Admin/Pages/Product/types";
 import { GridRowId } from "@mui/x-data-grid";
+import { IGoodsAdmin } from "Admin/Pages/AddProduct/type";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
@@ -35,7 +36,7 @@ export const productApi = createApi({
         };
       },
     }),
-    getOneProduct: builder.query<Goods, string>({
+    getOneProduct: builder.query<IGoodsAdmin, string>({
       query: (id) => `${id}`,
     }),
 

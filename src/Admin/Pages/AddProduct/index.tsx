@@ -1,7 +1,6 @@
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
-import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 import Button from "@mui/material/Button";
@@ -14,6 +13,7 @@ import {
   WrapperSelect,
   WrapperUpload,
   StyledErrorMessage,
+  WrapperMultiFile,
 } from "./style";
 import {
   useUpdateProductMutation,
@@ -31,11 +31,15 @@ import { useTranslation } from "react-i18next";
 import { Button as StyledButton } from "Admin/Components/Shared/Button";
 import { GitHubLabel } from "./components/colors";
 import { useValidator } from "Hooks/validator";
+import { PhotoUpload } from "./components/photoUpload";
 
 export const AddProduct = () => {
   const [pendingValue, setPendingValue] = useState<string[]>([]);
   const [value, setValue] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [multiFileName, setMultiFileName] = useState<string[]>([]);
+  const [fileName, setFileName] = useState<string>("");
+  const [storage, setStorage] = useState<string[]>([]);
   const { id } = useParams<{ id: any }>();
   const { t } = useTranslation();
   const [setAddProduct, { isSuccess, isLoading }] = useCreateProductMutation();
@@ -47,9 +51,17 @@ export const AddProduct = () => {
   const { data: product } = useGetOneProductQuery(id, {
     skip: id === "create",
   });
+
   const { addProductValidate } = useValidator();
   const dispatch = useAppDispatch();
-  console.log(product);
+  useEffect(() => {
+    if (product?.colors) {
+      setValue(product?.colors.map((x) => x.code));
+    }
+    if (product?.storages) {
+      setStorage(product?.storages.map((x) => x.value.toString()));
+    }
+  }, [product]);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -89,11 +101,34 @@ export const AddProduct = () => {
       }
     },
   });
+
+  const handleChangeFile = (ev: FormEvent<HTMLInputElement>) => {
+    let files = ev.currentTarget.files;
+
+    if (files) {
+      if (files["length"] === 0) {
+        setFileName("");
+      }
+      Array.from(files).map((item) => setFileName(item.name));
+      formik.setFieldValue("Photos", files);
+    }
+  };
+  const handleChangeMultiFile = (ev: FormEvent<HTMLInputElement>) => {
+    let files = ev.currentTarget.files;
+
+    if (files) {
+      if (files["length"] === 0) {
+        setMultiFileName([]);
+      }
+      Array.from(files).map((item) => multiFileName.push(item.name));
+      formik.setFieldValue("ChildPhotos", files);
+    }
+  };
+
   useEffect(() => {
     if (isSuccess) {
       toast.success(t("ProductAdded"));
       formik.resetForm();
-      console.log(isSuccess);
       dispatch(extendedGetAllProductAdminApi.util.resetApiState());
       setValue([]);
     }
@@ -127,7 +162,7 @@ export const AddProduct = () => {
   useEffect(() => {
     formik.setFieldValue("colors", value);
   }, [value]);
-
+  console.log(storage);
   return (
     <Wrapper>
       {isLoading || updateLoading ? (
@@ -239,13 +274,15 @@ export const AddProduct = () => {
                 name="Photos"
                 type="file"
                 accept="image/*"
-                onChange={(e) =>
-                  formik.setFieldValue("Photos", e.currentTarget.files)
-                }
+                onChange={handleChangeFile}
               />
               <PhotoCamera sx={{ marginLeft: "10px" }} />
             </Button>
-
+            {fileName.length !== 0 && (
+              <WrapperMultiFile>
+                <PhotoUpload item={fileName} />
+              </WrapperMultiFile>
+            )}
             {formik.touched.Photos && formik.errors.Photos ? (
               <StyledErrorMessage>{formik.errors.Photos}</StyledErrorMessage>
             ) : null}
@@ -261,12 +298,17 @@ export const AddProduct = () => {
                 type="file"
                 multiple={true}
                 accept="image/*"
-                onChange={(e) =>
-                  formik.setFieldValue("ChildPhotos", e.currentTarget.files)
-                }
+                onChange={handleChangeMultiFile}
               />
               <PhotoCamera sx={{ marginLeft: "10px" }} />
             </Button>
+            {multiFileName.length !== 0 && (
+              <WrapperMultiFile>
+                {multiFileName.map((item) => (
+                  <PhotoUpload key={item} item={item} />
+                ))}
+              </WrapperMultiFile>
+            )}
 
             {formik.touched.ChildPhotos && formik.errors.ChildPhotos ? (
               <StyledErrorMessage>
@@ -290,7 +332,7 @@ export const AddProduct = () => {
           <Autocomplete
             multiple
             id="storage"
-            options={["8", "16", "32", "64", "128", "256"]}
+            options={["8", "16", "32", "64", "128", "256", "512"]}
             getOptionLabel={(option) => option}
             onChange={(e, value) => formik.setFieldValue("storage", value)}
             renderInput={(params) => (

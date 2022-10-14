@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Theme from "./Theme";
 import { AppRoutes } from "./Routes/routes";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
 import { AppRoutesAdmin } from "./Admin/Routes/routes";
 import { ToastContainer, toast } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (

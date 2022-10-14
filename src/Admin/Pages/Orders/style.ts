@@ -23,6 +23,7 @@ export const StyledRejectIcon = styled(X)`
 `;
 export const StyledImg = styled.img`
   width: 60px;
+  object-fit: contain;
 `;
 export const StyledPending = styled.span`
   background-color: ${({ theme }) => theme.colors.yellow};

@@ -16,16 +16,13 @@ interface Props {
   title: string;
   ratingGoods?: Goods[];
   headphones?: Goods[];
-  handleChangeFavorite: (
-    ev: React.FormEvent<HTMLInputElement>,
-    id: number
-  ) => void;
+  handleNoCheckFavorite: (id: number) => void;
 }
 
 export const ProductsHome: FC<Props> = ({
   title,
   ratingGoods,
-  handleChangeFavorite,
+  handleNoCheckFavorite,
 }) => {
   const { t } = useTranslation();
   return (
@@ -44,7 +41,8 @@ export const ProductsHome: FC<Props> = ({
           {ratingGoods?.map((obj) => (
             <Grid key={obj.id} item xs={3}>
               <CustomCard
-                handleChangeFavorite={handleChangeFavorite}
+              
+                handleNoCheckFavorite={handleNoCheckFavorite}
                 {...obj}
               />
             </Grid>

@@ -9,7 +9,7 @@ import {
   Title,
 } from "./style";
 import { FC } from "react";
-import { Favorits, Goods } from "types";
+import { Goods } from "types";
 import * as React from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
@@ -19,11 +19,9 @@ import IconButton, { IconButtonProps } from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { StyledLink } from "../products/style";
-import { Checkbox } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
-import { Favorite, FavoriteBorder } from "@mui/icons-material";
+import { Favorite } from "@mui/icons-material";
 import { useAppSelector } from "../../../Redux/hooks";
-import FavoriteIcon from "@mui/icons-material/Favorite";
 import { useTranslation } from "react-i18next";
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
@@ -40,17 +38,15 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }));
 
-interface Props extends Goods {
-  handleChangeFavorite?: (
-    ev: React.FormEvent<HTMLInputElement>,
-    id: number
-  ) => void;
-  favorites?: boolean;
-  isFavorite?: boolean;
-}
-const StyledFavorite = styled(Favorite)`
-  color: #1976d2;
+const StyledFavorite = styled(Favorite)<{ isfav: boolean | undefined }>`
+  color: ${(props) => (props.isfav ? "#1976d2" : "")};
 `;
+interface Props extends Goods {
+  handleNoCheckFavorite?: (id: number) => void;
+  favorites?: boolean;
+  isfavorite?: boolean;
+}
+
 export const CustomCard: FC<Props> = ({
   newPrice,
   oldPrice,
@@ -59,13 +55,14 @@ export const CustomCard: FC<Props> = ({
   title,
   description,
   id,
-  handleChangeFavorite,
+  handleNoCheckFavorite,
   favorites,
-  isFavorite = true,
+  isfavorite = true,
 }) => {
   const [expanded, setExpanded] = React.useState(false);
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -101,21 +98,18 @@ export const CustomCard: FC<Props> = ({
         </StyledTypographyPrices>
       </StyledCardContent>
       <StyledCardActions disableSpacing>
-        {isFavorite && (
+        {isfavorite && (
           <IconButton aria-label="add to favorites">
             <>
               {user.isOnline && (
-                <Checkbox
-                  name={id.toString()}
-                  onChange={
-                    handleChangeFavorite
-                      ? (ev) => handleChangeFavorite(ev, id)
-                      : undefined
-                  }
-                  icon={favorites ? <StyledFavorite /> : <FavoriteBorder />}
-                  defaultChecked={favorites}
-                  checkedIcon={<StyledFavorite />}
-                />
+                <>
+                  <StyledFavorite
+                    isfav={favorites ? favorites : undefined}
+                    onClick={() =>
+                      handleNoCheckFavorite && handleNoCheckFavorite(id)
+                    }
+                  />
+                </>
               )}
             </>
           </IconButton>

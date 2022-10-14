@@ -16,7 +16,7 @@ export const Links = {
   },
   userProfileApp: {
     MyOrders: "MyOrders",
-    MyFavorites: "MyFavorites",
+    MyFavorites: "/UserProfile/MyFavorites",
     PersonalInformation: "PersonalInformation",
     DeliveryAddress: "DeliveryAddress",
     OrderItems: "/UserProfile/OrderItems",

@@ -46,7 +46,9 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   const [itemIds, setItemIds] = useState<AddProps>({
     productId: product.id,
     colorId: product.productColors[0].colors.id,
-    storageId: product?.productStorages[0]?.storage.id,
+    storageId: product?.productStorages[0]?.storage.id
+      ? product?.productStorages[0]?.storage.id
+      : 0,
   });
   const handleClickColor = (id: number, colorCode: string) => {
     setItemIds({ ...itemIds, colorId: id });
@@ -58,9 +60,9 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   };
   const handleAddItem = (productId: number) => {
     if (user.isOnline) {
+      console.log(itemIds);
       setItemIds({ ...itemIds, productId: productId });
       addProduct(itemIds);
-      toast.success(t("AddedToCart"), { position: "bottom-right" });
     } else {
       toast.warning("login ol");
     }
@@ -69,6 +71,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
     if (isSuccess) {
       dispatch(addItem(data.basketItems));
       dispatch(updateTotal(data.total));
+      toast.success(t("AddedToCart"), { position: "bottom-right" });
     }
   }, [data]);
   return (

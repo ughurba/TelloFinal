@@ -130,5 +130,11 @@
   "SuccsessDelete":"Uğurla silindi",
   "AddRole":"Rol əlavə etmək",
   "EnterTheRoll":"Rolu daxil edin",
-  "UserDelete":"Istifadəçi silindi"
+  "UserDelete":"Istifadəçi silindi",
+  "CategoryDeletedSuccessfully":"Kateqoriya uğurla silindi",
+  "CategoryAddedSuccessfully":"Kateqoriya uğurla əlavə edildi",
+  "CategoryUpdatedCuccsessufully":"Kateqoriya uğurla yeniləndi",
+  "BrandDeletedSuccessfully":"Brend uğurla silindi",
+  "BrandAddedSuccessfully":"Brend uğurla əlavə edildi",
+  "BrandUpdatedCuccsessufully":"Brend uğurla yeniləndi"
 }

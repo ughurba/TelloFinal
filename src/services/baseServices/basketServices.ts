@@ -2,7 +2,7 @@ import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/dist/query/react";
 import { Basket, CalculationBasket } from "types";
 export interface AddProps {
   colorId?: number;
-  storageId?: number;
+  storageId: number | null;
   productId?: number;
 }
 
@@ -20,11 +20,10 @@ export const basketApi = createApi({
   }),
 
   endpoints: (builder) => ({
-  
     addItem: builder.mutation<Basket, AddProps>({
       query: (itemId) => {
         return {
-          url: `?productId=${itemId?.productId}&colorId=${itemId?.colorId}&storageId=${itemId?.storageId}`,
+          url: `addbasket?productId=${itemId?.productId}&colorId=${itemId?.colorId}&storageId=${itemId?.storageId}`,
           method: "POST",
         };
       },

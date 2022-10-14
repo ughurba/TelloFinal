@@ -34,6 +34,7 @@ export const WrapperBrandTable = styled.div`
   width: 50%;
 `;
 export const CategoryAndBrand = () => {
+  const { t } = useTranslation();
   const { data } = useGetCategoryAndBrandAllQuery();
   const [removeCategory, { isSuccess: removeIsSuccsesCate }] =
     useRemoveCategoryMutation();
@@ -72,7 +73,6 @@ export const CategoryAndBrand = () => {
     });
   };
 
-  const { t } = useTranslation();
   type CategoryRow = ICategory;
   type BrandRow = IBrand;
   const handleRowEditCommit = useCallback(
@@ -178,7 +178,7 @@ export const CategoryAndBrand = () => {
   );
   useEffect(() => {
     if (removeIsSuccsesCate) {
-      toast.success("category silindi");
+      toast.success(t("CategoryDeletedSuccessfully"));
     }
   }, [removeIsSuccsesCate]);
   useEffect(() => {
@@ -200,32 +200,32 @@ export const CategoryAndBrand = () => {
   }, [updateErrorCate]);
   useEffect(() => {
     if (createSuccessCate) {
-      toast.success("category elave edildi");
+      toast.success(t("CategoryAddedSuccessfully"));
     }
   }, [createSuccessCate]);
 
   useEffect(() => {
     if (updateSuccsessCate) {
-      toast.success("category update olundu");
+      toast.success(t("CategoryUpdatedCuccsessufully"));
     }
   }, [updateSuccsessCate]);
 
   ///brands
   useEffect(() => {
     if (createSuccsessBrand) {
-      toast.success("brand yaradildi");
+      toast.success(t("BrandAddedSuccessfully"));
     }
   }, [createSuccsessBrand]);
 
   useEffect(() => {
     if (removeSuccessBrand) {
-      toast.success("brand silindi");
+      toast.success(t("BrandDeletedSuccessfully"));
     }
   }, [removeSuccessBrand]);
 
   useEffect(() => {
     if (updateSuccsessBrand) {
-      toast.success("brand update olundu");
+      toast.success(t("BrandUpdatedCuccsessufully"));
     }
   }, [updateSuccsessBrand]);
 
