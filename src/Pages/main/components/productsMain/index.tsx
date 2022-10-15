@@ -41,7 +41,7 @@ export const ProductsHome: FC<Props> = ({
           {ratingGoods?.map((obj) => (
             <Grid key={obj.id} item xs={3}>
               <CustomCard
-              
+                isfavorite={false}
                 handleNoCheckFavorite={handleNoCheckFavorite}
                 {...obj}
               />

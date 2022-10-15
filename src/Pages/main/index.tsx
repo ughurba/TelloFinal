@@ -11,8 +11,6 @@ import {
 } from "services/baseServices/goodsServices";
 import { useTranslation } from "react-i18next";
 
-import * as React from "react";
-import { useSetFavoriteMutation } from "services/baseServices/shopServices";
 import { useAppDispatch } from "Redux/hooks";
 import { extendedApi } from "services/baseServices/basketServices";
 
@@ -25,8 +23,6 @@ export const MainPage: FC = () => {
   const { t } = useTranslation();
   const { data, isLoading: isRatingGoodsLoad } =
     useGetBestSellingProductQuery();
-
-  const [postFavorite] = useSetFavoriteMutation();
 
   const { data: newArrivalProduct } = useGetNewArrivalProductQuery();
   const { data: goods } = useFetchAllGoodsQuery();

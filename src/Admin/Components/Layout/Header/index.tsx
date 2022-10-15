@@ -3,7 +3,6 @@ import { createTheme, styled, ThemeProvider } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -77,7 +76,7 @@ export function DashboardContent() {
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
-            pr: "24px", // keep right padding when drawer closed
+            pr: "24px",
           }}
         >
           <IconButton
@@ -126,7 +125,3 @@ export function DashboardContent() {
     </ThemeProvider>
   );
 }
-
-// export default function Dashboard() {
-//   return <DashboardContent />;
-// }

@@ -13,7 +13,7 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFetchLoginMutation } from "services/adminServices/accountServices";
 import { StyledError } from "./style";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { Loader } from "Components/shared";
 import { useNavigate } from "react-router-dom";
 import { AdminLinks } from "../../Routes/AdminLinks";
@@ -46,18 +46,17 @@ export function SignIn() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    postLogin({
-      email: data?.get("email")?.toString(),
-      password: data?.get("password")?.toString(),
-    });
+    postLogin(data);
   };
 
-  if (isSuccess) {
-    if (data) {
-      localStorage.setItem("userAdminToken", data?.token);
+  useEffect(() => {
+    if (isSuccess) {
+      if (data) {
+        localStorage.setItem("userAdminToken", data?.token);
+      }
+      navigate(AdminLinks.base);
     }
-    navigate(AdminLinks.base);
-  }
+  }, [isSuccess]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -105,10 +104,6 @@ export function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-              />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
               />
               <Button
                 type="submit"

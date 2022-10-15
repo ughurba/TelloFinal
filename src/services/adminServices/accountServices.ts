@@ -9,8 +9,8 @@ export const accountApi = createApi({
     baseUrl: "http://localhost:33033/api/AdminAccount/",
   }),
   endpoints: (build) => ({
-    fetchLogin: build.mutation<DataToken, ILogin>({
-      query: (body: ILogin) => {
+    fetchLogin: build.mutation<DataToken, FormData>({
+      query: (body) => {
         return {
           url: "login",
           method: "POST",

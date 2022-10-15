@@ -16,6 +16,6 @@ export const Wrapper = styled.div`
   background: #f1f1f1; */
 `;
 export const WrapperTrash = styled.div`
-  margin-left: 20px;
+  margin-left: 10px;
   cursor: pointer;
 `;

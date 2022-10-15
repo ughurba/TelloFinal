@@ -13,6 +13,7 @@ import { StyledLinks } from "./style";
 
 import GroupIcon from "@mui/icons-material/Group";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 export const MainListItems = () => {
   return (
@@ -57,7 +58,7 @@ export const MainListItems = () => {
           <ListItemIcon>
             <CategoryIcon />
           </ListItemIcon>
-          <ListItemText primary="Category" />
+          <ListItemText primary="Category ve Brend" />
         </ListItemButton>
       </StyledLinks>
 
@@ -75,9 +76,14 @@ export const MainListItems = () => {
 
 export const SecondaryListItems = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const handleClickLogout = () => {
+    localStorage.removeItem("userAdminToken");
+    navigate(AdminLinks.login);
+  };
   return (
     <>
-      <ListItemButton>
+      <ListItemButton onClick={handleClickLogout}>
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>

@@ -33,7 +33,6 @@ export const Orders = () => {
   const { data: Orders, refetch: getAllOrder } = useGetAllOrderQuery();
   const [putOrderStatus, { isSuccess }] = useUpdateOrderStatusMutation();
   const [rows, setRows] = React.useState<IAdminOrder[]>(Orders ? Orders : []);
-  console.log(Orders);
   useEffect(() => {
     if (Orders) {
       setRows(Orders);

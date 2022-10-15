@@ -114,7 +114,6 @@ export const AddProduct = () => {
   };
   const handleChangeMultiFile = (ev: FormEvent<HTMLInputElement>) => {
     let files = ev.currentTarget.files;
-
     if (files) {
       if (files["length"] === 0) {
         setMultiFileName([]);
@@ -123,21 +122,6 @@ export const AddProduct = () => {
       formik.setFieldValue("ChildPhotos", files);
     }
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(t("ProductAdded"));
-      formik.resetForm();
-      dispatch(extendedGetAllProductAdminApi.util.resetApiState());
-      setMultiFileName([]);
-      setFileName("");
-      setValue([]);
-    }
-    if (successUpdate) {
-      toast.success(t("InformationHasBeenUpdated"));
-      dispatch(extendedGetAllProductAdminApi.util.resetApiState());
-    }
-  }, [isSuccess, successUpdate]);
 
   const handleClose = () => {
     setValue(pendingValue);
@@ -160,6 +144,22 @@ export const AddProduct = () => {
     }
     setPendingValue(value);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success(t("ProductAdded"));
+      formik.resetForm();
+      dispatch(extendedGetAllProductAdminApi.util.resetApiState());
+      setMultiFileName([]);
+      setFileName("");
+      setValue([]);
+    }
+    if (successUpdate) {
+      toast.success(t("InformationHasBeenUpdated"));
+      dispatch(extendedGetAllProductAdminApi.util.resetApiState());
+    }
+  }, [isSuccess, successUpdate]);
+
   useEffect(() => {
     formik.setFieldValue("colors", value);
   }, [value]);

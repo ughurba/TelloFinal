@@ -75,14 +75,17 @@ export const Fag = () => {
                   aria-controls="panel4bh-content"
                   id="panel4bh-header"
                 >
-                  <Typography>{item.key}</Typography>
+                  <Typography variant="h5">{item.key}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>{item.value}</Typography>
+                  <Flex>
+                    <Typography variant="subtitle1">{item.value}</Typography>
+
+                    <WrapperTrash onClick={() => handleRemoveFag(item.id)}>
+                      <Trash size={25} color="#ff0000" weight="duotone" />
+                    </WrapperTrash>
+                  </Flex>
                 </AccordionDetails>
-                <WrapperTrash onClick={() => handleRemoveFag(item.id)}>
-                  <Trash size={20} color="#30a67f" weight="duotone" />
-                </WrapperTrash>
               </Accordion>
             ))}
           </Flex>

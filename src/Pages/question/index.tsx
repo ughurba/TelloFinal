@@ -64,10 +64,10 @@ export const Question = () => {
                   aria-controls="panel4bh-content"
                   id="panel4bh-header"
                 >
-                  <Typography>{item.key}</Typography>
+                  <Typography variant="h5">{item.key}</Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography>{item.value}</Typography>
+                  <Typography variant="subtitle1">{item.value}</Typography>
                 </AccordionDetails>
               </Accordion>
             ))}

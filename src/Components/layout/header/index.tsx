@@ -3,11 +3,15 @@ import {
   StyledParentSvg,
   StyledBasketHeader,
   StyledSize,
+  WrapperLang,
 } from "./style";
 import { Flex, Container } from "../../shared/";
 import { SubMenu } from "./components/subMenu";
 import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
@@ -20,9 +24,17 @@ import {
 } from "services/baseServices/shopServices";
 import { useDebounce } from "Hooks/debounce";
 import { SearchMenu } from "./components/searchMenu";
+import { useTranslation } from "react-i18next";
+import { styled } from "@mui/material";
 
+export const StyledSelect = styled(Select)`
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding-right: 0px !important;
+  }
+`;
 export const Header = () => {
   const dispatch = useAppDispatch();
+  const { i18n } = useTranslation();
   useSetUser();
   useBasketUpdate();
   const { user } = useAppSelector((state) => state.user);
@@ -41,6 +53,15 @@ export const Header = () => {
       dispatch(shopExtendedApi.util.resetApiState());
     }
   }, [debounceSearch]);
+  const [lang, setLang] = useState("az");
+
+  const handleChangeLang = (event: SelectChangeEvent<unknown>) => {
+    setLang(event.target.value as string);
+  };
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
+
   return (
     <Container>
       <Flex AlItems={"center"} JsContent={"space-between"}>
@@ -68,6 +89,18 @@ export const Header = () => {
             </Link>
             <StyledSize>{basketItems.length}</StyledSize>
           </StyledBasketHeader>
+          <WrapperLang>
+            <FormControl>
+              <StyledSelect
+                IconComponent={"noscript"}
+                value={lang}
+                onChange={handleChangeLang}
+              >
+                <MenuItem value={"az"}>az</MenuItem>
+                <MenuItem value={"ru"}>ru</MenuItem>
+              </StyledSelect>
+            </FormControl>
+          </WrapperLang>
         </StyledParentSvg>
       </Flex>
       <SubMenu />

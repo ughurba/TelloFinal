@@ -60,7 +60,6 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
   };
   const handleAddItem = (productId: number) => {
     if (user.isOnline) {
-      console.log(itemIds);
       setItemIds({ ...itemIds, productId: productId });
       addProduct(itemIds);
     } else {

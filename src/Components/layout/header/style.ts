@@ -9,6 +9,8 @@ export const StyledParentInput = styled.div`
   }
 `;
 export const StyledParentSvg = styled.div`
+  display: flex;
+  align-items: center;
   & svg {
     margin-right: ${(props) => props.theme.space[5]};
   }
@@ -26,4 +28,10 @@ export const StyledSize = styled.span`
   font-size: ${(props) => props.theme.fontStyle.size.small};
   color: white;
   font-weight: ${(props) => props.theme.fontStyle.fontWeight.medium};
+`;
+export const WrapperLang = styled.div`
+  width: 30px;
+
+  display: inline-block;
+  margin-left: 10px;
 `;
