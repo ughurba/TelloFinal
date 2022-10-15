@@ -9,6 +9,7 @@ import { goodsApi } from "./baseServices/goodsServices";
 import { saleApi } from "./baseServices/saleServices";
 import { saleAdminApi } from "./adminServices/saleAdminServices";
 import { categoryAndBrandApi } from "./adminServices/categoryAndBrandServices";
+import { fagApi } from "./baseServices/fagServices";
 export {
   saleAdminApi,
   accountApi,
@@ -21,4 +22,5 @@ export {
   saleApi,
   shopApi,
   categoryAndBrandApi,
+  fagApi,
 };

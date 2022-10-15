@@ -1,5 +1,5 @@
 import { GridRowId } from "@mui/x-data-grid";
-import { ICategoryAndBrand } from "../../Admin/Pages/CategoryAndProduct/types";
+import { ICategoryAndBrand } from "../../Admin/Pages/CategoryAndBrand/types";
 import { fetchBaseQuery, createApi } from "@reduxjs/toolkit/dist/query/react";
 
 export const categoryAndBrandApi = createApi({

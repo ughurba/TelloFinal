@@ -7,6 +7,8 @@ import { UpdateSpecifications } from "./Specifications/updateSpecifications";
 import { EditSpecifications } from "./Specifications/EditSpecifications";
 import { Users } from "./User";
 import { Product } from "Admin/Pages/Product";
+import { Fag } from "./Fag";
+import { AddFag } from "./AddFag";
 export {
   Product,
   Users,
@@ -17,4 +19,6 @@ export {
   CreateSpecifications,
   Orders,
   OrderItems,
+  Fag,
+  AddFag,
 };

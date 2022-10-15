@@ -8,8 +8,10 @@ import {
   UpdateSpecifications,
   Users,
   Product,
+  Fag,
+  AddFag,
 } from "Admin/Pages";
-import { CategoryAndBrand } from "Admin/Pages/CategoryAndProduct";
+import { CategoryAndBrand } from "Admin/Pages/CategoryAndBrand";
 import { RemoveRoleModal } from "Admin/Pages/User/components/removeModalRole";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AppLayout } from "../Layouts/AppLayout";
@@ -50,6 +52,8 @@ export const AppRoutesAdmin = () => {
             path={AdminLinks.categoryAndBrand}
             element={<CategoryAndBrand />}
           />
+          <Route path={AdminLinks.fagAdd} element={<AddFag />} />
+          <Route path={AdminLinks.fag} element={<Fag />} />
         </Route>
         <Route path={AdminLinks.login} element={<SignIn />} />
       </Routes>

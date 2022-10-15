@@ -136,5 +136,7 @@
   "CategoryUpdatedCuccsessufully":"Kateqoriya uğurla yeniləndi",
   "BrandDeletedSuccessfully":"Brend uğurla silindi",
   "BrandAddedSuccessfully":"Brend uğurla əlavə edildi",
-  "BrandUpdatedCuccsessufully":"Brend uğurla yeniləndi"
+  "BrandUpdatedCuccsessufully":"Brend uğurla yeniləndi",
+  "AreYouSure":"Sən əminsən?",
+  "YouWontbeAbleToRevertThis":"Bunu geri qaytara bilməyəcəksiniz!"
 }

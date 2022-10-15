@@ -3,9 +3,6 @@ import Button from "@mui/material/Button";
 
 import { styled as MuiStyled, TextField } from "@mui/material";
 
-export const StyledLabel = styled.label`
-  display: block;
-`;
 export const Wrapper = styled.div`
   width: 100%;
   padding-bottom: 50px;
@@ -17,15 +14,6 @@ export const StyledInput = MuiStyled(TextField)`
   border-radius: 8px;
   outline: none;
 `;
-
-export const StyledSelect = styled.select`
-  height: 50px;
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 15px;
-  cursor: pointer;
-  outline: none;
-`;
 export const WrapperSelect = styled.div`
   margin-top: 20px;
 `;
@@ -34,16 +22,14 @@ margin-top:20px;
 
 `;
 export const WrapperUpload = styled.div`
-  margin-top: 20px;
+  margin-top: 50px;
 `;
-export const ColorInput = styled.input`
-  margin-left: 20px;
-`;
+
 export const StyledErrorMessage = styled.div`
   font-size: ${({ theme }) => theme.fontStyle.size.xSmall};
   color: red;
 `;
-export const StyledSpan = styled.span``;
+
 export const WrapperMultiFile = styled.div`
   display: flex;
   width: 260px;
@@ -59,4 +45,19 @@ export const WrapperMultiFile = styled.div`
   border: 1px solid rgb(206, 212, 218);
   overflow-y: scroll;
   max-height: 200px;
+`;
+
+export const WrapperImages = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  width: 65px;
+  height: 50px;
+  margin-left: 10px;
+`;
+export const StyledImage = styled.img`
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
 `;

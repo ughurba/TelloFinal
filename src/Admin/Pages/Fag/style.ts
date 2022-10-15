@@ -9,7 +9,13 @@ export const Title = styled.h2`
   margin-top: 20px;
 `;
 export const Wrapper = styled.div`
-  padding-bottom: 200px;
-  margin-top: 10px;
-  background: #f1f1f1;
+  padding-bottom: 100px;
+  // margin-top: 10px; */
+  /* width: 100%;
+  height: 100%;
+  background: #f1f1f1; */
+`;
+export const WrapperTrash = styled.div`
+  margin-left: 20px;
+  cursor: pointer;
 `;

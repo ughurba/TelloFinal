@@ -17,7 +17,9 @@ import {
   shopApi,
   saleAdminApi,
   categoryAndBrandApi,
+  fagApi,
 } from "services";
+import { fagAdminApi } from "services/adminServices/adminFagServices";
 
 export const store = configureStore({
   reducer: {
@@ -38,6 +40,8 @@ export const store = configureStore({
     [saleAdminApi.reducerPath]: saleAdminApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [categoryAndBrandApi.reducerPath]: categoryAndBrandApi.reducer,
+    [fagApi.reducerPath]: fagApi.reducer,
+    [fagAdminApi.reducerPath]: fagAdminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -52,7 +56,9 @@ export const store = configureStore({
       saleApi.middleware,
       saleAdminApi.middleware,
       userApi.middleware,
-      categoryAndBrandApi.middleware
+      categoryAndBrandApi.middleware,
+      fagApi.middleware,
+      fagAdminApi.middleware
     ),
 });
 

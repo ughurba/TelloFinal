@@ -6,8 +6,8 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import CategoryIcon from "@mui/icons-material/Category";
+import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 import LogoutIcon from "@mui/icons-material/Logout";
-import LayersIcon from "@mui/icons-material/Layers";
 import { AdminLinks } from "../../../Routes/AdminLinks";
 import { StyledLinks } from "./style";
 
@@ -58,6 +58,15 @@ export const MainListItems = () => {
             <CategoryIcon />
           </ListItemIcon>
           <ListItemText primary="Category" />
+        </ListItemButton>
+      </StyledLinks>
+
+      <StyledLinks to={AdminLinks.fag}>
+        <ListItemButton>
+          <ListItemIcon>
+            <QuestionAnswerIcon />
+          </ListItemIcon>
+          <ListItemText primary="Fag" />
         </ListItemButton>
       </StyledLinks>
     </React.Fragment>

@@ -3,9 +3,7 @@ import { FormEvent, useEffect, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import MenuItem from "@material-ui/core/MenuItem";
-
 import Button from "@mui/material/Button";
-
 import {
   StyledInput,
   Wrapper,
@@ -13,6 +11,8 @@ import {
   WrapperUpload,
   StyledErrorMessage,
   WrapperMultiFile,
+  StyledImage,
+  WrapperImages,
 } from "./style";
 import {
   useUpdateProductMutation,
@@ -23,7 +23,7 @@ import {
 } from "services/adminServices/productServices";
 import { toFormData } from "Helper";
 import { toast } from "react-toastify";
-import { Loader } from "Components/shared";
+import { Flex, Loader } from "Components/shared";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "Redux/hooks";
 import { useTranslation } from "react-i18next";
@@ -51,7 +51,6 @@ export const AddProduct = () => {
   const { data: product } = useGetOneProductQuery(id, {
     skip: id === "create",
   });
-
   const { addProductValidate } = useValidator();
   const dispatch = useAppDispatch();
   useEffect(() => {
@@ -62,6 +61,7 @@ export const AddProduct = () => {
       setStorage(product?.storages.map((x) => x.value.toString()));
     }
   }, [product]);
+
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
@@ -76,7 +76,7 @@ export const AddProduct = () => {
       Photos: [],
       ChildPhotos: [],
       colors: [],
-      storage: [],
+      storage: storage || [],
     },
     validationSchema: id === "create" ? addProductValidate : "",
 
@@ -282,18 +282,26 @@ export const AddProduct = () => {
           </WrapperSelect>
 
           <WrapperUpload>
-            <Button variant="contained" component="label">
-              Main photo Upload
-              <input
-                hidden
-                id="file"
-                name="Photos"
-                type="file"
-                accept="image/*"
-                onChange={handleChangeFile}
-              />
-              <PhotoCamera sx={{ marginLeft: "10px" }} />
-            </Button>
+            <Flex AlItems="center">
+              <Button variant="contained" component="label">
+                Main photo Upload
+                <input
+                  hidden
+                  id="file"
+                  name="Photos"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChangeFile}
+                />
+                <PhotoCamera sx={{ marginLeft: "10px" }} />
+              </Button>
+              {product?.mainPhoto && (
+                <WrapperImages>
+                  <StyledImage src={product?.mainPhoto.path} />
+                </WrapperImages>
+              )}
+            </Flex>
+
             {fileName.length !== 0 && (
               <WrapperMultiFile>
                 <PhotoUpload item={fileName} />
@@ -305,19 +313,28 @@ export const AddProduct = () => {
           </WrapperUpload>
 
           <WrapperUpload>
-            <Button variant="contained" component="label">
-              Child Photo Upload
-              <input
-                hidden
-                id="file"
-                name="ChildPhotos"
-                type="file"
-                multiple={true}
-                accept="image/*"
-                onChange={handleChangeMultiFile}
-              />
-              <PhotoCamera sx={{ marginLeft: "10px" }} />
-            </Button>
+            <Flex AlItems="center">
+              <Button variant="contained" component="label">
+                Child Photo Upload
+                <input
+                  hidden
+                  id="file"
+                  name="ChildPhotos"
+                  type="file"
+                  multiple={true}
+                  accept="image/*"
+                  onChange={handleChangeMultiFile}
+                />
+                <PhotoCamera sx={{ marginLeft: "10px" }} />
+              </Button>
+
+              {product?.childPhotos.map((img) => (
+                <WrapperImages>
+                  <StyledImage src={img.path} />
+                </WrapperImages>
+              ))}
+            </Flex>
+
             {multiFileName.length !== 0 && (
               <WrapperMultiFile>
                 {multiFileName.map((item) => (
@@ -351,6 +368,7 @@ export const AddProduct = () => {
             options={["8", "16", "32", "64", "128", "256", "512"]}
             getOptionLabel={(option) => option}
             onChange={(e, value) => formik.setFieldValue("storage", value)}
+            value={formik.values.storage}
             renderInput={(params) => (
               <StyledInput
                 {...params}
