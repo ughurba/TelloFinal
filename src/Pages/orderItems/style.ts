@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 export const StyledImg = styled.img`
   width: 50px;
-  height: 72px;
+  object-fit: contain;
 `;
 export const ProductContent = styled.div`
   margin-left: 25px;

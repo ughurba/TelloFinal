@@ -19,7 +19,6 @@ import {
 import styled from "styled-components";
 
 interface Props {
-  mainImg: string[];
   childImg: string[];
 }
 export const StyledChildImg = styled.img`
@@ -29,7 +28,7 @@ export const StyledChildImg = styled.img`
 export const StyledMainImg = styled.img`
   object-fit: contain !important;
 `;
-export const FullInfoShowSlider: FC<Props> = ({ mainImg, childImg }) => {
+export const FullInfoShowSlider: FC<Props> = ({ childImg }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
   return (
     <Wrapper>

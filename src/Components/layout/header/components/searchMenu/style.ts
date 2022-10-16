@@ -59,8 +59,7 @@ export const OldPrice = styled.del`
 `;
 export const StyledImg = styled.img`
   width: 75px;
-  height: 80px;
-  object-fit: cover;
+  object-fit: contain;
   padding: 3px;
 `;
 export const Content = styled.div`

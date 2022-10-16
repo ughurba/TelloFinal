@@ -21,7 +21,7 @@ export const categoryAndBrandApi = createApi({
       query: () => ``,
       providesTags: ["PostCategory", "PostBrand"],
     }),
-    removeCategory: build.mutation<void, { id: GridRowId }>({
+    removeCategory: build.mutation<any, { id: GridRowId }>({
       query: (arg) => {
         return {
           url: `removeCategory/${arg.id}`,
@@ -61,7 +61,7 @@ export const categoryAndBrandApi = createApi({
       },
       invalidatesTags: ["PostBrand"],
     }),
-    removeBrand: build.mutation<void, { id: GridRowId }>({
+    removeBrand: build.mutation<any, { id: GridRowId }>({
       query: (arg) => {
         return {
           url: `removeBrand/${arg.id}`,
@@ -69,7 +69,7 @@ export const categoryAndBrandApi = createApi({
         };
       },
     }),
-    updateBrand: build.mutation<void, { id: GridRowId; name: string }>({
+    updateBrand: build.mutation<any, { id: GridRowId; name: string }>({
       query: (body) => {
         return {
           url: `brandUpdate`,

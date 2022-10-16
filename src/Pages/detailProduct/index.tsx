@@ -7,17 +7,13 @@ import { useGetOneQuery } from "services/baseServices/goodsServices";
 
 export const DetailProduct = () => {
   const { id = "" } = useParams<{ id: string }>();
-
-  const [mainImg, setMainImg] = useState<string[]>([]);
   const [childImg, setChildImg] = useState<string[]>([]);
 
   const { data, isLoading } = useGetOneQuery(id);
 
   useEffect(() => {
     data?.photos.forEach((item) => {
-      if (item.isMain) {
-        setMainImg([item.path]);
-      } else {
+      if (!item.isMain) {
         childImg.push(item.path);
       }
     });
@@ -31,7 +27,7 @@ export const DetailProduct = () => {
         ) : (
           <div>
             <Flex>
-              <FullInfoShowSlider mainImg={mainImg} childImg={childImg} />{" "}
+              <FullInfoShowSlider childImg={childImg} />
               {data && <FullInfoProductContent product={data} />}
             </Flex>
             <Specification product={data} />

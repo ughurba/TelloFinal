@@ -20,7 +20,7 @@
   "ProductCount": "Məhsul sayı",
   "SkipToProducts": "Məhsullara keçid",
   "SmartClock": "Smart Saat",
-  "Search": "Axtarış...",
+  "Search": "Поиск...",
   "Brand": "Brend",
   "ProductType": "Məhsul tipi",
   "Network": "Şəbəkə",
@@ -80,7 +80,7 @@
   "MyOrders": "Sifarişlərim",
   "MyFavorites":"Favorilərim",
   "DeliveryAddress":"Çatdırılma ünvanı",
-  "Logout": "Çıxış",
+  "Logout": "Выход",
   "Birtdhy" : "Doğum tarixi",
   "SelectYourDateOfBirth": "Doğum tarixinizi seçin",
   "UpdateInformation":"Məlumatları yenilə",
@@ -138,5 +138,6 @@
   "BrandAddedSuccessfully":"Brend uğurla əlavə edildi",
   "BrandUpdatedCuccsessufully":"Brend uğurla yeniləndi",
   "AreYouSure":"Sən əminsən?",
-  "YouWontbeAbleToRevertThis":"Bunu geri qaytara bilməyəcəksiniz!"
+  "YouWontbeAbleToRevertThis":"Bunu geri qaytara bilməyəcəksiniz!",
+  "Send":"Отправить"
 }

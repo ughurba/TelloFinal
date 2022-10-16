@@ -140,7 +140,7 @@ export const Specification: FC<Props> = ({ product }) => {
                   }
                   type={"submit"}
                 >
-                  {t("Insert")}
+                  {t("Send")}
                 </StyledButton>
               </>
             )}

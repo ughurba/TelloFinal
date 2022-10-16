@@ -7,7 +7,6 @@ import {
   MuiEvent,
 } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
-
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import { Flex } from "Components/shared";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -21,34 +20,28 @@ import {
   useUpdateCategoryMutation,
   useUpdateBrandMutation,
 } from "services/adminServices/categoryAndBrandServices";
-import styled from "styled-components";
 import { IBrand, ICategory } from "types";
-import { toast } from "react-toastify";
 import { BasicModalDialog } from "Admin/Components/Shared/Modal";
+import { useSuccess } from "Hooks/useSuccess";
+import { WrapperCategoryTable, Wrapper, WrapperBrandTable } from "./style";
+import { useError } from "Hooks/useError";
 
-export const Wrapper = styled.div``;
-export const WrapperCategoryTable = styled.div`
-  width: 50%;
-`;
-export const WrapperBrandTable = styled.div`
-  width: 50%;
-`;
 export const CategoryAndBrand = () => {
   const { t } = useTranslation();
   const { data } = useGetCategoryAndBrandAllQuery();
-  const [removeCategory, { isSuccess: removeIsSuccsesCate }] =
+  const [removeCategory, { isSuccess: removeIsSuccesCate }] =
     useRemoveCategoryMutation();
   const [postCategory, { error, isSuccess: createSuccessCate }] =
     useCreateCategoryMutation();
   const [
     updateCategory,
-    { isSuccess: updateSuccsessCate, error: updateErrorCate },
+    { isSuccess: updateSuccessCate, error: updateErrorCate },
   ] = useUpdateCategoryMutation();
 
   ///brand requests
   const [
     postBrand,
-    { isSuccess: createSuccsessBrand, error: brandCreateError },
+    { isSuccess: createSuccessBrand, error: brandCreateError },
   ] = useCreateBrandMutation();
   const [removeBrand, { isSuccess: removeSuccessBrand }] =
     useRemoveBrandMutation();
@@ -176,75 +169,19 @@ export const CategoryAndBrand = () => {
     ],
     [deleteBrand, brandRows]
   );
-  useEffect(() => {
-    if (removeIsSuccsesCate) {
-      toast.success(t("CategoryDeletedSuccessfully"));
-    }
-  }, [removeIsSuccsesCate]);
-  useEffect(() => {
-    if (error) {
-      if ("data" in error) {
-        //@ts-ignore
-        toast.error(error.data);
-      }
-    }
-  }, [error]);
+  //category
+  useSuccess(removeIsSuccesCate, "CategoryDeletedSuccessfully");
+  useSuccess(createSuccessCate, "CategoryAddedSuccessfully");
+  useSuccess(updateSuccessCate, "CategoryUpdatedCuccsessufully");
+  useError(error);
+  useError(updateErrorCate);
+  //brands
+  useSuccess(createSuccessBrand, "BrandAddedSuccessfully");
+  useSuccess(removeSuccessBrand, "BrandDeletedSuccessfully");
+  useSuccess(updateSuccsessBrand, "BrandUpdatedCuccsessufully");
+  useError(brandCreateError);
+  useError(brandUpdateError);
 
-  useEffect(() => {
-    if (updateErrorCate) {
-      if ("data" in updateErrorCate) {
-        //@ts-ignore
-        toast.error(updateErrorCate.data);
-      }
-    }
-  }, [updateErrorCate]);
-  useEffect(() => {
-    if (createSuccessCate) {
-      toast.success(t("CategoryAddedSuccessfully"));
-    }
-  }, [createSuccessCate]);
-
-  useEffect(() => {
-    if (updateSuccsessCate) {
-      toast.success(t("CategoryUpdatedCuccsessufully"));
-    }
-  }, [updateSuccsessCate]);
-
-  ///brands
-  useEffect(() => {
-    if (createSuccsessBrand) {
-      toast.success(t("BrandAddedSuccessfully"));
-    }
-  }, [createSuccsessBrand]);
-
-  useEffect(() => {
-    if (removeSuccessBrand) {
-      toast.success(t("BrandDeletedSuccessfully"));
-    }
-  }, [removeSuccessBrand]);
-
-  useEffect(() => {
-    if (updateSuccsessBrand) {
-      toast.success(t("BrandUpdatedCuccsessufully"));
-    }
-  }, [updateSuccsessBrand]);
-
-  useEffect(() => {
-    if (brandCreateError) {
-      if ("data" in brandCreateError) {
-        //@ts-ignore
-        toast.error(brandCreateError.data);
-      }
-    }
-  }, [brandCreateError]);
-  useEffect(() => {
-    if (brandUpdateError) {
-      if ("data" in brandUpdateError) {
-        //@ts-ignore
-        toast.error(brandUpdateError.data);
-      }
-    }
-  }, [brandUpdateError]);
   return (
     <Wrapper>
       <Flex>

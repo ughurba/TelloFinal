@@ -28,8 +28,11 @@ import { useTranslation } from "react-i18next";
 import { styled } from "@mui/material";
 
 export const StyledSelect = styled(Select)`
-  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
-    padding-right: 0px !important;
+  .MuiSelect-select {
+    padding: 5px 7px !important;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.23) !important;
   }
 `;
 export const Header = () => {
