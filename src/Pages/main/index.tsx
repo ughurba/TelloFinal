@@ -10,12 +10,17 @@ import {
   useGetNewArrivalProductQuery,
 } from "services/baseServices/goodsServices";
 import { useTranslation } from "react-i18next";
-
-import { useAppDispatch } from "Redux/hooks";
+import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { extendedApi } from "services/baseServices/basketServices";
+import { fetchSlider } from "Redux/slices/sliderSlice";
 
 export const MainPage: FC = () => {
   const dispatch = useAppDispatch();
+  const { sliderImg } = useAppSelector((state) => state.slider);
+
+  useEffect(() => {
+    dispatch(fetchSlider());
+  }, [dispatch]);
   useEffect(() => {
     dispatch(extendedApi.util.resetApiState());
   }, [dispatch]);
@@ -83,7 +88,7 @@ export const MainPage: FC = () => {
       </div>
 
       <InfoCard phones={phones} headphones={headphones} />
-      <SmallSlider />
+      <SmallSlider data={sliderImg} />
     </StyledMain>
   );
 };

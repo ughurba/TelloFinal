@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { DetailProduct, Goods } from "types";
+import { DetailProduct, Goods, ShopGoods } from "types";
 
 export const goodsApi = createApi({
   reducerPath: "goodsApi",
@@ -16,6 +16,9 @@ export const goodsApi = createApi({
     getNewArrivalProduct: builder.query<Goods[], void>({
       query: () => `newArrival`,
     }),
+    getAllRelatedProduct: builder.query<ShopGoods[], number>({
+      query: (id) => `relatedProducts/${id}`,
+    }),
     getOne: builder.query<DetailProduct, string>({
       query: (id) => `/${id}`,
     }),
@@ -27,4 +30,5 @@ export const {
   useFetchAllGoodsQuery,
   useGetBestSellingProductQuery,
   useGetOneQuery,
+  useGetAllRelatedProductQuery,
 } = goodsApi;

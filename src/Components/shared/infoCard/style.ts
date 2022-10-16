@@ -60,9 +60,11 @@ export const ImageBoxMask = MuiStyled(Box)`
      
 `;
 export const StyledChevron = styled(ChevronBlue)`
-  position: absolute;
+  /* position: absolute;
   top: 6px;
-  right: 320px;
+  right: 320px; */
+  margin-left: 8px;
+  margin-top: 3px;
 `;
 export const StyledImage = styled.img`
   position: absolute;

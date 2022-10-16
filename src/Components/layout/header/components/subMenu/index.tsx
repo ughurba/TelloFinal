@@ -11,32 +11,12 @@ export const SubMenu = () => {
   const dispatch = useAppDispatch();
   const { data } = useGetAllCategoriesQuery();
   const { t } = useTranslation();
-  // const Routes = useMemo(
-  //   () => ({
-  //     1: {
-  //       link: Links.app.phone,
-  //       title: t("Phones"),
-  //     },
-  //     2: {
-  //       link: Links.app.headphone,
-  //       title: t("Headphones"),
-  //     },
-  //     3: {
-  //       link: Links.app.allBrands,
-  //       title: t("AllBrands"),
-  //     },
-  //     4: {
-  //       link: Links.app.discounts,
-  //       title: t("Discounts"),
-  //     },
-  //   }),
-  //   [data]
-  // );
 
   const handleSetCategoryId = (id: number) => {
     dispatch(setCategoryId(id));
     localStorage.setItem("categoryId", JSON.stringify(id));
   };
+
   return (
     <Wrapper>
       <Flex>
@@ -45,15 +25,15 @@ export const SubMenu = () => {
           <StyledMenuList
             key={item.id}
             onClick={() => handleSetCategoryId(item.id)}
-            to={`${Links.app.product}/${item.title.split(" ").join("_")}`}
+            to={`${Links.app.product}/${item.id}`}
           >
             {item.title}
           </StyledMenuList>
         ))}
-        <StyledMenuList to={`${Links.app.product}/Bütün brendlər`}>
+        <StyledMenuList to={`${Links.app.product}/allBrands`}>
           Bütün brendlər
         </StyledMenuList>
-        <StyledMenuList to={`${Links.app.product}/Endirimlər`}>
+        <StyledMenuList to={`${Links.app.product}/discount`}>
           Endirimlər
         </StyledMenuList>
       </Flex>

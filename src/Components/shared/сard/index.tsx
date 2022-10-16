@@ -49,7 +49,6 @@ export const CustomCard: FC<Props> = ({
 }) => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
-
   return (
     <Card
       sx={{ maxWidth: 300, padding: "15px", height: 380, position: "relative" }}

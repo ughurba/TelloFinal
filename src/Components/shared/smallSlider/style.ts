@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Box, styled as MuiStyled } from "@mui/material";
 export const Wrapper = styled.div`
-  margin-top: ${(props) => props.theme.space[8]};
+  margin-top: ${(props) => props.theme.space[4]};
   padding-top: 50px;
   background: #f5f5f7;
   & .swiper-pagination-bullets {

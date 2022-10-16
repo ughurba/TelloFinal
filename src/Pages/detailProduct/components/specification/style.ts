@@ -86,7 +86,7 @@ export const StyledTextArea = styled(MyField).attrs({
   component: "textarea",
   id: "comment",
   name: "comment",
-  placeholder: "Rətinizi buraya yazın",
+  placeholder: "Rəyinizi buraya yazın",
   label: "Rəyinizi yazın",
 })`
   width: 100%;

@@ -33,9 +33,12 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
             <GoodsCount>
               {t("ProductCount")}: {phones?.length}
             </GoodsCount>
-            <GoodsPath onClick={() => navigate(Links.app.phone)}>
-              {t("SkipToProducts")} <StyledChevron />
-            </GoodsPath>
+            <Flex AlItems="center">
+              <GoodsPath onClick={() => navigate(Links.app.phone)}>
+                {t("SkipToProducts")}
+              </GoodsPath>
+              <StyledChevron />
+            </Flex>
           </ImageBoxFon>
           <ImageBoxXiaomi></ImageBoxXiaomi>
         </Flex>
@@ -43,10 +46,12 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
           <Flex FlexColumn={"column"}>
             <ImageBoxWatch>
               <Title>{t("SmartClock")}</Title>
-              <GoodsCount>{t("ProductCount")}: 46</GoodsCount>
-              <GoodsPath>
-                {t("SkipToProducts")} <StyledChevron />
-              </GoodsPath>
+              <GoodsCount>{t("ProductCount")}: 8</GoodsCount>
+              <Flex AlItems="center">
+                <GoodsPath>{t("SkipToProducts")}</GoodsPath>
+                <StyledChevron />
+              </Flex>
+
               <StyledImage src={watching} />
             </ImageBoxWatch>
             <ImageBoxMask>
@@ -54,9 +59,12 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
               <GoodsCount>
                 {t("ProductCount")}: {headphones.length}
               </GoodsCount>
-              <GoodsPath onClick={() => navigate(Links.app.headphone)}>
-                {t("SkipToProducts")} <StyledChevron />
-              </GoodsPath>
+              <Flex AlItems="center">
+                <GoodsPath onClick={() => navigate(Links.app.headphone)}>
+                  {t("SkipToProducts")}
+                </GoodsPath>
+                <StyledChevron />
+              </Flex>
             </ImageBoxMask>
           </Flex>
         </StyledBox>

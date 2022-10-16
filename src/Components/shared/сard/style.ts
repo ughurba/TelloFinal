@@ -40,11 +40,12 @@ export const NoStock = styled.span`
 
 export const NewPrice = styled.span`
   color: ${(props) => props.theme.colors.cerise};
-  margin-left: 15px;
+
   ${FontStyles}
 `;
 export const OldPrice = styled.del`
   color: ${(props) => props.theme.colors.oldSilver};
+  margin-right: 15px;
   ${FontStyles}
 `;
 export const StyledCardActions = MuiStyled(CardActions)`

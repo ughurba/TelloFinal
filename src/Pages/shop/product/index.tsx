@@ -58,9 +58,9 @@ export const Product = () => {
   const handleValue = (ev: React.ChangeEvent<HTMLSelectElement>) => {
     setOrderByValue(+ev.currentTarget.value);
   };
-  const { category } = useParams();
+  const { category = "" } = useParams();
   const ProductType: IProductType = {
-    id: id,
+    id: category,
     brandIds: brandValue,
     orderBy: orderByValue,
     page: page,

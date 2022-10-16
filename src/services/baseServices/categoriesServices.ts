@@ -3,7 +3,7 @@ import { Brand, Category, ShopGoods } from "types";
 import { Links } from "Routes/links";
 
 export interface IProductType {
-  id: number;
+  id: string;
   brandIds?: number[];
   page: number;
   size: number;
@@ -18,15 +18,17 @@ const categoryProduct = (Product: IProductType, url?: string) => {
     .split(",")
     .join("");
 
-  const allBrands = `${
-    Product.category === "Bütün brendlər" ? `&allBrand=${true}` : ""
+  const allBrands = `${Product.id === "allBrands" ? `&allBrand=${true}` : ""}`;
+
+  const discount = `${Product.id === "discount" ? `&discount=${true}` : ""}`;
+
+  const productId = `${
+    Product.id === "discount" || Product.id === "allBrands"
+      ? ""
+      : `id=${Product.id}`
   }`;
 
-  const discount = `${
-    Product.category === "Endirimlər" ? `&discount=${true}` : ""
-  }`;
-
-  return `/${url ? `${url}/` : ""}${Product.id}?${str}
+  return `/getProductInShop?${productId}&${str}
   &orderBy=${Product.orderBy}&minPrice=${Product?.minPrice}
   &maxPrice=${Product?.maxPrice}${discount}${allBrands}
   &page=${Product.page}

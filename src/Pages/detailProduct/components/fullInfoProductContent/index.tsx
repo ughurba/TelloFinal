@@ -16,7 +16,7 @@ import {
 } from "./style";
 import { Flex } from "Components/shared/";
 import { useTranslation } from "react-i18next";
-import { DetailProduct, ProductStorages } from "types";
+import { DetailProduct } from "types";
 import HoverRating from "../customRating";
 import {
   AddProps,
@@ -50,6 +50,7 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       ? product?.productStorages[0]?.storage.id
       : 0,
   });
+
   const handleClickColor = (id: number, colorCode: string) => {
     setItemIds({ ...itemIds, colorId: id });
     setCheckColor(colorCode);
@@ -66,6 +67,18 @@ export const FullInfoProductContent: FC<IProps> = ({ product }) => {
       toast.warning("login ol");
     }
   };
+  useEffect(() => {
+    setCheckColor(product.productColors[0].colors.code);
+    setCheckStorage(product?.productStorages[0]?.storage.id);
+    setItemIds({
+      productId: product.id,
+      colorId: product.productColors[0].colors.id,
+      storageId: product?.productStorages[0]?.storage.id
+        ? product?.productStorages[0]?.storage.id
+        : 0,
+    });
+  }, [product]);
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(addItem(data.basketItems));

@@ -8,13 +8,21 @@ import {
   WrapperTitle,
 } from "./style";
 import { useTranslation } from "react-i18next";
-import { GoogleLogin, GoogleLogout } from "react-google-login";
+import {
+  GoogleLogin,
+  GoogleLoginResponse,
+  GoogleLoginResponseOffline,
+  useGoogleLogin,
+  GoogleLogout,
+} from "react-google-login";
 import { gapi } from "gapi-script";
 import { useEffect } from "react";
 export const AnotherLogin = () => {
   const { t } = useTranslation();
-  const onSuccess = (res: any) => {
-    console.log("success:", res);
+  const onSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if ("profileObj" in res) {
+      console.log(res.profileObj);
+    }
   };
   const onFailure = (err: any) => {
     console.log("failed:", err);
@@ -48,7 +56,7 @@ export const AnotherLogin = () => {
           isSignedIn={false}
         />
         <Text>{t("WithGoogle")}</Text>
-        <GoogleLogout clientId={clientId} buttonText="Sign Out" />
+        {/* <GoogleLogout clientId={clientId} buttonText="Sign Out" /> */}
         {/* <StyledGoogle />
          */}
       </Flex>

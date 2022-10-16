@@ -18,4 +18,5 @@ export const Wrapper = styled.div`
   .active {
     color: ${({ theme }) => theme.colors.green};
   }
+
 `;

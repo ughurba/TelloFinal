@@ -57,7 +57,7 @@ export const TotalSide: FC<Props> = ({ total, isButton = false }) => {
       </List>
       <Line />
       <Flex AlItems={"center"} JsContent={"space-between"}>
-        <Total>{t("Toplam qiymət:")}</Total>
+        <Total>{t("TotalAmount")}</Total>
         <Flex AlItems={"center"}>
           <Price>{total?.toFixed(2)}</Price>
           <GreyAzn />
