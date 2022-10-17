@@ -54,6 +54,7 @@ export const Question = () => {
             <Title>{t("QuickGiveQuestions")}</Title>
             {data?.map((item) => (
               <Accordion
+                key={item.id}
                 TransitionProps={{ unmountOnExit: true }}
                 expanded={expanded === item.id.toString()}
                 onChange={handleChange(item.id.toString())}

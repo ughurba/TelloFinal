@@ -1,7 +1,6 @@
 import { IRole, IUserAndRoles } from "./../../Admin/Pages/User/types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { GridRowId } from "@mui/x-data-grid";
-import { build } from "@reduxjs/toolkit/dist/query/core/buildMiddleware/cacheLifecycle";
 
 export const userApi = createApi({
   reducerPath: "userApi",
@@ -15,10 +14,16 @@ export const userApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["Role"],
 
   endpoints: (build) => ({
+    getAllUserAndRole: build.query<IUserAndRoles, void>({
+      query: () => `getAllUser`,
+      providesTags: ["Role"],
+    }),
     getAllRoles: build.query<IRole[], void>({
       query: () => `getAllRole`,
+      providesTags: ["Role"],
     }),
     removeRole: build.mutation<void, { id: string }>({
       query: (arg) => {
@@ -27,6 +32,7 @@ export const userApi = createApi({
           method: "DELETE",
         };
       },
+      invalidatesTags: ["Role"],
     }),
     removeUser: build.mutation<void, { id: GridRowId }>({
       query: (arg) => {
@@ -52,21 +58,16 @@ export const userApi = createApi({
           method: "POST",
         };
       },
+      invalidatesTags: ["Role"],
     }),
   }),
 });
-export const extendedUserApi = userApi.injectEndpoints({
-  endpoints: (build) => ({
-    getAllUserAndRole: build.query<IUserAndRoles, void>({
-      query: () => `getAllUser`,
-    }),
-  }),
-});
-export const { useGetAllUserAndRoleQuery } = extendedUserApi;
+
 export const {
   useUpdateRoleMutation,
   useCreateRoleMutation,
   useRemoveUserMutation,
   useGetAllRolesQuery,
   useRemoveRoleMutation,
+  useGetAllUserAndRoleQuery,
 } = userApi;

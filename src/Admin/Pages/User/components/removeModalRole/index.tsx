@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import { useAppDispatch } from "Redux/hooks";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
 import {
-  extendedUserApi,
   useGetAllRolesQuery,
   useRemoveRoleMutation,
 } from "services/adminServices/userServices";
@@ -25,7 +24,7 @@ const WrapperButton = styled.div`
   margin-top: 10px;
 `;
 export function RemoveRoleModal() {
-  const dispatch = useAppDispatch();
+   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const { data, refetch: getAllRoles, isLoading } = useGetAllRolesQuery();
   const [deleteRole, { isSuccess }] = useRemoveRoleMutation();
@@ -33,7 +32,6 @@ export function RemoveRoleModal() {
   useEffect(() => {
     if (isSuccess) {
       toast.success("Role silindi");
-      dispatch(extendedUserApi.util.resetApiState());
       setOpen(false);
     }
     return () => getAllRoles();

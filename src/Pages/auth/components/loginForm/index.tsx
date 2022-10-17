@@ -24,7 +24,7 @@ export const LoginForm: FC<Props> = ({ onClick, isLoading }) => {
 
   return (
     <Wrapper>
-      <AnotherLogin />
+      <AnotherLogin title="Insert" subTitle="EnterYourEmailAndPassword" />
       <MyForm onClick={onClick} validationScheme={LoginValidate}>
         <MyField
           name={"email"}

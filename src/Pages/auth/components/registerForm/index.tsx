@@ -24,7 +24,7 @@ export const RegisterForm: FC<Props> = ({ onClick, isLoading }) => {
   const { t } = useTranslation();
   return (
     <Wrapper>
-      <AnotherLogin />
+      <AnotherLogin title="SignUp" subTitle="CreateYourAccountFirst" />
       <MyForm onClick={onClick} validationScheme={RegisterValidate}>
         <MyField
           name={"firstName"}

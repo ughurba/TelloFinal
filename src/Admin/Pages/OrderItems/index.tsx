@@ -36,12 +36,12 @@ export const OrderItems = () => {
           );
         },
       },
-      { field: "title", headerName: "Title", width: 300 },
-      { field: "count", headerName: t("Count"), width: 80 },
+      { field: "title", headerName: "Title", width: 500 },
+      { field: "count", headerName: t("Count"), width: 90 },
       {
         field: "storage",
         headerName: t("Storage"),
-        width: 80,
+        width: 120,
         renderCell: (params) => {
           return (
             <>
@@ -62,7 +62,7 @@ export const OrderItems = () => {
           );
         },
       },
-      { field: "total", headerName: t("Total"), width: 80 },
+      { field: "total", headerName: t("Total"), width: 170 },
     ],
     []
   );

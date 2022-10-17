@@ -142,5 +142,9 @@
   "Send":"Göndər",
   "RelatedProducts":"Oxşar məhsullar",
   "WriteAReview":"",
-  "TotalAmount":"Toplam qiymət:"
+  "TotalAmount":"Toplam qiymət:",
+  "RoleAdded":"Rol əlavə edildi",
+  "EnterYourEmailAndPassword":"E-poçtunuzu və şifrənizi daxil edin",
+  "CreateYourAccountFirst":"Əvvəlcə hesabınızı yaradın"
+
 }

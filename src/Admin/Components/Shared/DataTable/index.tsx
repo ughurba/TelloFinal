@@ -15,7 +15,7 @@ export const DataTable: React.FC<Props> = ({
   return (
     <Box
       sx={{
-        height: 400,
+        height: 500,
         width: "90%",
         alignItems: "center",
         justifyContent: "center",
@@ -33,7 +33,7 @@ export const DataTable: React.FC<Props> = ({
         onCellEditCommit={handleRowEditCommit}
         rows={rows}
         columns={columns}
-        pageSize={5}
+        pageSize={7}
         rowsPerPageOptions={[5]}
       />
     </Box>

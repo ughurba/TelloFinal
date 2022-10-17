@@ -8,59 +8,22 @@ import {
   WrapperTitle,
 } from "./style";
 import { useTranslation } from "react-i18next";
-import {
-  GoogleLogin,
-  GoogleLoginResponse,
-  GoogleLoginResponseOffline,
-  useGoogleLogin,
-  GoogleLogout,
-} from "react-google-login";
-import { gapi } from "gapi-script";
-import { useEffect } from "react";
-export const AnotherLogin = () => {
-  const { t } = useTranslation();
-  const onSuccess = (res: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    if ("profileObj" in res) {
-      console.log(res.profileObj);
-    }
-  };
-  const onFailure = (err: any) => {
-    console.log("failed:", err);
-  };
-  const clientId =
-    "386437863762-01up0fjtv0v6mh9go2lhoe72fa0jfsdk.apps.googleusercontent.com";
 
-  useEffect(() => {
-    const initClient = () => {
-      gapi.client.init({
-        clientId: clientId,
-        scope: "",
-      });
-    };
-    gapi.load("client:auth2", initClient);
-  }, []);
+import { gapi } from "gapi-script";
+import { FC, useEffect } from "react";
+interface Props {
+  subTitle: string;
+  title: string;
+}
+export const AnotherLogin: FC<Props> = ({ subTitle, title }) => {
+  const { t } = useTranslation();
+
   return (
     <WrapperTitle>
-      <Title>{t("Insert")}</Title>
+      <Title>{t(title)}</Title>
       <Flex JsContent={"center"} AlItems={"center"}>
-        <StyledFacebook />
-        <Text>{t("WithFacebook")}</Text>
-        <GoogleLogin
-          clientId={clientId}
-          render={(renderProps) => (
-            <StyledGoogle onClick={renderProps.onClick} />
-          )}
-          onSuccess={onSuccess}
-          onFailure={onFailure}
-          cookiePolicy={"single_host_origin"}
-          isSignedIn={false}
-        />
-        <Text>{t("WithGoogle")}</Text>
-        {/* <GoogleLogout clientId={clientId} buttonText="Sign Out" /> */}
-        {/* <StyledGoogle />
-         */}
+        <SubText>{t(subTitle)}</SubText>
       </Flex>
-      <SubText>{t("Or")}</SubText>
     </WrapperTitle>
   );
 };

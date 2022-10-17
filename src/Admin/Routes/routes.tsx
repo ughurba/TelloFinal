@@ -10,6 +10,7 @@ import {
   Product,
   Fag,
   AddFag,
+  ChartCustom,
 } from "Admin/Pages";
 import { CategoryAndBrand } from "Admin/Pages/CategoryAndBrand";
 import { RemoveRoleModal } from "Admin/Pages/User/components/removeModalRole";
@@ -24,6 +25,7 @@ export const AppRoutesAdmin = () => {
     <BrowserRouter>
       <Routes>
         <Route path={AdminLinks.base} element={<AppLayout />}>
+          <Route path={AdminLinks.base} element={<ChartCustom />} />
           <Route path="/admin/modal" element={<RemoveRoleModal />} />
           <Route
             path={`${AdminLinks.addProduct}/:id`}

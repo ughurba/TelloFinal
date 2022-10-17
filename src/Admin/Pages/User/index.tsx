@@ -12,6 +12,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "styled-components";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import {
+  useCreateRoleMutation,
+  useGetAllRolesQuery,
   useGetAllUserAndRoleQuery,
   useRemoveUserMutation,
   useUpdateRoleMutation,
@@ -19,14 +21,17 @@ import {
 import { IUser } from "./types";
 import { Loader } from "Components/shared";
 import { toast } from "react-toastify";
-import { BasicModalDialog } from "./components/modal";
+import { BasicModalDialog } from "../../Components/Shared/Modal";
 import { RemoveRoleModal } from "./components/removeModalRole";
 import { StyledCreateRole, StyledRemoveRole } from "./style";
+import { useSuccess } from "Hooks/useSuccess";
 
 export const Wrapper = styled.div``;
 export const Users = () => {
   const { data, isLoading } = useGetAllUserAndRoleQuery();
   const [updateRole, { isSuccess }] = useUpdateRoleMutation();
+  const [postRole, { isSuccess: roleCreateSuccess }] = useCreateRoleMutation();
+
   const [removeUser, { isSuccess: removeSuccess }] = useRemoveUserMutation();
   const [rows, setRows] = React.useState<IUser[]>(
     data?.returnUserDtos ? data.returnUserDtos : []
@@ -39,17 +44,10 @@ export const Users = () => {
       setRows(data.returnUserDtos);
     }
   }, [data]);
-  useEffect(() => {
-    if (isSuccess) {
-      toast.success(t("InformationHasBeenUpdated"));
-    }
-  }, [isSuccess]);
-  useEffect(() => {
-    if (removeSuccess) {
-      toast.success(t("UserDelete"));
-    }
-  }, [removeSuccess]);
 
+  useSuccess(isSuccess, "InformationHasBeenUpdated");
+  useSuccess(removeSuccess, "UserDelete");
+  useSuccess(roleCreateSuccess, "RoleAdded");
   const handleRowEditCommit = React.useCallback(
     (params: GridCellEditCommitParams, event: MuiEvent<MuiBaseEvent>) => {
       updateRole({ id: params.id, role: params.value });
@@ -97,6 +95,10 @@ export const Users = () => {
     ],
     [deleteProduct, data]
   );
+  const handleCreateRole = (value: string) => {
+    postRole({ role: value });
+  };
+
   return (
     <Wrapper>
       {isLoading ? (
@@ -104,7 +106,12 @@ export const Users = () => {
       ) : (
         <>
           <StyledCreateRole>
-            <BasicModalDialog />
+            <BasicModalDialog
+              btnName={t("AddRole")}
+              label="Role Name"
+              title={t("EnterTheRoll")}
+              postFn={handleCreateRole}
+            />
           </StyledCreateRole>
           <StyledRemoveRole>
             <RemoveRoleModal />

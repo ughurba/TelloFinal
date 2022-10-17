@@ -15,7 +15,6 @@ export const SubText = styled.p`
   font-weight: ${({ theme }) => theme.fontStyle.fontWeight.medium};
   font-size: ${({ theme }) => theme.fontStyle.size.xSmall};
   line-height: 18px;
-  margin-top: 25px;
   color: ${({ theme }) => theme.colors.gray4};
 `;
 const StyleIcon = css`

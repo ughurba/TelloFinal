@@ -74,7 +74,6 @@ export const Register = () => {
 
             <StyledRegisterText>
               {t("YouAlreadyHaveAnAccount")}
-
               <StyledToRegister to={Links.app.login}>
                 {" "}
                 {t("Enter")}

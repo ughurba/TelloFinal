@@ -177,11 +177,4 @@ export interface ICategory {
   title: string;
   isActive: boolean;
 }
-// interface IProfileGoogle {
-//   email: string;
-//   familyName: string;
-//   givenName: string;
-// }
-// export interface IGoogleLogin {
-//   profileObj: IProfileGoogle;
-// }
+

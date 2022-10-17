@@ -141,5 +141,9 @@
   "YouWontbeAbleToRevertThis":"Товар не подлежит возврату!",
   "Send":"Отправить",
   "RelatedProducts":"Похожие товары",
-  "TotalAmount":"Общая сумма:"
+  "TotalAmount":"Общая сумма:",
+  "RoleAdded":"Роль добавлена",
+  "EnterYourEmailAndPassword":"Введите свой адрес электронной почты и пароль",
+  "CreateYourAccountFirst":"Cначала создайте свою учетную запись"
+
 }
