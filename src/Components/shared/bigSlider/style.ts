@@ -18,7 +18,7 @@ export const StyledTitle = styled.h1`
   width: 450px;
 `;
 export const StyledSlider = styled.div`
-  margin-top: ${(props) => props.theme.space[6]};
+  //margin-top: ${(props) => props.theme.space[1]};
 
   background: rgba(134, 248, 195, 1);
   background: linear-gradient(

@@ -14,9 +14,11 @@ export const saleAdminApi = createApi({
       return headers;
     },
   }),
+  tagTypes: ["OrderUpdate"],
   endpoints: (builder) => ({
     getAllOrder: builder.query<IAdminOrder[], void>({
       query: () => `allOrder`,
+      providesTags: ["OrderUpdate"],
     }),
     getAllOrderItem: builder.query<IOrderItem[], string>({
       query: (id) => `/OrderItem?orderId=${id}`,
@@ -31,6 +33,7 @@ export const saleAdminApi = createApi({
           method: "PUT",
         };
       },
+      invalidatesTags: ["OrderUpdate"],
     }),
   }),
 });

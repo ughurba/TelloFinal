@@ -5,12 +5,10 @@ import {
   useGetAllProductQuery,
   useRemoveDataMutation,
 } from "services/adminServices/productServices";
-import { StyledButton, StyledLink, Wrapper } from "./style";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
+import { StyledLink, Wrapper } from "./style";
 import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import { Image } from "types";
-import { Link } from "react-router-dom";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
 import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect } from "react";
@@ -19,6 +17,9 @@ import { Goods } from "types";
 import { Button } from "Admin/Components/Shared/Button";
 import { useTranslation } from "react-i18next";
 import { Loader } from "Components/shared";
+import { Tooltip } from "@mui/material";
+import Swal from "sweetalert2";
+import { ClipboardText } from "phosphor-react";
 
 export const Product = () => {
   const {
@@ -41,9 +42,21 @@ export const Product = () => {
   const [postRemoveData, { isSuccess }] = useRemoveDataMutation();
   const deleteProduct = React.useCallback(
     (id: GridRowId) => () => {
-      postRemoveData(id);
-      setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      Swal.fire({
+        title: t("AreYouSure"),
+        text: t("YouWontbeAbleToRevertThis"),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: t("YesDeletIt"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          postRemoveData(id);
+          setTimeout(() => {
+            setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+          });
+        }
       });
     },
     []
@@ -75,31 +88,33 @@ export const Product = () => {
         field: "actions",
         headerName: t("EditTheProduct"),
         type: "actions",
-        width: 100,
+        width: 110,
         getActions: (params) => [
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteProduct(params.id)}
-          />,
-          <StyledLink to={`${AdminLinks.addProduct}/${params.id}`}>
-            <EditIcon color="action" />
-          </StyledLink>,
+          <Tooltip title={t("RemoveProducting")}>
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={deleteProduct(params.id)}
+            />
+          </Tooltip>,
+          <Tooltip title={t("EditProduct")}>
+            <StyledLink to={`${AdminLinks.addProduct}/${params.id}`}>
+              <EditIcon color="action" />
+            </StyledLink>
+          </Tooltip>,
         ],
       },
       {
         field: "createSpecifications",
-        headerName: t("TechnicalSpecificationsEdit"),
+        headerName: t("TechnicalCharacteristics"),
         type: "actions",
-        width: 260,
+        width: 170,
         getActions: (params) => [
-          <Link to={`${AdminLinks.createSpecifications}/${params.id}`}>
-            <StyledButton>{t("CreateSpecifications")}</StyledButton>
-          </Link>,
-
-          <StyledLink to={`${AdminLinks.editSpecifications}/${params.id}`}>
-            <BorderColorIcon color="action" />
-          </StyledLink>,
+          <Tooltip title={t("AccessToSpecifications")}>
+            <StyledLink to={`${AdminLinks.editSpecifications}/${params.id}`}>
+              <ClipboardText size={25} color="#007aff" weight="bold" />
+            </StyledLink>
+          </Tooltip>,
         ],
       },
     ],

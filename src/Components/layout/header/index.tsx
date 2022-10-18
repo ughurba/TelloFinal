@@ -4,6 +4,7 @@ import {
   StyledBasketHeader,
   StyledSize,
   WrapperLang,
+  Wrapper,
 } from "./style";
 import { Flex, Container } from "../../shared/";
 import { SubMenu } from "./components/subMenu";
@@ -66,47 +67,49 @@ export const Header = () => {
   }, [lang]);
 
   return (
-    <Container>
-      <Flex AlItems={"center"} JsContent={"space-between"}>
-        <img src={teloicon} alt={"icon"} />
-        <StyledParentInput>
-          <Search onChange={handleSearch} width={"591px"} height={"40px"} />
-          <SearchIcon />
-          {data?.result.length !== 0 && data?.result ? (
-            <SearchMenu data={data.result} />
-          ) : (
-            ""
-          )}
-        </StyledParentInput>
-        <StyledParentSvg>
-          <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>
-            <User />
-          </Link>
-          <Link to={Links.userProfileApp.MyFavorites}>
-            <Heart />
-          </Link>
-
-          <StyledBasketHeader>
-            <Link to={Links.app.basket}>
-              <Basket />
+    <Wrapper>
+      <Container>
+        <Flex AlItems={"center"} JsContent={"space-between"}>
+          <img src={teloicon} alt={"icon"} />
+          <StyledParentInput>
+            <Search onChange={handleSearch} width={"591px"} height={"40px"} />
+            <SearchIcon />
+            {data?.result.length !== 0 && data?.result ? (
+              <SearchMenu data={data.result} />
+            ) : (
+              ""
+            )}
+          </StyledParentInput>
+          <StyledParentSvg>
+            <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>
+              <User />
             </Link>
-            <StyledSize>{basketItems.length}</StyledSize>
-          </StyledBasketHeader>
-          <WrapperLang>
-            <FormControl>
-              <StyledSelect
-                IconComponent={"noscript"}
-                value={lang}
-                onChange={handleChangeLang}
-              >
-                <MenuItem value={"az"}>az</MenuItem>
-                <MenuItem value={"ru"}>ru</MenuItem>
-              </StyledSelect>
-            </FormControl>
-          </WrapperLang>
-        </StyledParentSvg>
-      </Flex>
-      <SubMenu />
-    </Container>
+            <Link to={Links.userProfileApp.MyFavorites}>
+              <Heart />
+            </Link>
+
+            <StyledBasketHeader>
+              <Link to={Links.app.basket}>
+                <Basket />
+              </Link>
+              <StyledSize>{basketItems.length}</StyledSize>
+            </StyledBasketHeader>
+            <WrapperLang>
+              <FormControl>
+                <StyledSelect
+                  IconComponent={"noscript"}
+                  value={lang}
+                  onChange={handleChangeLang}
+                >
+                  <MenuItem value={"az"}>az</MenuItem>
+                  <MenuItem value={"ru"}>ru</MenuItem>
+                </StyledSelect>
+              </FormControl>
+            </WrapperLang>
+          </StyledParentSvg>
+        </Flex>
+        <SubMenu />
+      </Container>
+    </Wrapper>
   );
 };

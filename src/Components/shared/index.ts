@@ -1,4 +1,4 @@
-import Swiper from "./bigSlider";
+import { BigSlider } from "./bigSlider";
 import { Container } from "./container";
 import { Flex } from "./flex";
 import { InfoCard } from "./infoCard";
@@ -22,7 +22,7 @@ export {
   MyForm,
   TotalSide,
   IncDecCount,
-  Swiper,
+  BigSlider,
   Container,
   Flex,
   InfoCard,

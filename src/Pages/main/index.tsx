@@ -2,7 +2,7 @@ import { FC, useEffect, useMemo, useState } from "react";
 import { StyledMain } from "./style";
 import { ProductsHome } from "./components/productsMain";
 import { BigCards } from "./components/bigCard";
-import { SmallSlider, InfoCard, Swiper, Loader } from "Components/shared";
+import { SmallSlider, InfoCard, BigSlider, Loader } from "Components/shared";
 import { Goods } from "types";
 import {
   useFetchAllGoodsQuery,
@@ -66,8 +66,7 @@ export const MainPage: FC = () => {
     <Loader />
   ) : (
     <StyledMain>
-      <Swiper />
-
+      <BigSlider />
       <div>
         <ProductsHome
           handleNoCheckFavorite={handleNoCheckFavorite}

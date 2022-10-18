@@ -25,6 +25,8 @@ import { BasicModalDialog } from "Admin/Components/Shared/Modal";
 import { useSuccess } from "Hooks/useSuccess";
 import { WrapperCategoryTable, Wrapper, WrapperBrandTable } from "./style";
 import { useError } from "Hooks/useError";
+import { Tooltip } from "@mui/material";
+import Swal from "sweetalert2";
 
 export const CategoryAndBrand = () => {
   const { t } = useTranslation();
@@ -107,18 +109,44 @@ export const CategoryAndBrand = () => {
 
   const deleteCategory = useCallback(
     (id: GridRowId) => () => {
-      removeCategory({ id: id });
-      setTimeout(() => {
-        setRowsCategory((prevRows) => prevRows.filter((row) => row.id !== id));
+      Swal.fire({
+        title: t("AreYouSure"),
+        text: t("YouWontbeAbleToRevertThis"),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: t("YesDeletIt"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          removeCategory({ id: id });
+          setTimeout(() => {
+            setRowsCategory((prevRows) =>
+              prevRows.filter((row) => row.id !== id)
+            );
+          });
+        }
       });
     },
     []
   );
   const deleteBrand = useCallback(
     (id: GridRowId) => () => {
-      removeBrand({ id: id });
-      setTimeout(() => {
-        setBrandRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      Swal.fire({
+        title: t("AreYouSure"),
+        text: t("YouWontbeAbleToRevertThis"),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: t("YesDeletIt"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          removeBrand({ id: id });
+          setTimeout(() => {
+            setBrandRows((prevRows) => prevRows.filter((row) => row.id !== id));
+          });
+        }
       });
     },
     []
@@ -140,11 +168,13 @@ export const CategoryAndBrand = () => {
         type: "actions",
         width: 100,
         getActions: (params) => [
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteCategory(params.id)}
-          />,
+          <Tooltip title={t("RemoveCategory")}>
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={deleteCategory(params.id)}
+            />
+          </Tooltip>,
         ],
       },
     ],
@@ -159,11 +189,13 @@ export const CategoryAndBrand = () => {
         type: "actions",
         width: 100,
         getActions: (params) => [
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteBrand(params.id)}
-          />,
+          <Tooltip title={t("RemoveBrand")}>
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={deleteBrand(params.id)}
+            />
+          </Tooltip>,
         ],
       },
     ],

@@ -23,6 +23,7 @@ export const StyledRejectIcon = styled(X)`
 `;
 export const StyledImg = styled.img`
   width: 60px;
+  height: 40px;
   object-fit: contain;
 `;
 export const StyledPending = styled.span`

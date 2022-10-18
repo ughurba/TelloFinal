@@ -14,6 +14,10 @@ import {
 import { ISpecifications } from "../CreateSpecifications/types";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
+import { Tooltip } from "@mui/material";
+import { PlusCircle } from "phosphor-react";
+import { TableButtons } from "Admin/Components/Shared/TableButtons";
 export const Wrapper = styled.div``;
 export const EditSpecifications = () => {
   const { t } = useTranslation();
@@ -38,11 +42,23 @@ export const EditSpecifications = () => {
     }
   }, [isSuccess]);
   type Row = ISpecifications;
-  const deleteProduct = React.useCallback(
+  const deleteSpecification = React.useCallback(
     (id: GridRowId) => () => {
-      removeSpecifications({ productId: productId, specId: id });
-      setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      Swal.fire({
+        title: t("AreYouSure"),
+        text: t("YouWontbeAbleToRevertThis"),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: t("YesDeletIt"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          removeSpecifications({ productId: productId, specId: id });
+          setTimeout(() => {
+            setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+          });
+        }
       });
     },
     []
@@ -58,21 +74,31 @@ export const EditSpecifications = () => {
         type: "actions",
         width: 450,
         getActions: (params) => [
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteProduct(params.id)}
+          <TableButtons
+            onAddBtn={true}
+            titleToolTip={t("AddSpecification")}
+            toRouting={`${AdminLinks.createSpecifications}/${params.id}`}
           />,
 
-          <Link
-            to={`${AdminLinks.updateSpecifications}/${productId}/${params.id}`}
-          >
-            <EditIcon color="action" />
-          </Link>,
+          <GridActionsCellItem
+            icon={
+              <TableButtons
+                onRemoveBtn={true}
+                titleToolTip={t("RemoveSpecification")}
+              />
+            }
+            label="Delete"
+            onClick={deleteSpecification(params.id)}
+          />,
+          <TableButtons
+            onEditBtn={true}
+            titleToolTip={t("EditSpecification")}
+            toRouting={`${AdminLinks.updateSpecifications}/${productId}/${params.id}`}
+          />,
         ],
       },
     ],
-    []
+    [deleteSpecification]
   );
   return <Wrapper>{<DataTable rows={rows} columns={columns} />}</Wrapper>;
 };

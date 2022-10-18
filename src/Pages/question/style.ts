@@ -10,6 +10,6 @@ export const Title = styled.h2`
 `;
 export const Wrapper = styled.div`
   padding-bottom: 200px;
-  margin-top: 10px;
+  /* margin-top: 10px; */
   background: #f1f1f1;
 `;

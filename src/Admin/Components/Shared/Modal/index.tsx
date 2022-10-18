@@ -6,16 +6,8 @@ import Stack from "@mui/joy/Stack";
 import Add from "@mui/icons-material/Add";
 import Typography from "@mui/joy/Typography";
 import { FC, useEffect, useState } from "react";
-import {
-  Button,
-  Checkbox,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Button, Checkbox} from "@mui/material";
 import { Flex } from "Components/shared";
-import { useFormik } from "formik";
 
 interface Props {
   label: string;

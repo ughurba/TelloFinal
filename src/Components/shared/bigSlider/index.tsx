@@ -5,41 +5,52 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Flex, Container } from "../";
 import { StyledImg, StyledParagrpah, StyledSlider, StyledTitle } from "./style";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../Redux/hooks";
-import { fetchSlider } from "../../../Redux/slices/sliderSlice";
 
-export default () => {
-  const { bigSlider } = useAppSelector((state) => state.slider);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(fetchSlider);
-  }, [dispatch]);
-
+export const BigSlider = () => {
   return (
-    <StyledSlider>
-      <Swiper
-        modules={[Pagination]}
-        pagination={{ clickable: true }}
-        grabCursor={true}
-        spaceBetween={50}
-        slidesPerView={1}
-      >
-        {bigSlider.map((item) => (
-          <SwiperSlide key={item.id}>
+    <>
+      <StyledSlider>
+        <Swiper
+          modules={[Pagination]}
+          pagination={{ clickable: true }}
+          grabCursor={true}
+          spaceBetween={50}
+          slidesPerView={1}
+        >
+          <SwiperSlide>
             <Container>
               <Flex AlItems={"center"} JsContent={"space-between"}>
                 <div>
-                  <StyledTitle>{item.title}</StyledTitle>
-                  <StyledParagrpah>{item.paragraph}</StyledParagrpah>
+                  <StyledTitle>Buy & Sell What's Now & Next</StyledTitle>
+                  <StyledParagrpah>
+                    Lorem ipsum dolor sit amet,consectetur adipiscing elit.
+                    Felis malesuada et leo faucibus Lorem ipsum dolor sit
+                    amet,consectetur adipiscing elit. Felis malesuada et leo
+                    faucibus
+                  </StyledParagrpah>
                 </div>
-                <StyledImg src={item.imgUrl} />
+                <StyledImg src={"https://i.ibb.co/PjC15Cg/Slider-Phone.png"} />
               </Flex>
             </Container>
           </SwiperSlide>
-        ))}
-      </Swiper>
-    </StyledSlider>
+          <SwiperSlide>
+            <Container>
+              <Flex AlItems={"center"} JsContent={"space-between"}>
+                <div>
+                  <StyledTitle>Buy & Sell What's Now & Next</StyledTitle>
+                  <StyledParagrpah>
+                    Lorem ipsum dolor sit amet,consectetur adipiscing elit.
+                    Felis malesuada et leo faucibus Lorem ipsum dolor sit
+                    amet,consectetur adipiscing elit. Felis malesuada et leo
+                    faucibus
+                  </StyledParagrpah>
+                </div>
+                <StyledImg src={"https://i.ibb.co/PjC15Cg/Slider-Phone.png"} />
+              </Flex>
+            </Container>
+          </SwiperSlide>
+        </Swiper>
+      </StyledSlider>
+    </>
   );
 };

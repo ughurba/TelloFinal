@@ -38,7 +38,7 @@ export const Fag = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
+      confirmButtonText: t("YesDeletIt"),
     }).then((result) => {
       if (result.isConfirmed) {
         removeFag(id);

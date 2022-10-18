@@ -35,3 +35,6 @@ export const WrapperLang = styled.div`
   display: inline-block;
   margin-left: 10px;
 `;
+export const Wrapper = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.green};
+`;

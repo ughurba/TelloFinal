@@ -144,6 +144,8 @@
   "TotalAmount":"Общая сумма:",
   "RoleAdded":"Роль добавлена",
   "EnterYourEmailAndPassword":"Введите свой адрес электронной почты и пароль",
-  "CreateYourAccountFirst":"Cначала создайте свою учетную запись"
+  "CreateYourAccountFirst":"Cначала создайте свою учетную запись",
+  "YesDeletIt":"Да, удалить!"
+
 
 }

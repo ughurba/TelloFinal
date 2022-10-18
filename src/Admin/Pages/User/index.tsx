@@ -13,7 +13,6 @@ import styled from "styled-components";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import {
   useCreateRoleMutation,
-  useGetAllRolesQuery,
   useGetAllUserAndRoleQuery,
   useRemoveUserMutation,
   useUpdateRoleMutation,
@@ -25,7 +24,8 @@ import { BasicModalDialog } from "../../Components/Shared/Modal";
 import { RemoveRoleModal } from "./components/removeModalRole";
 import { StyledCreateRole, StyledRemoveRole } from "./style";
 import { useSuccess } from "Hooks/useSuccess";
-
+import { Tooltip } from "@mui/material";
+import Swal from "sweetalert2";
 export const Wrapper = styled.div``;
 export const Users = () => {
   const { data, isLoading } = useGetAllUserAndRoleQuery();
@@ -54,11 +54,23 @@ export const Users = () => {
     },
     []
   );
-  const deleteProduct = React.useCallback(
+  const deleteUser = React.useCallback(
     (id: GridRowId) => () => {
-      removeUser({ id: id });
-      setTimeout(() => {
-        setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+      Swal.fire({
+        title: t("AreYouSure"),
+        text: t("YouWontbeAbleToRevertThis"),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: t("YesDeletIt"),
+      }).then((result) => {
+        if (result.isConfirmed) {
+          removeUser({ id: id });
+          setTimeout(() => {
+            setRows((prevRows) => prevRows.filter((row) => row.id !== id));
+          });
+        }
       });
     },
     []
@@ -85,15 +97,17 @@ export const Users = () => {
         width: 100,
 
         getActions: (params) => [
-          <GridActionsCellItem
-            icon={<DeleteIcon />}
-            label="Delete"
-            onClick={deleteProduct(params.id)}
-          />,
+          <Tooltip title={t("RemoveUser")}>
+            <GridActionsCellItem
+              icon={<DeleteIcon />}
+              label="Delete"
+              onClick={deleteUser(params.id)}
+            />
+          </Tooltip>,
         ],
       },
     ],
-    [deleteProduct, data]
+    [deleteUser, data]
   );
   const handleCreateRole = (value: string) => {
     postRole({ role: value });

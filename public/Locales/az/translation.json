@@ -137,7 +137,7 @@
   "BrandDeletedSuccessfully":"Brend uğurla silindi",
   "BrandAddedSuccessfully":"Brend uğurla əlavə edildi",
   "BrandUpdatedCuccsessufully":"Brend uğurla yeniləndi",
-  "AreYouSure":"Sən əminsən?",
+  "AreYouSure":"Əminsiniz?",
   "YouWontbeAbleToRevertThis":"Bunu geri qaytara bilməyəcəksiniz!",
   "Send":"Göndər",
   "RelatedProducts":"Oxşar məhsullar",
@@ -145,6 +145,18 @@
   "TotalAmount":"Toplam qiymət:",
   "RoleAdded":"Rol əlavə edildi",
   "EnterYourEmailAndPassword":"E-poçtunuzu və şifrənizi daxil edin",
-  "CreateYourAccountFirst":"Əvvəlcə hesabınızı yaradın"
+  "CreateYourAccountFirst":"Əvvəlcə hesabınızı yaradın",
+  "YesDeletIt":"Bəli, silin!",
+  "YouAreReadyToConfirmTheOrder":"Sifarişi təsdiqləməyə əminsiniz?",
+  "YesConfirm":"Bəli! Təsdiq et",
+  "OrderConfirmed":"Sifariş təsdiqləndi",
+  "AreYouSureYouWantToCancelTheOrder":"Sifarişi ləğv etmək istədiyinizə əminsiniz?",
+  "YesCancelTheOrder":"Bəli sifarişi ləğv et",
+  "TheOrderWasCancelled":"Sifariş ləğv edildi",
+  "ConfirmTheOrder":"Sifarişi təsdiqlə",
+  "CancelTheOrder":"Sifarişi ləğv et",
+  "RemoveProducting":"Məhsulu silmək",
+  "EditProduct":"Məhsulu redaktə etmək",
+  "AccessToSpecifications":"Texniki Xüsusiyyətlərinə giriş et"
 
 }
