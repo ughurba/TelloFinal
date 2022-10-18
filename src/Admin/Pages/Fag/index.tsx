@@ -4,6 +4,7 @@ import {
   AccordionDetails,
   Accordion,
   AccordionSummary,
+  Tooltip,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Flex, Loader } from "Components/shared";
@@ -19,6 +20,7 @@ import { StyledLinks } from "Admin/Components/Shared/ListItems/style";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
 import { Trash } from "phosphor-react";
 import Swal from "sweetalert2";
+import { TableButtons } from "Admin/Components/Shared/TableButtons";
 
 export const Fag = () => {
   const { data, isLoading } = useGetAllFagsQuery();
@@ -80,10 +82,11 @@ export const Fag = () => {
                 <AccordionDetails>
                   <Flex>
                     <Typography variant="subtitle1">{item.value}</Typography>
-
-                    <WrapperTrash onClick={() => handleRemoveFag(item.id)}>
-                      <Trash size={25} color="#ff0000" weight="duotone" />
-                    </WrapperTrash>
+                    <Tooltip title={t("RemoveFag")}>
+                      <WrapperTrash onClick={() => handleRemoveFag(item.id)}>
+                        <TableButtons onRemoveBtn={true} />
+                      </WrapperTrash>
+                    </Tooltip>
                   </Flex>
                 </AccordionDetails>
               </Accordion>

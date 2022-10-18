@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Select from "@mui/material/Select";
 
 export const StyledParentInput = styled.div`
   position: relative;
@@ -37,4 +38,12 @@ export const WrapperLang = styled.div`
 `;
 export const Wrapper = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.colors.green};
+`;
+export const StyledSelect = styled(Select)`
+  .MuiSelect-select {
+    padding: 5px 7px !important;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border-color: rgba(0, 0, 0, 0.23) !important;
+  }
 `;

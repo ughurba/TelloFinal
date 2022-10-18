@@ -27,6 +27,7 @@ import { WrapperCategoryTable, Wrapper, WrapperBrandTable } from "./style";
 import { useError } from "Hooks/useError";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
+import { TableButtons } from "Admin/Components/Shared/TableButtons";
 
 export const CategoryAndBrand = () => {
   const { t } = useTranslation();
@@ -170,7 +171,7 @@ export const CategoryAndBrand = () => {
         getActions: (params) => [
           <Tooltip title={t("RemoveCategory")}>
             <GridActionsCellItem
-              icon={<DeleteIcon />}
+              icon={<TableButtons onRemoveBtn={true} />}
               label="Delete"
               onClick={deleteCategory(params.id)}
             />
@@ -191,7 +192,7 @@ export const CategoryAndBrand = () => {
         getActions: (params) => [
           <Tooltip title={t("RemoveBrand")}>
             <GridActionsCellItem
-              icon={<DeleteIcon />}
+              icon={<TableButtons onRemoveBtn={true} />}
               label="Delete"
               onClick={deleteBrand(params.id)}
             />

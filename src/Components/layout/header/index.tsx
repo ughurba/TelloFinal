@@ -5,6 +5,7 @@ import {
   StyledSize,
   WrapperLang,
   Wrapper,
+  StyledSelect,
 } from "./style";
 import { Flex, Container } from "../../shared/";
 import { SubMenu } from "./components/subMenu";
@@ -12,7 +13,7 @@ import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { SelectChangeEvent } from "@mui/material/Select";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
@@ -26,16 +27,7 @@ import {
 import { useDebounce } from "Hooks/debounce";
 import { SearchMenu } from "./components/searchMenu";
 import { useTranslation } from "react-i18next";
-import { styled } from "@mui/material";
 
-export const StyledSelect = styled(Select)`
-  .MuiSelect-select {
-    padding: 5px 7px !important;
-  }
-  .MuiOutlinedInput-notchedOutline {
-    border-color: rgba(0, 0, 0, 0.23) !important;
-  }
-`;
 export const Header = () => {
   const dispatch = useAppDispatch();
   const { i18n } = useTranslation();
@@ -57,13 +49,17 @@ export const Header = () => {
       dispatch(shopExtendedApi.util.resetApiState());
     }
   }, [debounceSearch]);
-  const [lang, setLang] = useState("az");
+
+  const local = localStorage.getItem("lang");
+  const [lang, setLang] = useState<string>(local ? local : "");
+  localStorage.setItem("lang", lang);
 
   const handleChangeLang = (event: SelectChangeEvent<unknown>) => {
     setLang(event.target.value as string);
   };
   useEffect(() => {
     i18n.changeLanguage(lang);
+    localStorage.setItem("lang", lang);
   }, [lang]);
 
   return (

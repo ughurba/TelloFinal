@@ -26,6 +26,7 @@ import { StyledCreateRole, StyledRemoveRole } from "./style";
 import { useSuccess } from "Hooks/useSuccess";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
+import { TableButtons } from "Admin/Components/Shared/TableButtons";
 export const Wrapper = styled.div``;
 export const Users = () => {
   const { data, isLoading } = useGetAllUserAndRoleQuery();
@@ -94,12 +95,12 @@ export const Users = () => {
         field: "actions",
         headerName: "actions",
         type: "actions",
-        width: 100,
+        width: 260,
 
         getActions: (params) => [
           <Tooltip title={t("RemoveUser")}>
             <GridActionsCellItem
-              icon={<DeleteIcon />}
+              icon={<TableButtons onRemoveBtn={true} />}
               label="Delete"
               onClick={deleteUser(params.id)}
             />

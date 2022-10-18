@@ -1,7 +1,5 @@
 import { FC } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import { PlusCircle } from "phosphor-react";
+import { StyledAddIcon, StyledDeleteIcon, StyledEditIcon } from "./style";
 
 import { RenderButton } from "../RenderButton";
 
@@ -11,7 +9,7 @@ interface Props {
   onAddBtn?: boolean;
   textBtn?: string;
   toRouting?: string;
-  titleToolTip: string;
+  titleToolTip?: string;
 }
 export const TableButtons: FC<Props> = ({
   onAddBtn = false,
@@ -24,21 +22,21 @@ export const TableButtons: FC<Props> = ({
     <>
       {onAddBtn && (
         <RenderButton
-          Button={<PlusCircle />}
+          Button={<StyledAddIcon weight="bold" />}
           titleToolTip={titleToolTip}
           toRouting={toRouting}
         />
       )}
       {onEditBtn && (
         <RenderButton
-          Button={<EditIcon />}
+          Button={<StyledEditIcon weight="bold" />}
           titleToolTip={titleToolTip}
           toRouting={toRouting}
         />
       )}
       {onRemoveBtn && (
         <RenderButton
-          Button={<DeleteIcon />}
+          Button={<StyledDeleteIcon weight="bold" />}
           titleToolTip={titleToolTip}
           toRouting={toRouting}
         />

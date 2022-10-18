@@ -181,9 +181,11 @@ export const Orders = () => {
         type: "actions",
         width: 100,
         getActions: (params) => [
-          <Link to={`${AdminLinks.orderItems}/${params.id}`}>
-            <Package size={25} color="#007aff" weight="bold" />{" "}
-          </Link>,
+          <Tooltip title={t("OrderDetails")}>
+            <Link to={`${AdminLinks.orderItems}/${params.id}`}>
+              <Package size={25} color="#007aff" weight="bold" />{" "}
+            </Link>
+          </Tooltip>,
         ],
       },
     ],

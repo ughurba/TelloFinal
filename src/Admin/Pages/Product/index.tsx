@@ -20,6 +20,7 @@ import { Loader } from "Components/shared";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { ClipboardText } from "phosphor-react";
+import { TableButtons } from "Admin/Components/Shared/TableButtons";
 
 export const Product = () => {
   const {
@@ -80,7 +81,7 @@ export const Product = () => {
           );
         },
       },
-      { field: "title", headerName: t("Title"), width: 320 },
+      { field: "title", headerName: t("Title"), width: 470 },
       { field: "newPrice", headerName: t("NewPrice"), width: 100 },
       { field: "oldPrice", headerName: t("OldPrice"), width: 100 },
       { field: "stockCount", headerName: t("StockCount"), width: 120 },
@@ -92,16 +93,16 @@ export const Product = () => {
         getActions: (params) => [
           <Tooltip title={t("RemoveProducting")}>
             <GridActionsCellItem
-              icon={<DeleteIcon />}
+              icon={<TableButtons onRemoveBtn={true} />}
               label="Delete"
               onClick={deleteProduct(params.id)}
             />
           </Tooltip>,
-          <Tooltip title={t("EditProduct")}>
-            <StyledLink to={`${AdminLinks.addProduct}/${params.id}`}>
-              <EditIcon color="action" />
-            </StyledLink>
-          </Tooltip>,
+          <TableButtons
+            onEditBtn={true}
+            toRouting={`${AdminLinks.addProduct}/${params.id}`}
+            titleToolTip={t("EditProduct")}
+          />,
         ],
       },
       {
@@ -110,6 +111,12 @@ export const Product = () => {
         type: "actions",
         width: 170,
         getActions: (params) => [
+          <TableButtons
+            onAddBtn={true}
+            titleToolTip={t("AddSpecification")}
+            toRouting={`${AdminLinks.createSpecifications}/${params.id}`}
+          />,
+
           <Tooltip title={t("AccessToSpecifications")}>
             <StyledLink to={`${AdminLinks.editSpecifications}/${params.id}`}>
               <ClipboardText size={25} color="#007aff" weight="bold" />

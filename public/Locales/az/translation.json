@@ -157,6 +157,13 @@
   "CancelTheOrder":"Sifarişi ləğv et",
   "RemoveProducting":"Məhsulu silmək",
   "EditProduct":"Məhsulu redaktə etmək",
-  "AccessToSpecifications":"Texniki Xüsusiyyətlərinə giriş et"
-
+  "AccessToSpecifications":"Texniki Xüsusiyyətlərinə giriş et",
+  "RemoveSpecification":"Texniki Xüsusiyyəti silmək",
+  "EditSpecification":"Texniki Xüsusiyyəti redaktə etmək",
+  "AddSpecification":"Texniki Xüsusiyyət elavə etmək",
+  "OrderDetails":"Sifarişin detalları",
+  "RemoveUser":"Istifadəçini silmək",
+  "RemoveCategory":"Kateqoriyanı silmək",
+  "RemoveBrand":"Brendi silmək",
+  "RemoveFag":"Tez-tez verilən suallar silmək"
 }

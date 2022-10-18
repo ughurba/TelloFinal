@@ -74,22 +74,13 @@ export const EditSpecifications = () => {
         type: "actions",
         width: 450,
         getActions: (params) => [
-          <TableButtons
-            onAddBtn={true}
-            titleToolTip={t("AddSpecification")}
-            toRouting={`${AdminLinks.createSpecifications}/${params.id}`}
-          />,
-
-          <GridActionsCellItem
-            icon={
-              <TableButtons
-                onRemoveBtn={true}
-                titleToolTip={t("RemoveSpecification")}
-              />
-            }
-            label="Delete"
-            onClick={deleteSpecification(params.id)}
-          />,
+          <Tooltip title={t("RemoveSpecification")}>
+            <GridActionsCellItem
+              icon={<TableButtons onRemoveBtn={true} />}
+              label="Delete"
+              onClick={deleteSpecification(params.id)}
+            />
+          </Tooltip>,
           <TableButtons
             onEditBtn={true}
             titleToolTip={t("EditSpecification")}

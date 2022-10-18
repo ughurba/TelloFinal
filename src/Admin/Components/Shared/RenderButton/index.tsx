@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 interface Props {
   Button: ReactNode;
   toRouting?: string;
-  titleToolTip: string;
+  titleToolTip?: string;
 }
 export const RenderButton: FC<Props> = ({
   Button,
@@ -13,7 +13,7 @@ export const RenderButton: FC<Props> = ({
   toRouting,
 }) => {
   return (
-    <Tooltip title={titleToolTip}>
+    <Tooltip title={titleToolTip ? titleToolTip : ""}>
       {toRouting ? <Link to={toRouting}>{Button}</Link> : <>{Button}</>}
     </Tooltip>
   );
