@@ -4,6 +4,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { IBrandAndCategory } from "../../Admin/Pages/Product/types";
 import { GridRowId } from "@mui/x-data-grid";
 import { IGoodsAdmin } from "Admin/Pages/AddProduct/type";
+import { ProductCountByBrand } from "Admin/Pages/Dashboard/types";
 export const productApi = createApi({
   reducerPath: "productApi",
   baseQuery: fetchBaseQuery({
@@ -95,6 +96,10 @@ export const productApi = createApi({
         };
       },
     }),
+
+    getProductCountByBrand: builder.query<ProductCountByBrand[], void>({
+      query: () => `brandProductsCount`,
+    }),
   }),
 });
 
@@ -107,6 +112,7 @@ export const extendedGetAllProductAdminApi = productApi.injectEndpoints({
 });
 export const { useGetAllProductQuery } = extendedGetAllProductAdminApi;
 export const {
+  useGetProductCountByBrandQuery,
   useCreateSpecificationsMutation,
   useGetOneProductQuery,
   useUpdateProductMutation,

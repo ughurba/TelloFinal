@@ -6,7 +6,6 @@ import {
   MuiBaseEvent,
   MuiEvent,
 } from "@mui/x-data-grid";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import { Flex } from "Components/shared";
 import { useCallback, useEffect, useMemo, useState } from "react";
