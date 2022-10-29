@@ -11,6 +11,7 @@ export interface IProductType {
   maxPrice?: number;
   orderBy: number;
   category?: string;
+  userId?: string;
 }
 
 const categoryProduct = (Product: IProductType, url?: string) => {
@@ -27,10 +28,11 @@ const categoryProduct = (Product: IProductType, url?: string) => {
       ? ""
       : `id=${Product.id}`
   }`;
+  const userId = `${Product.userId ? `&userId=${Product.userId}` : ""} `;
 
   return `/getProductInShop?${productId}&${str}
   &orderBy=${Product.orderBy}&minPrice=${Product?.minPrice}
-  &maxPrice=${Product?.maxPrice}${discount}${allBrands}
+  &maxPrice=${Product?.maxPrice}${userId}${discount}${allBrands}
   &page=${Product.page}
   &size=${Product.size}`;
 };

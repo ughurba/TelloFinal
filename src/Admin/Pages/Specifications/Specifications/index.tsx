@@ -2,11 +2,9 @@ import { useTranslation } from "react-i18next";
 import { GridActionsCellItem, GridColumns, GridRowId } from "@mui/x-data-grid";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import React, { useEffect } from "react";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 
 import styled from "styled-components";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   useGetAllSpecificationsQuery,
   useRemoveSpecificationsMutation,
@@ -16,10 +14,10 @@ import { AdminLinks } from "Admin/Routes/AdminLinks";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import { Tooltip } from "@mui/material";
-import { PlusCircle } from "phosphor-react";
+
 import { TableButtons } from "Admin/Components/Shared/TableButtons";
 export const Wrapper = styled.div``;
-export const EditSpecifications = () => {
+const EditSpecifications = () => {
   const { t } = useTranslation();
   const { productId = "" } = useParams();
   const { data, refetch: getAllSpec } = useGetAllSpecificationsQuery(productId);
@@ -93,3 +91,4 @@ export const EditSpecifications = () => {
   );
   return <Wrapper>{<DataTable rows={rows} columns={columns} />}</Wrapper>;
 };
+export default EditSpecifications;

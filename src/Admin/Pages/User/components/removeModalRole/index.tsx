@@ -19,19 +19,19 @@ import {
   useRemoveRoleMutation,
 } from "services/adminServices/userServices";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
 
 const WrapperButton = styled.div`
   margin-top: 10px;
 `;
-export function RemoveRoleModal() {
-   const dispatch = useAppDispatch();
+export default function RemoveRoleModal() {
   const [open, setOpen] = useState(false);
   const { data, refetch: getAllRoles, isLoading } = useGetAllRolesQuery();
   const [deleteRole, { isSuccess }] = useRemoveRoleMutation();
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (isSuccess) {
-      toast.success("Role silindi");
+      toast.success(t("RemoveRole"));
       setOpen(false);
     }
     return () => getAllRoles();
@@ -61,7 +61,7 @@ export function RemoveRoleModal() {
         variant="contained"
         onClick={handleClickOpen}
       >
-        Rol silmek
+        {t("RemoveingRole")}
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Optional sizes</DialogTitle>

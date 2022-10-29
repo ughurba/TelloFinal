@@ -3,15 +3,15 @@ import Card from "@mui/joy/Card";
 import Typography from "@mui/joy/Typography";
 
 const OrderStatusStyled = css`
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 500;
   margin-top: 5px;
   border-radius: 2px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
+  width: 80px;
   height: 25px;
   color: white;
 `;

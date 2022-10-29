@@ -26,7 +26,7 @@ export const SearchMenu: FC<Props> = ({ data }) => {
             <StyledImg src={item?.photos[0]?.path} />
             <Content>
               <Title>{item.title}</Title>
-              <OldPrice>{item.oldPrice}₼</OldPrice>
+              {item.oldPrice > 0 ? <OldPrice>{item.oldPrice}₼</OldPrice> : ""}
               <Price>{item.newPrice}₼</Price>
               {item.inStock ? (
                 <Stock>InStock</Stock>

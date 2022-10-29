@@ -17,7 +17,7 @@ import { StyledError } from "../register/style";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export const Login = () => {
+const Login = () => {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState<ILogin>();
   const [loginPost, result] = useFetchLoginMutation();
@@ -72,3 +72,4 @@ export const Login = () => {
     </Wrapper>
   );
 };
+export default Login;

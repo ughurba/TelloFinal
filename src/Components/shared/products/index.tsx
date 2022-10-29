@@ -4,18 +4,16 @@ import { Grid } from "@mui/material";
 import { CustomCard } from "../сard";
 import { StyledGrid, Wrapper } from "./style";
 
-import { ShopGoods } from "types";
-import * as React from "react";
+import { Favorits, ShopGoods } from "types";
 import { useAppSelector } from "../../../Redux/hooks";
 
 interface Props {
   data: ShopGoods;
-  handleNoCheckFavorite: (id: number) => void;
+  handleNoCheckFavorite: (id: number, fav: Favorits[]) => void;
   checked?: boolean;
 }
 export const Products: FC<Props> = ({ data, handleNoCheckFavorite }) => {
   const { user } = useAppSelector((state) => state.user);
-
   return (
     <Wrapper>
       <StyledGlobal />
@@ -23,7 +21,7 @@ export const Products: FC<Props> = ({ data, handleNoCheckFavorite }) => {
         {data?.result.map((obj) => (
           <StyledGrid key={obj.id} item xs={4}>
             <CustomCard
-              favorites={data.productIdFavorite?.includes(obj.id)}
+              favoriteIds={data.productIdFavorite?.includes(obj.id)}
               handleNoCheckFavorite={handleNoCheckFavorite}
               {...obj}
             />

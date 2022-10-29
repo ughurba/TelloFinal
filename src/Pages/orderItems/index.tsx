@@ -16,7 +16,7 @@ import {
   NameCount,
 } from "./style";
 
-export const OrderItems = () => {
+const OrderItems = () => {
   const { orderId = "" } = useParams();
   const { t } = useTranslation();
   const { data, isLoading } = useGetOrderItemQuery(orderId);
@@ -60,3 +60,4 @@ export const OrderItems = () => {
     </>
   );
 };
+export default OrderItems;

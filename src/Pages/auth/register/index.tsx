@@ -19,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-export const Register = () => {
+const Register = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [registerData, setRegisterData] = useState<IRegisterData>();
@@ -85,3 +85,4 @@ export const Register = () => {
     </Wrapper>
   );
 };
+export default Register;

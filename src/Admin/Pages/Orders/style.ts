@@ -4,7 +4,7 @@ export const Wrapper = styled.div``;
 const StyleOrderStatus = css`
   color: white;
   border-radius: 5px;
-  font-weight: 700;
+  font-weight: 500;
   width: 250px;
   height: 40px;
   display: flex;

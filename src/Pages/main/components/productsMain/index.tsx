@@ -2,7 +2,6 @@ import { FC } from "react";
 import {
   StyledChevronRight,
   StyledGlobal,
-  StyledLink,
   StyledMore,
   StyledTitle,
   StyledWrapper,
@@ -11,7 +10,7 @@ import { Grid } from "@mui/material";
 import { CustomCard, Flex, Container } from "Components/shared";
 import { Goods } from "types";
 import { useTranslation } from "react-i18next";
-import * as React from "react";
+
 interface Props {
   title: string;
   ratingGoods?: Goods[];
@@ -32,7 +31,7 @@ export const ProductsHome: FC<Props> = ({
         <Flex JsContent={"space-between"}>
           <StyledTitle>{title}</StyledTitle>
           <StyledMore>
-            {t("Hamısına")}
+            {t("ToAll")}
             <StyledChevronRight />
           </StyledMore>
         </Flex>

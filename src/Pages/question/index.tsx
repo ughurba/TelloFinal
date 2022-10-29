@@ -34,7 +34,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useTranslation } from "react-i18next";
 import { useGetAllFagsQuery } from "../../services/baseServices/fagServices";
 
-export const Question = () => {
+const Question = () => {
   const { data, isLoading } = useGetAllFagsQuery();
   const [expanded, setExpanded] = React.useState<string | false>(false);
   const { t } = useTranslation();
@@ -78,3 +78,4 @@ export const Question = () => {
     </>
   );
 };
+export default Question;

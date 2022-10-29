@@ -9,7 +9,7 @@ import { buttonLoader } from "Assets";
 import { useSetUser } from "Hooks/useSetUser";
 import { toast } from "react-toastify";
 
-export const PersonalInformation = () => {
+const PersonalInformation = () => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
   const [update, result] = useFetchUpdateMutation();
@@ -50,7 +50,7 @@ export const PersonalInformation = () => {
   useEffect(() => {
     if (isSuccess) {
       localStorage.setItem("userToken", data?.token);
-      toast.success(t("Məlumatlarınız yeniləndi"), {
+      toast.success(t("YourInformationHasBeenUpdated"), {
         position: "bottom-right",
       });
     }
@@ -81,3 +81,4 @@ export const PersonalInformation = () => {
     </Wrapper>
   );
 };
+export default PersonalInformation;

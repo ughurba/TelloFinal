@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import { Button, StyledInput, StyledPopper } from "./style";
 import { FC } from "react";
 import { useAppDispatch } from "Redux/hooks";
+import { useTranslation } from "react-i18next";
 
 interface PopperComponentProps {
   anchorEl?: any;
@@ -72,7 +73,7 @@ export const GitHubLabel: FC<Props> = ({
   pendingValue,
 }) => {
   const dispatch = useAppDispatch();
-
+  const { t } = useTranslation();
   const theme = useTheme();
 
   const open = Boolean(anchorEl);
@@ -82,7 +83,7 @@ export const GitHubLabel: FC<Props> = ({
     <React.Fragment>
       <Box sx={{ width: 200, marginTop: 3 }}>
         <Button disableRipple aria-describedby={id} onClick={handleClick}>
-          <span>Colors</span>
+          <span>{t("Colors")}</span>
           <Palette size={50} color="#30a67f" weight="duotone" />
         </Button>
         {value.map((label, index) => (
@@ -216,4 +217,9 @@ const labels = [
   "#d876e3",
   "#333333",
   "#FFD700",
+  "#000000",
+  "#00FF00",
+  "#FFFFFF",
+  "#F8C471",
+  "#1ABC9C",
 ];

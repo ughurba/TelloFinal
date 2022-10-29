@@ -24,11 +24,11 @@ export const OrderCard: FC<IOrder> = ({ date, orderStatus, photos, total }) => {
 
   const orderHtml = () => {
     if (orderStatus === OrderStatus.Pending) {
-      return <StyledPending>Pending</StyledPending>;
+      return <StyledPending>{t("Pending")}</StyledPending>;
     } else if (orderStatus === OrderStatus.Accept) {
-      return <StyledSuccsess>Succsess</StyledSuccsess>;
+      return <StyledSuccsess>{t("Success")}</StyledSuccsess>;
     } else {
-      return <StyledReject>Reject</StyledReject>;
+      return <StyledReject>{t("Reject")}</StyledReject>;
     }
   };
   return (

@@ -15,15 +15,12 @@ import {
 import { FC } from "react";
 import { Goods } from "types";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { Links } from "Routes/links";
 interface Props {
   phones: Goods[];
   headphones: Goods[];
 }
 export const InfoCard: FC<Props> = ({ phones, headphones }) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
   return (
     <Container>
       <Flex JsContent={"space-between"}>
@@ -34,9 +31,7 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
               {t("ProductCount")}: {phones?.length}
             </GoodsCount>
             <Flex AlItems="center">
-              <GoodsPath onClick={() => navigate(Links.app.phone)}>
-                {t("SkipToProducts")}
-              </GoodsPath>
+              <GoodsPath>{t("SkipToProducts")}</GoodsPath>
               <StyledChevron />
             </Flex>
           </ImageBoxFon>
@@ -60,9 +55,7 @@ export const InfoCard: FC<Props> = ({ phones, headphones }) => {
                 {t("ProductCount")}: {headphones.length}
               </GoodsCount>
               <Flex AlItems="center">
-                <GoodsPath onClick={() => navigate(Links.app.headphone)}>
-                  {t("SkipToProducts")}
-                </GoodsPath>
+                <GoodsPath>{t("SkipToProducts")}</GoodsPath>
                 <StyledChevron />
               </Flex>
             </ImageBoxMask>

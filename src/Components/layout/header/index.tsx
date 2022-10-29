@@ -13,7 +13,6 @@ import { teloicon, Heart, SearchIcon, User, Basket } from "Assets";
 import { Search } from "../../shared/search";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import { SelectChangeEvent } from "@mui/material/Select";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "Redux/hooks";
 import { Links } from "Routes/links";
@@ -26,22 +25,24 @@ import {
 } from "services/baseServices/shopServices";
 import { useDebounce } from "Hooks/debounce";
 import { SearchMenu } from "./components/searchMenu";
-import { useTranslation } from "react-i18next";
+import { useLanguage } from "Hooks/useLanguage";
+import { setSearch } from "Redux/slices/searchSlice";
 
 export const Header = () => {
   const dispatch = useAppDispatch();
-  const { i18n } = useTranslation();
+
   useSetUser();
   useBasketUpdate();
   const { user } = useAppSelector((state) => state.user);
   const { basketItems } = useAppSelector((state) => state.basket.basket);
-  const [search, setSearch] = useState<string>("");
-  const handleSearch = (ev: FormEvent<HTMLInputElement>) => {
-    setSearch(ev.currentTarget.value);
-  };
-  const debounceSearch = useDebounce(search, 500);
-  const [postSearch, { data }] = useSearchProductMutation();
+  const { searchValue } = useAppSelector((state) => state.search);
 
+  const handleSearch = (ev: FormEvent<HTMLInputElement>) => {
+    dispatch(setSearch(ev.currentTarget.value));
+  };
+  const debounceSearch = useDebounce(searchValue, 500);
+  const [postSearch, { data }] = useSearchProductMutation();
+  const { handleChangeLang, lang } = useLanguage();
   useEffect(() => {
     if (debounceSearch !== "") {
       postSearch(debounceSearch);
@@ -50,25 +51,18 @@ export const Header = () => {
     }
   }, [debounceSearch]);
 
-  const local = localStorage.getItem("lang");
-  const [lang, setLang] = useState<string>(local ? local : "");
-  localStorage.setItem("lang", lang);
-
-  const handleChangeLang = (event: SelectChangeEvent<unknown>) => {
-    setLang(event.target.value as string);
-  };
-  useEffect(() => {
-    i18n.changeLanguage(lang);
-    localStorage.setItem("lang", lang);
-  }, [lang]);
-
   return (
     <Wrapper>
       <Container>
         <Flex AlItems={"center"} JsContent={"space-between"}>
           <img src={teloicon} alt={"icon"} />
           <StyledParentInput>
-            <Search onChange={handleSearch} width={"591px"} height={"40px"} />
+            <Search
+              value={searchValue}
+              onChange={handleSearch}
+              width={"591px"}
+              height={"40px"}
+            />
             <SearchIcon />
             {data?.result.length !== 0 && data?.result ? (
               <SearchMenu data={data.result} />
@@ -80,7 +74,13 @@ export const Header = () => {
             <Link to={!user.isOnline ? Links.app.login : Links.app.userProfile}>
               <User />
             </Link>
-            <Link to={Links.userProfileApp.MyFavorites}>
+            <Link
+              to={
+                user.isOnline
+                  ? Links.userProfileApp.MyFavorites
+                  : Links.app.login
+              }
+            >
               <Heart />
             </Link>
 

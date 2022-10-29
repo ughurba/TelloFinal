@@ -12,16 +12,17 @@ import { extendedApi } from "services/baseServices/basketServices";
 import { useBasketUpdate } from "Hooks/basket";
 import { useSetUser } from "Hooks/useSetUser";
 import { usePostOrderMutation } from "services/baseServices/saleServices";
+import { useTranslation } from "react-i18next";
 export interface Confirm {
   personal?: boolean;
   delivery: boolean;
   payments: boolean;
 }
 
-export const Pay = () => {
+const Pay = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(extendedApi.util.resetApiState());
   }, [dispatch]);
@@ -90,7 +91,7 @@ export const Pay = () => {
 
   if (orderSuccess) {
     swal({
-      title: "Tesdiqlendi",
+      title: t("YourOrderHasBeenSuccessfullyRegistered"),
       icon: "success",
     }).then((res) => {
       if (res) {
@@ -124,3 +125,4 @@ export const Pay = () => {
     </Wrapper>
   );
 };
+export default Pay;

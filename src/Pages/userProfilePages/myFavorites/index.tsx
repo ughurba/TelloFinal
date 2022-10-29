@@ -12,7 +12,7 @@ export const WrapperCard = styled.div`
 `;
 export const Wrapper = styled.div``;
 
-export const MyFavorites = () => {
+const MyFavorites = () => {
   const { t } = useTranslation();
   const { data, refetch: getAllFavorite } = useGetAllFavoriteQuery();
 
@@ -32,3 +32,4 @@ export const MyFavorites = () => {
     </Wrapper>
   );
 };
+export default MyFavorites;

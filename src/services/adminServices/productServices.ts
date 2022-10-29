@@ -17,7 +17,7 @@ export const productApi = createApi({
       return headers;
     },
   }),
-
+  tagTypes: ["UpdateSpec"],
   endpoints: (builder) => ({
     createProduct: builder.mutation<void, FormData>({
       query: (body) => {
@@ -74,6 +74,7 @@ export const productApi = createApi({
       { productId: string; specId: string }
     >({
       query: ({ productId, specId }) => `/${productId}/${specId}`,
+      providesTags: ["UpdateSpec"],
     }),
 
     updateSpecification: builder.mutation<void, Partial<ISpecifications>>({
@@ -84,6 +85,7 @@ export const productApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["UpdateSpec"],
     }),
     removeSpecifications: builder.mutation<
       void,
@@ -100,6 +102,9 @@ export const productApi = createApi({
     getProductCountByBrand: builder.query<ProductCountByBrand[], void>({
       query: () => `brandProductsCount`,
     }),
+    getProductDateAdd: builder.query<[], void>({
+      query: () => `DateCountAddProduct`,
+    }),
   }),
 });
 
@@ -112,6 +117,7 @@ export const extendedGetAllProductAdminApi = productApi.injectEndpoints({
 });
 export const { useGetAllProductQuery } = extendedGetAllProductAdminApi;
 export const {
+  useGetProductDateAddQuery,
   useGetProductCountByBrandQuery,
   useCreateSpecificationsMutation,
   useGetOneProductQuery,

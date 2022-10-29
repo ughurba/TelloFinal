@@ -18,6 +18,7 @@ import {
   Text,
   Logout,
   StyledUser,
+  WrapperUserProfile,
 } from "./style";
 import { addItem, updateTotal } from "Redux/slices/basketSlice";
 import { extendedApi } from "services/baseServices/basketServices";
@@ -25,60 +26,66 @@ import { useBasketUpdate } from "Hooks/basket";
 import { useEffect } from "react";
 import { Flex } from "Components/shared";
 
-export const UserProfile = () => {
+const UserProfile = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   useEffect(() => {
     dispatch(extendedApi.util.resetApiState());
   }, [dispatch]);
+  // const navigate = useNavigate();
 
   useSetUser();
   useBasketUpdate();
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
   const handleLogout = () => {
     dispatch(extendedApi.util.resetApiState());
     localStorage.removeItem("userToken");
     dispatch(logoutUser());
-    naviagte("/");
+    navigate("/");
     dispatch(addItem([]));
     dispatch(updateTotal(0));
   };
-
+  useEffect(() => {
+    navigate(Links.userProfileApp.MyOrders);
+  }, []);
   return (
     <Wrapper>
-      <List>
-        <Flex AlItems="center">
-          <StyledUser>
-            <User size={30} color="#40b56d" weight="duotone" />
-          </StyledUser>
-          <Title>{t("ProfileTitle")}</Title>
-        </Flex>
+      <Flex>
+        <List>
+          <Flex AlItems="center">
+            <StyledUser>
+              <User size={30} color="#40b56d" weight="duotone" />
+            </StyledUser>
+            <Title>{t("ProfileTitle")}</Title>
+          </Flex>
 
-        <StyledLink to={Links.userProfileApp.MyOrders}>
-          <ShoppingCartSimple weight={"bold"} />
-          <Text> {t("MyOrders")}</Text>
-        </StyledLink>
+          <StyledLink to={Links.userProfileApp.MyOrders}>
+            <ShoppingCartSimple weight={"bold"} />
+            <Text> {t("MyOrders")}</Text>
+          </StyledLink>
 
-        <StyledLink to={Links.userProfileApp.MyFavorites}>
-          <HeartStraight weight={"bold"} />
-          <Text>{t("MyFavorites")}</Text>
-        </StyledLink>
+          <StyledLink to={Links.userProfileApp.MyFavorites}>
+            <HeartStraight weight={"bold"} />
+            <Text>{t("MyFavorites")}</Text>
+          </StyledLink>
 
-        <StyledLink to={Links.userProfileApp.PersonalInformation}>
-          <User weight={"bold"} />
-          <Text> {t("PersonalInformation")}</Text>
-        </StyledLink>
+          <StyledLink to={Links.userProfileApp.PersonalInformation}>
+            <User weight={"bold"} />
+            <Text> {t("PersonalInformation")}</Text>
+          </StyledLink>
 
-        {/* <StyledLink to={Links.userProfileApp.DeliveryAddress}>
-          <MapPin weight={"bold"} />
-          <Text> {t("DeliveryAddress")}</Text>
-        </StyledLink> */}
+          {/* <StyledLink to={Links.userProfileApp.base}>
+            <User weight={"bold"} />
+            <Text> {t("MyProfile")}</Text>
+          </StyledLink> */}
 
-        <Logout onClick={handleLogout}>
-          <SignOut weight={"bold"} />
-          <Text>{t("Logout")}</Text>
-        </Logout>
-      </List>
+          <Logout onClick={handleLogout}>
+            <SignOut weight={"bold"} />
+            <Text>{t("Logout")}</Text>
+          </Logout>
+        </List>
+      </Flex>
     </Wrapper>
   );
 };
+export default UserProfile;

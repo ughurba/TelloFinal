@@ -1,4 +1,3 @@
-import DeleteIcon from "@mui/icons-material/Delete";
 import {
   Typography,
   AccordionDetails,
@@ -18,11 +17,10 @@ import { Wrapper, Title, WrapperTrash } from "./style";
 import { Button } from "Admin/Components/Shared/Button";
 import { StyledLinks } from "Admin/Components/Shared/ListItems/style";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
-import { Trash } from "phosphor-react";
 import Swal from "sweetalert2";
 import { TableButtons } from "Admin/Components/Shared/TableButtons";
 
-export const Fag = () => {
+const Fag = () => {
   const { data, isLoading } = useGetAllFagsQuery();
   const [removeFag, { isSuccess }] = useRemoveFagMutation();
   const [expanded, setExpanded] = useState<string | false>(false);
@@ -59,7 +57,7 @@ export const Fag = () => {
       ) : (
         <Wrapper>
           <StyledLinks to={AdminLinks.fagAdd}>
-            <Button btnName="Fag elave etmek" />
+            <Button btnName="Faq elave etmek" />
           </StyledLinks>
 
           <Flex AlItems="center" JsContent="center" FlexColumn="column">
@@ -97,3 +95,4 @@ export const Fag = () => {
     </>
   );
 };
+export default Fag;

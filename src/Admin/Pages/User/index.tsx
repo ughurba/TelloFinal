@@ -8,7 +8,6 @@ import {
 } from "@mui/x-data-grid";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "styled-components";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import {
@@ -19,16 +18,15 @@ import {
 } from "services/adminServices/userServices";
 import { IUser } from "./types";
 import { Loader } from "Components/shared";
-import { toast } from "react-toastify";
 import { BasicModalDialog } from "../../Components/Shared/Modal";
-import { RemoveRoleModal } from "./components/removeModalRole";
+import RemoveRoleModal from "./components/removeModalRole";
 import { StyledCreateRole, StyledRemoveRole } from "./style";
 import { useSuccess } from "Hooks/useSuccess";
 import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { TableButtons } from "Admin/Components/Shared/TableButtons";
 export const Wrapper = styled.div``;
-export const Users = () => {
+const Users = () => {
   const { data, isLoading } = useGetAllUserAndRoleQuery();
   const [updateRole, { isSuccess }] = useUpdateRoleMutation();
   const [postRole, { isSuccess: roleCreateSuccess }] = useCreateRoleMutation();
@@ -89,13 +87,13 @@ export const Users = () => {
         headerName: t("Role"),
         valueOptions: data?.role,
         editable: true,
-        width: 400,
+        width: 250,
       },
       {
         field: "actions",
         headerName: "actions",
         type: "actions",
-        width: 260,
+        width: 230,
 
         getActions: (params) => [
           <Tooltip title={t("RemoveUser")}>
@@ -108,7 +106,7 @@ export const Users = () => {
         ],
       },
     ],
-    [deleteUser, data]
+    [deleteUser, data, t]
   );
   const handleCreateRole = (value: string) => {
     postRole({ role: value });
@@ -142,3 +140,4 @@ export const Users = () => {
     </Wrapper>
   );
 };
+export default Users;

@@ -12,7 +12,7 @@ import { useAppDispatch } from "Redux/hooks";
 import { useEffect } from "react";
 import { Links } from "Routes/links";
 
-export const MyOrders = () => {
+const MyOrders = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(extendSaleApi.util.resetApiState());
@@ -47,3 +47,4 @@ export const MyOrders = () => {
     </Wrapper>
   );
 };
+export default MyOrders;

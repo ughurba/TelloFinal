@@ -1,10 +1,9 @@
 import { Button, Tooltip } from "@mui/material";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
 import { GridColumns } from "@mui/x-data-grid";
 import { DataTable } from "Admin/Components/Shared/DataTable";
 import { IAdminOrder } from "Admin/Pages/Orders/types";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
-import { Flex } from "Components/shared";
+import { Flex, Loader } from "Components/shared";
 import { OrderStatus } from "Helper";
 import * as React from "react";
 import { useEffect } from "react";
@@ -20,7 +19,6 @@ import {
   Wrapper,
   StyledImg,
   StyledPending,
-  StyledButton,
   StyledReject,
   StyledSuccsess,
   StyledCheck,
@@ -32,9 +30,13 @@ interface ArgTypeOrder {
   orderId: number;
   orderStatus: number;
 }
-export const Orders = () => {
+const Orders = () => {
   const { t } = useTranslation();
-  const { data: Orders, refetch: getAllOrder } = useGetAllOrderQuery();
+  const {
+    data: Orders,
+    refetch: getAllOrder,
+    isLoading,
+  } = useGetAllOrderQuery();
   const [putOrderStatus, { isSuccess }] = useUpdateOrderStatusMutation();
   const [rows, setRows] = React.useState<IAdminOrder[]>(Orders ? Orders : []);
   useEffect(() => {
@@ -117,7 +119,7 @@ export const Orders = () => {
           );
         },
       },
-      { field: "note", headerName: t("CourierNote"), width: 120 },
+      { field: "note", headerName: t("CourierNote"), width: 400 },
       { field: "userName", headerName: t("UserName"), width: 120 },
       {
         field: "orderStatus",
@@ -136,11 +138,11 @@ export const Orders = () => {
       {
         field: "cash",
         headerName: t("Payment"),
-        width: 70,
+        width: 100,
         renderCell: (params) => {
           return (
             <>
-              <span>{params.value ? "Nəğd " : ""}</span>
+              <span>{params.value ? t("Cash") : ""}</span>
             </>
           );
         },
@@ -189,12 +191,19 @@ export const Orders = () => {
         ],
       },
     ],
-    []
+    [t]
   );
 
   return (
-    <Wrapper>
-      <DataTable columns={columns} rows={rows} />
-    </Wrapper>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <Wrapper>
+          <DataTable columns={columns} rows={rows} />
+        </Wrapper>
+      )}
+    </>
   );
 };
+export default Orders;

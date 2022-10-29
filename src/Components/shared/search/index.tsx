@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { CSSProperties, FC, FormEvent, useState } from "react";
+import { FC, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const Wrapper = styled.div``;
 interface Props {
   onChange?(event: FormEvent<HTMLInputElement>): void;
-
   width?: string;
   height?: string;
   positionSearch?: string;
+  value?: string;
   top?: string;
   right?: string;
   left?: string;
@@ -28,14 +28,15 @@ export const StyledInput = styled.input<Props>`
   padding-right: ${(props) => props.theme.space[3]};
 `;
 
-export const Search: FC<Props> = ({ ...props }, { handleSearch }) => {
+export const Search: FC<Props> = ({ ...props }, { handleSearch, value }) => {
   const { t } = useTranslation();
   return (
     <Wrapper>
       <StyledInput
-        type={"search"}
+        type="search"
         onChange={() => handleSearch}
         placeholder={t("Search")}
+        value={value}
         {...props}
       />
     </Wrapper>

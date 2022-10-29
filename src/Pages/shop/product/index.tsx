@@ -6,7 +6,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { Brand } from "types";
+import { Brand, Favorits } from "types";
 import { SizeProducts, Wrapper, WrapperShop, WrapperSideBar } from "./style";
 import * as React from "react";
 import { Flex, Container, Products } from "Components/shared";
@@ -30,7 +30,7 @@ import { useSetFavoriteMutation } from "services/baseServices/shopServices";
 import { NativeSelectDemo } from "../components/select";
 import { useParams } from "react-router-dom";
 
-export const Product = () => {
+const Product = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [page, setPage] = useState(1);
@@ -39,6 +39,8 @@ export const Product = () => {
   const [orderByValue, setOrderByValue] = useState<number>(0);
   const id = Number(localStorage.getItem("categoryId"));
   const { product, productLoading } = useAppSelector((state) => state.goods);
+  const { user } = useAppSelector((state) => state.user);
+
   const debounced = useDebounce(value, 1000);
   const { data: brands } = useGetBrandsQuery();
 
@@ -68,6 +70,7 @@ export const Product = () => {
     minPrice: debounced[0],
     maxPrice: debounced[1],
     category: category,
+    userId: user.nameid,
   };
   const {
     data,
@@ -99,10 +102,10 @@ export const Product = () => {
     setValue(newValue as number[]);
   };
 
-  const handleNoCheckFavorite = (id: number) => {
+  const handleNoCheckFavorite = (id: number, fav: Favorits[]) => {
     postFavorite({
       productId: id,
-      isFavorite: !false,
+      favId: fav[0]?.id,
     });
     getAllProduct();
   };
@@ -156,3 +159,4 @@ export const Product = () => {
     </Wrapper>
   );
 };
+export default Product;

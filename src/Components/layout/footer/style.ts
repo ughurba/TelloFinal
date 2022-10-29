@@ -11,15 +11,19 @@ export const StyledLink = styled(NavLink)`
 `;
 export const StyledInstagramIcon = MuiStyled(InstagramIcon)`
 color:white;
+margin-right:1px;
 `;
 export const FacebookIcon = MuiStyled(FacebookTwoToneIcon)`
 color:white;
+margin-left:10px;
 `;
 export const StyledYouTubeIcon = MuiStyled(YouTubeIcon)`
 color:white;
+margin-left:10px;
 `;
 export const StyledTwitterIcon = MuiStyled(TwitterIcon)`
 color:white;
+margin-left:10px;
 `;
 export const Wrapper = styled.div`
   background: black;
@@ -28,18 +32,19 @@ export const Wrapper = styled.div`
 `;
 export const ColorStyle = css`
   color: ${(props) => props.theme.colors.white};
+  opacity: 0.7;
 `;
-export const IconTitle = styled.ul`
-  font-weight: ${(props) => props.theme.fontStyle.fontWeight.medium};
-  font-size: 32px;
-  line-height: 41px;
-  ${ColorStyle}
-  &:after {
-    content: "X";
-    color: green;
-    margin-left: 9px;
-  }
-`;
+// export const IconTitle = styled.ul`
+//   font-weight: ${(props) => props.theme.fontStyle.fontWeight.medium};
+//   font-size: 32px;
+//   line-height: 41px;
+//   ${ColorStyle}
+//   &:after {
+//     content: "X";
+//     color: green;
+//     margin-left: 9px;
+//   }
+// `;
 export const Title = styled.h5`
   font-weight: 500;
   font-size: 20px;
@@ -70,4 +75,24 @@ export const Span = styled.span`
   position: relative;
   bottom: 7px;
   ${ColorStyle}
+`;
+export const Line = styled.div`
+  margin: 25px 0;
+  border-top: 3px solid #ffffff;
+  opacity: 0.2;
+`;
+export const SubFooter = styled.div``;
+export const SubText = styled.span`
+  &:nth-child(1) {
+    margin-left: 60px;
+  }
+  margin-right: 40px;
+  ${ColorStyle}
+`;
+export const LocationFooter = styled.span`
+  display: inline-block;
+  margin-left: 20px;
+  position: relative;
+  bottom: 7px;
+  color: ${(props) => props.theme.colors.green};
 `;

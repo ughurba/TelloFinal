@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-export const UpdateSpecifications = () => {
+const UpdateSpecifications = () => {
   const { t } = useTranslation();
   const { productId = "", specId = "" } = useParams();
   const [putSpecification, { isSuccess, isLoading }] =
@@ -75,3 +75,4 @@ export const UpdateSpecifications = () => {
     </div>
   );
 };
+export default UpdateSpecifications;

@@ -80,6 +80,7 @@ export interface Goods {
   colors: Color[];
   stockCount: number;
   isFavorite?: boolean;
+  favorits?: Favorits[];
 }
 interface ProductDetails {
   id: number;
@@ -150,7 +151,7 @@ export interface CalculationBasket {
 
 export interface Favorites {
   productId: number;
-  isFavorite?: boolean;
+  favId: number;
 }
 export interface IOrder {
   id: number;
@@ -177,4 +178,3 @@ export interface ICategory {
   title: string;
   isActive: boolean;
 }
-

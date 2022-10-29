@@ -94,7 +94,7 @@ export const Specification: FC<Props> = ({ product }) => {
         <Flex JsContent={"space-between"}>
           <List>
             {product?.productDetails.map((item) => (
-              <Link key={item.id}>{item.name}</Link>
+              <Link key={item.id}>{item.name} :</Link>
             ))}
           </List>
           <List>

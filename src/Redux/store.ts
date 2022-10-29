@@ -1,10 +1,11 @@
 import { userApi } from "./../services/adminServices/userServices";
 import { configureStore } from "@reduxjs/toolkit";
-import sliderSlice from "./slices/sliderSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userSlice from "./slices/userSlice";
 import goodsSlice from "./slices/goodsSlice";
 import basketSlice from "./slices/basketSlice";
+import searchSlice from "./slices/searchSlice";
+
 import {
   accountApi,
   authApi,
@@ -23,10 +24,10 @@ import { fagAdminApi } from "services/adminServices/adminFagServices";
 
 export const store = configureStore({
   reducer: {
-    slider: sliderSlice,
     user: userSlice,
     goods: goodsSlice,
     basket: basketSlice,
+    search: searchSlice,
 
     [goodsApi.reducerPath]: goodsApi.reducer,
     [authApi.reducerPath]: authApi.reducer,

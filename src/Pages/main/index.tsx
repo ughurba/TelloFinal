@@ -3,6 +3,7 @@ import { StyledMain } from "./style";
 import { ProductsHome } from "./components/productsMain";
 import { BigCards } from "./components/bigCard";
 import { SmallSlider, InfoCard, BigSlider, Loader } from "Components/shared";
+import sliderImg from "Redux/fakeData/sliderImg.json";
 import { Goods } from "types";
 import {
   useFetchAllGoodsQuery,
@@ -10,17 +11,13 @@ import {
   useGetNewArrivalProductQuery,
 } from "services/baseServices/goodsServices";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "Redux/hooks";
+import { useAppDispatch} from "Redux/hooks";
 import { extendedApi } from "services/baseServices/basketServices";
-import { fetchSlider } from "Redux/slices/sliderSlice";
+import { CustomerAssistance } from "./components/customerAssistance";
 
-export const MainPage: FC = () => {
+const MainPage: FC = () => {
   const dispatch = useAppDispatch();
-  const { sliderImg } = useAppSelector((state) => state.slider);
 
-  useEffect(() => {
-    dispatch(fetchSlider());
-  }, [dispatch]);
   useEffect(() => {
     dispatch(extendedApi.util.resetApiState());
   }, [dispatch]);
@@ -87,7 +84,9 @@ export const MainPage: FC = () => {
       </div>
 
       <InfoCard phones={phones} headphones={headphones} />
+      <CustomerAssistance />
       <SmallSlider data={sliderImg} />
     </StyledMain>
   );
 };
+export default MainPage;

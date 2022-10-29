@@ -4,13 +4,11 @@ import { Button } from "Admin/Components/Shared/Button";
 import { StyledField } from "./style";
 import { useCreateSpecificationsMutation } from "services/adminServices/productServices";
 import { toast } from "react-toastify";
-import { useEffect, useState } from "react";
-import { ISpecifications } from "./types";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { LoadingButton } from "@mui/lab";
 import { useTranslation } from "react-i18next";
 
-export const CreateSpecifications = () => {
+const CreateSpecifications = () => {
   const [postSpecifications, { isSuccess, isLoading }] =
     useCreateSpecificationsMutation();
   const { t } = useTranslation();
@@ -71,3 +69,4 @@ export const CreateSpecifications = () => {
     </div>
   );
 };
+export default CreateSpecifications;

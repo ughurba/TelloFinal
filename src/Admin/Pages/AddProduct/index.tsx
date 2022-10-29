@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { FormEvent, useEffect, useState } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import MenuItem from "@material-ui/core/MenuItem";
+// import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@mui/material/Button";
 import {
   StyledInput,
@@ -31,9 +31,10 @@ import { Button as StyledButton } from "Admin/Components/Shared/Button";
 import { GitHubLabel } from "./components/colors";
 import { useValidator } from "Hooks/validator";
 import { PhotoUpload } from "./components/photoUpload";
-import { TextField } from "@mui/material";
-
-export const AddProduct = () => {
+// import { TextField } from "@mui/material";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
+const AddProduct = () => {
   const [pendingValue, setPendingValue] = useState<string[]>([]);
   const [value, setValue] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -177,7 +178,7 @@ export const AddProduct = () => {
               value={formik.values.Title}
               id="title"
               name="Title"
-              label="Title"
+              label={t("Title")}
             />
           </div>
           <div>
@@ -188,7 +189,7 @@ export const AddProduct = () => {
               helperText={
                 formik.touched.Description && formik.errors.Description
               }
-              label="Description"
+              label={t("Description")}
               id="Description"
               name="Description"
               onChange={formik.handleChange}
@@ -199,7 +200,7 @@ export const AddProduct = () => {
             <StyledInput
               error={formik.touched.NewPrice && Boolean(formik.errors.NewPrice)}
               helperText={formik.touched.NewPrice && formik.errors.NewPrice}
-              label="NewPrice"
+              label={t("NewPrice")}
               id="NewPrice"
               type="text"
               name="NewPrice"
@@ -211,7 +212,7 @@ export const AddProduct = () => {
             <StyledInput
               error={formik.touched.OldPrice && Boolean(formik.errors.OldPrice)}
               helperText={formik.touched.OldPrice && formik.errors.OldPrice}
-              label="OldPrice"
+              label={t("OldPrice")}
               id="OldPrice"
               name="OldPrice"
               type="text"
@@ -225,7 +226,7 @@ export const AddProduct = () => {
                 formik.touched.StockCount && Boolean(formik.errors.StockCount)
               }
               helperText={formik.touched.StockCount && formik.errors.StockCount}
-              label="StockCount"
+              label={t("StockCount")}
               id="StockCount"
               type="number"
               name="StockCount"
@@ -237,12 +238,11 @@ export const AddProduct = () => {
             <TextField
               select
               style={{ width: "200px" }}
-              id="demo-simple-select"
               error={formik.touched.BrandId && Boolean(formik.errors.BrandId)}
               helperText={formik.touched.BrandId && formik.errors.BrandId}
               variant="outlined"
               name="BrandId"
-              label="Brand"
+              label={t("Brand")}
               value={formik.values.BrandId}
               onChange={formik.handleChange}
             >
@@ -266,7 +266,7 @@ export const AddProduct = () => {
               style={{ width: "200px" }}
               variant="outlined"
               name="CategoryId"
-              label="Category"
+              label={t("Category")}
               value={formik.values.CategoryId}
               onChange={formik.handleChange}
             >
@@ -284,7 +284,7 @@ export const AddProduct = () => {
           <WrapperUpload>
             <Flex AlItems="center">
               <Button variant="contained" component="label">
-                Main photo Upload
+                {t("MainPhotoUpload")}
                 <input
                   hidden
                   id="file"
@@ -315,7 +315,7 @@ export const AddProduct = () => {
           <WrapperUpload>
             <Flex AlItems="center">
               <Button variant="contained" component="label">
-                Child Photo Upload
+                {t("ChildPhotoUpload")}
                 <input
                   hidden
                   id="file"
@@ -391,3 +391,4 @@ export const AddProduct = () => {
     </Wrapper>
   );
 };
+export default AddProduct;

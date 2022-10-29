@@ -13,6 +13,9 @@ import { ReactComponent as CheckGreen } from "./img/icon/checkGreen.svg";
 import { ReactComponent as CheckWhite } from "./img/icon/checkWhite.svg";
 import { ReactComponent as Facebook } from "./img/icon/facebook.svg";
 import { ReactComponent as Google } from "./img/icon/google.svg";
+import { ReactComponent as Box } from "./img/box.svg";
+import { ReactComponent as Medal } from "./img/medal-star.svg";
+import { ReactComponent as Card } from "./img/card-pos.svg";
 import azn from "./img/icon/aznsymbol.svg";
 import load from "./img/5.gif";
 import buttonLoader from "./img/icon/buttonLoader.gif";
@@ -27,6 +30,9 @@ import watching from "./img/watching.png";
 import GroupTello from "./img/icon/GroupTello.png";
 
 export {
+  Card,
+  Medal,
+  Box,
   adminBtnLoad,
   buttonLoader,
   registerImg,

@@ -5,12 +5,18 @@ import { FullInfoProductContent, FullInfoShowSlider } from "./components";
 import { Wrapper } from "./style";
 import { useGetOneQuery } from "services/baseServices/goodsServices";
 import { RelatedProducts } from "./components/relatedProducts";
+import { useAppDispatch } from "Redux/hooks";
+import { setSearch } from "Redux/slices/searchSlice";
 
-export const DetailProduct = () => {
+const DetailProduct = () => {
   const { id = "" } = useParams<{ id: string }>();
   const [childImg, setChildImg] = useState<string[]>([]);
-
+  const dispatch = useAppDispatch();
   const { data, isLoading } = useGetOneQuery(id);
+  useEffect(() => {
+    dispatch(setSearch(""));
+  }, [data]);
+
   useEffect(() => {
     let newArr: string[] = [];
     data?.photos.forEach((item) => {
@@ -40,3 +46,4 @@ export const DetailProduct = () => {
     </Container>
   );
 };
+export default DetailProduct;

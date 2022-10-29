@@ -7,7 +7,7 @@ import { useCreateFagMutation } from "services/adminServices/adminFagServices";
 import * as yup from "yup";
 import { StyledField } from "./style";
 
-export const AddFag = () => {
+const AddFag = () => {
   const [postFag, { isSuccess, isLoading }] = useCreateFagMutation();
   const { t } = useTranslation();
 
@@ -65,3 +65,4 @@ export const AddFag = () => {
     </div>
   );
 };
+export default AddFag;

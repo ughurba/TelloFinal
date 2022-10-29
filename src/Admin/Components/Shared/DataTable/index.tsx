@@ -1,5 +1,10 @@
 import * as React from "react";
-import { DataGrid, GridColumns, GridEventListener } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColumns,
+  GridEventListener,
+  gridClasses,
+} from "@mui/x-data-grid";
 import { Box } from "@mui/material";
 interface Props {
   columns: GridColumns;
@@ -24,17 +29,23 @@ export const DataTable: React.FC<Props> = ({
           color: "white",
           fontWeight: 700,
         },
-        "& .MuiDataGrid-row": {
-          paddingBottom: "25px",
-        },
+        // "& .MuiDataGrid-row": {
+        //   paddingBottom: "25px",
+        // },
       }}
     >
       <DataGrid
+        getRowHeight={() => "auto"}
         onCellEditCommit={handleRowEditCommit}
         rows={rows}
         columns={columns}
-        pageSize={7}
+        pageSize={6}
         rowsPerPageOptions={[5]}
+        sx={{
+          [`& .${gridClasses.cell}`]: {
+            py: 1,
+          },
+        }}
       />
     </Box>
   );

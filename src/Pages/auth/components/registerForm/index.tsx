@@ -46,8 +46,8 @@ export const RegisterForm: FC<Props> = ({ onClick, isLoading }) => {
           <MyField
             type={show ? "text" : "password"}
             name={"password"}
-            label={"Password"}
-            placeholder={"EnterYourPassword"}
+            label={t("Password")}
+            placeholder={t("EnterYourPassword")}
           />
           {show ? (
             <StyledEye onClick={() => setShow(!show)} />

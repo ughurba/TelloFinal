@@ -28,7 +28,7 @@ import { Tooltip } from "@mui/material";
 import Swal from "sweetalert2";
 import { TableButtons } from "Admin/Components/Shared/TableButtons";
 
-export const CategoryAndBrand = () => {
+const CategoryAndBrand = () => {
   const { t } = useTranslation();
   const { data } = useGetCategoryAndBrandAllQuery();
   const [removeCategory, { isSuccess: removeIsSuccesCate }] =
@@ -128,7 +128,7 @@ export const CategoryAndBrand = () => {
         }
       });
     },
-    []
+    [t]
   );
   const deleteBrand = useCallback(
     (id: GridRowId) => () => {
@@ -149,7 +149,7 @@ export const CategoryAndBrand = () => {
         }
       });
     },
-    []
+    [t]
   );
   const CategoryColumns = useMemo<GridColumns<CategoryRow>>(
     () => [
@@ -248,3 +248,4 @@ export const CategoryAndBrand = () => {
     </Wrapper>
   );
 };
+export default CategoryAndBrand;

@@ -9,8 +9,7 @@ import {
   Title,
 } from "./style";
 import { FC } from "react";
-import { Goods } from "types";
-import * as React from "react";
+import { Favorits, Goods } from "types";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
@@ -30,8 +29,8 @@ export const StyledIconButton = styled(IconButton)`
   right: 15px;
 `;
 interface Props extends Goods {
-  handleNoCheckFavorite?: (id: number) => void;
-  favorites?: boolean;
+  handleNoCheckFavorite?: (id: number, favId: Favorits[]) => void;
+  favoriteIds?: boolean;
   isfavorite?: boolean;
 }
 
@@ -44,8 +43,9 @@ export const CustomCard: FC<Props> = ({
   description,
   id,
   handleNoCheckFavorite,
-  favorites,
+  favorits,
   isfavorite = true,
+  favoriteIds,
 }) => {
   const { t } = useTranslation();
   const { user } = useAppSelector((state) => state.user);
@@ -84,13 +84,23 @@ export const CustomCard: FC<Props> = ({
       <StyledCardActions disableSpacing>
         {isfavorite && (
           <StyledIconButton
-            onClick={() => handleNoCheckFavorite && handleNoCheckFavorite(id)}
+            onClick={() =>
+              handleNoCheckFavorite &&
+              handleNoCheckFavorite(
+                id,
+                favorits
+                  ? favorits?.filter((x) => x.appUserId === user.nameid)
+                  : []
+              )
+            }
             aria-label="add to favorites"
           >
             <>
               {user.isOnline && (
                 <>
-                  <StyledFavorite isfav={favorites ? favorites : undefined} />
+                  <StyledFavorite
+                    isfav={favoriteIds ? favoriteIds : undefined}
+                  />
                 </>
               )}
             </>

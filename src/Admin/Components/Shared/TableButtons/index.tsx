@@ -22,21 +22,21 @@ export const TableButtons: FC<Props> = ({
     <>
       {onAddBtn && (
         <RenderButton
-          Button={<StyledAddIcon weight="bold" />}
+          Button={<StyledAddIcon />}
           titleToolTip={titleToolTip}
           toRouting={toRouting}
         />
       )}
       {onEditBtn && (
         <RenderButton
-          Button={<StyledEditIcon weight="bold" />}
+          Button={<StyledEditIcon />}
           titleToolTip={titleToolTip}
           toRouting={toRouting}
         />
       )}
       {onRemoveBtn && (
         <RenderButton
-          Button={<StyledDeleteIcon weight="bold" />}
+          Button={<StyledDeleteIcon />}
           titleToolTip={titleToolTip}
           toRouting={toRouting}
         />

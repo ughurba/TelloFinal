@@ -8,7 +8,7 @@ import { StyledButton } from "Pages/detailProduct/components/fullInfoProductCont
 import { useNavigate } from "react-router-dom";
 import { Links } from "../../Routes/links";
 
-export const Basket = () => {
+const Basket = () => {
   const { basketItems, total } = useAppSelector((state) => state.basket.basket);
   const { user } = useAppSelector((state) => state.user);
   const { t } = useTranslation();
@@ -67,3 +67,4 @@ export const Basket = () => {
     </>
   );
 };
+export default Basket;

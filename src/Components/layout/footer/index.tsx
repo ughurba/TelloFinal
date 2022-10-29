@@ -1,13 +1,16 @@
 import {
   FacebookIcon,
-  IconTitle,
+  Line,
   List,
+  LocationFooter,
   Span,
   StyledIcon,
   StyledInstagramIcon,
   StyledLink,
   StyledTwitterIcon,
   StyledYouTubeIcon,
+  SubFooter,
+  SubText,
   Title,
   Wrapper,
 } from "./style";
@@ -19,6 +22,7 @@ import { FC } from "react";
 import { Links } from "Routes/links";
 import { useTranslation } from "react-i18next";
 import { useBasketUpdate } from "Hooks/basket";
+import { GroupTello } from "Assets";
 
 export const Footer: FC = () => {
   const { t } = useTranslation();
@@ -27,7 +31,8 @@ export const Footer: FC = () => {
       <Container>
         <Flex JsContent={"space-around"}>
           <ul>
-            <IconTitle>Project</IconTitle>
+            <img src={GroupTello} alt={"groupTello"} />
+
             <Flex>
               <StyledIcon>
                 <StyledInstagramIcon />
@@ -64,7 +69,7 @@ export const Footer: FC = () => {
             <Title>{t("Contact")}</Title>
             <List>
               <LocationOnIcon />
-              <Span>{t("LocationFooter")}</Span>
+              <LocationFooter>{t("LocationFooter")}</LocationFooter>
             </List>
             <List>
               <EmailIcon />
@@ -77,6 +82,16 @@ export const Footer: FC = () => {
           </ul>
         </Flex>
       </Container>
+      <Line />
+      <SubFooter>
+        <Flex AlItems="center" JsContent="space-between">
+          <SubText>{t("ProjectX2021AllRightsReserved")}</SubText>
+          <div>
+            <SubText>{t("RulesAndInformation")}</SubText>
+            <SubText>{t("PrivacyPolicy")}</SubText>
+          </div>
+        </Flex>
+      </SubFooter>
     </Wrapper>
   );
 };

@@ -69,7 +69,6 @@ export function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
   return (
     <ThemeProvider theme={mdTheme}>
       <CssBaseline />
@@ -98,7 +97,7 @@ export function DashboardContent() {
             noWrap
             sx={{ flexGrow: 1 }}
           >
-            Dashboard
+            Tello Dashboard
           </Typography>
         </Toolbar>
       </AppBar>

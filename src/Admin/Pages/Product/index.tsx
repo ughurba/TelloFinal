@@ -10,7 +10,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import { toast } from "react-toastify";
 import { Image } from "types";
 import { AdminLinks } from "Admin/Routes/AdminLinks";
-import DeleteIcon from "@mui/icons-material/Delete";
 import React, { useEffect } from "react";
 import { StyledImg } from "Admin/Components/Shared/DataTable/style";
 import { Goods } from "types";
@@ -22,7 +21,7 @@ import Swal from "sweetalert2";
 import { ClipboardText } from "phosphor-react";
 import { TableButtons } from "Admin/Components/Shared/TableButtons";
 
-export const Product = () => {
+const Product = () => {
   const {
     data: Goods,
     refetch: getAllProduct,
@@ -82,6 +81,17 @@ export const Product = () => {
         },
       },
       { field: "title", headerName: t("Title"), width: 470 },
+      {
+        field: "categoryTitle",
+        headerName: t("Category"),
+        width: 120,
+      },
+      {
+        field: "brandName",
+        headerName: t("Brand"),
+        width: 120,
+      },
+
       { field: "newPrice", headerName: t("NewPrice"), width: 100 },
       { field: "oldPrice", headerName: t("OldPrice"), width: 100 },
       { field: "stockCount", headerName: t("StockCount"), width: 120 },
@@ -125,7 +135,7 @@ export const Product = () => {
         ],
       },
     ],
-    [deleteProduct]
+    [deleteProduct, t]
   );
   if (isSuccess) {
     toast.success(t("RemoveProduct"));
@@ -146,3 +156,4 @@ export const Product = () => {
     </>
   );
 };
+export default Product;

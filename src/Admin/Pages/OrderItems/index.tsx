@@ -8,7 +8,7 @@ import { IOrderItem } from "types";
 import { StyledImg } from "../Orders/style";
 import { StyledColor } from "./style";
 
-export const OrderItems = () => {
+const OrderItems = () => {
   const { orderId = "" } = useParams();
   const [rows, setRows] = useState<IOrderItem[]>([]);
   const { data } = useGetAllOrderItemQuery(orderId);
@@ -43,11 +43,7 @@ export const OrderItems = () => {
         headerName: t("Storage"),
         width: 120,
         renderCell: (params) => {
-          return (
-            <>
-              <span>{params.value}GB</span>
-            </>
-          );
+          return <>{params.value ? <span>{params.value}GB</span> : ""}</>;
         },
       },
       {
@@ -72,3 +68,4 @@ export const OrderItems = () => {
     </>
   );
 };
+export default OrderItems;

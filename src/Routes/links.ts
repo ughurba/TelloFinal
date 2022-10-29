@@ -2,8 +2,6 @@ export const Links = {
   app: {
     main: "/",
     product: "/Product",
-    phone: "/Product/Phone",
-    headphone: "Product/Headphones",
     allBrands: "Product/AllBrands",
     discounts: "Product/Discounts",
     detail: "FullInfoProduct/:id",
@@ -18,7 +16,6 @@ export const Links = {
     MyOrders: "MyOrders",
     MyFavorites: "/UserProfile/MyFavorites",
     PersonalInformation: "PersonalInformation",
-    DeliveryAddress: "DeliveryAddress",
     OrderItems: "/UserProfile/OrderItems",
   },
 };

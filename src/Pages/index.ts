@@ -1,24 +1,28 @@
-import { DetailProduct } from "./detailProduct";
-import { MainPage } from "./main";
-import { Question } from "./question";
-import { Basket } from "./basket";
-import { Register } from "./auth/register";
-import { Login } from "./auth/login";
-import { Pay } from "./pay";
-import { UserProfile } from "../Components/layout/userProfile";
-import { DeliveryAddress } from "./userProfilePages/deliveryAddress";
-import { MyFavorites } from "./userProfilePages/myFavorites";
-import { MyOrders } from "./userProfilePages/myOrders";
-import { PersonalInformation } from "./userProfilePages/personalInformation";
-import { Product } from "./shop/product";
-import { OrderItems } from "./orderItems";
+import { lazy } from "react";
+
+const DetailProduct = lazy(() => import("./detailProduct"));
+const MainPage = lazy(() => import("./main"));
+const Question = lazy(() => import("./question"));
+const Basket = lazy(() => import("./basket"));
+const Register = lazy(() => import("./auth/register"));
+const Login = lazy(() => import("./auth/login"));
+const Pay = lazy(() => import("./pay"));
+const UserProfile = lazy(() => import("../Components/layout/userProfile"));
+const MyFavorites = lazy(() => import("./userProfilePages/myFavorites"));
+
+const MyOrders = lazy(() => import("./userProfilePages/myOrders"));
+const PersonalInformation = lazy(
+  () => import("./userProfilePages/personalInformation")
+);
+const Product = lazy(() => import("./shop/product"));
+const OrderItems = lazy(() => import("./orderItems"));
+
 export {
   OrderItems,
   Product,
   PersonalInformation,
   MyOrders,
   MyFavorites,
-  DeliveryAddress,
   UserProfile,
   Pay,
   Login,
